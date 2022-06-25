@@ -1,0 +1,37 @@
+$display-values: none, inline, inline-block, block, grid, flex;
+$position-values: sticky, static, relative, absolute, fixed;
+$overflow-values: auto, hidden, visible, scroll;
+
+@each $value in $overflow-values {
+  .overflow-#{$value} {
+    overflow: $value !important;
+  }
+
+  .overflow-x-#{$value} {
+    overflow-x: $value !important;
+  }
+
+  .overflow-y-#{$value} {
+    overflow-y: $value !important;
+  }
+}
+
+@each $value in $display-values {
+  .d-#{$value} {
+    display: $value !important;
+  }
+}
+
+@each $value in $position-values {
+  .position-#{$value} {
+    position: $value !important;
+  }
+}
+
+.visible {
+  visibility: visible !important;
+}
+
+.invisible {
+  visibility: hidden !important;
+}

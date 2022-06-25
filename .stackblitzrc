@@ -1,0 +1,6 @@
+{
+  "startCommand": "pnpm run dev",
+  "env": {
+    "ENABLE_CJS_IMPORTS": true
+  }
+}

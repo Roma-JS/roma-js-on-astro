@@ -1,0 +1,24 @@
+---
+import "../styles/main.scss";
+import BaseHead from '../components/BaseHead.astro';
+import type { Props as BaseHeadProps } from '../components/BaseHead.astro';
+
+export interface Props extends BaseHeadProps {
+  lang: string;
+}
+
+const { title, description, permalink, lang } = Astro.props as Props;
+---
+
+<html lang={lang || 'en' } class="rmjs-yellow-black-theme">
+
+<head>
+  <BaseHead title={title} description={description} permalink={permalink} />
+  <slot name="head" />
+</head>
+
+<body>
+  <slot />
+</body>
+
+</html>

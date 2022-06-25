@@ -1,0 +1,20 @@
+---
+import "../styles/main.scss";
+import BaseHead from '../components/BaseHead.astro';
+
+const { content } = Astro.props;
+const { title, description, publishDate, author, heroImage, permalink, alt } = content;
+---
+
+<html lang={content.lang || 'en' } class="rmjs-yellow-black-theme">
+
+<head>
+	<BaseHead title={title} description={description} permalink={permalink} />
+	<slot name="head" />
+</head>
+
+<body>
+	<slot />
+</body>
+
+</html>

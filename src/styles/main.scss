@@ -1,0 +1,67 @@
+@use "./mixins/a11y";
+
+@import "normalize.css/normalize.css";
+@import "./utilities/layout";
+@import "./utilities/open-sans";
+
+@mixin font-family {
+  font-family: 'Open Sans', sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  touch-action: manipulation;
+
+  & * {
+    word-break: break-word;
+  }
+}
+
+.visually-hidden {
+  @include a11y.visually-hidden();
+}
+
+.headline-1 {
+  @include font-family();
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.375;
+}
+
+.headline-2 {
+  @include font-family();
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+}
+
+.body-1 {
+  @include font-family();
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height:1.375;
+}
+
+:root {
+  --brand-primary: #8F001C;
+  --brand-secondary: #FFB200;
+  --color-dark-100: #121212;
+  --color-dark-200: #303030;
+  --color-light-100: #F3F6F9;
+}
+
+:root.rmjs-yellow-black-theme,
+.rmjs-yellow-black-theme {
+  color-scheme: dark;
+  --bg-primary: var(--brand-secondary);
+  --bg-secondary: var(--color-dark-100);
+  --bg-tertiary: var(--color-dark-200);
+  --text-primary: var(--color-dark-100);
+  --test-secondary: var(--color-light-100);
+}
