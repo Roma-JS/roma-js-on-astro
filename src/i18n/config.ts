@@ -32,8 +32,8 @@ export interface RelAlternateProps {
 
 /**
  * Generates a list `link[rel="alternate"]` attributes given input url.
- * @param url 
- * @returns 
+ * @param url
+ * @returns
  * @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
  */
 export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {

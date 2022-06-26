@@ -4,6 +4,7 @@ dist
 docs/
 umd
 build
+public/
 coverage
 node_modules
 __snapshots__

@@ -1,5 +1,6 @@
 ---
 import HpLayout from '@layouts/Hp.astro';
+import { sortPosts } from '../../utils/blog';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
@@ -9,6 +10,10 @@ let title: string = 'Example Blog';
 let description = 'The perfect starter for your perfect blog.';
 let permalink = 'https://example.com/';
 
+// Data Fetching: List all Markdown posts in the repo in descending order
+let allPosts = sortPosts(await Astro.glob('./posts/**/*.md'));
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
 ---
 
 <HpLayout lang="it" title={title} description={description} permalink={permalink}>
@@ -17,4 +22,6 @@ let permalink = 'https://example.com/';
 	</Fragment>
 
 	<p>Howdy fella!</p>
+
+	<ul>{allPosts.map(post => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}</ul>
 </HpLayout>

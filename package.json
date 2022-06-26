@@ -14,6 +14,7 @@
   },
   "packageManager": "pnpm@7.3.0",
   "devDependencies": {
+    "@astrojs/rss": "^0.2.0",
     "@astrojs/sitemap": "^0.2.2",
     "@astrojs/solid-js": "^0.2.0",
     "@babel/core": "^7.18.5",

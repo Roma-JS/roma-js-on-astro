@@ -14,7 +14,7 @@ $breakpoints: (
   md: $md,
   lg: $lg,
   xl: $xl,
-  xxl: $xxl
+  xxl: $xxl,
 );
 
 @mixin assert-valid-breakpoint($name) {
@@ -37,9 +37,8 @@ $breakpoints: (
 // See https://bugs.webkit.org/show_bug.cgi?id=178261
 @function breakpoint-max($name) {
   $max: map-get($breakpoints, $name);
-  @return if($max and $max > 0, $max - .02, null);
+  @return if($max and $max > 0, $max - 0.02, null);
 }
-
 
 // Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
 // Makes the @content apply to the given breakpoint and wider.
@@ -71,7 +70,6 @@ $breakpoints: (
   }
 }
 
-
 // Media that spans multiple breakpoint widths.
 // Makes the @content apply between the min and max breakpoints
 @mixin media-breakpoint-between($lower, $upper) {
@@ -95,7 +93,6 @@ $breakpoints: (
     }
   }
 }
-
 
 :export {
   xs: $xs;
