@@ -1,18 +1,16 @@
-@use "./mixins/a11y";
+@use './mixins/a11y';
+@use './mixins/text';
 
-@import "normalize.css/normalize.css";
-@import "./utilities/layout";
-@import "./utilities/open-sans";
-
-@mixin font-family {
-  font-family: 'Open Sans', sans-serif;
-}
+@import 'normalize.css/normalize.css';
+@import './utilities/layout';
+@import './utilities/open-sans';
 
 [hidden] {
   display: none !important;
 }
 
 body {
+  @include text.font-family();
   touch-action: manipulation;
 
   & * {
@@ -24,16 +22,16 @@ body {
   @include a11y.visually-hidden();
 }
 
-.headline-1 {
-  @include font-family();
+.h-1 {
+  @include text.font-family();
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 1.375;
 }
 
-.headline-2 {
-  @include font-family();
+.h-2 {
+  @include text.font-family();
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -41,19 +39,19 @@ body {
 }
 
 .body-1 {
-  @include font-family();
+  @include text.font-family();
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height:1.375;
+  line-height: 1.375;
 }
 
 :root {
-  --brand-primary: #8F001C;
-  --brand-secondary: #FFB200;
+  --brand-primary: #8f001c;
+  --brand-secondary: #ffb200;
   --color-dark-100: #121212;
   --color-dark-200: #303030;
-  --color-light-100: #F3F6F9;
+  --color-light-100: #f3f6f9;
 }
 
 :root.rmjs-yellow-black-theme,

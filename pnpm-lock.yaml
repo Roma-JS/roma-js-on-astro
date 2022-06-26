@@ -6,6 +6,7 @@ specifiers:
   '@fontsource/open-sans': ^4.5.10
   astro: ^1.0.0-beta.56
   normalize.css: ^8.0.1
+  prettier: 2.7.1
   sass: ^1.53.0
   solid-js: ^1.4.4
 
@@ -18,6 +19,7 @@ devDependencies:
   '@astrojs/solid-js': 0.2.0_fjpt4gfurtqwe2gh2rvvp4bduu
   '@babel/core': 7.18.5
   astro: 1.0.0-beta.56_sass@1.53.0
+  prettier: 2.7.1
   sass: 1.53.0
 
 packages:
@@ -2806,6 +2808,12 @@ packages:
       find-yarn-workspace-root2: 1.2.16
       path-exists: 4.0.0
       which-pm: 2.0.0
+    dev: true
+
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /prismjs/1.28.0:

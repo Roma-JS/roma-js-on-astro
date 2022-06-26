@@ -1,14 +1,13 @@
-@use "@fontsource/open-sans/scss/mixins" as OpenSans;
+@use '@fontsource/open-sans/scss/mixins' as OpenSans;
 
 @include OpenSans.fontFace(
   $weight: 400,
   $display: fallback,
-  $fontDir: "@fontsource/open-sans/files"
+  $fontDir: '@fontsource/open-sans/files'
 );
 
 @include OpenSans.fontFace(
   $weight: 700,
   $display: fallback,
-  $fontDir: "@fontsource/open-sans/files"
+  $fontDir: '@fontsource/open-sans/files'
 );
-

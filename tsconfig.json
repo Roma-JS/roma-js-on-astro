@@ -15,7 +15,7 @@
     "isolatedModules": true,
     // Add type definitions for our Vite runtime.
     "types": ["vite/client"],
-    "baseUrl": "./src",
+    "baseUrl": "./src"
   },
   "include": ["./src"],
   "exclude": ["node_modules"]
