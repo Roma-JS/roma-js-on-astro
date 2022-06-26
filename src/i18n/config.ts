@@ -8,7 +8,7 @@ export const i18nLang = Object.freeze({
     locale: 'en-US',
   },
   rm: {
-    locale: 'rm-RM',
+    locale: 'rm',
   },
 } as const);
 

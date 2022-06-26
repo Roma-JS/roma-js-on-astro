@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { defineConfig } from 'astro/config';
 import solid from '@astrojs/solid-js';
 import { env } from 'process';
+import sitemap from '@astrojs/sitemap';
 
 function enhanceEnvVariables() {
   if (!env.PUBLIC_BUILD_DATE) {
@@ -12,7 +13,9 @@ function enhanceEnvVariables() {
     env.PUBLIC_COMMIT_ID = execFileSync(
       'git',
       ['rev-parse', '--short', 'HEAD'],
-      { encoding: 'utf8' }
+      {
+        encoding: 'utf8',
+      }
     ).trim();
   }
 }
@@ -21,6 +24,18 @@ enhanceEnvVariables();
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [solid()],
+  integrations: [
+    solid(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'it', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
+        locales: {
+          en: 'en-US', // The `defaultLocale` value must present in `locales` keys
+          it: 'it-IT',
+          rm: 'rm',
+        },
+      },
+    }),
+  ],
   site: 'https://romajs.org',
 });
