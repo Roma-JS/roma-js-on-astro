@@ -1,5 +1,5 @@
 import type { JSX } from 'solid-js';
-import { stringifyForJSONScript } from 'utls/html-escape';
+import { stringifyForJSONScript } from 'utils/html-escape';
 
 export function BuildInfo(): JSX.Element {
   return (

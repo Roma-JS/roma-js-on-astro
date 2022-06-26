@@ -9,7 +9,7 @@ The new RomaJS website built with [astro](https://astro.build/).
 - Seo Support | automatic sitemap generation, robots.txt, `link[rel="alternate"]` etc...
 - Localized routes `/it/**` italian, `/en/**` english and `/rm/*` for Romanesco dialect :).
 - Blog section.
-- opengraph and twitter socia cards.
+- opengraph and twitter social cards.
 - About page
 
 ### Acknowledgements
