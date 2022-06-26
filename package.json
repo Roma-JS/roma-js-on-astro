@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fmt": "prettier . --write"
+    "fmt": "prettier . --write",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "engines": {
     "node": "^16.14.0"
@@ -19,6 +21,8 @@
     "@astrojs/solid-js": "^0.2.0",
     "@babel/core": "^7.18.5",
     "astro": "^1.0.0-beta.56",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
     "sass": "^1.53.0"
   },
