@@ -17,14 +17,27 @@ const { title, description, permalink, lang } = Astro.props as Props;
   <BaseHead title={title} description={description} />
   <slot name="head" />
   <style lang="scss">
+    @use "../styles/mixins/breakpoints";
+
     body {
       background-color: var(--bg-tertiary);
+    }
+
+    .main {
+      margin: 0 auto;
+
+      @include breakpoints.media-breakpoint-up(lg) {
+        max-width: 1200px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <slot />
+  <main class="main">
+    <slot />
+  </main>
+  <slot name="after" />
   <BuildInfo />
 </body>
 
