@@ -7,6 +7,8 @@ export interface Props {
 
 const { title, description, permalink = Astro.canonicalURL.toString() } = Astro.props as Props;
 
+const ogImage = new URL(Astro.site.href);
+ogImage.pathname = '/assets/og-img.png';
 ---
 
 <meta charset="utf-8" />
@@ -25,11 +27,16 @@ const { title, description, permalink = Astro.canonicalURL.toString() } = Astro.
 <meta property="og:url" content={permalink} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content="https://astro.build/social.png?v=1" />
+<meta property="og:image" content={ogImage.href} />
+<meta property="og:type" content="website" />
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={permalink} />
 <meta property="twitter:title" content={title} />
+<meta name="twitter:site" content={import.meta.env.PUBLIC_TWITTER_HANDLE} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content="https://astro.build/social.png?v=1" />
+<meta property="twitter:image" content={ogImage.href} />
+<meta property="twitter:image:alt" content="RomaJS, il meetup javascript di Roma" />
