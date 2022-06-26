@@ -1,4 +1,5 @@
 ---
+import { generateLinkRelAlternateProps } from '@i18n/config';
 export interface Props {
 	title: string;
 	description: string;
@@ -9,6 +10,10 @@ const { title, description, permalink = Astro.canonicalURL.toString() } = Astro.
 
 const ogImage = new URL(Astro.site.href);
 ogImage.pathname = '/assets/og-img.png';
+
+// @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
+const linkRelAlternateProps = generateLinkRelAlternateProps(Astro.canonicalURL);
+
 ---
 
 <meta charset="utf-8" />
@@ -40,3 +45,7 @@ ogImage.pathname = '/assets/og-img.png';
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImage.href} />
 <meta property="twitter:image:alt" content="RomaJS, il meetup javascript di Roma" />
+<>
+	{linkRelAlternateProps.map(({ hreflang, href }) => (
+	<link rel="alternate" href={href} hreflang={hreflang} />))}
+</>

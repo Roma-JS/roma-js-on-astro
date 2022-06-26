@@ -19,7 +19,7 @@ function enhanceEnvVariables() {
     ).trim();
   }
 
-  if(!env.PUBLIC_TWITTER_HANDLE) {
+  if (!env.PUBLIC_TWITTER_HANDLE) {
     env.PUBLIC_TWITTER_HANDLE = '@roma_js';
   }
 }
