@@ -1,0 +1,16 @@
+---
+import HpLayout from '@layouts/Hp.astro';
+import { getI18nRouteParams } from '@i18n/config';
+import type { I18nRouteParams } from '@i18n/types';
+import type { Params } from 'astro';
+
+export async function getStaticPaths() {
+  return getI18nRouteParams().map(params => ({ params }))
+}
+
+const { lang } = Astro.params as I18nRouteParams & Params;
+---
+
+<HpLayout lang={lang} title={`RomaJs - ${lang}`} description={`RomaJs - ${lang}`}>
+  <h1>HP - {lang}</h1>
+</HpLayout>

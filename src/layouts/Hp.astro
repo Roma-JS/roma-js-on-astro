@@ -1,6 +1,7 @@
 ---
 import "../styles/main.scss";
 import BaseHead from '../components/BaseHead.astro';
+import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '../components/BaseHead.astro';
 
 export interface Props extends BaseHeadProps {
@@ -13,12 +14,18 @@ const { title, description, permalink, lang } = Astro.props as Props;
 <html lang={lang || 'en' } class="rmjs-yellow-black-theme">
 
 <head>
-  <BaseHead title={title} description={description} permalink={permalink} />
+  <BaseHead title={title} description={description} />
   <slot name="head" />
+  <style lang="scss">
+    body {
+      background-color: var(--bg-tertiary);
+    }
+  </style>
 </head>
 
 <body>
   <slot />
+  <BuildInfo />
 </body>
 
 </html>

@@ -2,14 +2,16 @@
 export interface Props {
 	title: string;
 	description: string;
-	permalink: string;
+	permalink?: string;
 }
 
-const { title, description, permalink } = Astro.props as Props;
+const { title, description, permalink = Astro.canonicalURL.toString() } = Astro.props as Props;
+
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="created" value={import.meta.env.PUBLIC_BUILD_DATE}>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
 <!-- Primary Meta Tags -->

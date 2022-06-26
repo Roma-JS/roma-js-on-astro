@@ -1,6 +1,5 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import HpLayout from '../layouts/Hp.astro';
+import HpLayout from '@layouts/Hp.astro';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
@@ -12,7 +11,7 @@ let permalink = 'https://example.com/';
 
 // Data Fetching: List all Markdown posts in the repo.
 
-let allPosts = await Astro.glob('./posts/*.md');
+let allPosts = await Astro.glob('./blog/posts/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
 
 // Full Astro Component Syntax:
