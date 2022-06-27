@@ -13,6 +13,31 @@ The new RomaJS website built with [astro](https://astro.build/).
 - opengraph and twitter social cards.
 - About page
 
+## Development
+
+### Requirements
+
+This project requires [node 16](https://nodejs.org/en/) and uses [`pnpm`](https://pnpm.io/) as package manager.
+If you have `nvm` installed run `nvm use`.
+
+#### pnpm & corepack
+
+You do not need to install `pnpm`, you just need have `node 16` installed and then enable [`corepack`](https://nodejs.org/api/corepack.html):
+
+```bash
+corepack enable
+```
+
+You should then be able to run pnpm normally in this project, e.g. `pnpm run fmt`.
+
+### Common scripts
+
+- `pnpm run dev` starts dev server at `127.0.0.1:3000`.
+- `pnpm run build` builds project and emits site at `dist/` folder.
+- `pnpm run fmt` format code using prettier
+- `pnpm run preview` starts a server that serves the content of `dist/`
+- `pnpm run pre-commit` runs automatically on pre-commit there's no need to call it directly
+
 ### Acknowledgements
 
 The previous version of [romajs.org](https://romajs.org/) has been developed by [Luca Lanziani](https://github.com/LucaLanziani) and its source code is available at https://github.com/Roma-JS/romajs-on-metalsmith.
