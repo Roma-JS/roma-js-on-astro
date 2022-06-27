@@ -1,3 +1,5 @@
 {
-  "node": "16"
+  "node": "16",
+  "sandboxes": ["romajs-site"],
+  "buildCommand": false
 }
