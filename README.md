@@ -13,6 +13,20 @@ The new RomaJS website built with [astro](https://astro.build/).
 - opengraph and twitter social cards.
 - About page
 
+## Todo
+
+- [] homepage
+- [] script that generates blog post files from a template
+- [] github action pipeline that deploys to github pages
+- [] blog post tags pages
+- [] blog post authors pages
+- [] copy facebook posts
+- [] generate blog homepage
+- [] build about page
+- [] setup PR pipeline
+- [] setup deploy to GH pages pipeline
+- [] more...
+
 ## Development
 
 ### Requirements
