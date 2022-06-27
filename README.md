@@ -32,7 +32,12 @@ The new RomaJS website built with [astro](https://astro.build/).
 ### Requirements
 
 This project requires [node 16](https://nodejs.org/en/) and uses [`pnpm`](https://pnpm.io/) as package manager.
-If you have `nvm` installed run `nvm use`.
+
+If you have [`nvm`](https://github.com/nvm-sh/nvm) installed run
+
+```bash
+nvm use
+```
 
 #### pnpm & corepack
 
