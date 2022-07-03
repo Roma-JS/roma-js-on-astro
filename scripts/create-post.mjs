@@ -58,21 +58,6 @@ async function createPostPrompts() {
         },
       },
       {
-        type: 'text',
-        name: 'description',
-        message: 'Enter the blog post description/subtitle',
-        format(txt) {
-          return txt.trim();
-        },
-        validate(txt) {
-          if (txt.trim().length < 3) {
-            return 'description/subtitle is too short: at least 3 characters';
-          }
-
-          return true;
-        },
-      },
-      {
         type: 'select',
         name: 'lang',
         message: 'Select blog post language',
@@ -84,7 +69,7 @@ async function createPostPrompts() {
         initial: 0,
       },
       {
-        type: 'multiselect',
+        type: 'autocompleteMultiselect',
         name: 'categories',
         message: 'select blog post categories',
         get instructions() {
@@ -133,7 +118,6 @@ async function cli() {
   const blogPostRendered = Mustache.render(template, {
     ...responses,
     title: JSON.stringify(responses.title),
-    description: JSON.stringify(responses.description),
     author: JSON.stringify(responses.author),
     createdAt: JSON.stringify(createdAt),
     lang: JSON.stringify(responses.lang),

@@ -1,7 +1,7 @@
-import { sortPosts, Frontmatter } from 'utils/blog';
+import { sortPosts, CommonFrontmatterProperties } from 'utils/blog';
 
 export interface PostInfoDto {
-  frontmatter: Frontmatter;
+  frontmatter: CommonFrontmatterProperties;
   url: string;
   markdown: string;
 }
@@ -14,7 +14,13 @@ export async function get() {
     body: JSON.stringify(
       posts.map(
         (post): PostInfoDto => ({
-          frontmatter: post.frontmatter,
+          frontmatter: {
+            title: post.frontmatter.title,
+            categories: post.frontmatter.categories,
+            lang: post.frontmatter.lang,
+            createdAt: post.frontmatter.description,
+            author: post.frontmatter.author,
+          },
           url: post.url ?? '',
           markdown: post.rawContent(),
         })

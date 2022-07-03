@@ -1,6 +1,9 @@
 import type { MarkdownInstance } from 'astro';
 import type { Lang } from '../i18n/config';
-export interface Frontmatter {
+import { groupBy } from 'lodash-es';
+import slugify from 'slugify';
+
+export interface CommonFrontmatterProperties {
   /**
    * An ISO 8601 timestamp of the instant the blogpost was created.
    *
@@ -8,11 +11,19 @@ export interface Frontmatter {
    */
   createdAt: string;
   title: string;
-  description: string;
   author: string;
   categories: string[];
   lang: Lang;
+}
+export interface Frontmatter extends CommonFrontmatterProperties {
   [otherValues: string]: any;
+}
+
+export interface Category {
+  posts: MarkdownInstance<Frontmatter>[];
+  slug: string;
+  name: string;
+  url: string;
 }
 
 export function ascendingCreatedAtComparator(
@@ -43,4 +54,38 @@ export function sortPosts(
   comparator = descendingCreatedAtComparator
 ): MarkdownInstance<Frontmatter>[] {
   return posts.slice().sort(comparator);
+}
+
+export function computeAllCategories(
+  posts: MarkdownInstance<Frontmatter>[],
+  site: URL
+): Map<string, Category> {
+  const output: Map<string, Category> = new Map();
+
+  const baseUrl = import.meta.env.DEV ? new URL('http://localhost:3000') : site;
+
+  for (const post of posts) {
+    for (const category of post.frontmatter.categories) {
+      const postArray = output.get(category)?.posts;
+
+      if (!postArray) {
+        const slug = slugify(category, {
+          strict: true,
+          trim: true,
+          lower: true,
+        });
+
+        output.set(category, {
+          name: category,
+          posts: [post],
+          slug,
+          url: new URL(`/blog/category/${slug}`, baseUrl).href,
+        });
+      } else {
+        postArray.push(post);
+      }
+    }
+  }
+
+  return output;
 }
