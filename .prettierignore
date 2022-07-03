@@ -21,3 +21,4 @@ LICENSE
 tsconfig.tsbuildinfo
 pnpm-lock.yaml
 .babelrc
+scripts/templates/*
