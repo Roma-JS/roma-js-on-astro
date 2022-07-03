@@ -49,9 +49,9 @@ corepack enable
 
 You should then be able to run pnpm normally in this project, e.g. `pnpm run fmt`.
 
-## How To
+### How To
 
-### Create a new post
+#### Create a new post
 
 Run `pnpm run create-post` and follow the instructions.
 
@@ -62,7 +62,7 @@ Run `pnpm run create-post` and follow the instructions.
 - `pnpm run fmt` format code using prettier
 - `pnpm run create-post` prompts to generate new posts
 - `pnpm run preview` starts a server that serves the content of `dist/`
-- `pnpm run pre-commit` runs automatically on pre-commit there's no need to call it directly
+- `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
 
 ### Acknowledgements
 
