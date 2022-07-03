@@ -9,6 +9,7 @@ The new RomaJS website built with [astro](https://astro.build/).
 - Seo Support | automatic sitemap generation, robots.txt, `link[rel="alternate"]` etc...
 - Localized routes `/it/**` italian, `/en/**` english and `/rm/*` for Romanesco dialect :).
 - Blog section.
+- Blog category pages.
 - [feed rss](https://rss.com/blog/how-do-rss-feeds-work/) available at `<SITE>/blog/rss.xml`.
 - opengraph and twitter social cards.
 - About page
@@ -18,12 +19,12 @@ The new RomaJS website built with [astro](https://astro.build/).
 - [ ] homepage
 - [x] script that generates blog post files from a template
 - [ ] github action pipeline that deploys to github pages
-- [ ] blog post tags pages
+- [ ] blog post categories pages
 - [ ] blog post authors pages
 - [ ] copy facebook posts
 - [ ] generate blog homepage
 - [ ] build about page
-- [ ] setup PR pipeline
+- [x] setup PR pipeline
 - [ ] setup deploy to GH pages pipeline
 - [ ] more...
 

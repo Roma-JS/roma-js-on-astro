@@ -3,6 +3,7 @@ title: First test post
 description: The very first RomaJS blog post!
 createdAt: 2016-10-01T00:00:00.000Z
 author: 'Luca Lanziani'
+categories: ['RomaJS']
 layout: '@layouts/BlogPost.astro'
 lang: en
 ---

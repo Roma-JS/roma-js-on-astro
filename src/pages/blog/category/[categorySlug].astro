@@ -1,0 +1,27 @@
+---
+import { MarkdownInstance } from "astro";
+import { Frontmatter, computeAllCategories, Category } from "utils/blog";
+
+
+export async function getStaticPaths() {
+  const posts = (await Astro.glob('../post/**/*.md')) as MarkdownInstance<Frontmatter>[];
+  const allCategories = computeAllCategories(posts, Astro.site);
+
+  const allCategoriesList = Array.from(allCategories.values());
+
+  return allCategoriesList.map(category => {
+    return {
+      params: {
+        categorySlug: category.slug,
+      },
+      props: category,
+    }
+  })
+}
+
+const { name: categoryName, posts } = Astro.props as Category;
+---
+
+<h1>{categoryName}</h1>
+
+<ul>{posts.map(post => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}</ul>
