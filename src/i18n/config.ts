@@ -12,6 +12,8 @@ export const i18nLang = Object.freeze({
   },
 } as const);
 
+export type Lang = keyof typeof i18nLang;
+
 export function getI18nRouteParams(): I18nRouteParams[] {
   return Object.entries(i18nLang).map(([lang]) => ({
     lang,

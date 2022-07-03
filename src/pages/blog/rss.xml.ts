@@ -1,7 +1,7 @@
 import rss from '@astrojs/rss';
 import { sortPosts } from 'utils/blog';
 
-const postImportResult = import.meta.globEager('./posts/**/*.md');
+const postImportResult = import.meta.globEager('./post/**/*.md');
 const posts = sortPosts(Object.values(postImportResult) as any);
 
 export const get = () =>
@@ -14,6 +14,6 @@ export const get = () =>
     items: posts.map((post) => ({
       link: post.url as string,
       title: post.frontmatter.title,
-      pubDate: new Date(post.frontmatter.publishDate),
+      pubDate: new Date(post.frontmatter.createdAt),
     })),
   });

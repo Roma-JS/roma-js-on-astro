@@ -5,18 +5,25 @@ specifiers:
   '@astrojs/sitemap': ^0.2.2
   '@astrojs/solid-js': ^0.2.0
   '@babel/core': ^7.18.5
+  '@expo/spawn-async': ^1.6.0
   '@fontsource/open-sans': ^4.5.10
   astro: ^1.0.0-beta.56
+  chalk: ^5.0.1
   husky: ^8.0.0
   lint-staged: ^13.0.3
+  mustache: ^4.2.0
   normalize.css: ^8.0.1
   prettier: 2.7.1
+  prompts: ^2.4.2
   sass: ^1.53.0
+  slugify: ^1.6.5
   solid-js: ^1.4.4
+  tiny-invariant: ^1.2.0
 
 dependencies:
   '@fontsource/open-sans': 4.5.10
   normalize.css: 8.0.1
+  slugify: 1.6.5
   solid-js: 1.4.4
 
 devDependencies:
@@ -24,11 +31,16 @@ devDependencies:
   '@astrojs/sitemap': 0.2.2
   '@astrojs/solid-js': 0.2.0_fjpt4gfurtqwe2gh2rvvp4bduu
   '@babel/core': 7.18.5
+  '@expo/spawn-async': 1.6.0
   astro: 1.0.0-beta.56_sass@1.53.0
+  chalk: 5.0.1
   husky: 8.0.1
   lint-staged: 13.0.3
+  mustache: 4.2.0
   prettier: 2.7.1
+  prompts: 2.4.2
   sass: 1.53.0
+  tiny-invariant: 1.2.0
 
 packages:
 
@@ -413,6 +425,13 @@ packages:
 
   /@emmetio/scanner/1.0.0:
     resolution: {integrity: sha512-8HqW8EVqjnCmWXVpqAOZf+EGESdkR27odcMMMGefgKXtar00SoYNSryGv//TELI4T3QFsECo78p+0lmalk/CFA==}
+    dev: true
+
+  /@expo/spawn-async/1.6.0:
+    resolution: {integrity: sha512-CynFS2y9S0OXgoBN3o6qvLSD5tBXCxEQnbByIleEocbKKYKb+/gjrjxYVvxPY8G+zqe82xG6IcmHbJoPl5g1WA==}
+    engines: {node: '>=12'}
+    dependencies:
+      cross-spawn: 7.0.3
     dev: true
 
   /@fontsource/open-sans/4.5.10:
@@ -2692,6 +2711,11 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
+  /mustache/4.2.0:
+    resolution: {integrity: sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==}
+    hasBin: true
+    dev: true
+
   /nanoid/3.3.4:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -3354,6 +3378,11 @@ packages:
       is-fullwidth-code-point: 4.0.0
     dev: true
 
+  /slugify/1.6.5:
+    resolution: {integrity: sha512-8mo9bslnBO3tr5PEVFzMPIWwWnipGS0xVbYf65zxDqfNwmzYn1LpiKNrR6DlClusuvo+hDHd1zKpmfAe83NQSQ==}
+    engines: {node: '>=8.0.0'}
+    dev: false
+
   /solid-js/1.4.4:
     resolution: {integrity: sha512-nf/cbRzMuhb5UjbRDNfSJPqHKzUxNb9YgCQwijPUbdA3koQ/hWrz/lj0ter3lvThgxinvGPtXofDGy9bsKrXqA==}
 
@@ -3534,6 +3563,10 @@ packages:
 
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+    dev: true
+
+  /tiny-invariant/1.2.0:
+    resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==}
     dev: true
 
   /to-fast-properties/2.0.0:

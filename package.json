@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "create-post": "node scripts/create-post.mjs",
     "preview": "astro preview",
     "fmt": "prettier . --write",
     "prepare": "husky install",
@@ -20,15 +21,21 @@
     "@astrojs/sitemap": "^0.2.2",
     "@astrojs/solid-js": "^0.2.0",
     "@babel/core": "^7.18.5",
+    "@expo/spawn-async": "^1.6.0",
     "astro": "^1.0.0-beta.56",
+    "chalk": "^5.0.1",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
+    "mustache": "^4.2.0",
     "prettier": "2.7.1",
-    "sass": "^1.53.0"
+    "prompts": "^2.4.2",
+    "sass": "^1.53.0",
+    "tiny-invariant": "^1.2.0"
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.10",
     "normalize.css": "^8.0.1",
+    "slugify": "^1.6.5",
     "solid-js": "^1.4.4"
   }
 }
