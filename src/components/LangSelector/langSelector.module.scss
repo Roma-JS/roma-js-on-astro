@@ -1,0 +1,55 @@
+.nav {
+  composes: d-contents from global;
+}
+
+.list {
+  composes: d-flex from global;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 28px;
+}
+
+.listItem {
+  composes: d-flex from global;
+  list-style: none;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border: none;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid var(--text-primary);
+  }
+}
+
+.langBtn {
+  composes: d-flex from global;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.375;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  height: 28px;
+  min-width: 32px;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  color: var(--text-primary);
+
+  &[aria-current='page'] {
+    border-radius: 5px;
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+  }
+}

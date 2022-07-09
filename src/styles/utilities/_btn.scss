@@ -1,0 +1,39 @@
+.btn {
+  text-decoration: none;
+  display: inline-flex;
+  min-width: 40px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+
+  &.btn-primary {
+    color: var(--text-secondary);
+    border-color: var(--bg-secondary);
+    background: var(--bg-secondary);
+  }
+
+  &.btn-secondary {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+    background: var(--text-secondary);
+  }
+
+  &.btn-outline {
+    border-color: currentColor;
+  }
+
+  &.btn-small {
+    font-size: 12px;
+    min-height: 28px;
+    padding: 0 9px;
+  }
+}
+
+a.btn:not(:active, [aria-current='page']) {
+  background: transparent;
+  border: none;
+}

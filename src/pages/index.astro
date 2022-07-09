@@ -1,17 +1,18 @@
 ---
 import HpLayout from '@layouts/Hp.astro';
+import { hpUrlMap } from 'utils/routing';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
-let title: string = 'Example Blog';
+let title: string = 'RomaJS Homepage';
 let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
+let permalink = Astro.canonicalURL.href;
 
 ---
 
-<HpLayout lang="it" title={title} description={description} permalink={permalink}>
+<HpLayout lang="it" title={title} description={description} permalink={permalink} urlMap={hpUrlMap}>
 	<!-- Use Fragment slot="head" to add elements to head	-->
 	<Fragment slot="head">
 	</Fragment>

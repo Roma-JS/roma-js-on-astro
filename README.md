@@ -12,6 +12,8 @@ The new RomaJS website built with [astro](https://astro.build/).
 - Blog category pages.
 - [feed rss](https://rss.com/blog/how-do-rss-feeds-work/) available at `<SITE>/blog/rss.xml`.
 - opengraph and twitter social cards.
+- headless blog posts available at `/api/blog/post.json`.
+- headless blog posts categories available at `/api/blog/category.json`.
 - About page
 
 ## Todo

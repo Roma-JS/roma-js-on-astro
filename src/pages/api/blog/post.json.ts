@@ -7,7 +7,7 @@ export interface PostInfoDto {
 }
 
 export async function get() {
-  const postImportResult = import.meta.globEager('./post/**/*.md');
+  const postImportResult = import.meta.globEager('../../blog/post/**/*.md');
   const posts = sortPosts(Object.values(postImportResult) as any);
 
   return {

@@ -3,15 +3,20 @@ import "../styles/main.scss";
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import { Navbar } from "@components/Navbar/Navbar";
+import { Lang } from "@i18n/config";
 
 export interface Props extends BaseHeadProps {
-  lang: string;
+  lang: Lang;
+  urlMap?: Partial<Record<Lang, string>>;
 }
 
-const { title, description, permalink, lang } = Astro.props as Props;
+const { title, description, permalink, lang = 'en', urlMap } = Astro.props as Props;
+
+const relativePageUrl = Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') + Astro.canonicalURL.search + Astro.canonicalURL.hash;
 ---
 
-<html lang={lang || 'en' } class="rmjs-yellow-black-theme">
+<html lang={lang} class="rmjs-yellow-black-theme">
 
 <head>
   <BaseHead title={title} description={description} />
@@ -24,10 +29,15 @@ const { title, description, permalink, lang } = Astro.props as Props;
     }
 
     .main {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-secondary);
       margin: 0 auto;
+      overflow-x: hidden;
 
       @include breakpoints.media-breakpoint-up(lg) {
         max-width: 1200px;
+        box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 5px 5px 1px rgba(0, 0, 0, 0.2);
       }
     }
   </style>
@@ -35,6 +45,7 @@ const { title, description, permalink, lang } = Astro.props as Props;
 
 <body>
   <main class="main">
+    <Navbar client:load lang={lang} urlMap={urlMap} relativePageUrl={relativePageUrl} />
     <slot />
   </main>
   <slot name="after" />

@@ -1,12 +1,28 @@
 @use './mixins/a11y';
 @use './mixins/text';
+@use './mixins//breakpoints' as br;
 
 @import 'normalize.css/normalize.css';
 @import './utilities/layout';
 @import './utilities/open-sans';
+@import './utilities/btn';
+@import './utilities/animations';
 
 [hidden] {
   display: none !important;
+}
+
+body,
+body *,
+body ::after,
+body ::before {
+  box-sizing: border-box;
+}
+
+:root,
+body {
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -52,6 +68,18 @@ body {
   --color-dark-100: #121212;
   --color-dark-200: #303030;
   --color-light-100: #f3f6f9;
+
+  @include br.breakpoints-as-css-properties();
+}
+
+/* <Transition /> classes */
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 300ms ease-in;
+}
+.fade-enter,
+.fade-exit-to {
+  opacity: 0;
 }
 
 :root.rmjs-yellow-black-theme,
@@ -61,5 +89,5 @@ body {
   --bg-secondary: var(--color-dark-100);
   --bg-tertiary: var(--color-dark-200);
   --text-primary: var(--color-dark-100);
-  --test-secondary: var(--color-light-100);
+  --text-secondary: var(--color-light-100);
 }

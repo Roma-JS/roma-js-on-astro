@@ -1,0 +1,169 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.navbar {
+  composes: d-grid from global;
+  width: 100%;
+  overflow: hidden;
+  height: 60px;
+  align-items: center;
+  background-color: var(--bg-primary);
+  grid-template-columns: auto 1fr auto;
+  padding: 0 14px;
+
+  @include br.media-breakpoint-up(lg) {
+    height: 50px;
+    padding: 0 16px;
+  }
+}
+
+.navbarNav {
+  composes: d-contents from global;
+
+  ul,
+  li {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul {
+    gap: 5px;
+    justify-content: flex-end;
+  }
+
+  li {
+    justify-content: center;
+  }
+
+  :global(.btn.btn-small) {
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0;
+    padding: 0;
+    min-width: 68px;
+  }
+
+  :global(a.btn:not(:active, [aria-current='page'])) {
+    color: var(--text-primary);
+  }
+}
+
+.leftSide {
+  grid-column: 1 / span 1;
+}
+
+.rightSide {
+  grid-column: span 1 / -1;
+}
+
+.rightSideDesktop {
+  display: none;
+  @include br.media-breakpoint-up(lg) {
+    display: block;
+  }
+}
+
+.fullscreenMenu {
+  composes: d-flex from global;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  flex-flow: column nowrap;
+  background: var(--bg-primary);
+
+  .brandArea {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 54vw;
+    width: min(54vw, 360px);
+  }
+
+  .menuLinks {
+    list-style: none;
+    padding: 58px 0 0;
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 17px;
+  }
+
+  .menuItem {
+    display: inline-flex;
+    list-style: none;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 5px 4px;
+    animation-delay: 300ms;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    border-bottom: 2px solid var(--bg-secondary);
+    &:focus-within {
+      padding: 5px 10px;
+    }
+  }
+
+  .menuItem:nth-child(2) {
+    animation-delay: 340ms;
+  }
+
+  .menuItem:nth-child(3) {
+    animation-delay: 380ms;
+  }
+
+  a:global(.btn.btn-small) {
+    font-size: 16px;
+  }
+}
+
+.animatedBrandMenuGroup path {
+  animation-fill-mode: both;
+  stroke-dasharray: 1000;
+  animation-delay: 1.5s;
+  animation-iteration-count: 1;
+  animation: dash 5s ease-in-out;
+}
+
+.menuTopNav {
+  composes: d-grid from global;
+  height: 60px;
+  width: 100%;
+  padding: 0 14px;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+}
+
+.hamburgerMenuBtn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  background: transparent;
+
+  @include br.media-breakpoint-up(lg) {
+    display: none;
+  }
+}

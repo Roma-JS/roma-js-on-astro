@@ -2,22 +2,28 @@
 import "../styles/main.scss";
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
+import { Navbar } from "@components/Navbar/Navbar";
 
 const { content } = Astro.props;
 
 const { title, description, publishDate, author, heroImage, alt } = content;
+
+const relativePageUrl = Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') + Astro.canonicalURL.search + Astro.canonicalURL.hash;
+const lang = content.lang || 'en';
 ---
 
-<html lang={content.lang || 'en' } class="rmjs-yellow-black-theme">
+<html lang={lang} class="rmjs-yellow-black-theme">
 
 <head>
 	<BaseHead title={title} description={description} />
 	<slot name="head" />
 </head>
 
-<body>
+<main class="main">
+	<Navbar client:load lang={lang} urlMap={null} relativePageUrl={relativePageUrl} />
 	<slot />
-	<BuildInfo />
-</body>
+</main>
+<slot name="after" />
+<BuildInfo />
 
 </html>

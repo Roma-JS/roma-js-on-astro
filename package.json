@@ -18,11 +18,11 @@
   "packageManager": "pnpm@7.3.0",
   "devDependencies": {
     "@astrojs/rss": "^0.2.0",
-    "@astrojs/sitemap": "^0.2.2",
-    "@astrojs/solid-js": "^0.2.0",
-    "@babel/core": "^7.18.5",
+    "@astrojs/sitemap": "^0.2.5",
+    "@astrojs/solid-js": "^0.2.1",
+    "@babel/core": "^7.18.6",
     "@expo/spawn-async": "^1.6.0",
-    "astro": "^1.0.0-beta.56",
+    "astro": "1.0.0-beta.65",
     "chalk": "^5.0.1",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
@@ -34,8 +34,10 @@
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.10",
+    "@solid-primitives/media": "^2.0.0",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.4.4"
+    "solid-js": "^1.4.7",
+    "solid-transition-group": "^0.0.10"
   }
 }

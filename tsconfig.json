@@ -20,7 +20,8 @@
       "@components/*": ["./components/*"],
       "@layouts/*": ["./layouts/*"],
       "@i18n/*": ["./i18n/*"],
-      "@pages/*": ["./pages/*"]
+      "@pages/*": ["./pages/*"],
+      "@media/*": ["./media"]
     }
   },
   "include": ["./src"],
