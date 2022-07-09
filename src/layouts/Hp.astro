@@ -26,6 +26,13 @@ const relativePageUrl = Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1')
 
     body {
       background-color: var(--bg-tertiary);
+
+      @include breakpoints.media-breakpoint-up(lg) {
+        background-image: url("/assets/tile-bg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
     }
 
     .main {
