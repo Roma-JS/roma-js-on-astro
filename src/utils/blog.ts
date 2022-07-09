@@ -57,11 +57,9 @@ export function sortPosts(
 
 export function computeAllCategories(
   posts: MarkdownInstance<Frontmatter>[],
-  site: URL
+  basename: string
 ): Map<string, Category> {
   const output: Map<string, Category> = new Map();
-
-  const baseUrl = import.meta.env.DEV ? new URL('http://localhost:3000') : site;
 
   for (const post of posts) {
     for (const category of post.frontmatter.categories) {
@@ -78,7 +76,7 @@ export function computeAllCategories(
           name: category,
           posts: [post],
           slug,
-          url: new URL(`/blog/category/${slug}`, baseUrl).href,
+          url: `${basename.replace(/\/+$/, '')}/blog/category/${slug}`,
         });
       } else {
         postArray.push(post);

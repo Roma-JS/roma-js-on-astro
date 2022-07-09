@@ -5,7 +5,7 @@ import { Frontmatter, computeAllCategories, Category } from "utils/blog";
 
 export async function getStaticPaths() {
   const posts = (await Astro.glob('../post/**/*.md')) as MarkdownInstance<Frontmatter>[];
-  const allCategories = computeAllCategories(posts, Astro.site);
+  const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
 
   const allCategoriesList = Array.from(allCategories.values());
 
