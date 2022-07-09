@@ -1,6 +1,5 @@
 import type { MarkdownInstance } from 'astro';
 import type { Lang } from '../i18n/config';
-import { groupBy } from 'lodash-es';
 import slugify from 'slugify';
 
 export interface CommonFrontmatterProperties {

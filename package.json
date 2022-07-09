@@ -34,8 +34,10 @@
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.10",
+    "@solid-primitives/media": "^2.0.0",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.4.4"
+    "solid-js": "^1.4.4",
+    "solid-transition-group": "^0.0.10"
   }
 }
