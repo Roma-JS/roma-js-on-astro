@@ -1,4 +1,5 @@
 import { Lang } from '@i18n/types';
+import type { AstroGlobal } from 'astro';
 
 export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   it: {
@@ -25,4 +26,8 @@ export function preventSelfNavigation(
     evt.stopPropagation();
     evt.preventDefault();
   }
+}
+
+export function getCanonicalURL(astro: AstroGlobal) {
+  return new URL(astro.url.pathname, astro.site);
 }

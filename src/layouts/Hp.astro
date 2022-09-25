@@ -6,24 +6,21 @@ import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
 import { Lang } from '@i18n/types';
+import { getCanonicalURL } from 'utils/routing';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
   urlMap?: Partial<Record<Lang, string>>;
 }
 
-const {
-  title,
-  description,
-  permalink,
-  lang = 'en',
-  urlMap,
-} = Astro.props as Props;
+const { title, description, lang = 'en', urlMap } = Astro.props as Props;
+
+const canonicalURL = getCanonicalURL(Astro);
 
 const relativePageUrl =
-  Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
-  Astro.canonicalURL.search +
-  Astro.canonicalURL.hash;
+  canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  canonicalURL.search +
+  canonicalURL.hash;
 
 changeLanguage(lang);
 ---

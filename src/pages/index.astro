@@ -1,6 +1,6 @@
 ---
 import HpLayout from '@layouts/Hp.astro';
-import { hpUrlMap } from 'utils/routing';
+import { getCanonicalURL, hpUrlMap } from 'utils/routing';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
@@ -8,14 +8,18 @@ import { hpUrlMap } from 'utils/routing';
 // All variables are available to use in the HTML template below.
 let title: string = 'RomaJS Homepage';
 let description = 'The perfect starter for your perfect blog.';
-let permalink = Astro.canonicalURL.href;
-
+let permalink = getCanonicalURL(Astro).href;
 ---
 
-<HpLayout lang="it" title={title} description={description} permalink={permalink} urlMap={hpUrlMap}>
-	<!-- Use Fragment slot="head" to add elements to head	-->
-	<Fragment slot="head">
-	</Fragment>
+<HpLayout
+  lang="it"
+  title={title}
+  description={description}
+  permalink={permalink}
+  urlMap={hpUrlMap}
+>
+  <!-- Use Fragment slot="head" to add elements to head	-->
+  <Fragment slot="head" />
 
-	<p>Howdy fella!</p>
+  <p>Howdy fella!</p>
 </HpLayout>
