@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "astro dev --experimental-integrationsv",
-    "start": "astro dev --experimental-integrations",
-    "build": "npm run lint:ts && astro build --experimental-integrations",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "npm run lint:ts && astro build",
     "lint:ts": "tsc --noEmit",
+    "lint:astro": "astro check",
     "create-post": "node scripts/create-post.mjs",
     "preview": "astro preview",
     "fmt": "prettier . --write",
@@ -18,15 +19,15 @@
   },
   "packageManager": "pnpm@7.3.0",
   "devDependencies": {
-    "@astrojs/rss": "^0.2.0",
-    "@astrojs/sitemap": "^0.2.5",
-    "@astrojs/solid-js": "^0.2.1",
+    "@astrojs/rss": "^1.0.1",
+    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/solid-js": "^1.1.0",
     "@babel/core": "^7.18.6",
     "@expo/spawn-async": "^1.6.0",
     "@types/babel__core": "^7.1.19",
     "@types/html-escaper": "^3.0.0",
     "@types/yargs-parser": "^21.0.0",
-    "astro": "1.0.0-beta.65",
+    "astro": "1.3.0",
     "astro-i18next": "1.0.0-beta.12",
     "chalk": "^5.0.1",
     "husky": "^8.0.0",
@@ -35,15 +36,15 @@
     "mustache": "^4.2.0",
     "prettier": "2.7.1",
     "prompts": "^2.4.2",
-    "sass": "^1.53.0",
+    "sass": "^1.55.0",
     "tiny-invariant": "^1.2.0"
   },
   "dependencies": {
-    "@fontsource/open-sans": "^4.5.10",
-    "@solid-primitives/media": "^2.0.0",
+    "@fontsource/open-sans": "^4.5.11",
+    "@solid-primitives/media": "^2.0.2",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.4.7",
-    "solid-transition-group": "^0.0.10"
+    "solid-js": "^1.5.6",
+    "solid-transition-group": "^0.0.11"
   }
 }

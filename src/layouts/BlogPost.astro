@@ -4,15 +4,17 @@ import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
+import { getCanonicalURL } from 'utils/routing';
 
 const { content } = Astro.props;
 
-const { title, description, publishDate, author, heroImage, alt } = content;
+const { title, description } = content;
+const canonicalURL = getCanonicalURL(Astro);
 
 const relativePageUrl =
-  Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
-  Astro.canonicalURL.search +
-  Astro.canonicalURL.hash;
+  canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  canonicalURL.search +
+  canonicalURL.hash;
 const lang = content.lang || 'en';
 
 changeLanguage(lang);

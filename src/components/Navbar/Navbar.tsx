@@ -37,7 +37,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
         }}
       >
         <div class={styles.leftSide}>
-          <Show when={props.urlMap}>
+          <Show when={props.urlMap} keyed>
             {(urlMap) => (
               <LangSelector activeLang={props.lang} urlMap={urlMap} />
             )}

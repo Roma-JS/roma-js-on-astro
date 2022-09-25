@@ -1,29 +1,31 @@
 ---
 import { generateLinkRelAlternateProps } from '@i18n/config';
+import { getCanonicalURL } from 'utils/routing';
 export interface Props {
-	title: string;
-	description: string;
-	permalink?: string;
+  title: string;
+  description: string;
+  permalink?: string;
 }
 
-const { title, description, permalink = Astro.canonicalURL.toString() } = Astro.props as Props;
+const canonicalURL = getCanonicalURL(Astro);
 
-const ogImage = new URL(Astro.site.href);
+const { title, description, permalink = canonicalURL } = Astro.props as Props;
+
+const ogImage = new URL(canonicalURL.origin);
 ogImage.pathname = '/assets/og-img.png';
 
 // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
-const linkRelAlternateProps = generateLinkRelAlternateProps(Astro.canonicalURL);
-
+const linkRelAlternateProps = generateLinkRelAlternateProps(canonicalURL);
 ---
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="created" content={import.meta.env.PUBLIC_BUILD_DATE}>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="created" content={import.meta.env.PUBLIC_BUILD_DATE} />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <title>{title}</title>
-<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={permalink} />
@@ -40,8 +42,14 @@ const linkRelAlternateProps = generateLinkRelAlternateProps(Astro.canonicalURL);
 <meta name="twitter:site" content={import.meta.env.PUBLIC_TWITTER_HANDLE} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImage.href} />
-<meta property="twitter:image:alt" content="RomaJS, il meetup javascript di Roma" />
+<meta
+  property="twitter:image:alt"
+  content="RomaJS, il meetup javascript di Roma"
+/>
 <>
-	{linkRelAlternateProps.map(({ hreflang, href }) => (
-	<link rel="alternate" href={href} hreflang={hreflang} />))}
+  {
+    linkRelAlternateProps.map(({ hreflang, href }) => (
+      <link rel="alternate" href={href} hreflang={hreflang} />
+    ))
+  }
 </>
