@@ -1,4 +1,4 @@
-import { Lang } from '@i18n/config';
+import { Lang } from '@i18n/types';
 import { For, JSX, splitProps } from 'solid-js';
 import styles from './langSelector.module.scss';
 

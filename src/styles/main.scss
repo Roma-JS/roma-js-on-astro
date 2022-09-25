@@ -91,3 +91,13 @@ body {
   --text-primary: var(--color-dark-100);
   --text-secondary: var(--color-light-100);
 }
+
+:root.rmjs-yellow-white-theme,
+.rmjs-yellow-white-theme {
+  color-scheme: light;
+  --bg-primary: var(--brand-secondary);
+  --bg-secondary: var(--color-light-100);
+  --bg-tertiary: var(--color-dark-200);
+  --text-primary: var(--color-dark-100);
+  --text-secondary: var(--color-dark-100);
+}
