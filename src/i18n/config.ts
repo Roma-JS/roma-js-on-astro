@@ -1,4 +1,5 @@
 import { I18nRouteParams } from './types';
+import { t as i18nextTranslate } from 'i18next';
 
 export const i18nLang = Object.freeze({
   it: {
@@ -7,12 +8,7 @@ export const i18nLang = Object.freeze({
   en: {
     locale: 'en-US',
   },
-  rm: {
-    locale: 'rm',
-  },
 } as const);
-
-export type Lang = keyof typeof i18nLang;
 
 export function getI18nRouteParams(): I18nRouteParams[] {
   return Object.entries(i18nLang).map(([lang]) => ({
@@ -68,3 +64,9 @@ export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {
 
   return output;
 }
+
+export interface TranslateMessage {
+  (args: string | string[]): string;
+}
+
+export const l10n = i18nextTranslate as TranslateMessage;

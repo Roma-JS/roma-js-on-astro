@@ -29,6 +29,20 @@
 .navbarNav {
   composes: d-contents from global;
 
+  .divider {
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    &::after {
+      content: '';
+      width: 2px;
+      height: 28px;
+      background: var(--text-primary);
+    }
+  }
+
   ul,
   li {
     display: flex;

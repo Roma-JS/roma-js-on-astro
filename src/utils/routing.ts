@@ -1,4 +1,4 @@
-import type { Lang } from '@i18n/config';
+import { Lang } from '@i18n/types';
 
 export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   it: {
@@ -11,17 +11,11 @@ export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
     blog: '/blog',
     about: 'en/about',
   },
-  rm: {
-    home: '/rm',
-    blog: '/blog',
-    about: '/rm/about',
-  },
 };
 
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
   it: '/',
   en: '/en',
-  rm: '/rm',
 };
 
 export function preventSelfNavigation(

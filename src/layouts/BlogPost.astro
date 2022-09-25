@@ -1,29 +1,38 @@
 ---
-import "../styles/main.scss";
+import '../styles/main.scss';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
-import { Navbar } from "@components/Navbar/Navbar";
+import { Navbar } from '@components/Navbar/Navbar';
+import { changeLanguage } from 'i18next';
 
 const { content } = Astro.props;
 
 const { title, description, publishDate, author, heroImage, alt } = content;
 
-const relativePageUrl = Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') + Astro.canonicalURL.search + Astro.canonicalURL.hash;
+const relativePageUrl =
+  Astro.canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  Astro.canonicalURL.search +
+  Astro.canonicalURL.hash;
 const lang = content.lang || 'en';
+
+changeLanguage(lang);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
+  <head>
+    <BaseHead title={title} description={description} />
+    <slot name="head" />
+  </head>
 
-<head>
-	<BaseHead title={title} description={description} />
-	<slot name="head" />
-</head>
-
-<main class="main">
-	<Navbar client:load lang={lang} urlMap={null} relativePageUrl={relativePageUrl} />
-	<slot />
-</main>
-<slot name="after" />
-<BuildInfo />
-
+  <main class="main">
+    <Navbar
+      client:load
+      lang={lang}
+      urlMap={null}
+      relativePageUrl={relativePageUrl}
+    />
+    <slot />
+  </main>
+  <slot name="after" />
+  <BuildInfo />
 </html>

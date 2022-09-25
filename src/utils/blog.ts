@@ -1,5 +1,5 @@
+import { Lang } from '@i18n/types';
 import type { MarkdownInstance } from 'astro';
-import type { Lang } from '../i18n/config';
 import slugify from 'slugify';
 
 export interface CommonFrontmatterProperties {
