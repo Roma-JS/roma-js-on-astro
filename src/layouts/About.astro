@@ -1,10 +1,11 @@
 ---
 import '../styles/main.scss';
+import styles from '../styles/wallpaper.module.scss';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL } from 'utils/routing';
+import { getCanonicalURL, aboutUrlMap } from 'utils/routing';
 
 const { content } = Astro.props;
 
@@ -25,16 +26,18 @@ changeLanguage(lang);
     <BaseHead title={title} description={description} />
     <slot name="head" />
   </head>
-
-  <main class="main">
-    <Navbar
-      client:load
-      lang={lang}
-      urlMap={null}
-      relativePageUrl={relativePageUrl}
-    />
-    <div class="main-content"><slot /></div>
-  </main>
-  <slot name="after" />
-  <BuildInfo />
+  <body class={styles.wallpaper}>
+    <main class="main">
+      <Navbar
+        client:load
+        lang={lang}
+        urlMap={aboutUrlMap}
+        relativePageUrl={relativePageUrl}
+      />
+      <header class="slanted-header"><h1 class="h-1">{title}</h1></header>
+      <div class="main-content"><slot /></div>
+    </main>
+    <slot name="after" />
+    <BuildInfo />
+  </body>
 </html>

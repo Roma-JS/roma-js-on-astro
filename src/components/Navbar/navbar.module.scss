@@ -1,5 +1,7 @@
 @use '../../styles/mixins/breakpoints' as br;
 
+$navbar-menu-fullscreen-index: 50;
+
 @keyframes dash {
   0% {
     stroke-dashoffset: 1000;
@@ -94,6 +96,7 @@
 .fullscreenMenu {
   composes: d-flex from global;
   position: fixed;
+  z-index: $navbar-menu-fullscreen-index;
   top: 0;
   left: 0;
   width: 100vw;

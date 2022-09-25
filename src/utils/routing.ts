@@ -5,18 +5,23 @@ export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   it: {
     home: '/',
     blog: '/blog',
-    about: '/about',
+    about: '/it/about',
   },
   en: {
     home: '/en',
     blog: '/blog',
-    about: 'en/about',
+    about: '/en/about',
   },
 };
 
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
-  it: '/',
-  en: '/en',
+  it: navbarLinks.it.home,
+  en: navbarLinks.en.home,
+};
+
+export const aboutUrlMap: Readonly<Record<Lang, string>> = {
+  it: navbarLinks.it.about,
+  en: navbarLinks.en.about,
 };
 
 export function preventSelfNavigation(
