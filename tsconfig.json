@@ -11,6 +11,8 @@
     "moduleResolution": "node",
     // Enable JSON imports.
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "incremental": true,
     // Enable stricter transpilation for better output.
     "isolatedModules": true,
     // Add type definitions for our Vite runtime.

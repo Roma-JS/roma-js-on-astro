@@ -28,7 +28,7 @@ package-lock.json
 .vscode/temp
 
 # TS
-tsconfig.tsbuildinfo
+*.tsbuildinfo
 
 # IntelliJ
 .gradle/*
