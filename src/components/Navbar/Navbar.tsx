@@ -8,7 +8,7 @@ import { MenuModal } from './components/MenuModal';
 import { Transition } from 'solid-transition-group';
 import styles from './navbar.module.scss';
 import { createAppBreakpoints } from 'utils/media-queries';
-import { navbarLinks, preventSelfNavigation } from 'utils/routing';
+import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
 import { Lang } from '@i18n/types';
 import { l10n } from '@i18n/config';
 
@@ -52,7 +52,12 @@ export function Navbar(props: NavbarProps): JSX.Element {
           <nav class={styles.navbarNav}>
             <ul>
               <li>
-                <a class="btn btn-small btn-primary">
+                <a
+                  class="btn btn-small btn-primary"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={socialLinks.youtube.href}
+                >
                   {l10n('ctaWatchOurVideos')}
                 </a>
               </li>

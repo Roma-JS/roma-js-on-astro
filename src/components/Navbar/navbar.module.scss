@@ -94,10 +94,11 @@
 .fullscreenMenu {
   composes: d-flex from global;
   position: fixed;
+  z-index: var(--navbar-menu-fullscreen-index);
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
   display: none;
   flex-flow: column nowrap;

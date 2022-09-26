@@ -1,0 +1,30 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+.header {
+  --slanted-header-logo-size: 64px;
+  --slanted-header-height: 142px;
+  --slanted-header-gap: 20px;
+  border: none;
+  margin: 0;
+  height: var(--slanted-header-height);
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+  overflow: hidden;
+  padding: 0 0 0 40px;
+  background-color: var(--brand-secondary);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--slanted-header-gap);
+
+  .logo {
+    width: var(--slanted-header-logo-size);
+    height: var(--slanted-header-logo-size);
+    border-radius: 8px;
+  }
+
+  @include br.media-breakpoint-up(lg) {
+    --slanted-header-height: 212px;
+    --slanted-header-logo-size: 80px;
+    --slanted-header-gap: 32px;
+  }
+}
