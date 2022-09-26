@@ -4,8 +4,10 @@ import styles from '../styles/wallpaper.module.scss';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
+import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { changeLanguage } from 'i18next';
 import { getCanonicalURL, aboutUrlMap } from 'utils/routing';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 
 const { content } = Astro.props;
 
@@ -34,8 +36,9 @@ changeLanguage(lang);
         urlMap={aboutUrlMap}
         relativePageUrl={relativePageUrl}
       />
-      <header class="slanted-header"><h1 class="h-1">{title}</h1></header>
+      <SlantedHeader title={title} />
       <div class="main-content"><slot /></div>
+      <footer><SocialLinksList /></footer>
     </main>
     <slot name="after" />
     <BuildInfo />

@@ -1,6 +1,6 @@
 /** @type {import('astro-i18next').AstroI18nextConfig} */
 export default {
-  defaultLanguage: 'en',
+  defaultLanguage: 'it',
   supportedLanguages: ['it', 'en'],
   i18next: {
     debug: false,

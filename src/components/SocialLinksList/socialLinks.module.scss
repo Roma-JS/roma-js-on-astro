@@ -1,0 +1,41 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+.list {
+  --icon-size: 24px;
+  --icon-gap: 12px;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--icon-gap);
+  height: 32px;
+  overflow: hidden;
+
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    line-height: 1;
+    display: inline-block;
+
+    &:active {
+      transform: scale(1.1);
+      outline: none;
+    }
+  }
+
+  img {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    filter: invert(1);
+  }
+
+  @include br.media-breakpoint-up(lg) {
+    --icon-size: 32px;
+    --icon-gap: 25px;
+  }
+}
