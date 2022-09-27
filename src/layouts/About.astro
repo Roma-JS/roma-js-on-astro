@@ -29,7 +29,7 @@ changeLanguage(lang);
     <slot name="head" />
   </head>
   <body class={styles.wallpaper}>
-    <main class="main">
+    <article class="main">
       <Navbar
         client:load
         lang={lang}
@@ -39,7 +39,7 @@ changeLanguage(lang);
       <SlantedHeader title={title} />
       <div class="main-content"><slot /></div>
       <footer><SocialLinksList /></footer>
-    </main>
+    </article>
     <slot name="after" />
     <BuildInfo />
   </body>

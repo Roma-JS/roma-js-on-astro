@@ -1,4 +1,5 @@
-$display-values: none, inline, inline-block, block, grid, flex, contents;
+$display-values: none, inline, inline-block, block, grid, flex, inline-flex,
+  contents;
 $position-values: sticky, static, relative, absolute, fixed;
 $overflow-values: auto, hidden, visible, scroll;
 

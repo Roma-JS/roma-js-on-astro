@@ -1,14 +1,18 @@
 ---
 import '../styles/main.scss';
+import styles from '../styles/wallpaper.module.scss';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
 import { getCanonicalURL } from 'utils/routing';
+import { BlogPostInfo } from '@components/BlogPostInfo/BlogPostInfo';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 
 const { content } = Astro.props;
 
-const { title, description } = content;
+const { title, description, createdAt = '', categories = [] } = content;
 const canonicalURL = getCanonicalURL(Astro);
 
 const relativePageUrl =
@@ -24,17 +28,31 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <style lang="scss">
+      .pt-0 {
+        padding-top: 0 !important;
+      }
+    </style>
   </head>
 
-  <main class="main">
-    <Navbar
-      client:load
-      lang={lang}
-      urlMap={null}
-      relativePageUrl={relativePageUrl}
-    />
-    <div class="main-content"><slot /></div>
-  </main>
-  <slot name="after" />
-  <BuildInfo />
+  <body class={styles.wallpaper}>
+    <article class="main">
+      <Navbar
+        client:load
+        lang={lang}
+        urlMap={null}
+        relativePageUrl={relativePageUrl}
+      />
+      <SlantedHeader title={title} />
+      <BlogPostInfo
+        createdAt={createdAt ?? ''}
+        categories={categories}
+        baseUrl={import.meta.env.BASE_URL}
+      />
+      <div class="main-content pt-0"><slot /></div>
+      <footer><SocialLinksList /></footer>
+    </article>
+    <slot name="after" />
+    <BuildInfo />
+  </body>
 </html>

@@ -6,7 +6,7 @@
   @include br.media-breakpoint-up(lg) {
     background-image: url('/assets/tile-bg.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     background-position: center center;
   }
 

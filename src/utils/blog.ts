@@ -43,6 +43,20 @@ export function descendingCreatedAtComparator(
   return ascendingCreatedAtComparator(b, a);
 }
 
+export function createSlug(content: string): string {
+  return slugify(content, {
+    strict: true,
+    trim: true,
+    lower: true,
+  });
+}
+
+export function createCategoryUrl(basename: string, category: string) {
+  return `${basename.replace(/\/+$/, '')}/blog/category/${createSlug(
+    category
+  )}`;
+}
+
 /**
  * Sorts blog posts.
  * @param posts
@@ -66,17 +80,13 @@ export function computeAllCategories(
       const postArray = output.get(category)?.posts;
 
       if (!postArray) {
-        const slug = slugify(category, {
-          strict: true,
-          trim: true,
-          lower: true,
-        });
+        const slug = createSlug(category);
 
         output.set(category, {
           name: category,
           posts: [post],
           slug,
-          url: `${basename.replace(/\/+$/, '')}/blog/category/${slug}`,
+          url: createCategoryUrl(basename, category),
         });
       } else {
         postArray.push(post);

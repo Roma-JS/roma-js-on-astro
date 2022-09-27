@@ -4,16 +4,17 @@
   --slanted-header-logo-size: 64px;
   --slanted-header-height: 142px;
   --slanted-header-gap: 20px;
+
+  composes: d-flex overflow-hidden from global;
+
   border: none;
   margin: 0;
   height: var(--slanted-header-height);
   clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
-  overflow: hidden;
-  padding: 0 0 0 40px;
+  padding: 20px 20px 0;
   background-color: var(--brand-secondary);
   color: var(--text-primary);
-  display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--slanted-header-gap);
 
   .logo {
@@ -22,9 +23,29 @@
     border-radius: 8px;
   }
 
+  @include br.media-breakpoint-up(sm) {
+    .heading {
+      font-size: 1.5rem;
+    }
+  }
+
   @include br.media-breakpoint-up(lg) {
+    padding: 40px 40px 0;
     --slanted-header-height: 212px;
     --slanted-header-logo-size: 80px;
     --slanted-header-gap: 32px;
+
+    .logo {
+      position: relative;
+      top: -10px;
+    }
   }
+}
+
+.heading {
+  composes: overflow-hidden from global;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 1.125rem;
 }
