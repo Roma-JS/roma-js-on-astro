@@ -106,7 +106,7 @@ body {
   }
 
   @include br.media-breakpoint-up(lg) {
-    padding: 32px 50px var(--footer-height);
+    padding: 32px 40px var(--footer-height);
   }
 }
 

@@ -1,0 +1,66 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+.wrapper {
+  composes: d-grid from global;
+  --content-height: 32px;
+
+  max-width: 100%;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  align-items: flex-start;
+  padding: 20px;
+
+  time {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    height: var(--content-height);
+    padding: 0;
+    margin: 0;
+  }
+
+  @include br.media-breakpoint-up(lg) {
+    padding: 20px 40px;
+    grid-template-columns: 100px 1fr;
+    gap: 8px;
+  }
+
+  .categories {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+    flex-flow: row wrap;
+
+    li {
+      display: contents;
+      list-style: none;
+    }
+  }
+}
+
+.category {
+  composes: overflow-hidden d-inline-flex from global;
+  color: var(--brand-secondary);
+  font-size: 0.8rem;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  height: var(--content-height);
+  min-width: 60px;
+  border-radius: 8px;
+  margin: 0;
+  font-weight: 700;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  outline: none;
+
+  &:focus-visible {
+    text-decoration: underline;
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+}
