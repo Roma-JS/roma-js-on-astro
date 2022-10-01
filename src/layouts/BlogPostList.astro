@@ -1,0 +1,81 @@
+---
+import '../styles/main.scss';
+import styles from '../styles/wallpaper.module.scss';
+import BaseHead from '@components/BaseHead.astro';
+import { BuildInfo } from '@components/BuildInfo/BuildInfo';
+import { Navbar } from '@components/Navbar/Navbar';
+import { changeLanguage } from 'i18next';
+import { getCanonicalURL } from 'utils/routing';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import { Lang } from '@i18n/types';
+import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
+import { MarkdownInstance } from 'astro';
+import { Frontmatter } from 'utils/blog';
+import { BlogPostCard } from '@components/BlogPostCard/BlogPostCard';
+import { l10n } from '@i18n/config';
+
+export interface Props extends BaseHeadProps {
+  lang: Lang;
+  posts: MarkdownInstance<Frontmatter>[];
+}
+
+const { title, description, lang = 'en', posts } = Astro.props as Props;
+
+const canonicalURL = getCanonicalURL(Astro);
+
+const relativePageUrl =
+  canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  canonicalURL.search +
+  canonicalURL.hash;
+
+changeLanguage(lang);
+---
+
+<html lang={lang} class="rmjs-yellow-black-theme">
+  <head>
+    <BaseHead title={title} description={description} />
+    <slot name="head" />
+    <style lang="scss">
+      @use '../styles/mixins/_breakpoints.scss' as br;
+
+      .post-list {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 20px;
+        padding: 0;
+
+        @include br.media-breakpoint-up(lg) {
+          padding: 0 64px;
+        }
+      }
+    </style>
+  </head>
+
+  <body class={styles.wallpaper}>
+    <article class="main">
+      <Navbar
+        client:load
+        lang={lang}
+        urlMap={null}
+        relativePageUrl={relativePageUrl}
+      />
+      <SlantedHeader title={l10n('categoryTitle', { categoryTitle: title })} />
+      <div class="main-content">
+        <ul class="list-style-none m-0 post-list">
+          {
+            posts.map((post) => (
+              <li class="list-style-none m-0 p-0 d-contents">
+                <BlogPostCard post={post} />
+              </li>
+            ))
+          }
+        </ul>
+        <slot />
+      </div>
+      <footer><SocialLinksList /></footer>
+    </article>
+    <slot name="after" />
+    <BuildInfo />
+  </body>
+</html>

@@ -1,13 +1,24 @@
 ---
-import { MarkdownInstance } from "astro";
-import { Frontmatter, computeAllCategories } from "utils/blog";
+import { MarkdownInstance } from 'astro';
+import { Frontmatter, computeAllCategories } from 'utils/blog';
 
-const allPosts = (await Astro.glob('../post/**/*.md')) as MarkdownInstance<Frontmatter>[];
+const allPosts = (await Astro.glob(
+  '../post/**/*.md'
+)) as MarkdownInstance<Frontmatter>[];
 
-const allCategories = Array.from(computeAllCategories(allPosts, import.meta.env.BASE_URL).values());
-
+const allCategories = Array.from(
+  computeAllCategories(allPosts, import.meta.env.BASE_URL).values()
+);
 ---
 
 <h1>Categories</h1>
 
-<ul>{allCategories.map(category => <li><a href={category.url}>{category.name}</a></li>)}</ul>
+<ul>
+  {
+    allCategories.map((category) => (
+      <li>
+        <a href={category.url}>{category.name}</a>
+      </li>
+    ))
+  }
+</ul>

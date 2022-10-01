@@ -1,0 +1,68 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+.link {
+  composes: m-0 from global;
+
+  text-decoration: none;
+  outline: none;
+
+  &:focus-visible {
+    outline: inherit;
+  }
+}
+
+.card {
+  composes: d-flex overflow-hidden position-relative from global;
+  --card-scale-grow-x: 1.02;
+  padding: 8px 12px;
+  flex-flow: column nowrap;
+  gap: 20px;
+  height: 98px;
+  justify-content: space-between;
+
+  &::before {
+    inset-block-start: 0;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    block-size: 1px;
+    inset-inline: 0;
+    inset-block-end: 0;
+    transform: scale(0.98, 1);
+    background: var(--brand-secondary);
+    transition: transform 300ms cubic-bezier(0.5, 1.25, 0.75, 1.25);
+  }
+
+  .link:active &::before,
+  .link:active &::after {
+    block-size: 3px;
+    transform: scaleX(var(--card-scale-grow-x));
+  }
+
+  .link:focus-visible &::before,
+  .link:focus-visible &::after {
+    visibility: hidden;
+  }
+
+  @include br.media-breakpoint-up(lg) {
+    padding: 8px 24px;
+  }
+}
+
+.heading {
+  composes: m-0 from global;
+  font-size: 1.25rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.infoRow {
+  composes: d-flex overflow-hidden from global;
+  white-space: nowrap;
+  gap: 4px;
+}
