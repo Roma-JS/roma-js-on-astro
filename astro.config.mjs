@@ -19,6 +19,10 @@ function enhanceEnvVariables() {
       }
     ).trim();
   }
+
+  if (!env.PUBLIC_SITE_URL) {
+    env.PUBLIC_SITE_URL = 'https://romajs.org';
+  }
 }
 
 enhanceEnvVariables();
@@ -38,5 +42,5 @@ export default defineConfig({
       },
     }),
   ],
-  site: 'https://romajs.org',
+  site: env.PUBLIC_SITE_URL,
 });

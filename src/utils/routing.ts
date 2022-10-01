@@ -4,6 +4,7 @@ import slackIcon from 'media/social/slack.svg';
 import githubIcon from 'media/social/github.svg';
 import youtubeIcon from 'media/social/youtube.svg';
 import twitterIcon from 'media/social/twitter-square.svg';
+import rssIcon from 'media/social/rss.svg';
 import type { AstroGlobal } from 'astro';
 
 export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
@@ -63,6 +64,10 @@ export const socialLinks = {
   youtube: {
     href: import.meta.env.PUBLIC_YOUTUBE_PAGE_HREF,
     iconHref: youtubeIcon,
+  },
+  rss: {
+    href: `/blog/rss.xml`,
+    iconHref: rssIcon,
   },
   github: {
     href: import.meta.env.PUBLIC_GITHUB_PROFILE_HREF,
