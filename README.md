@@ -20,14 +20,14 @@ The new RomaJS website built with [astro](https://astro.build/).
 
 - [ ] homepage
 - [x] script that generates blog post files from a template
-- [ ] github action pipeline that deploys to github pages
-- [ ] blog post categories pages
+- [x] github action pipeline that deploys to github pages
+- [x] blog post categories pages
 - [ ] blog post authors pages
 - [ ] copy facebook posts
 - [ ] generate blog homepage
-- [ ] build about page
+- [x] build about page
 - [x] setup PR pipeline
-- [ ] setup deploy to GH pages pipeline
+- [x] setup deploy to GH pages pipeline
 - [ ] more...
 
 ## Development
