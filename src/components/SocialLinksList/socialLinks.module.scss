@@ -1,16 +1,13 @@
 @use '../../styles/mixins/breakpoints' as br;
 
 .list {
+  composes: m-0 d-flex list-style-none overflow-hidden from global;
   --icon-size: 24px;
   --icon-gap: 20px;
   align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
+  padding: 0 4px;
   gap: var(--icon-gap);
   height: 32px;
-  overflow: hidden;
 
   li {
     list-style: none;
@@ -21,6 +18,11 @@
   a {
     line-height: 1;
     display: inline-block;
+    outline-offset: -2px;
+
+    &:focus-visible {
+      outline-color: var(--brand-secondary) !important;
+    }
 
     &:active {
       transform: scale(1.1);

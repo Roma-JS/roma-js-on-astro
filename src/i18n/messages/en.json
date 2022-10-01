@@ -1,5 +1,6 @@
 {
   "ctaWatchOurVideos": "Watch our videos",
   "ctaJoinSlackCta": "Join us on Slack",
-  "ctaReserveMeetupPartecipation": "Reserve"
+  "ctaReserveMeetupPartecipation": "Reserve",
+  "categoryTitle": "Tag: {{categoryTitle}}"
 }

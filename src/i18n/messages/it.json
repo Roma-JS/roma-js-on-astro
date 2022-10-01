@@ -1,5 +1,6 @@
 {
   "ctaWatchOurVideos": "Rivedi i precedenti talks",
   "ctaJoinSlackCta": "Parla con noi su Slack",
-  "ctaReserveMeetupPartecipation": "Registrati!"
+  "ctaReserveMeetupPartecipation": "Registrati!",
+  "categoryTitle": "Tag: {{categoryTitle}}"
 }

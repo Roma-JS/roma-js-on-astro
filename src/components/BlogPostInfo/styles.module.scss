@@ -24,24 +24,22 @@
     grid-template-columns: 100px 1fr;
     gap: 8px;
   }
+}
 
-  .categories {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    gap: 8px;
-    flex-flow: row wrap;
+.categories {
+  composes: d-flex m-0 p-0 from global;
+  align-items: center;
+  gap: 8px;
+  flex-flow: row wrap;
 
-    li {
-      display: contents;
-      list-style: none;
-    }
+  li {
+    display: contents;
+    list-style: none;
   }
 }
 
 .category {
-  composes: overflow-hidden d-inline-flex from global;
+  composes: overflow-hidden d-inline-flex m-0 from global;
   color: var(--brand-secondary);
   font-size: 0.8rem;
   text-decoration: none;
@@ -50,7 +48,6 @@
   height: var(--content-height);
   min-width: 60px;
   border-radius: 8px;
-  margin: 0;
   font-weight: 700;
   padding: 0 8px;
   border: 1px solid currentColor;
