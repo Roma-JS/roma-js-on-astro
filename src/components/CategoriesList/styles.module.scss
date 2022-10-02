@@ -1,0 +1,40 @@
+.categories {
+  composes: d-flex m-0 p-0 from global;
+  align-items: center;
+  gap: 8px;
+  flex-flow: row wrap;
+
+  li {
+    display: contents;
+    list-style: none;
+  }
+}
+
+.category {
+  composes: overflow-hidden d-inline-flex m-0 from global;
+  color: var(--brand-secondary);
+  font-size: 0.8rem;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  height: var(--category-height, 32px);
+  min-width: var(--category-min-width, 60px);
+  border-radius: 8px;
+  font-weight: 700;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  outline: none;
+
+  &:focus-visible {
+    text-decoration: underline;
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+
+  &:hover {
+    background: var(--brand-secondary);
+    color: var(--text-primary);
+  }
+}

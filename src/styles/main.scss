@@ -95,7 +95,7 @@ body {
 }
 
 .main-content {
-  padding: 20px;
+  padding: 24px 20px var(--footer-height);
 
   a {
     color: var(--brand-secondary);
@@ -106,7 +106,7 @@ body {
   }
 
   @include br.media-breakpoint-up(lg) {
-    padding: 32px 40px var(--footer-height);
+    padding: 40px 40px var(--footer-height);
   }
 }
 
