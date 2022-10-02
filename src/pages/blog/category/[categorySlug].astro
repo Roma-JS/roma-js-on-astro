@@ -1,6 +1,7 @@
 ---
 import BlogPostListLayout from '@layouts/BlogPostList.astro';
 import { MarkdownInstance } from 'astro';
+import { l10n } from '../../../i18n/config';
 import { Frontmatter, computeAllCategories, Category } from 'utils/blog';
 
 export interface Props {
@@ -41,7 +42,7 @@ const lang = 'it';
 
 <BlogPostListLayout
   lang={lang}
-  title={categoryName}
+  title={l10n('categoryTitle', { categoryTitle: categoryName })}
   description={description}
   posts={posts}
   categories={categories}

@@ -1,27 +1,39 @@
 ---
-import HpLayout from '@layouts/Hp.astro';
-import { sortPosts } from '../../utils/blog';
+import BlogPostListLayout from '@layouts/BlogPostList.astro';
+import type { MarkdownInstance } from 'astro';
+import { Frontmatter, computeAllCategories } from '../../utils/blog';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
-let title: string = 'Example Blog';
+const title: string = 'RomaJS Blog';
 let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
+const lang = 'it';
+const posts = (
+  (await Astro.glob('./post/**/*.md')) as MarkdownInstance<Frontmatter>[]
+)
+  .slice()
+  .sort((a, b) => {
+    const aCreatedAt = a.frontmatter.createdAt;
+    const bCreatedAt = b.frontmatter.createdAt;
 
-// Data Fetching: List all Markdown posts in the repo in descending order
-let allPosts = sortPosts(await Astro.glob('./post/**/*.md'));
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+    if (aCreatedAt === bCreatedAt) {
+      return 0;
+    }
+    return bCreatedAt > aCreatedAt ? 1 : -1;
+  });
+const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
+
+const allCategoriesList = Array.from(allCategories.values()).sort(
+  (a, b) => b.posts.length - a.posts.length
+);
 ---
 
-<HpLayout lang="it" title={title} description={description} permalink={permalink}>
-	<!-- Use Fragment slot="head" to add elements to head	-->
-	<Fragment slot="head">
-	</Fragment>
-
-	<p>Howdy fella!</p>
-
-	<ul>{allPosts.map(post => <li><a href={post.url}>{post.frontmatter.title}</a></li>)}</ul>
-</HpLayout>
+<BlogPostListLayout
+  lang={lang}
+  title={title}
+  description={description}
+  posts={posts}
+  categories={allCategoriesList}
+/>
