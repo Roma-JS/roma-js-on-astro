@@ -23,6 +23,10 @@ jobs:
       - name: log info
         run: >
           printf 'commit -> %s\nbranch -> %s\n' "$(git rev-parse --short HEAD)" "$(git branch --show-current)"
+      - name: lint - typescript
+        run: pnpm run lint:ts
+      - name: lint - astro
+        run: pnpm run lint:astro
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Build
