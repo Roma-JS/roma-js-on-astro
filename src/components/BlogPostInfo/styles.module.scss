@@ -3,6 +3,7 @@
 .wrapper {
   composes: d-grid from global;
   --content-height: 32px;
+  --category-height: var(--content-height);
 
   max-width: 100%;
   justify-content: center;
@@ -23,41 +24,5 @@
     padding: 20px 40px;
     grid-template-columns: 100px 1fr;
     gap: 8px;
-  }
-}
-
-.categories {
-  composes: d-flex m-0 p-0 from global;
-  align-items: center;
-  gap: 8px;
-  flex-flow: row wrap;
-
-  li {
-    display: contents;
-    list-style: none;
-  }
-}
-
-.category {
-  composes: overflow-hidden d-inline-flex m-0 from global;
-  color: var(--brand-secondary);
-  font-size: 0.8rem;
-  text-decoration: none;
-  justify-content: center;
-  align-items: center;
-  height: var(--content-height);
-  min-width: 60px;
-  border-radius: 8px;
-  font-weight: 700;
-  padding: 0 8px;
-  border: 1px solid currentColor;
-  outline: none;
-
-  &:focus-visible {
-    text-decoration: underline;
-  }
-
-  &:active {
-    transform: scale(1.1);
   }
 }

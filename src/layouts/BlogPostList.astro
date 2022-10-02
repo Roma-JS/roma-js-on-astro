@@ -10,17 +10,25 @@ import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { Lang } from '@i18n/types';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
+import { CategoriesList } from '@components/CategoriesList/CategoriesList';
 import { MarkdownInstance } from 'astro';
-import { Frontmatter } from 'utils/blog';
+import { Category, Frontmatter } from 'utils/blog';
 import { BlogPostCard } from '@components/BlogPostCard/BlogPostCard';
 import { l10n } from '@i18n/config';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
   posts: MarkdownInstance<Frontmatter>[];
+  categories: Category[];
 }
 
-const { title, description, lang = 'en', posts } = Astro.props as Props;
+const {
+  title,
+  description,
+  lang = 'en',
+  posts,
+  categories,
+} = Astro.props as Props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -28,6 +36,8 @@ const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
+
+const categoryNames = categories.map(({ name }) => name);
 
 changeLanguage(lang);
 ---
@@ -49,6 +59,35 @@ changeLanguage(lang);
           padding: 0 64px;
         }
       }
+
+      .blog-list-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        @include br.media-breakpoint-up(lg) {
+          gap: 24px;
+          grid-template-columns: 8fr 2fr;
+        }
+      }
+
+      .categories-list.categories-list {
+        --category-min-width: 160px;
+        @include br.media-breakpoint-up(lg) {
+          flex-flow: column nowrap;
+          align-items: flex-start;
+        }
+      }
+
+      .aside {
+        display: flex;
+        flex-flow: column nowrap;
+        color: var(--brand-secondary);
+        gap: 16px;
+        padding: 32px 8px 0;
+        @include br.media-breakpoint-up(lg) {
+          padding: 0;
+        }
+      }
     </style>
   </head>
 
@@ -61,7 +100,7 @@ changeLanguage(lang);
         relativePageUrl={relativePageUrl}
       />
       <SlantedHeader title={l10n('categoryTitle', { categoryTitle: title })} />
-      <div class="main-content">
+      <div class="main-content blog-list-layout">
         <ul class="list-style-none m-0 post-list">
           {
             posts.map((post) => (
@@ -71,6 +110,14 @@ changeLanguage(lang);
             ))
           }
         </ul>
+        <aside class="aside">
+          <h2 class="h-2 m-0">{l10n('categoriesTitle')}</h2>
+          <CategoriesList
+            class="categories-list"
+            baseUrl={import.meta.env.BASE_URL}
+            categories={categoryNames}
+          />
+        </aside>
         <slot />
       </div>
       <footer><SocialLinksList /></footer>

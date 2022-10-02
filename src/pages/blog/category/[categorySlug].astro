@@ -3,6 +3,11 @@ import BlogPostListLayout from '@layouts/BlogPostList.astro';
 import { MarkdownInstance } from 'astro';
 import { Frontmatter, computeAllCategories, Category } from 'utils/blog';
 
+export interface Props {
+  category: Category;
+  categories: Category[];
+}
+
 export async function getStaticPaths() {
   const posts = (await Astro.glob(
     '../post/**/*.md'
@@ -16,12 +21,20 @@ export async function getStaticPaths() {
       params: {
         categorySlug: category.slug,
       },
-      props: category,
+      props: {
+        category,
+        categories: allCategoriesList
+          .filter(({ url }) => category.url !== url)
+          .sort((a, b) => b.posts.length - a.posts.length),
+      },
     };
   });
 }
 
-const { name: categoryName, posts } = Astro.props as Category;
+const {
+  category: { posts, name: categoryName },
+  categories,
+} = Astro.props;
 const description = `Category: ${categoryName}`;
 const lang = 'it';
 ---
@@ -31,4 +44,5 @@ const lang = 'it';
   title={categoryName}
   description={description}
   posts={posts}
+  categories={categories}
 />
