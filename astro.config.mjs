@@ -42,5 +42,6 @@ export default defineConfig({
       },
     }),
   ],
+  base: new URL(env.PUBLIC_SITE_URL).pathname || undefined,
   site: env.PUBLIC_SITE_URL,
 });
