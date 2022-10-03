@@ -66,7 +66,7 @@ export const socialLinks = {
     iconHref: youtubeIcon,
   },
   rss: {
-    href: `/blog/rss.xml`,
+    href: import.meta.env.PUBLIC_URL_BASE + `/blog/rss.xml`,
     iconHref: rssIcon,
   },
   github: {
