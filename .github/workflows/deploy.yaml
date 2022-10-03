@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - fix-gh-pages-site-base-url
 permissions: 
   contents: write
 jobs:
@@ -13,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUSKY: '0'
+      PUBLIC_SITE_URL: "https://fabervitale.github.io/roma-js-site"
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
