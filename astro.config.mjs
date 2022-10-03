@@ -29,14 +29,21 @@ function enhanceEnvVariables() {
  * @type {(publicUrl: string) => { base: string, site: string | undefined }}
  */
 function computeBaseAndSite(publicUrl) {
-  const siteFullURLWithPath = new URL(env.PUBLIC_SITE_URL);
-  const base = siteFullURLWithPath.pathname || undefined;
+  const siteFullURLWithPath = new URL(publicUrl);
+  let base = siteFullURLWithPath.pathname || '';
+
+  if (/^\/+$/.test(base)) {
+    base = '';
+  }
+
   siteFullURLWithPath.pathname =
     siteFullURLWithPath.hash =
     siteFullURLWithPath.search =
       '';
 
   const site = siteFullURLWithPath.href;
+
+  env.PUBLIC_URL_BASE = base;
 
   return {
     site,
@@ -62,6 +69,6 @@ export default defineConfig({
       },
     }),
   ],
-  base,
+  base: base || undefined,
   site,
 });

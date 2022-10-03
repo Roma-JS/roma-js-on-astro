@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_TWITTER_PROFILE_HREF: string;
   readonly PUBLIC_GITHUB_PROFILE_HREF: string;
   readonly PUBLIC_SITE_URL: string;
+  readonly PUBLIC_URL_BASE: string;
 }
 
 interface ImportMeta {
