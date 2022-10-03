@@ -9,14 +9,14 @@ import type { AstroGlobal } from 'astro';
 
 export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   it: {
-    home: '/',
-    blog: '/blog',
-    about: '/it/about',
+    home: import.meta.env.PUBLIC_URL_BASE + '/',
+    blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
+    about: import.meta.env.PUBLIC_URL_BASE + '/it/about',
   },
   en: {
-    home: '/en',
-    blog: '/blog',
-    about: '/en/about',
+    home: import.meta.env.PUBLIC_URL_BASE + '/en',
+    blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
+    about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
   },
 };
 
@@ -66,7 +66,7 @@ export const socialLinks = {
     iconHref: youtubeIcon,
   },
   rss: {
-    href: `/blog/rss.xml`,
+    href: import.meta.env.PUBLIC_URL_BASE + `/blog/rss.xml`,
     iconHref: rssIcon,
   },
   github: {

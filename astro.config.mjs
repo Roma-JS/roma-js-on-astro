@@ -25,7 +25,34 @@ function enhanceEnvVariables() {
   }
 }
 
+/**
+ * @type {(publicUrl: string) => { base: string, site: string | undefined }}
+ */
+function computeBaseAndSite(publicUrl) {
+  const siteFullURLWithPath = new URL(publicUrl);
+  let base = siteFullURLWithPath.pathname || '';
+
+  if (/^\/+$/.test(base)) {
+    base = '';
+  }
+
+  siteFullURLWithPath.pathname =
+    siteFullURLWithPath.hash =
+    siteFullURLWithPath.search =
+      '';
+
+  const site = siteFullURLWithPath.href;
+
+  env.PUBLIC_URL_BASE = base;
+
+  return {
+    site,
+    base,
+  };
+}
+
 enhanceEnvVariables();
+const { base, site } = computeBaseAndSite(env.PUBLIC_SITE_URL);
 
 // https://astro.build/config
 export default defineConfig({
@@ -42,5 +69,6 @@ export default defineConfig({
       },
     }),
   ],
-  site: env.PUBLIC_SITE_URL,
+  base: base || undefined,
+  site,
 });
