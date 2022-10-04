@@ -33,7 +33,7 @@
   }
 }
 
-a.btn:not(:active, [aria-current='page']) {
+.btn:not(:active, [aria-current='page']) {
   background: transparent;
   border: none;
 }
