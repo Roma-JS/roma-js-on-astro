@@ -27,10 +27,10 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
 
   return (
     <header class={styles.header} classList={classList()} {...otherProps}>
+      <img src={logoSvg} alt={'Romajs logo'} class={styles.logo} />
       <h1 class="h-1" classList={{ [styles.heading]: true }}>
         {local.title}
       </h1>
-      <img src={logoSvg} alt={'romajsLogo'} class={styles.logo} />
     </header>
   );
 }
