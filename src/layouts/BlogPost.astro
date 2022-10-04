@@ -9,6 +9,7 @@ import { getCanonicalURL } from 'utils/routing';
 import { BlogPostInfo } from '@components/BlogPostInfo/BlogPostInfo';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
+import { BlogPostComments } from '@components/BlogPostComments/BlogPostComments';
 
 const { content } = Astro.props;
 
@@ -32,6 +33,10 @@ changeLanguage(lang);
       .pt-0 {
         padding-top: 0 !important;
       }
+
+      .comments-box {
+        padding: 16px 0 8px;
+      }
     </style>
   </head>
 
@@ -49,7 +54,9 @@ changeLanguage(lang);
         categories={categories}
         baseUrl={import.meta.env.BASE_URL}
       />
-      <div class="main-content pt-0"><slot /></div>
+      <div class="main-content pt-0">
+        <slot /><BlogPostComments class="comments-box" />
+      </div>
       <footer><SocialLinksList /></footer>
     </article>
     <slot name="after" />
