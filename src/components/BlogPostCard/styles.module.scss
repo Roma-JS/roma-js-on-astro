@@ -1,5 +1,10 @@
 @use '../../styles/mixins/breakpoints' as br;
 
+@mixin active-style {
+  block-size: 3px;
+  transform: scaleX(var(--card-scale-grow-x));
+}
+
 .link {
   composes: m-0 from global;
 
@@ -38,8 +43,7 @@
 
   .link:active &::before,
   .link:active &::after {
-    block-size: 3px;
-    transform: scaleX(var(--card-scale-grow-x));
+    @include active-style;
   }
 
   .link:focus-visible &::before,
@@ -49,6 +53,13 @@
 
   @include br.media-breakpoint-up(lg) {
     padding: 8px 24px;
+  }
+
+  @media (hover: hover) {
+    .link:hover &::before,
+    .link:hover &::after {
+      @include active-style;
+    }
   }
 }
 

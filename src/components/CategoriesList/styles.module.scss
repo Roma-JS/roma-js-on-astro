@@ -1,3 +1,10 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+@mixin invert-colors {
+  background: var(--brand-secondary);
+  color: var(--text-primary);
+}
+
 .categories {
   composes: d-flex m-0 p-0 from global;
   align-items: center;
@@ -31,10 +38,12 @@
 
   &:active {
     transform: scale(1.1);
+    @include invert-colors;
   }
 
-  &:hover {
-    background: var(--brand-secondary);
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      @include invert-colors;
+    }
   }
 }

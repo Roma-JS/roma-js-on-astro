@@ -71,7 +71,7 @@
     min-width: 68px;
   }
 
-  :global(a.btn:not(:active, [aria-current='page'])) {
+  :global(.btn:not(:active, [aria-current='page'])) {
     color: var(--text-primary);
   }
 }
