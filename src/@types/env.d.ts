@@ -9,6 +9,10 @@ interface ImportMetaEnv {
   readonly PUBLIC_GITHUB_PROFILE_HREF: string;
   readonly PUBLIC_SITE_URL: string;
   readonly PUBLIC_URL_BASE: string;
+  readonly PUBLIC_GISCUS_REPO_NAME: string;
+  readonly PUBLIC_GISCUS_REPO_ID: string;
+  readonly PUBLIC_GISCUS_CATEGORY_NAME: string;
+  readonly PUBLIC_GISCUS_CATEGORY_ID: string;
 }
 
 interface ImportMeta {
