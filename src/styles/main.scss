@@ -98,10 +98,10 @@ body {
   padding: 24px 20px var(--footer-height);
 
   a {
-    color: var(--brand-secondary);
+    color: var(--accent-primary);
 
     &:focus-visible {
-      outline: var(--brand-secondary) auto 1px;
+      outline: var(--accent-primary) auto 1px;
     }
   }
 
@@ -128,6 +128,7 @@ body {
   --bg-tertiary: var(--color-dark-200);
   --text-primary: var(--color-dark-100);
   --text-secondary: var(--color-light-100);
+  --accent-primary: var(--brand-secondary);
 }
 
 :root.rmjs-yellow-white-theme,
@@ -138,4 +139,5 @@ body {
   --bg-tertiary: var(--color-dark-200);
   --text-primary: var(--color-dark-100);
   --text-secondary: var(--color-dark-100);
+  --accent-primary: var(--brand-secondary);
 }
