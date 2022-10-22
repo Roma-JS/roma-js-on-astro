@@ -1,7 +1,7 @@
 @use '../../styles/mixins/breakpoints' as br;
 
 @mixin invert-colors {
-  background: var(--brand-secondary);
+  background: var(--accent-primary);
   color: var(--text-primary);
 }
 
@@ -19,7 +19,7 @@
 
 .category {
   composes: overflow-hidden d-inline-flex m-0 from global;
-  color: var(--brand-secondary);
+  color: var(--accent-primary);
   font-size: 0.8rem;
   text-decoration: none;
   justify-content: center;

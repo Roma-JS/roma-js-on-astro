@@ -1,11 +1,13 @@
 import rss from '@astrojs/rss';
 import { sortPosts } from 'utils/blog';
 
-const postImportResult = import.meta.globEager('./post/**/*.md');
-const posts = sortPosts(Object.values(postImportResult) as any);
+export async function get() {
+  const postImportResult = await Promise.all(
+    Object.values(import.meta.glob('./post/**/*.md')).map((get) => get())
+  );
+  const posts = sortPosts(Object.values(postImportResult) as any);
 
-export const get = () =>
-  rss({
+  return rss({
     title: 'RomaJS blog',
     description:
       'RomaJS è una comunity di sviluppatori javascript. Con questo feed potrai rimanere aggiornato sui prossimi appuntamenti e potrai leggere il prima possibile i nostri blog posts!',
@@ -17,3 +19,4 @@ export const get = () =>
       pubDate: new Date(post.frontmatter.createdAt),
     })),
   });
+}

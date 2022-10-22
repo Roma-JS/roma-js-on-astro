@@ -9,17 +9,15 @@
   border-radius: 5px;
   border-width: 2px;
   border-style: solid;
+  color: var(--btn-color);
+  border-color: var(--btn-border-color);
+  background: var(--btn-bg-color);
 
   &.btn-primary {
-    color: var(--text-secondary);
-    border-color: var(--bg-secondary);
-    background: var(--bg-secondary);
-  }
-
-  &.btn-secondary {
-    color: var(--text-primary);
-    border-color: var(--text-secondary);
-    background: var(--text-secondary);
+    --btn-color: var(--text-primary);
+    --btn-border-color: var(--bg-secondary);
+    --btn-bg-color: var(--bg-secondary);
+    --btn-accent: var(--text-secondary);
   }
 
   &.btn-outline {
@@ -36,4 +34,19 @@
 .btn:not(:active, [aria-current='page']) {
   background: transparent;
   border: none;
+}
+
+.btn[aria-current='page'],
+.btn[aria-current='page']:active {
+  color: var(--btn-accent);
+  border-color: var(--btn-color);
+  background-color: var(--btn-color);
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    color: var(--btn-accent);
+    border-color: var(--btn-color);
+    background-color: var(--btn-color);
+  }
 }
