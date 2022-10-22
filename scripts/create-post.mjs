@@ -64,7 +64,6 @@ async function createPostPrompts() {
         choices: [
           { title: 'italian', value: 'it' },
           { title: 'english', value: 'en' },
-          { title: 'romanesco', value: 'rm' },
         ],
         initial: 0,
       },
@@ -88,6 +87,7 @@ async function createPostPrompts() {
       {
         type: 'text',
         name: 'author',
+        initial: 'RomaJS team',
         message: 'Enter blog post Author',
         format(txt) {
           return txt.trim();

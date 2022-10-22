@@ -71,10 +71,13 @@ changeLanguage(lang);
       }
 
       .categories-list.categories-list {
-        --category-min-width: 160px;
+        --category-min-width: 62px;
+        gap: 14px;
         @include br.media-breakpoint-up(lg) {
           flex-flow: column nowrap;
           align-items: flex-start;
+          --category-min-width: 200px;
+          gap: 8px;
         }
       }
 

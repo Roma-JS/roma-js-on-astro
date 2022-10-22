@@ -2,8 +2,8 @@
 title: 'Doppio talk per il meetup di Febbraio!'
 description:
 createdAt: '2022-02-14T00:00:00.000Z'
-categories: ['Meetup', 'React']
-author: 'RomaJS'
+categories: ['Meetup', 'React', 'react-hook-form']
+author: 'RomaJS team'
 lang: 'it'
 layout: '@layouts/BlogPost.astro'
 ---
