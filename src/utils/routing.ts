@@ -19,6 +19,8 @@ export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   },
 };
 
+export const categoryPageUrl = navbarLinks.it.blog + '/category';
+
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
   it: navbarLinks.it.home,
   en: navbarLinks.en.home,

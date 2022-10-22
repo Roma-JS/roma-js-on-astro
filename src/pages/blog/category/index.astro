@@ -1,6 +1,9 @@
 ---
+import { l10n } from '@i18n/config';
+import CategoriesListLayout from '@layouts/CategoriesList.astro';
 import { MarkdownInstance } from 'astro';
 import { Frontmatter, computeAllCategories } from 'utils/blog';
+import { changeLanguage } from 'i18next';
 
 const allPosts = (await Astro.glob(
   '../post/**/*.md'
@@ -9,16 +12,15 @@ const allPosts = (await Astro.glob(
 const allCategories = Array.from(
   computeAllCategories(allPosts, import.meta.env.BASE_URL).values()
 );
+
+const lang = 'it';
+
+changeLanguage(lang);
 ---
 
-<h1>Categories</h1>
-
-<ul>
-  {
-    allCategories.map((category) => (
-      <li>
-        <a href={category.url}>{category.name}</a>
-      </li>
-    ))
-  }
-</ul>
+<CategoriesListLayout
+  lang={lang}
+  categories={allCategories}
+  title={l10n('categoriesTitle')}
+  description={l10n('categoriesDescription')}
+/>

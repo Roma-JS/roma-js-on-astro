@@ -1,0 +1,70 @@
+---
+import { Lang } from '@i18n/types';
+import styles from '../styles/wallpaper.module.scss';
+import { Category } from 'utils/blog';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import { getCanonicalURL } from 'utils/routing';
+import { changeLanguage } from 'i18next';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import { BuildInfo } from '@components/BuildInfo/BuildInfo';
+import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
+import { Navbar } from '@components/Navbar/Navbar';
+import BaseHead from '@components/BaseHead.astro';
+import { CategoriesList } from '@components/CategoriesList/CategoriesList';
+
+export interface Props extends BaseHeadProps {
+  lang: Lang;
+  categories: Category[];
+}
+
+const { title, description, lang = 'en', categories } = Astro.props as Props;
+
+const canonicalURL = getCanonicalURL(Astro);
+
+const relativePageUrl =
+  canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  canonicalURL.search +
+  canonicalURL.hash;
+
+const categoryNames = categories.map(({ name }) => name);
+
+changeLanguage(lang);
+---
+
+<html lang={lang} class="rmjs-yellow-black-theme">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style lang="scss">
+      .categories-list.categories-list {
+        align-items: flex-start;
+        --category-min-width: 200px;
+        gap: 8px;
+      }
+    </style>
+
+    <slot name="head" />
+  </head>
+
+  <body class={styles.wallpaper}>
+    <article class="main">
+      <Navbar
+        client:load
+        lang={lang}
+        urlMap={null}
+        relativePageUrl={relativePageUrl}
+      />
+      <SlantedHeader title={title} />
+      <div class="main-content blog-list-layout">
+        <CategoriesList
+          class="categories-list"
+          categories={categories.map((r) => r.name)}
+          baseUrl={import.meta.env.BASE_URL}
+        />
+        <slot />
+      </div>
+      <footer><SocialLinksList /></footer>
+    </article>
+    <slot name="after" />
+    <BuildInfo />
+  </body>
+</html>
