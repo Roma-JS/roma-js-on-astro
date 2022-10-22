@@ -26,7 +26,7 @@ The new RomaJS website built with [astro](https://astro.build/).
 - [ ] blog post authors pages
 - [x] blog post comments powered by [giscus](https://giscus.app/)
 - [ ] copy facebook posts
-- [ ] generate blog homepage
+- [x] generate blog homepage
 - [x] build about page
 - [x] setup PR pipeline
 - [x] setup deploy to GH pages pipeline
