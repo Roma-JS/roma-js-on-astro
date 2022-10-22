@@ -3,17 +3,15 @@
 }
 
 .list {
-  composes: d-flex from global;
+  composes: d-flex m-0 from global;
   list-style: none;
-  margin: 0;
   padding: 0;
   height: 28px;
 }
 
 .listItem {
-  composes: d-flex from global;
+  composes: d-flex m-0 from global;
   list-style: none;
-  margin: 0;
   justify-content: center;
   align-items: center;
   padding: 4px;

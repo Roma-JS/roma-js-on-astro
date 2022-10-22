@@ -11,7 +11,7 @@
   margin: 0;
   height: var(--slanted-header-height);
   clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
-  padding: 20px 20px 0;
+  padding: 10px 20px 0;
   background-color: var(--accent-primary);
   color: var(--text-primary);
   align-items: flex-start;
@@ -21,12 +21,6 @@
     width: var(--slanted-header-logo-size);
     height: var(--slanted-header-logo-size);
     border-radius: 8px;
-  }
-
-  @include br.media-breakpoint-up(sm) {
-    .heading {
-      font-size: 1.5rem;
-    }
   }
 
   @include br.media-breakpoint-up(lg) {
@@ -45,7 +39,14 @@
 .heading {
   composes: overflow-hidden from global;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  font-size: 1.125rem;
+  font-size: 1.25rem !important;
+  margin: 0;
+
+  @include br.media-breakpoint-up(sm) {
+    font-size: 1.5rem !important;
+    margin: 16px 0;
+    -webkit-line-clamp: 2;
+  }
 }
