@@ -15,7 +15,6 @@ export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   },
   en: {
     home: import.meta.env.PUBLIC_URL_BASE + '/en',
-    blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
     about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
   },
 };
