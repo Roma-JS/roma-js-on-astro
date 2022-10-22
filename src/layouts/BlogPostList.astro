@@ -5,7 +5,7 @@ import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL } from 'utils/routing';
+import { getCanonicalURL, categoryPageUrl } from 'utils/routing';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { Lang } from '@i18n/types';
@@ -120,6 +120,7 @@ changeLanguage(lang);
             baseUrl={import.meta.env.BASE_URL}
             categories={categoryNames}
           />
+          <a class="btn btn-primary" href={categoryPageUrl}>{l10n('seeAll')}</a>
         </aside>
         <slot />
       </div>

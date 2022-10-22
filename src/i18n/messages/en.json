@@ -3,5 +3,7 @@
   "ctaJoinSlackCta": "Join us on Slack",
   "ctaReserveMeetupPartecipation": "Reserve",
   "categoryTitle": "Tag: {{categoryTitle}}",
-  "categoriesTitle": "Tags"
+  "categoriesTitle": "Tags",
+  "categoriesDescription": "All the tags of the RomaJS blog",
+  "seeAll": "See all"
 }
