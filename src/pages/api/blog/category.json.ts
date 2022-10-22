@@ -12,7 +12,11 @@ export interface CategoryInfoDto {
 }
 
 export async function get() {
-  const postImportResult = import.meta.globEager('../../blog/post/**/*.md');
+  const postImportResult = await Promise.all(
+    Object.values(import.meta.glob('../../blog/post/**/*.md')).map((get) =>
+      get()
+    )
+  );
   const posts = sortPosts(Object.values(postImportResult) as any);
   const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
 
