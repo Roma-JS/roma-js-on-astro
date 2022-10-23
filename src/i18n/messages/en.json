@@ -5,5 +5,5 @@
   "categoryTitle": "Tag: {{categoryTitle}}",
   "categoriesTitle": "Tags",
   "categoriesDescription": "All the tags of the RomaJS blog",
-  "seeAll": "See all"
+  "showAllTags": "See all tags"
 }
