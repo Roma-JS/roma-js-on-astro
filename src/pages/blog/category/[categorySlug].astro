@@ -2,7 +2,12 @@
 import BlogPostListLayout from '@layouts/BlogPostList.astro';
 import { MarkdownInstance } from 'astro';
 import { l10n } from '../../../i18n/config';
-import { Frontmatter, computeAllCategories, Category } from 'utils/blog';
+import {
+  Frontmatter,
+  computeAllCategories,
+  Category,
+  descendingCreatedAtComparator,
+} from 'utils/blog';
 
 export interface Props {
   category: Category;
@@ -38,12 +43,13 @@ const {
 } = Astro.props;
 const description = `Category: ${categoryName}`;
 const lang = 'it';
+const sortedPostsByDate = posts.slice().sort(descendingCreatedAtComparator);
 ---
 
 <BlogPostListLayout
   lang={lang}
   title={l10n('categoryTitle', { categoryTitle: categoryName })}
   description={description}
-  posts={posts}
+  posts={sortedPostsByDate}
   categories={categories}
 />
