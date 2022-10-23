@@ -5,7 +5,7 @@ import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL, categoryPageUrl } from 'utils/routing';
+import { getCanonicalURL, categoryPageUrl, navbarLinks } from 'utils/routing';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { Lang } from '@i18n/types';
@@ -102,7 +102,11 @@ changeLanguage(lang);
         urlMap={null}
         relativePageUrl={relativePageUrl}
       />
-      <SlantedHeader title={title} />
+      <SlantedHeader
+        title={title}
+        logoHref={navbarLinks[lang]?.home}
+        logoLabel={'homepage'}
+      />
       <div class="main-content blog-list-layout">
         <ul class="list-style-none m-0 post-list">
           {

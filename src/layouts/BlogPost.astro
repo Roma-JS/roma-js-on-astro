@@ -5,11 +5,12 @@ import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL } from 'utils/routing';
+import { getCanonicalURL, navbarLinks } from 'utils/routing';
 import { BlogPostInfo } from '@components/BlogPostInfo/BlogPostInfo';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { BlogPostComments } from '@components/BlogPostComments/BlogPostComments';
+import { Lang } from '@i18n/types';
 
 const { content } = Astro.props;
 
@@ -20,7 +21,7 @@ const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
-const lang = content.lang || 'en';
+const lang: Lang = content.lang || 'en';
 
 changeLanguage(lang);
 ---
@@ -48,7 +49,11 @@ changeLanguage(lang);
         urlMap={null}
         relativePageUrl={relativePageUrl}
       />
-      <SlantedHeader title={title} />
+      <SlantedHeader
+        title={title}
+        logoHref={navbarLinks[lang]?.home}
+        logoLabel={'homepage'}
+      />
       <BlogPostInfo
         createdAt={createdAt ?? ''}
         categories={categories}
