@@ -9,8 +9,8 @@ import { Transition } from 'solid-transition-group';
 import styles from './navbar.module.scss';
 import { createAppBreakpoints } from 'utils/media-queries';
 import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
-import { Lang } from '@i18n/types';
-import { l10n } from '@i18n/config';
+import type { Lang } from '@i18n/types';
+import type { NavbarMessages } from './helpers';
 
 export interface NavbarProps {
   lang: Lang;
@@ -18,6 +18,7 @@ export interface NavbarProps {
   class?: JSX.IntrinsicElements['div']['class'];
   classList?: JSX.IntrinsicElements['div']['classList'];
   urlMap: LangSelectorProps['urlMap'] | null | undefined;
+  messages: NavbarMessages;
 }
 
 export function Navbar(props: NavbarProps): JSX.Element {
@@ -58,7 +59,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
                   target="_blank"
                   href={socialLinks.youtube.href}
                 >
-                  {l10n('ctaWatchOurVideos')}
+                  {props.messages.ctaWatchOurVideos}
                 </a>
               </li>
               <li class={styles.divider} />
@@ -102,6 +103,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
             activeLang={props.lang}
             urlMap={props.urlMap}
             onCloseButtonClick={() => setIsMenuOpen(false)}
+            messages={props.messages}
           />
         </Show>
       </Transition>

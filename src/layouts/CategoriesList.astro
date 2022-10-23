@@ -11,6 +11,7 @@ import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { Navbar } from '@components/Navbar/Navbar';
 import BaseHead from '@components/BaseHead.astro';
 import { CategoriesList } from '@components/CategoriesList/CategoriesList';
+import { getNavbarMessages } from '@components/Navbar/helpers';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -50,6 +51,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={null}
         relativePageUrl={relativePageUrl}
+        messages={getNavbarMessages()}
       />
       <SlantedHeader
         title={title}

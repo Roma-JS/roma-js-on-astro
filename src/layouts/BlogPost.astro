@@ -11,6 +11,7 @@ import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { BlogPostComments } from '@components/BlogPostComments/BlogPostComments';
 import { Lang } from '@i18n/types';
+import { getNavbarMessages } from '@components/Navbar/helpers';
 
 const { content } = Astro.props;
 
@@ -48,6 +49,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={null}
         relativePageUrl={relativePageUrl}
+        messages={getNavbarMessages()}
       />
       <SlantedHeader
         title={title}

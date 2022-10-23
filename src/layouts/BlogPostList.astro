@@ -15,6 +15,7 @@ import { MarkdownInstance } from 'astro';
 import { Category, Frontmatter } from 'utils/blog';
 import { BlogPostCard } from '@components/BlogPostCard/BlogPostCard';
 import { l10n } from '@i18n/config';
+import { getNavbarMessages } from '@components/Navbar/helpers';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -101,6 +102,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={null}
         relativePageUrl={relativePageUrl}
+        messages={getNavbarMessages()}
       />
       <SlantedHeader
         title={title}
