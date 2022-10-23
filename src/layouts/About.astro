@@ -9,6 +9,7 @@ import { changeLanguage } from 'i18next';
 import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { Lang } from '@i18n/types';
+import { getNavbarMessages } from '@components/Navbar/helpers';
 
 const { content } = Astro.props;
 
@@ -36,6 +37,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={aboutUrlMap}
         relativePageUrl={relativePageUrl}
+        messages={getNavbarMessages()}
       />
       <SlantedHeader
         title={title}

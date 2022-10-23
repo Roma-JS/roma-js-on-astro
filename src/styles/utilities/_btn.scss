@@ -18,9 +18,16 @@
 
   &.btn-primary {
     --btn-color: var(--text-primary);
+    --btn-border-color: transparent;
+    --btn-bg-color: transparent;
+    --btn-accent: var(--text-secondary);
+  }
+
+  &.btn-secondary {
+    --btn-color: var(--text-secondary);
     --btn-border-color: var(--bg-secondary);
     --btn-bg-color: var(--bg-secondary);
-    --btn-accent: var(--text-secondary);
+    --btn-accent: var(--text-primary);
   }
 
   &.btn-outline {
@@ -32,11 +39,6 @@
     min-height: 28px;
     padding: 0 9px;
   }
-}
-
-.btn:not(:active, [aria-current='page']) {
-  background: transparent;
-  border: none;
 }
 
 .btn[aria-current='page'],
