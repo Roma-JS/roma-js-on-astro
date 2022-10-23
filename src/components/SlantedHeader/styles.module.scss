@@ -52,7 +52,7 @@
 }
 
 .logoLink {
-  composes: m-0 p-0 d-inline-block from global;
+  composes: m-0 p-0 d-inline-block no-touch-highlight from global;
 
   &:active {
     transform: scale(1.05);

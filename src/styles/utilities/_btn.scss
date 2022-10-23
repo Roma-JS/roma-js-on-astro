@@ -13,6 +13,9 @@
   border-color: var(--btn-border-color);
   background: var(--btn-bg-color);
 
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+
   &.btn-primary {
     --btn-color: var(--text-primary);
     --btn-border-color: var(--bg-secondary);

@@ -52,3 +52,8 @@ $overflow-values: auto, hidden, visible, scroll;
 .text-decoration-none {
   text-decoration: none !important;
 }
+
+.no-touch-highlight {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
