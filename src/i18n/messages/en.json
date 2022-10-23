@@ -4,6 +4,7 @@
   "ctaReserveMeetupPartecipation": "Reserve",
   "categoryTitle": "Tag: {{categoryTitle}}",
   "categoriesTitle": "Tags",
+  "topCategoriesTitle": "Top tags",
   "categoriesDescription": "All the tags of the RomaJS blog",
   "showAllTags": "See all tags"
 }

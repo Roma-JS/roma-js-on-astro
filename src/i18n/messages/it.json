@@ -4,6 +4,7 @@
   "ctaReserveMeetupPartecipation": "Registrati!",
   "categoryTitle": "Tag: {{categoryTitle}}",
   "categoriesTitle": "Tags",
+  "topCategoriesTitle": "Top tags",
   "categoriesDescription": "Tutte le tag del RomaJS blog",
   "showAllTags": "Vedi tutte le tag"
 }
