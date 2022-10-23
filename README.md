@@ -2,7 +2,7 @@
 
 ## Description
 
-The new RomaJS website built with [astro](https://astro.build/).
+The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](https://www.solidjs.com/).
 
 ## Features
 
@@ -25,7 +25,7 @@ The new RomaJS website built with [astro](https://astro.build/).
 - [x] categories index page
 - [ ] blog post authors pages
 - [x] blog post comments powered by [giscus](https://giscus.app/)
-- [ ] copy facebook posts
+- [x] copy facebook posts 2022, 2020, 2019
 - [x] generate blog homepage
 - [x] build about page
 - [x] setup PR pipeline
