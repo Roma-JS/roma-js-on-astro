@@ -6,8 +6,9 @@ import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL, aboutUrlMap } from 'utils/routing';
+import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import { Lang } from '@i18n/types';
 
 const { content } = Astro.props;
 
@@ -18,7 +19,7 @@ const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
-const lang = content.lang || 'en';
+const lang: Lang = content.lang || 'en';
 
 changeLanguage(lang);
 ---
@@ -36,7 +37,11 @@ changeLanguage(lang);
         urlMap={aboutUrlMap}
         relativePageUrl={relativePageUrl}
       />
-      <SlantedHeader title={title} />
+      <SlantedHeader
+        title={title}
+        logoHref={navbarLinks[lang]?.home}
+        logoLabel={'homepage'}
+      />
       <div class="main-content"><slot /></div>
       <footer><SocialLinksList /></footer>
     </article>

@@ -6,13 +6,17 @@
 }
 
 .link {
-  composes: m-0 from global;
+  composes: m-0 no-touch-highlight from global;
 
   text-decoration: none;
   outline: none;
 
   &:focus-visible {
     outline: inherit;
+  }
+
+  &:active {
+    transform: scale(1.02);
   }
 }
 

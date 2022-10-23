@@ -50,3 +50,16 @@
     -webkit-line-clamp: 2;
   }
 }
+
+.logoLink {
+  composes: m-0 p-0 d-inline-block no-touch-highlight from global;
+
+  &:active {
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    outline-color: var(--brand-primary);
+    outline-offset: 4px;
+  }
+}

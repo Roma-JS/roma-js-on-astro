@@ -1,10 +1,12 @@
-import type { JSX } from 'solid-js';
+import { JSX, Show } from 'solid-js';
 import { splitProps } from 'solid-js';
 import styles from './styles.module.scss';
 import logoSvg from 'media/brand-logo/primary.svg';
 
 export type SlantedHeaderProps = JSX.IntrinsicElements['header'] & {
   title: string;
+  logoHref?: string;
+  logoLabel?: string;
 };
 
 export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
@@ -13,6 +15,8 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
     'children',
     'class',
     'classList',
+    'logoHref',
+    'logoLabel',
   ]);
 
   const classList = () => {
@@ -25,9 +29,27 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
     return output;
   };
 
+  const imageLogo = () => (
+    <img
+      src={logoSvg}
+      alt={'Romajs logo'}
+      class={styles.logo}
+      aria-hidden="true"
+    />
+  );
+
   return (
     <header class={styles.header} classList={classList()} {...otherProps}>
-      <img src={logoSvg} alt={'Romajs logo'} class={styles.logo} />
+      <Show when={local.logoHref} fallback={imageLogo()}>
+        <a
+          class={styles.logoLink}
+          href={local.logoHref}
+          aria-label={props.logoLabel}
+        >
+          {imageLogo()}
+        </a>
+      </Show>
+
       <h1 class="h-1" classList={{ [styles.heading]: true }}>
         {local.title}
       </h1>

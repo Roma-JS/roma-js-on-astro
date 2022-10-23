@@ -5,7 +5,7 @@ import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL, categoryPageUrl } from 'utils/routing';
+import { getCanonicalURL, categoryPageUrl, navbarLinks } from 'utils/routing';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { Lang } from '@i18n/types';
@@ -37,7 +37,7 @@ const relativePageUrl =
   canonicalURL.search +
   canonicalURL.hash;
 
-const categoryNames = categories.map(({ name }) => name);
+const topCategoriesNames = categories.map(({ name }) => name).slice(0, 15);
 
 changeLanguage(lang);
 ---
@@ -102,7 +102,11 @@ changeLanguage(lang);
         urlMap={null}
         relativePageUrl={relativePageUrl}
       />
-      <SlantedHeader title={title} />
+      <SlantedHeader
+        title={title}
+        logoHref={navbarLinks[lang]?.home}
+        logoLabel={'homepage'}
+      />
       <div class="main-content blog-list-layout">
         <ul class="list-style-none m-0 post-list">
           {
@@ -114,13 +118,15 @@ changeLanguage(lang);
           }
         </ul>
         <aside class="aside">
-          <h2 class="h-2 m-0">{l10n('categoriesTitle')}</h2>
+          <h2 class="h-2 m-0">{l10n('topCategoriesTitle')}</h2>
           <CategoriesList
             class="categories-list"
             baseUrl={import.meta.env.BASE_URL}
-            categories={categoryNames}
+            categories={topCategoriesNames}
           />
-          <a class="btn btn-primary" href={categoryPageUrl}>{l10n('seeAll')}</a>
+          <a class="btn btn-primary" href={categoryPageUrl}
+            >{l10n('showAllTags')}
+          </a>
         </aside>
         <slot />
       </div>

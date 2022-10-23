@@ -68,6 +68,17 @@ async function createPostPrompts() {
         initial: 0,
       },
       {
+        type: 'date',
+        name: 'createdAt',
+        message: 'Select creation date',
+        initial: new Date(),
+        validate(date) {
+          return date > Date.now()
+            ? "We can't publish in the future... yet"
+            : true;
+        },
+      },
+      {
         type: 'autocompleteMultiselect',
         name: 'categories',
         message: 'select blog post categories',
@@ -113,7 +124,7 @@ async function cli() {
   const template = await fs.readFile(templateFilePath, { encoding: 'utf-8' });
 
   const responses = await createPostPrompts();
-  const createdAt = new Date().toISOString();
+  const createdAt = responses.createdAt.toISOString();
 
   const blogPostRendered = Mustache.render(template, {
     ...responses,
