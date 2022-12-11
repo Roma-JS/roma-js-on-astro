@@ -30,6 +30,9 @@ jobs:
       - name: Build site
         run: pnpm run build
 
+      - name: Post build actions
+        run: touch ./dist/.nojekill # Avoids 404 when pathname includes underscores
+
       - name: Deploy roma-js site 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
