@@ -1,6 +1,7 @@
 ---
 import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
+import '../styles/layouts/blogPostList.scss';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -47,52 +48,6 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <style lang="scss">
-      @use '../styles/mixins/_breakpoints.scss' as br;
-
-      .post-list {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 20px;
-        padding: 0;
-
-        @include br.media-breakpoint-up(lg) {
-          padding: 0 64px;
-        }
-      }
-
-      .blog-list-layout {
-        display: grid;
-        grid-template-columns: 1fr;
-
-        @include br.media-breakpoint-up(lg) {
-          gap: 24px;
-          grid-template-columns: 8fr 2fr;
-        }
-      }
-
-      .categories-list.categories-list {
-        --category-min-width: 62px;
-        gap: 14px;
-        @include br.media-breakpoint-up(lg) {
-          flex-flow: column nowrap;
-          align-items: flex-start;
-          --category-min-width: 200px;
-          gap: 8px;
-        }
-      }
-
-      .aside {
-        display: flex;
-        flex-flow: column nowrap;
-        color: var(--accent-primary);
-        gap: 16px;
-        padding: 32px 8px 0;
-        @include br.media-breakpoint-up(lg) {
-          padding: 0;
-        }
-      }
-    </style>
   </head>
 
   <body class={styles.wallpaper}>
