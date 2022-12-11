@@ -2,20 +2,31 @@
 import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
 import BaseHead from '@components/BaseHead.astro';
+import brandLogo from '../media/brand-logo/primary.svg';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
 import { Lang } from '@i18n/types';
-import { getCanonicalURL } from 'utils/routing';
+import { getCanonicalURL, socialLinks } from 'utils/routing';
 import { getNavbarMessages } from '@components/Navbar/helpers';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import { l10n } from '@i18n/config';
+import type { HpContent } from '../@types/hp';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
   urlMap?: Partial<Record<Lang, string>>;
+  sections: HpContent['sections'];
 }
 
-const { title, description, lang = 'en', urlMap } = Astro.props as Props;
+const {
+  title,
+  description,
+  lang = 'en',
+  urlMap,
+  sections,
+} = Astro.props as Props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -31,6 +42,118 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <style lang="scss">
+      @use '../styles/mixins/_breakpoints.scss' as br;
+
+      :root {
+        --logo-width: 120px;
+      }
+
+      @include br.media-breakpoint-up(lg) {
+        :root {
+          --logo-width: 224px;
+        }
+      }
+
+      .logo {
+        border-radius: 17px;
+        width: var(--logo-width);
+        height: var(--logo-width);
+      }
+
+      .hp-section {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        gap: 16px;
+
+        .h-2,
+        .h-1 {
+          margin: 0;
+          max-width: 600px;
+        }
+      }
+
+      .logo-hero {
+        padding: 61px 45px 0;
+
+        .logo-hero__text {
+          margin: 16px 0 21px;
+
+          :not(h1) {
+            display: none;
+          }
+
+          @include br.media-breakpoint-up(lg) {
+            margin: 23px 0 29px;
+
+            :not(h1) {
+              display: unset;
+            }
+          }
+        }
+
+        @include br.media-breakpoint-up(lg) {
+          padding: 51px 45px 0;
+        }
+      }
+
+      .arrow-box {
+        padding: 20px 16px 0;
+      }
+
+      .arrow-box:nth-child(odd) {
+        min-height: 340px;
+        clip-path: polygon(100% 80%, 50% 100%, 0 80%, 0 0, 50% 20%, 100% 0);
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        padding: 40px 0 0;
+      }
+
+      .arrow-box:nth-child(even) {
+        min-height: 240px;
+        color: var(--text-secondary);
+      }
+
+      .arrow-box:first-child {
+        padding: 40px 16px 54px;
+        clip-path: polygon(100% 80%, 50% 100%, 0 80%, 0 0, 100% 0);
+        background-color: var(--bg-primary);
+      }
+
+      .contacts-cta {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        text-align: center;
+        padding: 17px 44px;
+
+        @include br.media-breakpoint-up(lg) {
+          padding: 33px 44px;
+        }
+      }
+
+      .slack-link {
+        @include br.media-breakpoint-down(md) {
+          font-size: 12px !important;
+          min-height: 28px !important;
+          padding: 0 9px !important;
+        }
+
+        img {
+          filter: invert(1);
+          margin-left: 0.2rem;
+        }
+
+        @media (hover: hover) {
+          &:hover img {
+            filter: invert(0);
+          }
+        }
+      }
+    </style>
   </head>
 
   <body class={styles.wallpaper}>
@@ -42,7 +165,55 @@ changeLanguage(lang);
         relativePageUrl={relativePageUrl}
         messages={getNavbarMessages()}
       />
+      <div>
+        <section class="arrow-box hp-section logo-hero">
+          <img class="logo" src={brandLogo} alt="RomaJS logo" />
+          <div class="logo-hero__text hero">
+            <h1 class="h-1">{title}</h1><span class="h-1">{description}</span>
+          </div>
+          <a
+            class="btn btn-secondary slack-link h-1"
+            rel="noopener noreferrer"
+            target="_blank"
+            href={socialLinks.slack.href}
+          >
+            {l10n('ctaJoinSlackCta')}{' '}
+            <img
+              width="24"
+              height="24"
+              src={socialLinks.slack.iconHref}
+              alt={'slack'}
+              aria-hidden="true"
+            />
+          </a>
+        </section>
+        {
+          sections.map((section) => (
+            <section class="arrow-box hp-section">
+              <h2 class="h-2 h-dynamic">{section.heading}</h2>
+              <p class="h-2 h-dynamic">{section.body}</p>
+              {!!section.cta && (
+                <a
+                  class="btn btn-outline btn-tertiary"
+                  href={section.cta.href}
+                  hreflang={section.cta.lang || undefined}
+                >
+                  {section.cta.text}
+                </a>
+              )}
+            </section>
+          ))
+        }
+      </div>
       <slot />
+      <section class="contacts-cta">
+        <p class="h-2">{l10n('ctaRequestTalk')}</p>
+        <p class="h-2">{l10n('ctaSeePreviousTalks')}</p>
+        <h2 class="h-1">{l10n('ctaContacts')}</h2>
+      </section>
+      <footer>
+        <SocialLinksList />
+      </footer>
     </main>
     <slot name="after" />
     <BuildInfo />

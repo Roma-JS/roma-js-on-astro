@@ -1,23 +1,48 @@
 ---
 import HpLayout from '@layouts/Hp.astro';
 import { getI18nRouteParams } from '@i18n/config';
-import type { I18nRouteParams } from '@i18n/types';
+import { enHpContent } from '../api/hp/en.json';
+import { itHpContent } from '../api/hp/it.json';
 import { hpUrlMap } from 'utils/routing';
-import type { Params } from 'astro';
 import type { Lang } from '@i18n/types';
+
+export interface Props {
+  lang: Lang;
+  permalink?: string;
+}
 
 export async function getStaticPaths() {
   return getI18nRouteParams().map((params) => ({ params }));
 }
 
-const { lang } = Astro.params as I18nRouteParams & Params;
+function getProp<Key extends keyof Props>(key: Key): Props[Key] {
+  return Astro.props[key as any] ?? Astro.params[key as any];
+}
+
+function getContentByLang(lang: Lang) {
+  switch (lang) {
+    case 'it': {
+      return itHpContent;
+    }
+    case 'en': {
+      return enHpContent;
+    }
+    default: {
+      throw new Error('unsupported lang received: ' + lang);
+    }
+  }
+}
+
+const lang = getProp('lang');
+const { title, description, sections } = getContentByLang(lang as Lang);
+const permalink = Astro.props.permalink;
 ---
 
 <HpLayout
   lang={lang as Lang}
-  title={`RomaJs - ${lang}`}
-  description={`RomaJs - ${lang}`}
+  title={title}
+  description={description}
   urlMap={hpUrlMap}
->
-  <h1>HP - {lang}</h1>
-</HpLayout>
+  sections={sections}
+  permalink={permalink}
+/>
