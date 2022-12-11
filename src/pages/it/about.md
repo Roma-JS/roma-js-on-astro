@@ -25,3 +25,9 @@ Durante gli ultimi anni diverse persone hanno contribuito a mantenere il gruppo 
 Potete avere un assaggio dei nostri incontri sul nostro [canale](https://www.youtube.com/channel/UCFm8OPi5USbFybw9SaTLxeA) youtube ufficiale.
 
 Per qualsiasi altra informazione potete contattarci usando uno dei nostri profili social.
+
+### About this website
+
+[romajs.org](https://romajs.org/) è stato progettato e sviluppato da [Fabrizio Vitale](https://github.com/FaberVitale) e [Guido D'Orsi](https://github.com/gdorsi) ed il sorgente è su https://github.com/FaberVitale/roma-js-site.
+
+La precendente versione è stata sviluppata da [Luca Lanziani](https://github.com/LucaLanziani) ed il sorgente è su https://github.com/Roma-JS/romajs-on-metalsmith.
