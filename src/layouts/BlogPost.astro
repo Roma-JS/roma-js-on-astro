@@ -1,6 +1,7 @@
 ---
 import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
+import '../styles/layouts/blogPost.scss';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -31,15 +32,6 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <style lang="scss">
-      .pt-0 {
-        padding-top: 0 !important;
-      }
-
-      .comments-box {
-        padding: 16px 0 8px;
-      }
-    </style>
   </head>
 
   <body class={styles.wallpaper}>
