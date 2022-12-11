@@ -6,7 +6,7 @@ export const enHpContent: Readonly<HpContent> = {
   sections: [
     {
       heading: 'Coming up next',
-      body: 'fp-ts explained to my son by Emanuele De Cupis, June 15th 2022',
+      body: 'Astro with Fabio Biondi - RomaJS #AperiTech Xmas 2022',
       cta: {
         href: 'https://www.youtube.com/watch?v=2Vp1ATBkdIQ',
         text: 'Register',
@@ -14,9 +14,9 @@ export const enHpContent: Readonly<HpContent> = {
     },
     {
       heading: 'Last meetup',
-      body: 'fp-ts explained to my son by Emanuele De Cupis, June 15th 2022',
+      body: 'Our experience with TailwindCSS',
       cta: {
-        href: 'https://www.youtube.com/watch?v=2Vp1ATBkdIQ',
+        href: 'https://www.youtube.com/watch?v=S6gUGJLJ5tA',
         text: 'Watch the VOD',
       },
     },

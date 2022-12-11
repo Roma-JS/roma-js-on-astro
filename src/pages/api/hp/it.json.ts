@@ -6,14 +6,17 @@ export const itHpContent: Readonly<HpContent> = {
   sections: [
     {
       heading: 'Coming up next',
-      body: 'fp-ts spiegato a mio figlio di Emanuele De Cupis 15 Giugno 2022',
-      cta: { href: 'dsds', text: 'Registrati' },
+      body: 'Astro, con Fabio Biondi - RomaJS #AperiTech Natalizio 2022',
+      cta: {
+        href: 'https://events.codemotion.com/?city=Roma&type=meetup',
+        text: 'Registrati',
+      },
     },
     {
       heading: 'Last meetup',
-      body: 'fp-ts spiegato a mio figlio di Emanuele De Cupis 15 Giugno 2022',
+      body: 'La nostra esperienza con TailwindCSS',
       cta: {
-        href: 'https://www.youtube.com/watch?v=2Vp1ATBkdIQ',
+        href: 'https://www.youtube.com/watch?v=S6gUGJLJ5tA',
         text: 'Guarda la registrazione',
       },
     },
