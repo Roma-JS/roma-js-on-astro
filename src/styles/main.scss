@@ -38,12 +38,16 @@ body {
   @include a11y.visually-hidden();
 }
 
-.h-1 {
+@mixin heading-1 {
   @include text.font-family();
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 1.375;
+}
+
+.h-1 {
+  @include heading-1();
 }
 
 .h-2 {
@@ -52,6 +56,12 @@ body {
   font-weight: 700;
   font-size: 16px;
   line-height: 1.375;
+
+  &.h-dynamic {
+    @include br.media-breakpoint-up(lg) {
+      @include heading-1();
+    }
+  }
 }
 
 .p-1 {

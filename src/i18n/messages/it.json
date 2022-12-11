@@ -6,5 +6,8 @@
   "categoriesTitle": "Tags",
   "topCategoriesTitle": "Top tags",
   "categoriesDescription": "Tutte le tag del RomaJS blog",
-  "showAllTags": "Vedi tutte le tag"
+  "showAllTags": "Vedi tutte le tag",
+  "ctaRequestTalk": "Vuoi proporre un talk?",
+  "ctaSeePreviousTalks": "Vuoi vedere la registrazione dei precendenti talks?",
+  "ctaContacts": "Trovi tutto questo e molto altro sui nostri contatti"
 }

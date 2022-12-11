@@ -24,7 +24,8 @@
       "@layouts/*": ["./layouts/*"],
       "@i18n/*": ["./i18n/*"],
       "@pages/*": ["./pages/*"],
-      "@media/*": ["./media"]
+      "@media/*": ["./media/*"],
+      "@types/*": ["./@types/*"]
     }
   },
   "include": ["./src"],

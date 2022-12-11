@@ -8,17 +8,19 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 
 - Seo Support | automatic sitemap generation, robots.txt, `link[rel="alternate"]` etc...
 - Localized routes `/it/**` italian and `/en/**` english.
+- Homepage.
 - Blog section.
 - Blog category pages.
 - [feed rss](https://rss.com/blog/how-do-rss-feeds-work/) available at `<SITE>/blog/rss.xml`.
 - opengraph and twitter social cards.
 - headless blog posts available at `/api/blog/post.json`.
 - headless blog posts categories available at `/api/blog/category.json`.
+- headless homepage content available at `/api/hp/it.json` & `/api/hp/en.json`
 - About page
 
 ## Todo
 
-- [ ] homepage
+- [x] homepage
 - [x] script that generates blog post files from a template
 - [x] github action pipeline that deploys to github pages
 - [x] blog post categories pages

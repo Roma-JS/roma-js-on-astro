@@ -6,5 +6,8 @@
   "categoriesTitle": "Tags",
   "topCategoriesTitle": "Top tags",
   "categoriesDescription": "All the tags of the RomaJS blog",
-  "showAllTags": "See all tags"
+  "showAllTags": "See all tags",
+  "ctaRequestTalk": "Have you got an idea for a talk?",
+  "ctaSeePreviousTalks": "Do want to watch the previous talks?",
+  "ctaContacts": "Let's chat about it!"
 }
