@@ -62,6 +62,15 @@ You should then be able to run pnpm normally in this project, e.g. `pnpm run fmt
 
 Run `pnpm run create-post` and follow the instructions.
 
+#### Change Homepage content
+
+HomePage content is defined in:
+
+- `src/pages/api/hp/en.json.ts`
+- `src/pages/api/hp/it.json.ts`
+
+Edit `enHpContent` to modify the english homepage and `itHpContent` to change the italian one.
+
 ### Common scripts
 
 - `pnpm run dev` starts dev server at `127.0.0.1:3000`.
