@@ -1,8 +1,8 @@
-name: Deploy examples
+name: Deploy
 on:
   push:
     branches:
-      - main
+      - release
 permissions: 
   contents: write
 jobs:
