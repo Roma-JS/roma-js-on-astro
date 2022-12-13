@@ -28,6 +28,6 @@ Per qualsiasi altra informazione potete contattarci usando uno dei nostri profil
 
 ### About this website
 
-[romajs.org](https://romajs.org/) è stato progettato e sviluppato da [Fabrizio Vitale](https://github.com/FaberVitale) e [Guido D'Orsi](https://github.com/gdorsi) ed il sorgente è su https://github.com/FaberVitale/roma-js-site.
+[romajs.org](https://romajs.org/) è stato progettato e sviluppato da [Fabrizio Vitale](https://github.com/FaberVitale) e [Guido D'Orsi](https://github.com/gdorsi) ed il sorgente è su https://github.com/Roma-JS/roma-js-on-astro.
 
 La precendente versione è stata sviluppata da [Luca Lanziani](https://github.com/LucaLanziani) ed il sorgente è su https://github.com/Roma-JS/romajs-on-metalsmith.
