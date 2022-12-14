@@ -1,19 +1,19 @@
-name: Deploy examples
+name: Deploy
 on:
   push:
     branches:
-      - main
+      - release
 permissions: 
   contents: write
 jobs:
   build-and-deploy:
     # prevents this action from running on forks
-    if: github.repository == 'FaberVitale/roma-js-site'
+    if: github.repository == 'Roma-JS/roma-js-on-astro'
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     env:
       HUSKY: '0'
-      PUBLIC_SITE_URL: "https://fabervitale.github.io/roma-js-site"
+      PUBLIC_SITE_URL: "https://romajs.org"
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -36,5 +36,9 @@ jobs:
       - name: Deploy roma-js site 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
-          branch: gh-pages # The branch the action should deploy to.
+          repository-name: "Roma-JS/roma-js.github.io"
+          branch: "master" # The branch the action should deploy to.
           folder: dist
+          clean: true
+          clean-exclude: | # These files do not get wiped
+            CNAME
