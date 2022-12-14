@@ -32,6 +32,8 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 - [x] build about page
 - [x] setup PR pipeline
 - [x] setup deploy to GH pages pipeline
+- [ ] page with browsable meetups list
+- [ ] video section with tags + comments
 - [ ] more...
 
 ## Development
