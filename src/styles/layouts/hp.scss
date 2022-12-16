@@ -16,6 +16,12 @@
   height: var(--logo-width);
 }
 
+.hp-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 40px;
+}
+
 .hp-section {
   display: flex;
   flex-flow: column nowrap;
@@ -35,6 +41,10 @@
   padding: 61px 45px 0;
 
   .logo-hero__text {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
     margin: 16px 0 21px;
 
     :not(h1) {
@@ -61,10 +71,8 @@
 
 .arrow-box:nth-child(odd) {
   min-height: 340px;
-  clip-path: polygon(100% 80%, 50% 100%, 0 80%, 0 0, 50% 20%, 100% 0);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  padding: 40px 0 0;
 }
 
 .arrow-box:nth-child(even) {
@@ -73,8 +81,6 @@
 }
 
 .arrow-box:first-child {
-  padding: 40px 16px 54px;
-  clip-path: polygon(100% 80%, 50% 100%, 0 80%, 0 0, 100% 0);
   background-color: var(--bg-primary);
 }
 
@@ -91,6 +97,8 @@
 }
 
 .slack-link {
+  border: 1px solid var(--text-secondary);
+
   @include br.media-breakpoint-down(md) {
     font-size: 12px !important;
     min-height: 28px !important;
