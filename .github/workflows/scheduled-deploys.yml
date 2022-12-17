@@ -1,0 +1,26 @@
+name: Trigger Site Rebuild on a CRON Schedule
+
+on:
+  schedule: 
+    - cron: '1 */12 * * *' # "At minute 1 past every 12th hour." (see https://crontab.guru)
+permissions: 
+  contents: write
+jobs:
+  trigger-deploy:
+    # prevents this action from running on forks
+    if: github.repository == 'Roma-JS/roma-js-on-astro'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+        with:
+          ref: 'release'
+          fetch-depth: 0
+      - name: Update site-deploy.yml
+        run: |
+          printf 'date: %s\ncid: %s\n' "$(date)" "$(git rev-parse --short HEAD)" > site-deploy.yml
+      - name: Commit changes
+        run: |
+          git add site-deploy.yml && git commit -m "cron-deploy $(date)"
+#         git push origin release --force 
+    
