@@ -1,8 +1,8 @@
 import type { HpContent } from '../../../@types/hp';
 
 export const enHpContent: Readonly<HpContent> = {
-  title: 'The Javascript meetup in Rome!',
-  description: 'offline and online every 3rd Wednesday of the month',
+  title: 'The Javascript community in Rome!',
+  description: 'We meet locally & online every 3rd Wednesday of the month',
   sections: [
     {
       heading: 'Coming up next',

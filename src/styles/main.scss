@@ -173,12 +173,16 @@ body {
   }
 }
 
+.categories-list-layout .categories-list[class] {
+  flex-flow: row wrap;
+}
+
 .categories-list.categories-list {
   --category-min-width: 62px;
   gap: 14px;
   @include br.media-breakpoint-up(lg) {
     flex-flow: column nowrap;
-    align-items: flex-start;
+    align-items: center;
     --category-min-width: 200px;
     gap: 8px;
   }

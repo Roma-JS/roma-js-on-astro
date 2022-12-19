@@ -1,8 +1,8 @@
 import type { HpContent } from '../../../@types/hp';
 
 export const itHpContent: Readonly<HpContent> = {
-  title: 'Il meetup Javascript di Roma!',
-  description: 'online & in presenza il terzo mercoledì del mese',
+  title: 'La tech community di Javascript su Roma',
+  description: 'Ci vediamo il prossimo terzo mercoledì del mese!',
   sections: [
     {
       heading: 'Coming up next',

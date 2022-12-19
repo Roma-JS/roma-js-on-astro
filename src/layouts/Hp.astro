@@ -3,7 +3,7 @@ import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
 import '../styles/layouts/hp.scss';
 import BaseHead from '@components/BaseHead.astro';
-import brandLogo from '../media/brand-logo/primary.svg';
+import { BrandLogo } from '@components/BrandLogo/BrandLogo';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -54,9 +54,9 @@ changeLanguage(lang);
         relativePageUrl={relativePageUrl}
         messages={getNavbarMessages()}
       />
-      <div>
-        <section class="arrow-box hp-section logo-hero">
-          <img class="logo" src={brandLogo} alt="RomaJS logo" />
+      <div class="hp-wrapper">
+        <section class="hp-section logo-hero">
+          <BrandLogo class="logo" />
           <div class="logo-hero__text hero">
             <h1 class="h-1">{title}</h1><span class="h-1">{description}</span>
           </div>

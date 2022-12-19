@@ -1,0 +1,46 @@
+.middleRow {
+  animation: middleRowAnimation 600ms ease-out;
+}
+
+@keyframes middleRowAnimation {
+  from {
+    transform: translateY(33px);
+  }
+}
+
+.topRow {
+  animation: topRowAnimation 600ms ease-out;
+  animation-delay: 300ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes topRowAnimation {
+  from {
+    transform: translateY(66px);
+  }
+}
+
+.diagonalLine {
+  animation: diagonalLineAnimation 600ms ease-out;
+  transform-origin: center;
+  animation-delay: 300ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes diagonalLineAnimation {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+.letter {
+  animation: letterAnimation 600ms ease-out;
+  animation-delay: 900ms;
+  animation-fill-mode: backwards;
+}
+
+@keyframes letterAnimation {
+  from {
+    fill: var(--brand-primary);
+  }
+}
