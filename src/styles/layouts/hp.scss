@@ -67,21 +67,16 @@
 
 .arrow-box {
   padding: 20px 16px 0;
-}
-
-.arrow-box:nth-child(odd) {
-  min-height: 340px;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  min-height: 240px;
 }
 
 .arrow-box:nth-child(even) {
-  min-height: 240px;
-  color: var(--text-secondary);
-}
-
-.arrow-box:first-child {
   background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 340px;
+  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
 }
 
 .contacts-cta {
