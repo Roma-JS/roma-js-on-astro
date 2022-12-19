@@ -73,6 +73,26 @@ HomePage content is defined in:
 
 Edit `enHpContent` to modify the english homepage and `itHpContent` to change the italian one.
 
+#### Deployment
+
+##### Manual deploys
+
+To deploy push the content of `main` to `release`:
+
+```bash
+git fetch --all
+git switch main
+git pull origin main
+git diff --quiet && git diff --cached --quiet && git push origin main:release # --force push if necessary
+```
+
+See [deploy.yaml](.github/workflows/deploy.yaml) for more details.
+
+##### Scheduled deploys
+
+There's a cronjob defined in [scheduled-deploys.yml](.github/workflows/scheduled-deploys.yml) that
+periodically triggers the deployment.
+
 ### Common scripts
 
 - `pnpm run dev` starts dev server at `127.0.0.1:3000`.
