@@ -82,6 +82,10 @@ Edit `enHpContent` to modify the english homepage and `itHpContent` to change th
 - `pnpm run preview` starts a server that serves the content of `dist/`
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
 
-### Acknowledgements
+## Acknowledgements
 
 The previous version of [romajs.org](https://romajs.org/) has been developed by [Luca Lanziani](https://github.com/LucaLanziani) and its source code is available at https://github.com/Roma-JS/romajs-on-metalsmith.
+
+## License
+
+- [MIT](./LICENSE)
