@@ -37,7 +37,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           repository-name: "Roma-JS/roma-js.github.io"
-          token: $DEPLOY_TOKEN
+          token: ${{ secrets.DEPLOY_TOKEN }}
           branch: "master" # The branch the action should deploy to.
           folder: dist
           clean: true
