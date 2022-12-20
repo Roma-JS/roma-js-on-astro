@@ -17,12 +17,12 @@ jobs:
         run: |
           git config user.name 'cronjob-deploy'
           git config user.email 'noreply@romajs.org'       
-          export GIT_CID_DATE="$(date)" GIT_CID_ID="$(git rev-parse --short HEAD)"
+          export GIT_DEPLOY_DATE="$(date)" GIT_DEPLOY_CID="$(git rev-parse --short HEAD)"
       - name: Update site-deploy.yml
         run: |
-          printf 'date: %s\ncid: %s\n' "$GIT_CID_DATE" "$GIT_CID_ID" > site-deploy.yml
+          printf 'date: %s\ncid: %s\n' "$GIT_DEPLOY_DATE" "$GIT_DEPLOY_CID" > site-deploy.yml
       - name: Commit and push changes
         run: |
           git add site-deploy.yml
-          git commit -m "cron-deploy 🚀 of $GIT_CID_ID at $GIT_CID_DATE"
-#         git push origin release
+          git commit -m "cronjob deploy 🚀 of $GIT_DEPLOY_CID at $GIT_DEPLOY_DATE"
+          git push origin release
