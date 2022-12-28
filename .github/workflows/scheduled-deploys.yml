@@ -13,16 +13,19 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: 'release'
-      - name: Setup environoment
+          token: ${{ secrets.DEPLOY_TOKEN }} # see https://github.com/Roma-JS/roma-js-on-astro/issues/12
+      - name: Setup environment
+        # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
         run: |
           git config user.name 'cronjob-deploy'
-          git config user.email 'noreply@romajs.org'       
-          export GIT_CID_DATE="$(date)" GIT_CID_ID="$(git rev-parse --short HEAD)"
+          git config user.email 'noreply@romajs.org'
+          echo "GIT_DEPLOY_DATE=$(date)" >> $GITHUB_ENV  
+          echo "GIT_DEPLOY_CID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV  
       - name: Update site-deploy.yml
         run: |
-          printf 'date: %s\ncid: %s\n' "$GIT_CID_DATE" "$GIT_CID_ID" > site-deploy.yml
+          printf 'date: %s\ncid: %s\n' "${{ env.GIT_DEPLOY_DATE }}" "${{ env.GIT_DEPLOY_CID }}" > site-deploy.yml
       - name: Commit and push changes
         run: |
           git add site-deploy.yml
-          git commit -m "cron-deploy 🚀 of $GIT_CID_ID at $GIT_CID_DATE"
-#         git push origin release
+          git commit -m "cronjob deploy 🚀 of ${{ env.GIT_DEPLOY_CID }} at ${{ env.GIT_DEPLOY_DATE }}"
+          git push origin release

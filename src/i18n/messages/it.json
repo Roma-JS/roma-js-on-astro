@@ -9,5 +9,9 @@
   "showAllTags": "Vedi tutte le tag",
   "ctaRequestTalk": "Vuoi proporre un talk?",
   "ctaSeePreviousTalks": "Vuoi vedere la registrazione dei precendenti talks?",
-  "ctaContacts": "Trovi tutto questo e molto altro sui nostri contatti"
+  "ctaContacts": "Trovi tutto questo e molto altro sui nostri contatti",
+  "nextTalkTitle": "Prossimo evento",
+  "latestTalkTitle": "Ultimo evento",
+  "ctaVOD": "Registrati",
+  "ctaRegister": "Guarda la registrazione"
 }
