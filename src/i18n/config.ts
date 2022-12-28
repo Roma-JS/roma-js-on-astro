@@ -1,6 +1,7 @@
 import { I18nRouteParams } from './types';
 import { t as i18nextTranslate } from 'i18next';
 import type { TOptions } from 'i18next';
+import type L10nMessages from './messages/it.json';
 
 export const i18nLang = Object.freeze({
   it: {
@@ -66,10 +67,12 @@ export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {
   return output;
 }
 
+export type L10nKey = keyof typeof L10nMessages;
+
 export interface TranslateMessage {
-  (args: string | string[]): string;
+  (args: L10nKey | L10nKey[]): string;
   <TInterpolationMap extends Record<string, any>>(
-    args: string,
+    args: L10nKey,
     options: TOptions<TInterpolationMap>
   ): string;
 }
