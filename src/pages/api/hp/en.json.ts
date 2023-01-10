@@ -8,6 +8,14 @@ export const enHpContent: Readonly<HpContent> = {
   description: 'We meet locally & online every 3rd Wednesday of the month',
   sections: [
     {
+      heading: 'Coming up next',
+      body: 'Qwik, with Giorgio Boa - RomaJS Meetup @ Immobiliare Labs',
+      cta: {
+        href: 'https://www.meetup.com/romajs/events/290831366/',
+        text: l10n('ctaRegister', { lng }),
+      },
+    },
+    {
       heading: l10n('latestTalkTitle', { lng }),
       body: 'Astro with Fabio Biondi - RomaJS #AperiTech Xmas 2022',
       cta: {
