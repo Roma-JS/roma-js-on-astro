@@ -8,6 +8,14 @@ export const itHpContent: Readonly<HpContent> = {
   description: 'Ci vediamo il prossimo terzo mercoledì del mese!',
   sections: [
     {
+      heading: 'Coming up next',
+      body: 'Qwik, con Giorgio Boa - RomaJS Meetup @ Immobiliare Labs',
+      cta: {
+        href: 'https://www.meetup.com/romajs/events/290831366/',
+        text: l10n('ctaRegister', { lng }),
+      },
+    },
+    {
       heading: l10n('latestTalkTitle', { lng }),
       body: 'Astro, con Fabio Biondi - RomaJS #AperiTech Natalizio 2022',
       cta: {
