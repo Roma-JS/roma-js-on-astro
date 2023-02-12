@@ -1,0 +1,38 @@
+.nav {
+  display: flex;
+  font-weight: 600;
+  color: var(--accent-primary);
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    display: contents;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  li:not(:last-child) {
+    &::after {
+      display: inline;
+      content: '/';
+      padding: 0 12px;
+    }
+  }
+
+  a {
+    display: inline-block; /* required for ::first-letter */
+    text-transform: lowercase;
+  }
+
+  a::first-letter {
+    text-transform: uppercase;
+  }
+
+  a[aria-current='page'] {
+    color: var(--text-secondary);
+    pointer-events: none;
+    text-decoration: none;
+  }
+}

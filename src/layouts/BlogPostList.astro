@@ -16,6 +16,10 @@ import { Category, Frontmatter } from 'utils/blog';
 import { BlogPostCard } from '@components/BlogPostCard/BlogPostCard';
 import { l10n } from '@i18n/config';
 import { getNavbarMessages } from '@components/Navbar/helpers';
+import {
+  Breadcrumbs,
+  BreadcrumbsProps,
+} from '@components/Breadcrumbs/Breadcrumbs';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -41,6 +45,10 @@ const relativePageUrl =
 const topCategoriesNames = categories.map(({ name }) => name).slice(0, 15);
 
 changeLanguage(lang);
+
+const breadcrumMessages = Object.fromEntries(
+  (['breadcrumbs', 'scrollToTop'] as const).map((key) => [key, l10n(key)])
+) as BreadcrumbsProps['messages'];
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -84,6 +92,13 @@ changeLanguage(lang);
             >{l10n('showAllTags')}
           </a>
         </aside>
+        <Breadcrumbs
+          client:idle
+          currentPathname={canonicalURL.pathname}
+          messages={breadcrumMessages}
+          lang={lang}
+          class="nav-breadcrumbs"
+        />
         <slot />
       </div>
       <footer><SocialLinksList /></footer>
