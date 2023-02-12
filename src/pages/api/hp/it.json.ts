@@ -8,7 +8,7 @@ export const itHpContent: Readonly<HpContent> = {
   description: 'Ci vediamo il prossimo terzo mercoledì del mese!',
   sections: [
     {
-      heading: 'Coming up next',
+      heading: l10n('nextTalkTitle'),
       body: 'React Native, con Matteo Manchi - RomaJS Meetup @ Engineering',
       cta: {
         href: 'https://www.meetup.com/romajs/events/291443684/',
