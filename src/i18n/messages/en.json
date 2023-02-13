@@ -13,5 +13,7 @@
   "nextTalkTitle": "Coming up next",
   "latestTalkTitle": "Latest meetup",
   "ctaVOD": "Watch the VOD",
-  "ctaRegister": "Register"
+  "ctaRegister": "Register",
+  "breadcrumbs": "website links",
+  "scrollToTop": "Scroll to top"
 }

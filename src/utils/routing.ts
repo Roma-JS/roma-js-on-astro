@@ -7,7 +7,7 @@ import twitterIcon from 'media/social/twitter-square.svg';
 import rssIcon from 'media/social/rss.svg';
 import type { AstroGlobal } from 'astro';
 
-export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
+export const routes = {
   it: {
     home: import.meta.env.PUBLIC_URL_BASE + '/',
     blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
@@ -17,18 +17,34 @@ export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
     home: import.meta.env.PUBLIC_URL_BASE + '/en',
     about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
   },
+} as const;
+
+export const breadcrumbLinks = {
+  it: {
+    home: import.meta.env.PUBLIC_URL_BASE + '/',
+    blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
+  },
+  en: {
+    home: import.meta.env.PUBLIC_URL_BASE + '/en',
+    about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
+  },
+};
+
+export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
+  it: routes.it,
+  en: routes.en,
 };
 
 export const categoryPageUrl = navbarLinks.it.blog + '/category';
 
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
-  it: navbarLinks.it.home,
-  en: navbarLinks.en.home,
+  it: routes.it.home,
+  en: routes.en.home,
 };
 
 export const aboutUrlMap: Readonly<Record<Lang, string>> = {
-  it: navbarLinks.it.about,
-  en: navbarLinks.en.about,
+  it: routes.it.about,
+  en: routes.en.about,
 };
 
 export function preventSelfNavigation(
