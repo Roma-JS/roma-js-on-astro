@@ -9,17 +9,17 @@ export const enHpContent: Readonly<HpContent> = {
   sections: [
     {
       heading: l10n('nextTalkTitle'),
-      body: 'React Native, with Matteo Manchi - RomaJS Meetup @ Engineering',
+      body: 'Attack on NPM with Alessandro Miliucci @ SourceSense',
       cta: {
-        href: 'https://www.meetup.com/romajs/events/291443684/',
+        href: 'https://www.meetup.com/romajs/events/292355926/',
         text: l10n('ctaRegister', { lng }),
       },
     },
     {
       heading: l10n('latestTalkTitle', { lng }),
-      body: 'Qwik, with Giorgio Boa - RomaJS Meetup @ Immobiliare Labs',
+      body: 'The evolution of JavaScript, with Luca Casonato & Nicolò Ribaudo',
       cta: {
-        href: 'https://youtu.be/Mc5ml-fjVwI?t=354',
+        href: 'https://youtu.be/1hYJujpkwlA?t=567',
         text: l10n('ctaVOD', { lng }),
       },
     },
