@@ -9,17 +9,17 @@ export const enHpContent: Readonly<HpContent> = {
   sections: [
     {
       heading: l10n('nextTalkTitle'),
-      body: 'Attack on NPM with Alessandro Miliucci @ SourceSense',
+      body: 'How Open Source changed my life & Video editing con js - RomaJS @ Sourcesense',
       cta: {
-        href: 'https://www.meetup.com/romajs/events/292355926/',
+        href: 'https://www.meetup.com/romajs/events/293424465/',
         text: l10n('ctaRegister', { lng }),
       },
     },
     {
       heading: l10n('latestTalkTitle', { lng }),
-      body: 'The evolution of JavaScript, with Luca Casonato & Nicolò Ribaudo',
+      body: 'Attack on NPM with Alessandro Miliucci',
       cta: {
-        href: 'https://youtu.be/1hYJujpkwlA?t=567',
+        href: 'https://youtu.be/BSKXpTFzKf4?t=384',
         text: l10n('ctaVOD', { lng }),
       },
     },
