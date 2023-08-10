@@ -1,7 +1,7 @@
 import { I18nRouteParams } from './types';
 import { t as i18nextTranslate } from 'i18next';
 import type { TOptions } from 'i18next';
-import type L10nMessages from './messages/it.json';
+import type L10nMessages from '../../public/locales/it/translation.json';
 
 export const i18nLang = Object.freeze({
   it: {
