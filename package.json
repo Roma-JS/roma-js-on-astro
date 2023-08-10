@@ -45,7 +45,7 @@
     "@solid-primitives/media": "^2.0.2",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.6.4",
-    "solid-transition-group": "^0.0.11"
+    "solid-js": "^1.7.10",
+    "solid-transition-group": "^0.2.3"
   }
 }
