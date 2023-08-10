@@ -1,8 +1,8 @@
 ---
 import HpLayout from '@layouts/Hp.astro';
 import { getI18nRouteParams } from '@i18n/config';
-import { enHpContent } from '../api/hp/en.json';
-import { itHpContent } from '../api/hp/it.json';
+import { getEnHpContent } from '../api/hp/en.json';
+import { getHpItContent } from '../api/hp/it.json';
 import { hpUrlMap } from 'utils/routing';
 import type { Lang } from '@i18n/types';
 
@@ -22,10 +22,10 @@ function getProp<Key extends keyof Props>(key: Key): Props[Key] {
 function getContentByLang(lang: Lang) {
   switch (lang) {
     case 'it': {
-      return itHpContent;
+      return getHpItContent();
     }
     case 'en': {
-      return enHpContent;
+      return getEnHpContent();
     }
     default: {
       throw new Error('unsupported lang received: ' + lang);
@@ -34,7 +34,7 @@ function getContentByLang(lang: Lang) {
 }
 
 const lang = getProp('lang');
-const { title, description, sections } = getContentByLang(lang as Lang);
+const { title, description, sections } = await getContentByLang(lang);
 const permalink = Astro.props.permalink;
 ---
 
