@@ -1,5 +1,24 @@
 .upcoming-events-list {
-  li {
+  & > li {
     display: contents;
+  }
+}
+
+.upcoming-event {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 20px;
+
+  time {
+    font-weight: bold;
+    color: var(--accent-primary);
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
   }
 }

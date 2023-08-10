@@ -12,12 +12,15 @@ import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
+import type { CollectionEntry } from 'astro:content';
+import { i18nLang } from '@i18n/config';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
+  upcomingEvents: CollectionEntry<'upcoming-events'>[];
 }
 
-const { title, description, lang } = Astro.props;
+const { title, description, lang, upcomingEvents } = Astro.props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -27,6 +30,13 @@ const relativePageUrl =
   canonicalURL.hash;
 
 changeLanguage(lang);
+
+const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'Europe/Rome',
+});
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -48,7 +58,26 @@ changeLanguage(lang);
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       />
-      <div class="main-content"><slot /></div>
+      <div class="main-content">
+        <ul class="upcoming-events-list">
+          {
+            upcomingEvents.map((event) => {
+              const parsedStartsAt = new Date(event.data.startsAt);
+              return (
+                <li>
+                  <section class="upcoming-event">
+                    <time datetime={parsedStartsAt.toISOString()}>
+                      {startsAtFormatter.format(parsedStartsAt)}
+                    </time>
+                    <h3>{event.data.title}</h3>
+                  </section>
+                </li>
+              );
+            })
+          }
+        </ul>
+        <slot />
+      </div>
       <footer><SocialLinksList /></footer>
     </article>
     <slot name="after" />
