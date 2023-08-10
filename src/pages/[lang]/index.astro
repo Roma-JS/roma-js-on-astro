@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 }
 
 function getProp<Key extends keyof Props>(key: Key): Props[Key] {
-  return Astro.props[key as any] ?? Astro.params[key as any];
+  return Astro.props[key] ?? (Astro.params[key] as Props[Key]);
 }
 
 function getContentByLang(lang: Lang) {
