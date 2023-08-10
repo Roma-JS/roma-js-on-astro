@@ -1,4 +1,4 @@
-import { I18nRouteParams } from './types';
+import type { I18nRouteParams } from './types';
 import { t as i18nextTranslate } from 'i18next';
 import type { TOptions } from 'i18next';
 import type L10nMessages from '../../public/locales/it/translation.json';

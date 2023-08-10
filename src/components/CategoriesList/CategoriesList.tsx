@@ -1,5 +1,5 @@
 import { ComponentProps, createMemo, For, splitProps } from 'solid-js';
-import { JSX } from 'solid-js/jsx-runtime';
+import type { JSX } from 'solid-js/jsx-runtime';
 import { createSlug, createCategoryUrl } from 'utils/blog';
 import styles from './styles.module.scss';
 

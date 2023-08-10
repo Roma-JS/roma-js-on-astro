@@ -1,5 +1,5 @@
 import { ComponentProps, splitProps } from 'solid-js';
-import { JSX } from 'solid-js/jsx-runtime';
+import type { JSX } from 'solid-js/jsx-runtime';
 
 export type BlogPostCommentsProps = ComponentProps<'div'>;
 

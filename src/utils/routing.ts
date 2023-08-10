@@ -1,4 +1,4 @@
-import { Lang } from '@i18n/types';
+import type { Lang } from '@i18n/types';
 import facebookIcon from 'media/social/facebook.svg';
 import slackIcon from 'media/social/slack.svg';
 import githubIcon from 'media/social/github.svg';
