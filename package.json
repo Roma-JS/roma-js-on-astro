@@ -16,7 +16,7 @@
     "pre-commit": "lint-staged"
   },
   "engines": {
-    "node": "^16.14.0"
+    "node": "^18.17.0"
   },
   "packageManager": "pnpm@7.12.2",
   "devDependencies": {
