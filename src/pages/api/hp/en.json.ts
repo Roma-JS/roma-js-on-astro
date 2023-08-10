@@ -8,7 +8,7 @@ export const enHpContent: Readonly<HpContent> = {
   description: 'We meet locally & online every 3rd Wednesday of the month',
   sections: [
     {
-      heading: l10n('nextTalkTitle'),
+      heading: l10n('nextTalkTitle', { lng }),
       body: 'How Open Source changed my life & Video editing con js - RomaJS @ Sourcesense',
       cta: {
         href: 'https://www.meetup.com/romajs/events/293424465/',

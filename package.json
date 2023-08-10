@@ -32,7 +32,6 @@
     "astro-i18next": "1.0.0-beta.21",
     "chalk": "^5.0.1",
     "husky": "^8.0.0",
-    "i18next-fs-backend": "^1.1.5",
     "lint-staged": "^13.0.3",
     "mustache": "^4.2.0",
     "prettier": "2.7.1",
@@ -43,6 +42,7 @@
   "dependencies": {
     "@fontsource/open-sans": "^4.5.11",
     "@solid-primitives/media": "^2.0.2",
+    "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
     "solid-js": "^1.7.10",

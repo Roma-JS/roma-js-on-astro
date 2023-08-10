@@ -11,6 +11,9 @@ dependencies:
   '@solid-primitives/media':
     specifier: ^2.0.2
     version: 2.0.2(solid-js@1.7.10)
+  i18next:
+    specifier: 22.4.10
+    version: 22.4.10
   normalize.css:
     specifier: ^8.0.1
     version: 8.0.1
@@ -61,9 +64,6 @@ devDependencies:
   husky:
     specifier: ^8.0.0
     version: 8.0.1
-  i18next-fs-backend:
-    specifier: ^1.1.5
-    version: 1.1.5
   lint-staged:
     specifier: ^13.0.3
     version: 13.0.3
@@ -580,7 +580,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
-    dev: true
 
   /@babel/template@7.18.6:
     resolution: {integrity: sha512-JoDWzPe+wgBsTTgdnIma3iHNFC7YVJoPssVBDjiHfNlyt4YcunDtcDOUmfVDfCK5MfdsaIoX9PkijPhjH3nYUw==}
@@ -1495,7 +1494,7 @@ packages:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
       astro: 2.10.4(sass@1.65.1)
-      i18next: 22.5.1
+      i18next: 22.4.10
       i18next-browser-languagedetector: 7.1.0
       i18next-fs-backend: 2.1.5
       i18next-http-backend: 2.2.1
@@ -2549,10 +2548,6 @@ packages:
       '@babel/runtime': 7.22.10
     dev: true
 
-  /i18next-fs-backend@1.1.5:
-    resolution: {integrity: sha512-raTel3EfshiUXxR0gvmIoqp75jhkj8+7R1LjB006VZKPTFBbXyx6TlUVhb8Z9+7ahgpFbcQg1QWVOdf/iNzI5A==}
-    dev: true
-
   /i18next-fs-backend@2.1.5:
     resolution: {integrity: sha512-7fgSH8nVhXSBYPHR/W3tEXXhcnwHwNiND4Dfx9knzPzdsWTUTL/TdDVV+DY0dL0asHKLbdoJaXS4LdVW6R8MVQ==}
     dev: true
@@ -2565,11 +2560,10 @@ packages:
       - encoding
     dev: true
 
-  /i18next@22.5.1:
-    resolution: {integrity: sha512-8TGPgM3pAD+VRsMtUMNknRz3kzqwp/gPALrWMsDnmC1mKqJwpWyooQRLMcbTwq8z8YwSmuj+ZYvc+xCuEpkssA==}
+  /i18next@22.4.10:
+    resolution: {integrity: sha512-3EqgGK6fAJRjnGgfkNSStl4mYLCjUoJID338yVyLMj5APT67HUtWoqSayZewiiC5elzMUB1VEUwcmSCoeQcNEA==}
     dependencies:
       '@babel/runtime': 7.22.10
-    dev: true
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -3593,7 +3587,6 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
-    dev: true
 
   /rehype-parse@8.0.4:
     resolution: {integrity: sha512-MJJKONunHjoTh4kc3dsM1v3C9kGrrxvA3U8PxZlP2SjH8RNUSrb+lF7Y0KVaUDnGH2QZ5vAn7ulkiajM9ifuqg==}
