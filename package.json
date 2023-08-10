@@ -37,7 +37,7 @@
     "mustache": "^4.2.0",
     "prettier": "2.7.1",
     "prompts": "^2.4.2",
-    "sass": "^1.55.0",
+    "sass": "^1.65.1",
     "tiny-invariant": "^1.2.0"
   },
   "dependencies": {

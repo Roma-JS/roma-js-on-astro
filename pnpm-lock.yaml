@@ -51,7 +51,7 @@ devDependencies:
     version: 21.0.0
   astro:
     specifier: 1.6.14
-    version: 1.6.14(sass@1.55.0)
+    version: 1.6.14(sass@1.65.1)
   astro-i18next:
     specifier: 1.0.0-beta.12
     version: 1.0.0-beta.12(astro@1.6.14)
@@ -77,8 +77,8 @@ devDependencies:
     specifier: ^2.4.2
     version: 2.4.2
   sass:
-    specifier: ^1.55.0
-    version: 1.55.0
+    specifier: ^1.65.1
+    version: 1.65.1
   tiny-invariant:
     specifier: ^1.2.0
     version: 1.2.0
@@ -1074,13 +1074,13 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
-      astro: 1.6.14(sass@1.55.0)
+      astro: 1.6.14(sass@1.65.1)
       i18next: 21.9.2
       iso-639-1: 2.1.15
       locale-emoji: 0.3.0
     dev: true
 
-  /astro@1.6.14(sass@1.55.0):
+  /astro@1.6.14(sass@1.65.1):
     resolution: {integrity: sha512-8ljrWPKEU5Hrrbupan48ba4gLWPY14Aqiv4u0U92wSl3wtsqPJUWWlHGGkXcgS/9dx8aiLkUm4RzCPFVnP7V2w==}
     engines: {node: ^14.18.0 || >=16.12.0, npm: '>=6.14.0'}
     hasBin: true
@@ -1141,7 +1141,7 @@ packages:
       typescript: 4.8.3
       unist-util-visit: 4.1.1
       vfile: 5.3.5
-      vite: 3.2.5(sass@1.55.0)
+      vite: 3.2.5(sass@1.65.1)
       vitefu: 0.2.3(vite@3.2.5)
       yargs-parser: 21.1.1
       zod: 3.19.1
@@ -3696,9 +3696,9 @@ packages:
       suf-log: 2.5.3
     dev: true
 
-  /sass@1.55.0:
-    resolution: {integrity: sha512-Pk+PMy7OGLs9WaxZGJMn7S96dvlyVBwwtToX895WmCpAOr5YiJYEUJfiJidMuKb613z2xNWcXCHEuOvjZbqC6A==}
-    engines: {node: '>=12.0.0'}
+  /sass@1.65.1:
+    resolution: {integrity: sha512-9DINwtHmA41SEd36eVPQ9BJKpn7eKDQmUHmpI0y5Zv2Rcorrh0zS+cFrt050hdNbmmCNKTW3hV5mWfuegNRsEA==}
+    engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.3
@@ -4228,7 +4228,7 @@ packages:
       vfile-message: 3.1.2
     dev: true
 
-  /vite@3.2.5(sass@1.55.0):
+  /vite@3.2.5(sass@1.65.1):
     resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4257,7 +4257,7 @@ packages:
       postcss: 8.4.19
       resolve: 1.22.1
       rollup: 2.79.1
-      sass: 1.55.0
+      sass: 1.65.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -4270,7 +4270,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 3.2.5(sass@1.55.0)
+      vite: 3.2.5(sass@1.65.1)
     dev: true
 
   /vscode-css-languageservice@6.1.1:
