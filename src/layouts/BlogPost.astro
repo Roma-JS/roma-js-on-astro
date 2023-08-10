@@ -13,6 +13,11 @@ import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { BlogPostComments } from '@components/BlogPostComments/BlogPostComments';
 import { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
+import {
+  Breadcrumbs,
+  BreadcrumbsProps,
+} from '@components/Breadcrumbs/Breadcrumbs';
+import { l10n } from '@i18n/config';
 
 const { content } = Astro.props;
 
@@ -26,6 +31,10 @@ const relativePageUrl =
 const lang: Lang = content.lang || 'en';
 
 changeLanguage(lang);
+
+const breadcrumMessages = Object.fromEntries(
+  (['breadcrumbs', 'scrollToTop'] as const).map((key) => [key, l10n(key)])
+) as BreadcrumbsProps['messages'];
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -55,6 +64,13 @@ changeLanguage(lang);
       />
       <div class="main-content pt-0">
         <slot /><BlogPostComments class="comments-box" />
+        <Breadcrumbs
+          client:idle
+          currentPathname={canonicalURL.pathname}
+          messages={breadcrumMessages}
+          lang={lang}
+          class="nav-breadcrumbs"
+        />
       </div>
       <footer><SocialLinksList /></footer>
     </article>

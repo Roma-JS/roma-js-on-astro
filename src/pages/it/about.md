@@ -8,7 +8,7 @@ layout: '@layouts/About.astro'
 lang: it
 ---
 
-Il gruppo RomaJS è stato **foundato da [Gilles Ruppert](https://twitter.com/gillesruppert)** nel 2013.
+Il gruppo RomaJS è stato **fondato da [Gilles Ruppert](https://twitter.com/gillesruppert)** nel 2013.
 
 Si tratta di un JavaScript User Group basato in Roma, Italia.
 Discutiamo e teniamo incontri su Javascript: server-side, client-side, mobile, HTML5. Qualunque cosa che abbia a che fare con JS.

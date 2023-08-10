@@ -8,10 +8,18 @@ export const enHpContent: Readonly<HpContent> = {
   description: 'We meet locally & online every 3rd Wednesday of the month',
   sections: [
     {
-      heading: l10n('latestTalkTitle', { lng }),
-      body: 'Astro with Fabio Biondi - RomaJS #AperiTech Xmas 2022',
+      heading: l10n('nextTalkTitle'),
+      body: 'How Open Source changed my life & Video editing con js - RomaJS @ Sourcesense',
       cta: {
-        href: 'https://www.youtube.com/@RomaJS/streams',
+        href: 'https://www.meetup.com/romajs/events/293424465/',
+        text: l10n('ctaRegister', { lng }),
+      },
+    },
+    {
+      heading: l10n('latestTalkTitle', { lng }),
+      body: 'Attack on NPM with Alessandro Miliucci',
+      cta: {
+        href: 'https://youtu.be/BSKXpTFzKf4?t=384',
         text: l10n('ctaVOD', { lng }),
       },
     },
