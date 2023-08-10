@@ -11,6 +11,7 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 - Homepage.
 - Blog section.
 - Blog category pages.
+- Upcoming events page.
 - [feed rss](https://rss.com/blog/how-do-rss-feeds-work/) available at `<SITE>/blog/rss.xml`.
 - opengraph and twitter social cards.
 - headless blog posts available at `/api/blog/post.json`.
@@ -59,6 +60,10 @@ corepack enable
 You should then be able to run pnpm normally in this project, e.g. `pnpm run fmt`.
 
 ### How To
+
+#### Create a new upcoming event
+
+Run `pnpm run create-event` and follow the instructions.
 
 #### Create a new post
 

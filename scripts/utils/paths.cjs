@@ -26,6 +26,7 @@ const paths = {
   templatesDir: resolvePath('./scripts/templates'),
   postCategories: resolvePath('./post-categories.json'),
   blogPostsDir: resolvePath('./src/pages/blog/post'),
+  upcomingEventsDir: resolvePath('./src/content/upcoming-events'),
 };
 
 module.exports = paths;
