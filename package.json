@@ -16,9 +16,9 @@
     "pre-commit": "lint-staged"
   },
   "engines": {
-    "node": "^16.14.0"
+    "node": "^18.17.0"
   },
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.6.12",
   "devDependencies": {
     "@astrojs/rss": "^1.0.1",
     "@astrojs/sitemap": "^1.0.0",
@@ -37,7 +37,7 @@
     "mustache": "^4.2.0",
     "prettier": "2.7.1",
     "prompts": "^2.4.2",
-    "sass": "^1.55.0",
+    "sass": "^1.65.1",
     "tiny-invariant": "^1.2.0"
   },
   "dependencies": {
@@ -45,7 +45,7 @@
     "@solid-primitives/media": "^2.0.2",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.6.4",
-    "solid-transition-group": "^0.0.11"
+    "solid-js": "^1.7.10",
+    "solid-transition-group": "^0.2.3"
   }
 }
