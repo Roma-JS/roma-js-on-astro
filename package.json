@@ -18,7 +18,7 @@
   "engines": {
     "node": "^18.17.0"
   },
-  "packageManager": "pnpm@7.12.2",
+  "packageManager": "pnpm@8.6.12",
   "devDependencies": {
     "@astrojs/rss": "^1.0.1",
     "@astrojs/sitemap": "^1.0.0",
