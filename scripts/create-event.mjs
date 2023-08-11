@@ -79,7 +79,7 @@ async function createUpcomingEventPrompts() {
         message: 'Select starting date',
         initial() {
           const initialDate = new Date();
-          initialDate.setHours(20, 0, 0, 0);
+          initialDate.setHours(19, 0, 0, 0);
 
           return initialDate;
         },
