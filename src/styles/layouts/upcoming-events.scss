@@ -1,4 +1,12 @@
+@use '../mixins/breakpoints' as br;
+
 .upcoming-events-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 48px;
+
   & > li {
     display: contents;
   }
@@ -6,19 +14,39 @@
 
 .upcoming-event {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
 
-  time {
-    font-weight: bold;
+  .upcoming-event-heading {
     color: var(--accent-primary);
-  }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
     margin: 0;
+    font-size: inherit;
+    font-size: inherit;
+    margin: 0;
+
+    & a[href]:last-child {
+      margin-top: 8px;
+    }
+  }
+}
+
+@include br.media-breakpoint-up(md) {
+  .upcoming-event {
+    grid-template-columns: 265px 1fr;
+
+    .upcoming-event-heading {
+      & a[href]:last-child {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+@include br.media-breakpoint-up(lg) {
+  .upcoming-events-list {
+    padding: 24px 0 0 68px;
   }
 }

@@ -14,6 +14,7 @@ import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import type { CollectionEntry } from 'astro:content';
 import { i18nLang } from '@i18n/config';
+import { CFPCta } from '@components/CFPCta/CFPCta';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -63,13 +64,16 @@ const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
           {
             upcomingEvents.map((event) => {
               const parsedStartsAt = new Date(event.data.startsAt);
+              const hasCFPCta = event.data.hasCallForPapers;
               return (
                 <li>
                   <section class="upcoming-event">
                     <time datetime={parsedStartsAt.toISOString()}>
                       {startsAtFormatter.format(parsedStartsAt)}
                     </time>
-                    <h3>{event.data.title}</h3>
+                    <h3 class="upcoming-event-heading">
+                      {event.data.title} {hasCFPCta && <CFPCta />}
+                    </h3>
                   </section>
                 </li>
               );
