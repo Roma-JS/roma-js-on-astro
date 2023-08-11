@@ -15,6 +15,7 @@ import { getNavbarMessages } from '@components/Navbar/helpers';
 import type { CollectionEntry } from 'astro:content';
 import { i18nLang } from '@i18n/config';
 import { CFPCta } from '@components/CFPCta/CFPCta';
+import { sortUpComingEvents } from 'utils/upcoming-events';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -38,6 +39,8 @@ const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
   day: 'numeric',
   timeZone: 'Europe/Rome',
 });
+
+const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -62,7 +65,7 @@ const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
       <div class="main-content">
         <ul class="upcoming-events-list">
           {
-            upcomingEvents.map((event) => {
+            sortedUpcomingEvents.map((event) => {
               const parsedStartsAt = new Date(event.data.startsAt);
               const hasCFPCta = event.data.hasCallForPapers;
               return (
