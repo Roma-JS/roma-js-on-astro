@@ -64,6 +64,9 @@ devDependencies:
   chalk:
     specifier: ^5.0.1
     version: 5.0.1
+  human-id:
+    specifier: ^4.0.0
+    version: 4.0.0
   husky:
     specifier: ^8.0.0
     version: 8.0.1
@@ -2302,6 +2305,10 @@ packages:
 
   /html-void-elements@2.0.1:
     resolution: {integrity: sha512-0quDb7s97CfemeJAnW9wC0hw78MtW7NU3hqtCD75g2vFlDLt36llsYD7uB7SUzojLMP24N5IatXf7ylGXiGG9A==}
+    dev: true
+
+  /human-id@4.0.0:
+    resolution: {integrity: sha512-pui0xZRgeAlaRt0I9r8N2pNlbNmluvn71EfjKRpM7jOpZbuHe5mm76r67gcprjw/Nd+GpvB9C3OlTbh7ZKLg7A==}
     dev: true
 
   /human-signals@3.0.1:

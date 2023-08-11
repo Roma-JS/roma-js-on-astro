@@ -4,18 +4,19 @@ import path from 'path';
 import Mustache from 'mustache';
 import fs from 'fs/promises';
 import chalk from 'chalk';
-import slugify from 'slugify';
 import process from 'process';
 import { fileURLToPath } from 'url';
+import { humanId } from 'human-id';
 
 /**
- * @type {(startsAt: string, title: string) => string}
+ * @type {() => string}
  */
-export function createUpcomingEventSlug(startsAt, title) {
-  return slugify(`${startsAt.split('T')[0]}-${title}`, {
-    lower: true,
-    trim: true,
-    strict: true,
+export function createUpcomingEventSlug() {
+  return humanId({
+    adjectiveCount: 2,
+    separator: '-',
+    capitalize: false,
+    addAdverb: false,
   });
 }
 
@@ -131,7 +132,7 @@ async function cli() {
 
   const newUpcomingEventFilePath = path.resolve(
     paths.upcomingEventsDir,
-    `${createUpcomingEventSlug(startsAt, responses.title)}.yml`
+    `${createUpcomingEventSlug()}.yml`
   );
 
   await fs.mkdir(paths.upcomingEventsDir, { recursive: true });
