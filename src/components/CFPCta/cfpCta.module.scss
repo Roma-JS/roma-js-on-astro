@@ -1,0 +1,31 @@
+.cta.cta {
+  user-select: none;
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0 6px;
+  min-width: 110px;
+  min-height: 44px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  background: var(--bg-primary);
+  color: var(--text-primary, #121212);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  &::after {
+    content: '';
+    background: url('../../media/brand-logo-detail.svg');
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    bottom: -4px;
+  }
+}

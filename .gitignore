@@ -33,3 +33,5 @@ package-lock.json
 # IntelliJ
 .gradle/*
 *.idea
+
+.astro

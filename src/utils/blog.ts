@@ -1,4 +1,4 @@
-import { Lang } from '@i18n/types';
+import type { Lang } from '@i18n/types';
 import type { MarkdownInstance } from 'astro';
 import slugify from 'slugify';
 

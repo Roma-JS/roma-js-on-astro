@@ -1,9 +1,9 @@
 ---
 import '../styles/main.scss';
-import { Lang } from '@i18n/types';
+import type { Lang } from '@i18n/types';
 import styles from '../styles/wallpaper.module.scss';
 import '../styles/layouts/categoriesList.scss';
-import { Category } from 'utils/blog';
+import type { Category } from 'utils/blog';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { getCanonicalURL, navbarLinks } from 'utils/routing';
 import { changeLanguage } from 'i18next';

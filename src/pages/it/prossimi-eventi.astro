@@ -1,0 +1,18 @@
+---
+import type { Lang } from '@i18n/types';
+import UpcomingEventsLayout from '@layouts/UpcomingEvents.astro';
+import { getCollection } from 'astro:content';
+
+const title: string = 'Prossimi Eventi';
+const lang: Lang = 'it';
+const description = 'Tutti i prossimi eventi in programma del RomaJS';
+
+const upcomingEvents = await getCollection('upcoming-events');
+---
+
+<UpcomingEventsLayout
+  title={title}
+  lang={lang}
+  description={description}
+  upcomingEvents={upcomingEvents}
+/>

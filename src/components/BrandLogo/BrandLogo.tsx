@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js/jsx-runtime';
+import type { JSX } from 'solid-js/jsx-runtime';
 import styles from './styles.module.scss';
 
 export function BrandLogo(props: { class: string }): JSX.Element {

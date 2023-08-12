@@ -13,6 +13,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_GISCUS_REPO_ID: string;
   readonly PUBLIC_GISCUS_CATEGORY_NAME: string;
   readonly PUBLIC_GISCUS_CATEGORY_ID: string;
+  readonly PUBLIC_CFP_FORM_HREF: string;
 }
 
 interface ImportMeta {
