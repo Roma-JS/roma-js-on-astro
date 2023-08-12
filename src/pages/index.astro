@@ -1,8 +1,21 @@
 ---
-import { getCanonicalURL } from 'utils/routing';
-import HpPage from '@pages/[lang]/index.astro';
+import HpLayout from '@layouts/Hp.astro';
+import { getHpItContent } from './api/hp/it.json';
+import { hpUrlMap } from 'utils/routing';
+import type { Lang } from '@i18n/types';
+import { changeLanguage } from 'i18next';
 
-let permalink = getCanonicalURL(Astro).href;
+const lang: Lang = 'it';
+changeLanguage(lang);
+const { title, description, sections } = await getHpItContent();
+const permalink = Astro.props.permalink;
 ---
 
-<HpPage lang="it" permalink={permalink} />
+<HpLayout
+  lang={lang}
+  title={title}
+  description={description}
+  urlMap={hpUrlMap}
+  sections={sections}
+  permalink={permalink}
+/>

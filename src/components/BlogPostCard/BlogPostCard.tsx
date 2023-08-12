@@ -1,6 +1,6 @@
 import { JSX, ComponentProps, splitProps } from 'solid-js';
-import { MarkdownInstance } from 'astro';
-import { Frontmatter } from 'utils/blog';
+import type { MarkdownInstance } from 'astro';
+import type { Frontmatter } from 'utils/blog';
 import styles from './styles.module.scss';
 
 export interface BlogPostCardProps extends ComponentProps<'section'> {

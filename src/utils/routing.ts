@@ -1,4 +1,4 @@
-import { Lang } from '@i18n/types';
+import type { Lang } from '@i18n/types';
 import facebookIcon from 'media/social/facebook.svg';
 import slackIcon from 'media/social/slack.svg';
 import githubIcon from 'media/social/github.svg';
@@ -10,23 +10,25 @@ import type { AstroGlobal } from 'astro';
 export const routes = {
   it: {
     home: import.meta.env.PUBLIC_URL_BASE + '/',
+    'prossimi eventi': import.meta.env.PUBLIC_URL_BASE + '/it/prossimi-eventi',
     blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
     about: import.meta.env.PUBLIC_URL_BASE + '/it/about',
   },
   en: {
     home: import.meta.env.PUBLIC_URL_BASE + '/en',
+    'upcoming events': import.meta.env.PUBLIC_URL_BASE + '/en/upcoming-events',
     about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
   },
 } as const;
 
 export const breadcrumbLinks = {
   it: {
-    home: import.meta.env.PUBLIC_URL_BASE + '/',
-    blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
+    home: routes.it.home,
+    blog: routes.it.blog,
   },
   en: {
-    home: import.meta.env.PUBLIC_URL_BASE + '/en',
-    about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
+    home: routes.en.home,
+    about: routes.en.about,
   },
 };
 

@@ -7,45 +7,49 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npm run lint:ts && astro build",
+    "astro:sync": "astro sync",
     "lint:ts": "tsc --noEmit",
     "lint:astro": "astro check",
     "create-post": "node scripts/create-post.mjs",
+    "create-event": "node scripts/create-event.mjs",
     "preview": "astro preview",
     "fmt": "prettier . --write",
-    "prepare": "husky install",
+    "prepare": "husky install; pnpm run astro:sync",
     "pre-commit": "lint-staged"
   },
   "engines": {
-    "node": "^16.14.0"
+    "node": "^18.17.0"
   },
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.6.12",
   "devDependencies": {
-    "@astrojs/rss": "^1.0.1",
-    "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/solid-js": "^1.2.3",
+    "@astrojs/rss": "^2.4.4",
+    "@astrojs/sitemap": "^2.0.1",
+    "@astrojs/solid-js": "^2.2.0",
     "@babel/core": "^7.18.6",
     "@expo/spawn-async": "^1.6.0",
     "@types/babel__core": "^7.1.19",
     "@types/html-escaper": "^3.0.0",
     "@types/yargs-parser": "^21.0.0",
-    "astro": "1.6.14",
-    "astro-i18next": "1.0.0-beta.12",
+    "astro": "2.10.4",
+    "astro-i18next": "1.0.0-beta.21",
     "chalk": "^5.0.1",
+    "human-id": "^4.0.0",
     "husky": "^8.0.0",
-    "i18next-fs-backend": "^1.1.5",
     "lint-staged": "^13.0.3",
     "mustache": "^4.2.0",
     "prettier": "2.7.1",
     "prompts": "^2.4.2",
-    "sass": "^1.55.0",
+    "sass": "^1.65.1",
     "tiny-invariant": "^1.2.0"
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.11",
     "@solid-primitives/media": "^2.0.2",
+    "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.6.4",
-    "solid-transition-group": "^0.0.11"
+    "solid-js": "^1.7.10",
+    "solid-transition-group": "^0.2.3",
+    "typescript": "^5.1.6"
   }
 }

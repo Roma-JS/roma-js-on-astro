@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js/jsx-runtime';
+import type { JSX } from 'solid-js/jsx-runtime';
 import { CategoriesList } from '@components/CategoriesList/CategoriesList';
 import styles from './styles.module.scss';
 
