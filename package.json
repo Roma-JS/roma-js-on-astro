@@ -45,6 +45,9 @@
   "dependencies": {
     "@fontsource/open-sans": "^4.5.11",
     "@solid-primitives/media": "^2.0.2",
+    "@tanstack/solid-query": "^4.33.0",
+    "graphql": "^16.8.0",
+    "graphql-request": "^6.1.0",
     "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",

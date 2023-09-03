@@ -23,7 +23,8 @@
       "@i18n/*": ["./i18n/*"],
       "@pages/*": ["./pages/*"],
       "@media/*": ["./media/*"],
-      "@types/*": ["./@types/*"]
+      "@types/*": ["./@types/*"],
+      "@api/*": ["./api/*"]
     }
   },
   "include": ["./src"],

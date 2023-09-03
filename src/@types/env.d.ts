@@ -14,6 +14,8 @@ interface ImportMetaEnv {
   readonly PUBLIC_GISCUS_CATEGORY_NAME: string;
   readonly PUBLIC_GISCUS_CATEGORY_ID: string;
   readonly PUBLIC_CFP_FORM_HREF: string;
+  readonly MEETUP_GRAPHQL_ENDPOINT: string;
+  readonly MEETUP_GROUP_ID: string;
 }
 
 interface ImportMeta {
