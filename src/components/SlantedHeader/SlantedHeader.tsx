@@ -1,4 +1,4 @@
-import { JSX, Show } from 'solid-js';
+import { type JSX, Show } from 'solid-js';
 import { splitProps } from 'solid-js';
 import styles from './styles.module.scss';
 import logoSvg from 'media/brand-logo/primary.svg';
@@ -31,7 +31,7 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
 
   const imageLogo = () => (
     <img
-      src={logoSvg}
+      src={logoSvg.src}
       alt={'Romajs logo'}
       class={styles.logo}
       aria-hidden="true"

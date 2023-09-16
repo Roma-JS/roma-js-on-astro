@@ -1,10 +1,10 @@
-import { JSX, ComponentProps, splitProps } from 'solid-js';
-import type { MarkdownInstance } from 'astro';
-import type { Frontmatter } from 'utils/blog';
+import { type JSX, type ComponentProps, splitProps } from 'solid-js';
+import type { CollectionEntry } from 'astro:content';
 import styles from './styles.module.scss';
+import { getBlogPostLink } from 'utils/blog';
 
 export interface BlogPostCardProps extends ComponentProps<'section'> {
-  post: MarkdownInstance<Frontmatter>;
+  post: CollectionEntry<'blog-posts'>;
 }
 
 export function BlogPostCard(props: BlogPostCardProps): JSX.Element {
@@ -22,20 +22,17 @@ export function BlogPostCard(props: BlogPostCardProps): JSX.Element {
   return (
     <a
       classList={{ [styles.link]: true }}
-      href={local.post.url}
-      aria-label={[
-        local.post.frontmatter.title,
-        local.post.frontmatter.author,
-      ].join(', ')}
+      href={getBlogPostLink(local.post)}
+      aria-label={[local.post.data.title, local.post.data.author].join(', ')}
     >
       <section classList={classList()} aria-hidden="true" {...otherProps}>
-        <h2 class={styles.heading}>{local.post.frontmatter.title}</h2>
+        <h2 class={styles.heading}>{local.post.data.title}</h2>
         <div class={styles.infoRow}>
-          <time dateTime={local.post.frontmatter.createdAt}>
-            {local.post.frontmatter.createdAt.split('T')[0]}
+          <time dateTime={local.post.data.createdAt}>
+            {local.post.data.createdAt.split('T')[0]}
           </time>
           {' - '}
-          <span>{local.post.frontmatter.author}</span>
+          <span>{local.post.data.author}</span>
         </div>
       </section>
     </a>

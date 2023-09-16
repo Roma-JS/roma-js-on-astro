@@ -1,5 +1,5 @@
 import type { Lang } from '@i18n/types';
-import { For, JSX, splitProps } from 'solid-js';
+import { For, type JSX, splitProps } from 'solid-js';
 import styles from './langSelector.module.scss';
 
 export type LangSelectorProps = JSX.IntrinsicElements['nav'] & {
