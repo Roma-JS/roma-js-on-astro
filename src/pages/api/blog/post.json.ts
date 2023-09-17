@@ -1,32 +1,34 @@
-import { sortPosts, CommonFrontmatterProperties } from 'utils/blog';
+import { sortPosts, getBlogPostLink } from 'utils/blog';
+import { getCollection } from 'astro:content';
 
 export interface PostInfoDto {
-  frontmatter: CommonFrontmatterProperties;
+  frontmatter: {
+    title: string;
+    categories: string[];
+    lang: string;
+    createdAt: string;
+    author: string;
+  };
   url: string;
   markdown: string;
 }
 
 export async function get() {
-  const postImportResult = await Promise.all(
-    Object.values(import.meta.glob('../../blog/post/**/*.md')).map((get) =>
-      get()
-    )
-  );
-  const posts = sortPosts(Object.values(postImportResult) as any);
+  const posts = await getCollection('blog-posts');
 
   return {
     body: JSON.stringify(
       posts.map(
         (post): PostInfoDto => ({
           frontmatter: {
-            title: post.frontmatter.title,
-            categories: post.frontmatter.categories,
-            lang: post.frontmatter.lang,
-            createdAt: post.frontmatter.description,
-            author: post.frontmatter.author,
+            title: post.data.title,
+            categories: post.data.categories,
+            lang: post.data.lang,
+            createdAt: post.data.createdAt,
+            author: post.data.author,
           },
-          url: post.url ?? '',
-          markdown: post.rawContent(),
+          url: getBlogPostLink(post),
+          markdown: post.body,
         })
       )
     ),

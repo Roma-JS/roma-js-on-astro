@@ -1,16 +1,13 @@
 ---
 import { l10n } from '@i18n/config';
 import CategoriesListLayout from '@layouts/CategoriesList.astro';
-import type { MarkdownInstance } from 'astro';
-import { Frontmatter, computeAllCategories } from 'utils/blog';
+import { getCollection } from 'astro:content'
+import { computeAllCategories } from 'utils/blog';
 import { changeLanguage } from 'i18next';
 
-const allPosts = (await Astro.glob(
-  '../post/**/*.md'
-)) as MarkdownInstance<Frontmatter>[];
-
+const post = await getCollection('blog-posts')
 const allCategories = Array.from(
-  computeAllCategories(allPosts, import.meta.env.BASE_URL).values()
+  computeAllCategories(post, import.meta.env.BASE_URL).values()
 );
 
 const lang = 'it';

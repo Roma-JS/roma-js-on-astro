@@ -1,9 +1,9 @@
-import { createEffect, For, JSX, onCleanup } from 'solid-js';
+import { createEffect, For, type JSX, onCleanup } from 'solid-js';
 import hamburgerMenuOpenImg from 'media/hamburger-menu-open.svg';
 import styles from '../navbar.module.scss';
 import {
   LangSelector,
-  LangSelectorProps,
+  type LangSelectorProps,
 } from '@components/LangSelector/LangSelector';
 import { BrandMenuArea } from './BrandMenuArea';
 import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
@@ -45,7 +45,7 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
           type="button"
           onClick={props.onCloseButtonClick}
         >
-          <img src={hamburgerMenuOpenImg} alt="close" aria-hidden="true" />
+          <img src={hamburgerMenuOpenImg.src} alt="close" aria-hidden="true" />
           <span class="visually-hidden">Close menu</span>
         </button>
       </div>
@@ -87,7 +87,7 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
             <img
               width="24"
               height="24"
-              src={socialLinks.slack.iconHref}
+              src={socialLinks.slack.iconHref.src}
               alt={'slack'}
               aria-hidden="true"
             />

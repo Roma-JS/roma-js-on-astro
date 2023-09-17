@@ -1,7 +1,7 @@
-import { createSignal, For, JSX, Show } from 'solid-js';
+import { createSignal, For, type JSX, Show } from 'solid-js';
 import {
   LangSelector,
-  LangSelectorProps,
+  type LangSelectorProps,
 } from 'components/LangSelector/LangSelector';
 import hamburgerMenuImg from 'media/hamburger-menu-closed.svg';
 import { MenuModal } from './components/MenuModal';
@@ -92,7 +92,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
             setIsMenuOpen(true);
           }}
         >
-          <img aria-hidden="true" alt="menu" src={hamburgerMenuImg} />
+          <img aria-hidden="true" alt="menu" src={hamburgerMenuImg.src} />
           <span class="visually-hidden">Open menu</span>
         </button>
       </div>

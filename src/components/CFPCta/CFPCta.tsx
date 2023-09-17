@@ -4,7 +4,7 @@ import styles from './cfpCta.module.scss';
 export function CFPCta(
   props: Omit<JSX.IntrinsicElements['a'], 'children' | 'href'>
 ) {
-  const [local, otherProps] = splitProps(props, ['class', 'classList']);
+  const [local] = splitProps(props, ['class', 'classList']);
 
   const classList = () => {
     const output = { ...local.classList };
