@@ -14,8 +14,6 @@
     // Enable stricter transpilation for better output.
     "isolatedModules": true,
     "skipLibCheck": true,
-    // Add type definitions for our Vite runtime.
-    "types": ["vite/client"],
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["./components/*"],
@@ -27,6 +25,6 @@
       "@api/*": ["./api/*"]
     }
   },
-  "include": ["./src"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules"]
 }
