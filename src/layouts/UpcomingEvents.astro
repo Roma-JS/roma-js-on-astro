@@ -16,6 +16,8 @@ import type { CollectionEntry } from 'astro:content';
 import { i18nLang } from '@i18n/config';
 import { CFPCta } from '@components/CFPCta/CFPCta';
 import { sortUpComingEvents } from 'utils/upcoming-events';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -47,6 +49,7 @@ const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
   <body class={styles.wallpaper}>
     <article class="main">
@@ -61,7 +64,9 @@ const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class='logo-small' />
+      </SlantedHeader>
       <div class="main-content">
         <ul class="upcoming-events-list">
           {
