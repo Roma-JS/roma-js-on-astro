@@ -33,18 +33,6 @@ fragment MeetupArticle on Event{
     name
     urlname
   }
-  tickets {
-    edges {
-      node {
-        id
-        user {
-          name
-        }
-        createdAt
-      }
-      cursor
-    }
-  }
 }
 `;
 export const ALL_POSTS_QUERY = gql`
@@ -97,9 +85,9 @@ export const LAST_UPCOMING_EVENT_QUERY = gql`
   ${MeetupArticle}
   query ($urlname: String!) {
     groupByUrlname(urlname: $urlname) {
-      upcomingEvents(input: { first: 1 }, sortOrder: DESC) {
+      upcomingEvents(input: { first: 10 }, sortOrder: DESC) {
         #this rename query is for development only
-        #upcomingEvents: pastEvents(input: {first: 1},sortOrder:DESC) {
+        #upcomingEvents: pastEvents(input: {first: 10},sortOrder:DESC) {
         edges {
           node {
             ...MeetupArticle

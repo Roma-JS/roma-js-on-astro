@@ -36,12 +36,6 @@
 @include br.media-breakpoint-up(md) {
   .upcoming-event {
     grid-template-columns: 265px 1fr;
-
-    .upcoming-event-heading {
-      & a[href]:last-child {
-        margin-left: 8px;
-      }
-    }
   }
 }
 
