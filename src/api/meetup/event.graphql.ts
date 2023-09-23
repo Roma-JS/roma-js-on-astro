@@ -33,6 +33,12 @@ fragment MeetupArticle on Event{
     name
     urlname
   }
+  venue {
+    id
+    name
+    lat
+    lng
+  }
 }
 `;
 export const ALL_POSTS_QUERY = gql`

@@ -3,7 +3,7 @@ import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 export interface MeetupEventsApiResponse {
   events: Pick<
     MeetupEventType,
-    'id' | 'title' | 'dateTime' | 'eventUrl' | 'group' | 'duration'
+    'id' | 'title' | 'dateTime' | 'eventUrl' | 'group' | 'duration' | 'venue'
   >[];
 }
 
@@ -12,13 +12,14 @@ export function computeMeetupEventsApiResponse(
 ): MeetupEventsApiResponse {
   return {
     events: (meetupEvents || [])?.map(
-      ({ id, eventUrl, title, dateTime, group, duration }) => ({
+      ({ id, eventUrl, title, dateTime, group, duration, venue }) => ({
         id,
         title,
         dateTime,
         eventUrl,
         group,
         duration,
+        venue,
       })
     ),
   };

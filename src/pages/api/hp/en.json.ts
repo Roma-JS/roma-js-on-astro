@@ -4,6 +4,7 @@ import {
   fetchAllPastRomajsEvents,
   fetchUpcomingRomajsEvents,
 } from '@api/meetup/queries.server';
+import { formatVenueMapsHref } from 'utils/venue';
 
 const lng = 'en';
 
@@ -25,6 +26,12 @@ export async function getEnHpContent(): Promise<Readonly<HpContent>> {
         href: nextEvent.eventUrl,
         text: l10n('ctaRegister', { lng }),
       },
+      venue: nextEvent.venue
+        ? {
+            href: formatVenueMapsHref(nextEvent.venue),
+            text: l10n('ctaVenue', { lng }),
+          }
+        : undefined,
     });
   }
 

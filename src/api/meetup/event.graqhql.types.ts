@@ -32,17 +32,25 @@ export type MeetupUserType = {
   id: string;
   name?: string;
 };
+
+export type MeetupVenueType = {
+  id: string;
+  name?: string;
+  lat: number;
+  lng: number;
+};
+
 export type MeetupEventType = {
   id: string;
   title?: string;
   eventUrl: string;
   description?: string;
   shortDescription?: string;
+  venue?: MeetupVenueType;
   imageUrl: string;
   dateTime: string;
   duration: string;
   host: MeetupUserType;
   images: MeetupImageType[];
   group: MeetupGroupType;
-  tickets: MeetupEventTicketsConnectionType;
 };

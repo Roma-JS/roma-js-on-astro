@@ -4,6 +4,7 @@ import {
   fetchUpcomingRomajsEvents,
   fetchAllPastRomajsEvents,
 } from '@api/meetup/queries.server';
+import { formatVenueMapsHref } from 'utils/venue';
 
 const lng = 'it';
 
@@ -17,14 +18,20 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
 
   const sections: HpContent['sections'] = [];
 
-  if (nextEvent) {
+  if (nextEvent || latestPastEvent) {
     sections.push({
       heading: l10n('nextTalkTitle', { lng }),
-      body: nextEvent.title || '',
+      body: latestPastEvent.title || '',
       cta: {
-        href: nextEvent.eventUrl,
+        href: latestPastEvent.eventUrl,
         text: l10n('ctaRegister', { lng }),
       },
+      venue: latestPastEvent.venue
+        ? {
+            href: formatVenueMapsHref(latestPastEvent.venue),
+            text: l10n('ctaVenue', { lng }),
+          }
+        : undefined,
     });
   }
 
@@ -46,7 +53,7 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
   };
 }
 
-export async function get() {
+export async function GET() {
   return {
     body: JSON.stringify(await getHpItContent()),
   };
