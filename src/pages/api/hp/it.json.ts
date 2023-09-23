@@ -54,7 +54,5 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
 }
 
 export async function GET() {
-  return {
-    body: JSON.stringify(await getHpItContent()),
-  };
+  return new Response(JSON.stringify(await getHpItContent()));
 }

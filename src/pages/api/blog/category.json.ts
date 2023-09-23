@@ -8,14 +8,14 @@ export interface CategoryInfoDto {
   posts: { url: string; title: string; author: string }[];
 }
 
-export async function get() {
+export async function GET() {
   const posts = sortPosts(await getCollection('blog-posts'));
   const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
 
   const allCategoriesList = Array.from(allCategories.values());
 
-  return {
-    body: JSON.stringify(
+  return new Response(
+    JSON.stringify(
       allCategoriesList.map(
         (category): CategoryInfoDto => ({
           name: category.name,
@@ -28,6 +28,6 @@ export async function get() {
           })),
         })
       )
-    ),
-  };
+    )
+  );
 }

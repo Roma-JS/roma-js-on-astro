@@ -4,7 +4,7 @@ import { computeMeetupEventsApiResponse } from 'utils/api';
 export async function GET() {
   const pastEvents = await fetchAllPastRomajsEvents();
 
-  return {
-    body: JSON.stringify(computeMeetupEventsApiResponse(pastEvents)),
-  };
+  return new Response(
+    JSON.stringify(computeMeetupEventsApiResponse(pastEvents))
+  );
 }
