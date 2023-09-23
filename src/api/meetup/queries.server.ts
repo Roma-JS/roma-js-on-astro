@@ -102,8 +102,8 @@ export async function fetchRomajsMeetupsCount(
  * ```
  */
 export async function fetchNextUpcomingRomajsEvent(
-  config?: MeetupQueryConfig<MeetupEventType | null>
-): Promise<MeetupEventType | null> {
+  config?: MeetupQueryConfig<MeetupEventType[] | null>
+): Promise<MeetupEventType[] | null> {
   return queryCacheClient.fetchQuery({
     ...config,
     queryKey: ['fetchNextUpcomingRomajsEvent'],
@@ -125,7 +125,9 @@ export async function fetchNextUpcomingRomajsEvent(
         },
       } = data;
 
-      return edges[0]?.node ?? null;
+      return edges.map((eventElement) => ({
+        ...eventElement.node,
+      }));
     },
   });
 }

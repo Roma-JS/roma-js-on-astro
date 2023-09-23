@@ -12,19 +12,19 @@ import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
-import type { CollectionEntry } from 'astro:content';
 import { i18nLang } from '@i18n/config';
 import { CFPCta } from '@components/CFPCta/CFPCta';
-import { sortUpComingEvents } from 'utils/upcoming-events';
 import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
-  upcomingEvents: CollectionEntry<'upcoming-events'>[];
+  upcomingEvents: MeetupEventType[] | null;
+  nextEvents: Date[];
 }
 
-const { title, description, lang, upcomingEvents } = Astro.props;
+const { title, description, lang, upcomingEvents, nextEvents } = Astro.props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -41,8 +41,6 @@ const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
   day: 'numeric',
   timeZone: 'Europe/Rome',
 });
-
-const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -70,17 +68,29 @@ const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
       <div class="main-content">
         <ul class="upcoming-events-list">
           {
-            sortedUpcomingEvents.map((event) => {
-              const parsedStartsAt = new Date(event.data.startsAt);
-              const hasCFPCta = event.data.hasCallForPapers;
+            upcomingEvents?.map(upcomingEvent =>
+              <li>
+                <section class="upcoming-event">
+                  <time datetime={new Date(upcomingEvent.dateTime).toISOString()}>
+                    {startsAtFormatter.format(new Date(upcomingEvent.dateTime))}
+                  </time>
+                  <h3 class="upcoming-event-heading">
+                    <a href={upcomingEvent.eventUrl}>{upcomingEvent.title}</a>
+                  </h3>
+                </section>
+              </li>
+            )
+          }
+          {
+            nextEvents.map((event) => {
               return (
                 <li>
                   <section class="upcoming-event">
-                    <time datetime={parsedStartsAt.toISOString()}>
-                      {startsAtFormatter.format(parsedStartsAt)}
+                    <time datetime={event.toISOString()}>
+                      {startsAtFormatter.format(event)}
                     </time>
                     <h3 class="upcoming-event-heading">
-                      {event.data.title} {hasCFPCta && <CFPCta />}
+                      TBD <CFPCta />
                     </h3>
                   </section>
                 </li>
