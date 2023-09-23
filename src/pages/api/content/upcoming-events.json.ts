@@ -1,13 +1,25 @@
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { fetchUpcomingRomajsEvents } from '@api/meetup/queries.server';
+import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 
 interface UpcomingEventsResponse {
-  events: Pick<CollectionEntry<'upcoming-events'>, 'data' | 'id'>[];
+  events: Pick<
+    MeetupEventType,
+    'id' | 'title' | 'dateTime' | 'eventUrl' | 'group'
+  >[];
 }
 
-export async function get() {
-  const upcomingEvents = await getCollection('upcoming-events');
+export async function GET() {
+  const upcomingEvents = await fetchUpcomingRomajsEvents();
   const response: UpcomingEventsResponse = {
-    events: upcomingEvents.map((entry) => ({ id: entry.id, data: entry.data })),
+    events: (upcomingEvents || [])?.map(
+      ({ id, eventUrl, title, dateTime, group }) => ({
+        id,
+        title,
+        dateTime,
+        eventUrl,
+        group,
+      })
+    ),
   };
 
   return {
