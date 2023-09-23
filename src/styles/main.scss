@@ -198,3 +198,16 @@ body {
     padding: 0;
   }
 }
+
+.logo-small {
+  border-radius: 8px;
+  width: 64px;
+  height: 64px;
+}
+
+@include br.media-breakpoint-up(lg) {
+  .logo-small {
+    width: 80px;
+    height: 80px;
+  }
+}

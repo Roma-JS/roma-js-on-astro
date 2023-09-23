@@ -1,13 +1,19 @@
-import type { JSX } from 'solid-js/jsx-runtime';
+---
 import styles from './styles.module.scss';
 
-export function BrandLogo(props: { class: string }): JSX.Element {
-  return (
-    <svg
+export interface Props {
+  class?: string;
+}
+
+const props = Astro.props;
+
+---
+<svg
       class={props.class}
       viewBox="0 0 224 224"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      transition:name="logo"
     >
       <path
         d="M223.955 0.271484H0.407227V223.819H223.955V0.271484Z"
@@ -86,6 +92,5 @@ export function BrandLogo(props: { class: string }): JSX.Element {
         d="M36.4735 20.6351H26.9253V45.0715H36.4735V20.6351Z"
         fill="#FFB200"
       />
-    </svg>
-  );
-}
+</svg>
+
