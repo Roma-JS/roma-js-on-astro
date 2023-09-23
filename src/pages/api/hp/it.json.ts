@@ -18,17 +18,17 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
 
   const sections: HpContent['sections'] = [];
 
-  if (nextEvent || latestPastEvent) {
+  if (nextEvent) {
     sections.push({
       heading: l10n('nextTalkTitle', { lng }),
-      body: latestPastEvent.title || '',
+      body: nextEvent.title || '',
       cta: {
-        href: latestPastEvent.eventUrl,
+        href: nextEvent.eventUrl,
         text: l10n('ctaRegister', { lng }),
       },
-      venue: latestPastEvent.venue
+      venue: nextEvent.venue
         ? {
-            href: formatVenueMapsHref(latestPastEvent.venue),
+            href: formatVenueMapsHref(nextEvent.venue),
             text: l10n('ctaVenue', { lng }),
           }
         : undefined,
