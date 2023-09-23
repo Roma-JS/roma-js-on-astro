@@ -1,13 +1,13 @@
 ---
 import type { Lang } from '@i18n/types';
 import UpcomingEventsLayout from '@layouts/UpcomingEvents.astro';
-import {fetchNextUpcomingRomajsEvent} from '@api/meetup/queries.server';
+import {fetchUpcomingRomajsEvents} from '@api/meetup/queries.server';
 import {startOfMonth, addMonths, nextWednesday, isWednesday} from 'date-fns';
 const title: string = 'Upcoming events';
 const lang: Lang = 'en';
 const description = 'Upcoming events of RomaJS community';
 
-const upcomingEvents = await fetchNextUpcomingRomajsEvent();
+const upcomingEvents = await fetchUpcomingRomajsEvents();
 
 const lastUpcomingEventDate = upcomingEvents?.at(-1)?.dateTime || Date.now();
 

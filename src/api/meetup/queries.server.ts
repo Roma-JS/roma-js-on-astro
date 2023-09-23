@@ -98,15 +98,15 @@ export async function fetchRomajsMeetupsCount(
  * ```ts
  * import { fetchNextUpcomingRomajsEvent } from '@api/meetup/queries.server';
  *
- * const nextUpcomingEvent = await fetchNextUpcomingRomajsEvent();
+ * const upcomingRomaJsEvents = await fetchNextUpcomingRomajsEvent();
  * ```
  */
-export async function fetchNextUpcomingRomajsEvent(
+export async function fetchUpcomingRomajsEvents(
   config?: MeetupQueryConfig<MeetupEventType[] | null>
 ): Promise<MeetupEventType[] | null> {
   return queryCacheClient.fetchQuery({
     ...config,
-    queryKey: ['fetchNextUpcomingRomajsEvent'],
+    queryKey: ['fetchUpcomingRomajsEvents'],
     async queryFn() {
       const data = await meetupGraqhqlClient.request<{
         groupByUrlname: {
