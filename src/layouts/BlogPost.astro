@@ -18,6 +18,8 @@ import {
   type BreadcrumbsProps,
 } from '@components/Breadcrumbs/Breadcrumbs';
 import { l10n } from '@i18n/config';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 
 const { content } = Astro.props;
 
@@ -41,6 +43,7 @@ const breadcrumMessages = Object.fromEntries(
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
 
   <body class={styles.wallpaper}>
@@ -56,7 +59,9 @@ const breadcrumMessages = Object.fromEntries(
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class="logo-small" />
+      </SlantedHeader>
       <BlogPostInfo
         createdAt={createdAt ?? ''}
         categories={categories}

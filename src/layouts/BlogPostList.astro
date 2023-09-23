@@ -20,6 +20,8 @@ import {
   Breadcrumbs,
   type BreadcrumbsProps,
 } from '@components/Breadcrumbs/Breadcrumbs';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -55,6 +57,7 @@ const breadcrumMessages = Object.fromEntries(
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
 
   <body class={styles.wallpaper}>
@@ -70,7 +73,9 @@ const breadcrumMessages = Object.fromEntries(
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class="logo-small" />
+      </SlantedHeader>
       <div class="main-content blog-list-layout">
         <ul class="list-style-none m-0 post-list">
           {

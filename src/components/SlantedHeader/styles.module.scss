@@ -17,22 +17,10 @@
   align-items: flex-start;
   gap: var(--slanted-header-gap);
 
-  .logo {
-    width: var(--slanted-header-logo-size);
-    height: var(--slanted-header-logo-size);
-    border-radius: 8px;
-  }
-
   @include br.media-breakpoint-up(lg) {
     padding: 40px 110px 0;
     --slanted-header-height: 212px;
-    --slanted-header-logo-size: 80px;
     --slanted-header-gap: 32px;
-
-    .logo {
-      position: relative;
-      top: -10px;
-    }
   }
 }
 

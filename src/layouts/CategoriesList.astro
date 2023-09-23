@@ -14,6 +14,8 @@ import { Navbar } from '@components/Navbar/Navbar';
 import BaseHead from '@components/BaseHead.astro';
 import { CategoriesList as CategoriesListComponent } from '@components/CategoriesList/CategoriesList';
 import { getNavbarMessages } from '@components/Navbar/helpers';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -36,6 +38,7 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
 
   <body class={styles.wallpaper}>
@@ -51,7 +54,9 @@ changeLanguage(lang);
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class="logo-small" />
+      </SlantedHeader>
       <div class="main-content categories-list-layout">
         <CategoriesListComponent
           class="categories-list"
