@@ -168,10 +168,7 @@ export async function fetchAllPastRomajsEvents(
         },
       } = data;
 
-      return edges.map((eventElement) => ({
-        ...eventElement.node,
-        id: eventElement.node.id.replace('!chp', ''),
-      }));
+      return edges.map((eventElement) => eventElement.node);
     },
   });
 }
