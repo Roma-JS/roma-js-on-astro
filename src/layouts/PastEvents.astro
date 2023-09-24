@@ -1,0 +1,93 @@
+---
+import '../styles/main.scss';
+import styles from '../styles/wallpaper.module.scss';
+import '../styles/layouts/upcoming-events.scss';
+import BaseHead from '@components/BaseHead.astro';
+import Pagination from '@components/Pagination/Pagination.astro';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import { BuildInfo } from '@components/BuildInfo/BuildInfo';
+import { Navbar } from '@components/Navbar/Navbar';
+import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
+import { changeLanguage } from 'i18next';
+import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import type { Lang } from '@i18n/types';
+import { getNavbarMessages } from '@components/Navbar/helpers';
+import { i18nLang } from '@i18n/config';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
+import type { Page } from 'astro';
+
+export interface Props extends BaseHeadProps {
+  lang: Lang;
+  page: Page<MeetupEventType>;
+}
+
+const { title, description, lang, page } = Astro.props;
+
+const canonicalURL = getCanonicalURL(Astro);
+
+const relativePageUrl =
+  canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  canonicalURL.search +
+  canonicalURL.hash;
+
+changeLanguage(lang);
+
+const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'Europe/Rome',
+});
+---
+
+<html lang={lang} class="rmjs-yellow-black-theme">
+  <head>
+    <BaseHead title={title} description={description} />
+    <slot name="head" />
+    <ViewTransitions />
+  </head>
+  <body class={styles.wallpaper}>
+    <article class="main">
+      <Navbar
+        client:load
+        lang={lang}
+        urlMap={aboutUrlMap}
+        relativePageUrl={relativePageUrl}
+        messages={getNavbarMessages()}
+      />
+      <SlantedHeader
+        title={title}
+        logoHref={navbarLinks[lang]?.home}
+        logoLabel={'homepage'}
+      >
+        <BrandLogo class='logo-small' />
+      </SlantedHeader>
+      <div class="main-content">
+        <ul class="upcoming-events-list">
+          {
+            page.data.map(event =>
+              <li>
+                <section class="upcoming-event">
+                  <time datetime={new Date(event.dateTime).toISOString()}>
+                    {startsAtFormatter.format(new Date(event.dateTime))}
+                  </time>
+                  <h3 class="upcoming-event-heading">
+                    <a href={event.eventUrl}>{event.title}</a>
+                  </h3>
+                </section>
+              </li>
+            )
+          }
+        </ul>
+        <slot />
+        <Pagination url={page.url} />
+      </div>
+      <footer><SocialLinksList /></footer>
+    </article>
+    <slot name="after" />
+    <BuildInfo />
+  </body>
+</html>

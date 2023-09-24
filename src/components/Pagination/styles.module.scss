@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  margin-top: 48px;
+  gap: 16px;
+  width: 100%;
+}
+
+.pageLink {
+  color: var(--accent-primary);
+  font-size: 16px;
+  font-weight: 700;
+}
