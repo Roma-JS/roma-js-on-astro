@@ -2,8 +2,9 @@
 import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
 import BaseHead from '@components/BaseHead.astro';
-import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import Pagination from '@components/Pagination/Pagination.astro';
 import { EventsList } from '@components/EventsList/EventsList';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
@@ -15,14 +16,14 @@ import { getNavbarMessages } from '@components/Navbar/helpers';
 import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
+import type { Page } from 'astro';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
-  upcomingEvents: MeetupEventType[] | null;
-  nextEvents: Date[];
+  page: Page<MeetupEventType>;
 }
 
-const { title, description, lang, upcomingEvents, nextEvents } = Astro.props;
+const { title, description, lang, page } = Astro.props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -57,8 +58,9 @@ changeLanguage(lang);
         <BrandLogo class='logo-small' />
       </SlantedHeader>
       <div class="main-content">
-        <EventsList data={upcomingEvents} upcoming={nextEvents} lang={lang} />
+        <EventsList data={page.data}  lang={lang} />
         <slot />
+        <Pagination url={page.url} lang={lang} />
       </div>
       <footer><SocialLinksList /></footer>
     </article>

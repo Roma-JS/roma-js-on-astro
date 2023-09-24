@@ -1,6 +1,6 @@
-@use '../mixins/breakpoints' as br;
+@use '../../styles/mixins/breakpoints' as br;
 
-.upcoming-events-list {
+.eventsList {
   margin: 0;
   padding: 0;
   display: grid;
@@ -12,35 +12,33 @@
   }
 }
 
-.upcoming-event {
+.event {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
   align-items: center;
   font-weight: bold;
   font-size: 20px;
+}
 
-  .upcoming-event-heading {
-    color: var(--accent-primary);
-    margin: 0;
-    font-size: inherit;
-    font-size: inherit;
-    margin: 0;
+.eventHeading {
+  color: var(--accent-primary);
+  margin: 0;
+  font-size: inherit;
 
-    & a[href]:last-child {
-      margin-top: 8px;
-    }
+  & a[href]:last-child {
+    margin-top: 8px;
   }
 }
 
 @include br.media-breakpoint-up(md) {
-  .upcoming-event {
+  .event {
     grid-template-columns: 265px 1fr;
   }
 }
 
 @include br.media-breakpoint-up(lg) {
-  .upcoming-events-list {
+  .eventsList {
     padding: 24px 0 0 68px;
   }
 }
