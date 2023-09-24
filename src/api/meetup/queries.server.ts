@@ -20,6 +20,7 @@ const meetupGraqhqlClient = new GraphQLClient(
   import.meta.env.MEETUP_GRAPHQL_ENDPOINT || ''
 );
 
+// Additional `cache.fetchQuery` parameters that can be added to customize the cache behavior
 export type MeetupQueryConfig<Data> = Omit<
   FetchQueryOptions<unknown, unknown, Data, string[]>,
   'queryKey' | 'queryFn'
@@ -35,12 +36,8 @@ export type MeetupQueryConfig<Data> = Omit<
  *
  * @see {@link MeetupQueryConfig}
  */
-export async function fetchMeetupEventById(
-  eventId: string,
-  config?: MeetupQueryConfig<MeetupEventType | null>
-) {
+export async function fetchMeetupEventById(eventId: string) {
   return queryCacheClient.fetchQuery({
-    ...config,
     queryKey: ['fetchMeetupEventById', eventId],
     async queryFn({ queryKey }) {
       const data = await meetupGraqhqlClient.request<{
@@ -66,11 +63,8 @@ export async function fetchMeetupEventById(
  *
  * @see {@link MeetupQueryConfig}
  */
-export async function fetchRomajsMeetupsCount(
-  config?: MeetupQueryConfig<number>
-): Promise<number> {
+export async function fetchRomajsMeetupsCount(): Promise<number> {
   return queryCacheClient.fetchQuery({
-    ...config,
     queryKey: ['fetchRomajsMeetupsCount'],
     async queryFn() {
       const data = await meetupGraqhqlClient.request<{
@@ -96,16 +90,15 @@ export async function fetchRomajsMeetupsCount(
  * ### Usage
  *
  * ```ts
- * import { fetchNextUpcomingRomajsEvent } from '@api/meetup/queries.server';
+ * import { fetchUpcomingRomajsEvents } from '@api/meetup/queries.server';
  *
- * const upcomingRomaJsEvents = await fetchNextUpcomingRomajsEvent();
+ * const upcomingRomaJsEvents = await fetchUpcomingRomajsEvents();
  * ```
  */
-export async function fetchUpcomingRomajsEvents(
-  config?: MeetupQueryConfig<MeetupEventType[] | null>
-): Promise<MeetupEventType[] | null> {
+export async function fetchUpcomingRomajsEvents(): Promise<
+  MeetupEventType[] | null
+> {
   return queryCacheClient.fetchQuery({
-    ...config,
     queryKey: ['fetchUpcomingRomajsEvents'],
     async queryFn() {
       const data = await meetupGraqhqlClient.request<{
@@ -141,16 +134,11 @@ export async function fetchUpcomingRomajsEvents(
  * const allPastEvents = await fetchAllPastRomajsEvents();
  * ```
  */
-export async function fetchAllPastRomajsEvents(
-  config?: MeetupQueryConfig<MeetupEventType[]>
-): Promise<MeetupEventType[]> {
+export async function fetchAllPastRomajsEvents(): Promise<MeetupEventType[]> {
   return queryCacheClient.fetchQuery({
-    ...config,
     queryKey: ['fetchAllPastRomajsEvents'],
     async queryFn() {
-      const itemsNum = await fetchRomajsMeetupsCount(
-        config as unknown as MeetupQueryConfig<number>
-      );
+      const itemsNum = await fetchRomajsMeetupsCount();
 
       const data = await meetupGraqhqlClient.request<{
         groupByUrlname: { pastEvents: { edges: { node: MeetupEventType }[] } };
