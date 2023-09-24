@@ -24,3 +24,6 @@ export function computeMeetupEventsApiResponse(
     ),
   };
 }
+
+export const pastEventsPageSise =
+  parseInt(import.meta.env.PUBLIC_MEETUP_PAGE_SIZE, 10) || 10;

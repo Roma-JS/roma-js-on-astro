@@ -1,5 +1,5 @@
 import { fetchAllPastRomajsEvents } from '@api/meetup/queries.server';
-import { computeMeetupEventsApiResponse } from 'utils/api';
+import { computeMeetupEventsApiResponse } from 'utils/meetup-events';
 
 export async function GET() {
   const pastEvents = await fetchAllPastRomajsEvents();
