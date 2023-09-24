@@ -42,7 +42,11 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
         </a>
       </Show>
 
-      <h1 class="h-1" classList={{ [styles.heading]: true }}>
+      <h1
+        class="h-1"
+        classList={{ [styles.heading]: true }}
+        style="view-transition-name: title;"
+      >
         {local.title}
       </h1>
     </header>

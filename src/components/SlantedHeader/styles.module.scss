@@ -5,6 +5,8 @@
   --slanted-header-height: 142px;
   --slanted-header-gap: 20px;
 
+  view-transition-name: header;
+
   composes: d-flex overflow-hidden from global;
 
   border: none;

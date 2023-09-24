@@ -1,21 +1,5 @@
 @use '../mixins/_breakpoints.scss' as br;
 
-:root {
-  --logo-width: 120px;
-}
-
-@include br.media-breakpoint-up(lg) {
-  :root {
-    --logo-width: 224px;
-  }
-}
-
-.logo {
-  border-radius: 17px;
-  width: var(--logo-width);
-  height: var(--logo-width);
-}
-
 .hp-wrapper {
   display: flex;
   flex-flow: column nowrap;

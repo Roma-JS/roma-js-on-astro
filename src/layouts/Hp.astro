@@ -58,15 +58,17 @@ changeLanguage(lang);
       />
       <div class="hp-wrapper">
         <section class="hp-section logo-hero">
-          <BrandLogo class='logo'/>
-          <div class="logo-hero__text hero">
-            <h1 class="h-1">{title}</h1><span class="h-1">{description}</span>
+          <BrandLogo />
+          <div class="logo-hero__text hero" transition:name="title">
+            <h1 class="h-1">{title}</h1>
+            <span class="h-1">{description}</span>
           </div>
           <a
             class="btn btn-secondary slack-link h-1"
             rel="noopener noreferrer"
             target="_blank"
             href={socialLinks.slack.href}
+            transition:name="hp-cta"
           >
             {l10n('ctaJoinSlackCta')}{' '}
             <img
@@ -79,8 +81,8 @@ changeLanguage(lang);
           </a>
         </section>
         {
-          sections.map((section) => (
-            <section class="arrow-box hp-section">
+          sections.map((section, i) => (
+            <section class="arrow-box hp-section" transition:name={'hp-section-' + i}>
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
               <p class="h-2 h-dynamic">{section.body}</p>
               <div class="hp-section-links">

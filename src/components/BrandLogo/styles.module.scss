@@ -1,3 +1,31 @@
+@use '../../styles/mixins/breakpoints' as br;
+
+:root {
+  --logo-width: 120px;
+}
+
+.logo {
+  border-radius: 17px;
+  width: var(--logo-width);
+  height: var(--logo-width);
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.logoSmall {
+  border-radius: 8px;
+  --logo-width: 64px;
+}
+
+@include br.media-breakpoint-up(lg) {
+  :root {
+    --logo-width: 224px;
+  }
+
+  .logo-small {
+    --logo-width: 80px;
+  }
+}
+
 .middleRow {
   animation: middleRowAnimation 600ms ease-out;
 }
