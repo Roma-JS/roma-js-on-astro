@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import type { Lang } from '@i18n/types';
+import PastEventsLayout from '@layouts/PastEvents.astro';
+import {fetchAllPastRomajsEvents} from '@api/meetup/queries.server';
+import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
+import { pastEventsPageSise } from '../../../utils/meetup-events'
+
+export interface Props {
+  page: Page<MeetupEventType>;
+}
+
+const title: string = 'Past Events';
+const lang: Lang = 'en';
+const description = 'All past events organized by RomaJS';
+
+export const  getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const pastEvents = await fetchAllPastRomajsEvents();
+
+  return paginate(pastEvents, { pageSize: pastEventsPageSise });
+} 
+
+const { page } = Astro.props;
+---
+
+<PastEventsLayout
+  title={title}
+  lang={lang}
+  description={description}
+  page={page}
+/>

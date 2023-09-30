@@ -13,11 +13,11 @@ export interface PostInfoDto {
   markdown: string;
 }
 
-export async function get() {
+export async function GET() {
   const posts = await getCollection('blog-posts');
 
-  return {
-    body: JSON.stringify(
+  return new Response(
+    JSON.stringify(
       posts.map(
         (post): PostInfoDto => ({
           frontmatter: {
@@ -31,6 +31,6 @@ export async function get() {
           markdown: post.body,
         })
       )
-    ),
-  };
+    )
+  );
 }

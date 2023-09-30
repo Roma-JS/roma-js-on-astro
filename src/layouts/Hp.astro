@@ -83,7 +83,8 @@ changeLanguage(lang);
             <section class="arrow-box hp-section">
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
               <p class="h-2 h-dynamic">{section.body}</p>
-              {!!section.cta && (
+              <div class="hp-section-links">
+                {!!section.cta && (
                 <a
                   class="btn btn-outline btn-tertiary"
                   href={section.cta.href}
@@ -92,6 +93,16 @@ changeLanguage(lang);
                   {section.cta.text}
                 </a>
               )}
+                {!!section.venue && (
+                <a
+                class="btn btn-outline btn-tertiary"
+                  href={section.venue.href}
+                  hreflang={section.venue.lang || undefined}
+                >
+                  {section.venue.text}
+                </a>
+              )}
+              </div>
             </section>
           ))
         }

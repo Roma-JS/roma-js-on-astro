@@ -8,6 +8,7 @@ export interface HpSection {
   heading: string;
   body: string;
   cta?: Link;
+  venue?: Link;
 }
 
 export interface HpContent {

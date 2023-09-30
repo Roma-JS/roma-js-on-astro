@@ -11,6 +11,18 @@ dependencies:
   '@solid-primitives/media':
     specifier: ^2.0.2
     version: 2.0.2(solid-js@1.7.10)
+  '@tanstack/solid-query':
+    specifier: ^4.33.0
+    version: 4.35.3(solid-js@1.7.10)
+  date-fns:
+    specifier: ^2.30.0
+    version: 2.30.0
+  graphql:
+    specifier: ^16.8.0
+    version: 16.8.0
+  graphql-request:
+    specifier: ^6.1.0
+    version: 6.1.0(graphql@16.8.0)
   i18next:
     specifier: 22.4.10
     version: 22.4.10
@@ -64,9 +76,6 @@ devDependencies:
   chalk:
     specifier: ^5.0.1
     version: 5.3.0
-  human-id:
-    specifier: ^4.0.0
-    version: 4.0.0
   husky:
     specifier: ^8.0.0
     version: 8.0.1
@@ -928,6 +937,14 @@ packages:
     resolution: {integrity: sha512-nG0gmbx4pSr8wltdG/ZdlS6OrsMK40Wt6iyuLTKHEf0TQfzKRMlWaskZHdeuWCwS6WUgqHKMf9KSwGdxPfapOg==}
     dev: false
 
+  /@graphql-typed-document-node/core@3.2.0(graphql@16.8.0):
+    resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    dependencies:
+      graphql: 16.8.0
+    dev: false
+
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -1054,6 +1071,19 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
+      solid-js: 1.7.10
+    dev: false
+
+  /@tanstack/query-core@4.35.3:
+    resolution: {integrity: sha512-PS+WEjd9wzKTyNjjQymvcOe1yg8f3wYc6mD+vb6CKyZAKvu4sIJwryfqfBULITKCla7P9C4l5e9RXePHvZOZeQ==}
+    dev: false
+
+  /@tanstack/solid-query@4.35.3(solid-js@1.7.10):
+    resolution: {integrity: sha512-RQvUjWJgg1vyuPVMEqshM/ZBzA3ZgDynyQppc3vXW/OWJ+PaOMpCbgZAiBP2ROuk0Ag8xxeGMBuEJ7ESUjCCgg==}
+    peerDependencies:
+      solid-js: ^1.5.7
+    dependencies:
+      '@tanstack/query-core': 4.35.3
       solid-js: 1.7.10
     dev: false
 
@@ -1649,7 +1679,6 @@ packages:
       node-fetch: 2.6.12
     transitivePeerDependencies:
       - encoding
-    dev: true
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -1662,6 +1691,13 @@ packages:
 
   /csstype@3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.22.10
+    dev: false
 
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -2248,6 +2284,23 @@ packages:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
     dev: true
 
+  /graphql-request@6.1.0(graphql@16.8.0):
+    resolution: {integrity: sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==}
+    peerDependencies:
+      graphql: 14 - 16
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.0)
+      cross-fetch: 3.1.6
+      graphql: 16.8.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /graphql@16.8.0:
+    resolution: {integrity: sha512-0oKGaR+y3qcS5mCu1vb7KG+a89vjn06C7Ihq/dDl3jA+A8B3TKomvi3CiEcVLJQGalbu8F52LxkOym7U5sSfbg==}
+    engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
+    dev: false
+
   /gray-matter@4.0.3:
     resolution: {integrity: sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q==}
     engines: {node: '>=6.0'}
@@ -2359,10 +2412,6 @@ packages:
 
   /http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
-    dev: true
-
-  /human-id@4.0.0:
-    resolution: {integrity: sha512-pui0xZRgeAlaRt0I9r8N2pNlbNmluvn71EfjKRpM7jOpZbuHe5mm76r67gcprjw/Nd+GpvB9C3OlTbh7ZKLg7A==}
     dev: true
 
   /human-signals@3.0.1:
@@ -3238,7 +3287,6 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
-    dev: true
 
   /node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
@@ -4111,7 +4159,6 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
-    dev: true
 
   /trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
@@ -4400,14 +4447,12 @@ packages:
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
-    dev: true
 
   /whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
     dependencies:
       tr46: 0.0.3
       webidl-conversions: 3.0.1
-    dev: true
 
   /which-pm-runs@1.1.0:
     resolution: {integrity: sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==}

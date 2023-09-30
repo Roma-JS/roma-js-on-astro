@@ -1,13 +1,26 @@
 ---
 import type { Lang } from '@i18n/types';
 import UpcomingEventsLayout from '@layouts/UpcomingEvents.astro';
-import { getCollection } from 'astro:content';
+import {fetchUpcomingRomajsEvents} from '@api/meetup/queries.server';
+import {startOfMonth, addMonths, nextWednesday, isWednesday} from 'date-fns';
 
 const title: string = 'Prossimi Eventi';
 const lang: Lang = 'it';
 const description = 'Tutti i prossimi eventi in programma del RomaJS';
 
-const upcomingEvents = await getCollection('upcoming-events');
+const upcomingEvents = await fetchUpcomingRomajsEvents();
+
+const lastUpcomingEventDate = upcomingEvents?.at(-1)?.dateTime || Date.now();
+
+const nextThreeMeetups = [1, 2, 3].map(month => {
+  const firstDayOfNextMonth = startOfMonth(addMonths(new Date(lastUpcomingEventDate), month));
+
+  if(isWednesday(firstDayOfNextMonth)) {
+    return nextWednesday(nextWednesday(firstDayOfNextMonth));
+  }
+
+  return nextWednesday(nextWednesday(nextWednesday(firstDayOfNextMonth)));
+});
 ---
 
 <UpcomingEventsLayout
@@ -15,4 +28,5 @@ const upcomingEvents = await getCollection('upcoming-events');
   lang={lang}
   description={description}
   upcomingEvents={upcomingEvents}
+  nextEvents={nextThreeMeetups}
 />

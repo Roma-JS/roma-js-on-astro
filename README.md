@@ -67,10 +67,6 @@ pnpm run fmt
 
 ### How To
 
-#### Create a new upcoming event
-
-Run `pnpm run create-event` and follow the instructions.
-
 #### Create a new post
 
 Run `pnpm run create-post` and follow the instructions.
@@ -112,6 +108,12 @@ periodically triggers the deployment.
 - `pnpm run create-post` prompts to generate new posts
 - `pnpm run preview` starts a server that serves the content of `dist/`
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
+
+## Designs
+
+We are using Figma to do our sketches.
+
+This is the link to [our workspace](https://www.figma.com/file/hGS1e2KtAppoY4PU7zQ53j/RomaJS.org).
 
 ## Acknowledgements
 

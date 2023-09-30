@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import { getBlogPostLink, sortPosts } from 'utils/blog';
 
-export async function get() {
+export async function GET() {
   const blogPosts = sortPosts(await getCollection('blog-posts'));
 
   return rss({
