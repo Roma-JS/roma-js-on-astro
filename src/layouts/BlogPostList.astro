@@ -11,19 +11,21 @@ import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { CategoriesList } from '@components/CategoriesList/CategoriesList';
-import type { MarkdownInstance } from 'astro';
-import type { Category, Frontmatter } from 'utils/blog';
+import type { CollectionEntry } from 'astro:content'
+import type { Category } from 'utils/blog';
 import { BlogPostCard } from '@components/BlogPostCard/BlogPostCard';
 import { l10n } from '@i18n/config';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import {
   Breadcrumbs,
-  BreadcrumbsProps,
+  type BreadcrumbsProps,
 } from '@components/Breadcrumbs/Breadcrumbs';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
-  posts: MarkdownInstance<Frontmatter>[];
+  posts: CollectionEntry<'blog-posts'>[];
   categories: Category[];
 }
 
@@ -55,6 +57,7 @@ const breadcrumMessages = Object.fromEntries(
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
 
   <body class={styles.wallpaper}>
@@ -70,7 +73,9 @@ const breadcrumMessages = Object.fromEntries(
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class="logo-small" />
+      </SlantedHeader>
       <div class="main-content blog-list-layout">
         <ul class="list-style-none m-0 post-list">
           {

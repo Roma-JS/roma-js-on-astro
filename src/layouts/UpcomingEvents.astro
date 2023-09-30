@@ -1,9 +1,9 @@
 ---
 import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
-import '../styles/layouts/upcoming-events.scss';
 import BaseHead from '@components/BaseHead.astro';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import { EventsList } from '@components/EventsList/EventsList';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
@@ -12,17 +12,17 @@ import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
-import type { CollectionEntry } from 'astro:content';
-import { i18nLang } from '@i18n/config';
-import { CFPCta } from '@components/CFPCta/CFPCta';
-import { sortUpComingEvents } from 'utils/upcoming-events';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
-  upcomingEvents: CollectionEntry<'upcoming-events'>[];
+  upcomingEvents: MeetupEventType[] | null;
+  nextEvents: Date[];
 }
 
-const { title, description, lang, upcomingEvents } = Astro.props;
+const { title, description, lang, upcomingEvents, nextEvents } = Astro.props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -32,21 +32,13 @@ const relativePageUrl =
   canonicalURL.hash;
 
 changeLanguage(lang);
-
-const startsAtFormatter = new Intl.DateTimeFormat(i18nLang[lang].locale, {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'Europe/Rome',
-});
-
-const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
   <body class={styles.wallpaper}>
     <article class="main">
@@ -61,28 +53,11 @@ const sortedUpcomingEvents = sortUpComingEvents(upcomingEvents);
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class='logo-small' />
+      </SlantedHeader>
       <div class="main-content">
-        <ul class="upcoming-events-list">
-          {
-            sortedUpcomingEvents.map((event) => {
-              const parsedStartsAt = new Date(event.data.startsAt);
-              const hasCFPCta = event.data.hasCallForPapers;
-              return (
-                <li>
-                  <section class="upcoming-event">
-                    <time datetime={parsedStartsAt.toISOString()}>
-                      {startsAtFormatter.format(parsedStartsAt)}
-                    </time>
-                    <h3 class="upcoming-event-heading">
-                      {event.data.title} {hasCFPCta && <CFPCta />}
-                    </h3>
-                  </section>
-                </li>
-              );
-            })
-          }
-        </ul>
+        <EventsList data={upcomingEvents} upcoming={nextEvents} lang={lang} />
         <slot />
       </div>
       <footer><SocialLinksList /></footer>

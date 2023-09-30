@@ -1,46 +1,34 @@
 import type { Lang } from '@i18n/types';
-import type { MarkdownInstance } from 'astro';
 import slugify from 'slugify';
-
-export interface CommonFrontmatterProperties {
-  /**
-   * An ISO 8601 timestamp of the instant the blogpost was created.
-   *
-   * `myDate.toISOString();`
-   */
-  createdAt: string;
-  title: string;
-  author: string;
-  categories: string[];
-  lang: Lang;
-}
-export interface Frontmatter extends CommonFrontmatterProperties {
-  [otherValues: string]: any;
-}
+import type { CollectionEntry } from 'astro:content';
 
 export interface Category {
-  posts: MarkdownInstance<Frontmatter>[];
+  posts: CollectionEntry<'blog-posts'>[];
   slug: string;
   name: string;
   url: string;
 }
 
 export function ascendingCreatedAtComparator(
-  a: MarkdownInstance<Frontmatter>,
-  b: MarkdownInstance<Frontmatter>
+  a: CollectionEntry<'blog-posts'>,
+  b: CollectionEntry<'blog-posts'>
 ): number {
-  if (b.frontmatter.createdAt === a.frontmatter.createdAt) {
+  if (b.data.createdAt === a.data.createdAt) {
     return 0;
   }
 
-  return a.frontmatter.createdAt > b.frontmatter.createdAt ? 1 : -1;
+  return a.data.createdAt > b.data.createdAt ? 1 : -1;
 }
 
 export function descendingCreatedAtComparator(
-  a: MarkdownInstance<Frontmatter>,
-  b: MarkdownInstance<Frontmatter>
+  a: CollectionEntry<'blog-posts'>,
+  b: CollectionEntry<'blog-posts'>
 ): number {
   return ascendingCreatedAtComparator(b, a);
+}
+
+export function getBlogPostLink(blogPost: CollectionEntry<'blog-posts'>) {
+  return `/blog/post/${blogPost.slug}`;
 }
 
 export function createSlug(content: string): string {
@@ -63,20 +51,20 @@ export function createCategoryUrl(basename: string, category: string) {
  * @param comparator Defaults to `descendigPublishDateComparator`
  */
 export function sortPosts(
-  posts: MarkdownInstance<Frontmatter>[],
+  posts: CollectionEntry<'blog-posts'>[],
   comparator = descendingCreatedAtComparator
-): MarkdownInstance<Frontmatter>[] {
+): CollectionEntry<'blog-posts'>[] {
   return posts.slice().sort(comparator);
 }
 
 export function computeAllCategories(
-  posts: MarkdownInstance<Frontmatter>[],
+  posts: CollectionEntry<'blog-posts'>[],
   basename: string
 ): Map<string, Category> {
   const output: Map<string, Category> = new Map();
 
   for (const post of posts) {
-    for (const category of post.frontmatter.categories) {
+    for (const category of post.data.categories) {
       const postArray = output.get(category)?.posts;
 
       if (!postArray) {

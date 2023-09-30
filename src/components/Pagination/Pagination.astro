@@ -1,0 +1,20 @@
+---
+import type { Page } from 'astro';
+import type { Lang } from '@i18n/types';
+import { l10n } from '@i18n/config';
+
+import styles from './styles.module.scss';
+
+export interface Props {
+  url: Page['url'];
+  lang: Lang
+}
+
+const { url, lang: lng } = Astro.props;
+
+---
+<nav role="navigation" class={styles.container}>
+    {url.prev ? <a class={styles.pageLink} href={url.prev}>{l10n('prevPage', { lng })}</a> : null}
+    {url.next ? <a class={styles.pageLink} href={url.next}>{l10n('nextPage', { lng })}</a> : null}
+</nav>
+

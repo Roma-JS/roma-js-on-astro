@@ -1,8 +1,5 @@
-import {
-  sortPosts,
-  CommonFrontmatterProperties,
-  computeAllCategories,
-} from 'utils/blog';
+import { sortPosts, computeAllCategories, getBlogPostLink } from 'utils/blog';
+import { getCollection } from 'astro:content';
 
 export interface CategoryInfoDto {
   name: string;
@@ -11,31 +8,26 @@ export interface CategoryInfoDto {
   posts: { url: string; title: string; author: string }[];
 }
 
-export async function get() {
-  const postImportResult = await Promise.all(
-    Object.values(import.meta.glob('../../blog/post/**/*.md')).map((get) =>
-      get()
-    )
-  );
-  const posts = sortPosts(Object.values(postImportResult) as any);
+export async function GET() {
+  const posts = sortPosts(await getCollection('blog-posts'));
   const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
 
   const allCategoriesList = Array.from(allCategories.values());
 
-  return {
-    body: JSON.stringify(
+  return new Response(
+    JSON.stringify(
       allCategoriesList.map(
         (category): CategoryInfoDto => ({
           name: category.name,
           slug: category.slug,
           url: category.url,
           posts: category.posts.map((post) => ({
-            url: post.url ?? '',
-            title: post.frontmatter.title,
-            author: post.frontmatter.author,
+            url: getBlogPostLink(post),
+            title: post.data.title,
+            author: post.data.author,
           })),
         })
       )
-    ),
-  };
+    )
+  );
 }

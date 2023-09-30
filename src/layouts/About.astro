@@ -10,6 +10,8 @@ import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
+import { ViewTransitions } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 
 const { content } = Astro.props;
 
@@ -29,6 +31,7 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
   <body class={styles.wallpaper}>
     <article class="main">
@@ -43,7 +46,9 @@ changeLanguage(lang);
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
-      />
+      >
+        <BrandLogo class="logo-small" />
+      </SlantedHeader>
       <div class="main-content"><slot /></div>
       <footer><SocialLinksList /></footer>
     </article>

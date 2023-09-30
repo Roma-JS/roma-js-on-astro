@@ -11,12 +11,14 @@ export const routes = {
   it: {
     home: import.meta.env.PUBLIC_URL_BASE + '/',
     'prossimi eventi': import.meta.env.PUBLIC_URL_BASE + '/it/prossimi-eventi',
+    'eventi passati': import.meta.env.PUBLIC_URL_BASE + '/it/eventi-passati/1',
     blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
     about: import.meta.env.PUBLIC_URL_BASE + '/it/about',
   },
   en: {
     home: import.meta.env.PUBLIC_URL_BASE + '/en',
     'upcoming events': import.meta.env.PUBLIC_URL_BASE + '/en/upcoming-events',
+    'past events': import.meta.env.PUBLIC_URL_BASE + '/en/past-events/1',
     about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
   },
 } as const;

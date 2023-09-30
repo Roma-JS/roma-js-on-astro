@@ -1,5 +1,5 @@
 import type { Lang } from '@i18n/types';
-import { For, JSX } from 'solid-js';
+import { For, type JSX } from 'solid-js';
 import { breadcrumbLinks } from 'utils/routing';
 import styles from './breadcrumbs.module.scss';
 

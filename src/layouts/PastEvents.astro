@@ -1,42 +1,38 @@
 ---
 import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
-import '../styles/layouts/blogPost.scss';
 import BaseHead from '@components/BaseHead.astro';
+import Pagination from '@components/Pagination/Pagination.astro';
+import { EventsList } from '@components/EventsList/EventsList';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
-import { changeLanguage } from 'i18next';
-import { getCanonicalURL, navbarLinks } from 'utils/routing';
-import { BlogPostInfo } from '@components/BlogPostInfo/BlogPostInfo';
-import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
-import { BlogPostComments } from '@components/BlogPostComments/BlogPostComments';
+import { changeLanguage } from 'i18next';
+import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
-import {
-  Breadcrumbs,
-  type BreadcrumbsProps,
-} from '@components/Breadcrumbs/Breadcrumbs';
-import { l10n } from '@i18n/config';
 import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
+import type { Page } from 'astro';
 
-const { content } = Astro.props;
+export interface Props extends BaseHeadProps {
+  lang: Lang;
+  page: Page<MeetupEventType>;
+}
 
-const { title, description, createdAt = '', categories = [] } = content;
+const { title, description, lang, page } = Astro.props;
+
 const canonicalURL = getCanonicalURL(Astro);
 
 const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
-const lang: Lang = content.lang || 'en';
 
 changeLanguage(lang);
-
-const breadcrumMessages = Object.fromEntries(
-  (['breadcrumbs', 'scrollToTop'] as const).map((key) => [key, l10n(key)])
-) as BreadcrumbsProps['messages'];
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -45,13 +41,12 @@ const breadcrumMessages = Object.fromEntries(
     <slot name="head" />
     <ViewTransitions />
   </head>
-
   <body class={styles.wallpaper}>
     <article class="main">
       <Navbar
         client:load
         lang={lang}
-        urlMap={null}
+        urlMap={aboutUrlMap}
         relativePageUrl={relativePageUrl}
         messages={getNavbarMessages()}
       />
@@ -60,22 +55,12 @@ const breadcrumMessages = Object.fromEntries(
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="logo-small" />
+        <BrandLogo class='logo-small' />
       </SlantedHeader>
-      <BlogPostInfo
-        createdAt={createdAt ?? ''}
-        categories={categories}
-        baseUrl={import.meta.env.BASE_URL}
-      />
-      <div class="main-content pt-0">
-        <slot /><BlogPostComments class="comments-box" />
-        <Breadcrumbs
-          client:idle
-          currentPathname={canonicalURL.pathname}
-          messages={breadcrumMessages}
-          lang={lang}
-          class="nav-breadcrumbs"
-        />
+      <div class="main-content">
+        <EventsList data={page.data}  lang={lang} />
+        <slot />
+        <Pagination url={page.url} lang={lang} />
       </div>
       <footer><SocialLinksList /></footer>
     </article>

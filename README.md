@@ -41,7 +41,7 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 
 ### Requirements
 
-This project requires [node 16](https://nodejs.org/en/) and uses [`pnpm`](https://pnpm.io/) as package manager.
+This project requires [node 18](https://nodejs.org/en/) and uses [`pnpm`](https://pnpm.io/) as package manager.
 
 If you have [`nvm`](https://github.com/nvm-sh/nvm) installed run
 
@@ -51,19 +51,21 @@ nvm use
 
 #### pnpm & corepack
 
-You do not need to install `pnpm`, you just need have `node 16` installed and then enable [`corepack`](https://nodejs.org/api/corepack.html):
+You do not need to install [`pnpm`](https://pnpm.io), you just need have [`node 18`](https://nodejs.org/en/) installed and then enable [`corepack`](https://nodejs.org/api/corepack.html):
 
 ```bash
 corepack enable
 ```
 
-You should then be able to run pnpm normally in this project, e.g. `pnpm run fmt`.
+You should then be able to run pnpm normally in this project, e.g.
+
+```bash
+pnpm run fmt
+```
+
+---
 
 ### How To
-
-#### Create a new upcoming event
-
-Run `pnpm run create-event` and follow the instructions.
 
 #### Create a new post
 
@@ -106,6 +108,12 @@ periodically triggers the deployment.
 - `pnpm run create-post` prompts to generate new posts
 - `pnpm run preview` starts a server that serves the content of `dist/`
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
+
+## Designs
+
+We are using Figma to do our sketches.
+
+This is the link to [our workspace](https://www.figma.com/file/hGS1e2KtAppoY4PU7zQ53j/RomaJS.org).
 
 ## Acknowledgements
 

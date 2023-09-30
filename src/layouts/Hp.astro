@@ -3,7 +3,7 @@ import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
 import '../styles/layouts/hp.scss';
 import BaseHead from '@components/BaseHead.astro';
-import { BrandLogo } from '@components/BrandLogo/BrandLogo';
+import BrandLogo  from '@components/BrandLogo/BrandLogo.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -14,6 +14,7 @@ import { getNavbarMessages } from '@components/Navbar/helpers';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { l10n } from '@i18n/config';
 import type { HpContent } from '../@types/hp';
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -43,6 +44,7 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
+    <ViewTransitions />
   </head>
 
   <body class={styles.wallpaper}>
@@ -56,7 +58,7 @@ changeLanguage(lang);
       />
       <div class="hp-wrapper">
         <section class="hp-section logo-hero">
-          <BrandLogo class="logo" />
+          <BrandLogo class='logo'/>
           <div class="logo-hero__text hero">
             <h1 class="h-1">{title}</h1><span class="h-1">{description}</span>
           </div>
@@ -70,7 +72,7 @@ changeLanguage(lang);
             <img
               width="24"
               height="24"
-              src={socialLinks.slack.iconHref}
+              src={socialLinks.slack.iconHref.src}
               alt={'slack'}
               aria-hidden="true"
             />
@@ -81,7 +83,8 @@ changeLanguage(lang);
             <section class="arrow-box hp-section">
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
               <p class="h-2 h-dynamic">{section.body}</p>
-              {!!section.cta && (
+              <div class="hp-section-links">
+                {!!section.cta && (
                 <a
                   class="btn btn-outline btn-tertiary"
                   href={section.cta.href}
@@ -90,6 +93,16 @@ changeLanguage(lang);
                   {section.cta.text}
                 </a>
               )}
+                {!!section.venue && (
+                <a
+                class="btn btn-outline btn-tertiary"
+                  href={section.venue.href}
+                  hreflang={section.venue.lang || undefined}
+                >
+                  {section.venue.text}
+                </a>
+              )}
+              </div>
             </section>
           ))
         }
