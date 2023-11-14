@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_FACEBOOK_PAGE_HREF: string;
   readonly PUBLIC_YOUTUBE_PAGE_HREF: string;
   readonly PUBLIC_SLACK_INVITE_HREF: string;
+  readonly PUBLIC_DISCORD_INVITE_HREF: string;
   readonly PUBLIC_TWITTER_PROFILE_HREF: string;
   readonly PUBLIC_GITHUB_PROFILE_HREF: string;
   readonly PUBLIC_SITE_URL: string;
