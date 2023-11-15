@@ -1,10 +1,10 @@
 import type { Lang } from '@i18n/types';
 import facebookIcon from 'media/social/facebook.svg';
-import slackIcon from 'media/social/slack.svg';
 import githubIcon from 'media/social/github.svg';
 import youtubeIcon from 'media/social/youtube.svg';
 import twitterIcon from 'media/social/twitter-square.svg';
 import rssIcon from 'media/social/rss.svg';
+import discordIcon from 'media/social/discord.svg';
 import type { AstroGlobal } from 'astro';
 
 export const routes = {
@@ -70,9 +70,9 @@ export interface SocialLink {
 }
 
 export const socialLinks = {
-  slack: {
-    href: import.meta.env.PUBLIC_SLACK_INVITE_HREF,
-    iconHref: slackIcon,
+  discord: {
+    href: import.meta.env.PUBLIC_DISCORD_INVITE_HREF,
+    iconHref: discordIcon,
   },
   facebook: {
     href: import.meta.env.PUBLIC_FACEBOOK_PAGE_HREF,
