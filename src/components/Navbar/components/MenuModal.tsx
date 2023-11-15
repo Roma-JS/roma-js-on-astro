@@ -81,14 +81,14 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
             class="btn btn-small btn-secondary"
             rel="noopener noreferrer"
             target="_blank"
-            href={socialLinks.slack.href}
+            href={socialLinks.discord.href}
           >
-            {props.messages.ctaJoinSlackCta}{' '}
+            {props.messages.ctaJoinDiscordCta}{' '}
             <img
               width="24"
               height="24"
-              src={socialLinks.slack.iconHref.src}
-              alt={'slack'}
+              src={socialLinks.discord.iconHref.src}
+              alt={'discord'}
               aria-hidden="true"
             />
           </a>

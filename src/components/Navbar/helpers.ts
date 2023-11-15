@@ -1,6 +1,6 @@
 import { l10n } from '@i18n/config';
 
-const l10nKeys = ['ctaWatchOurVideos', 'ctaJoinSlackCta'] as const;
+const l10nKeys = ['ctaWatchOurVideos', 'ctaJoinDiscordCta'] as const;
 
 export type NavbarMessages = Readonly<Record<typeof l10nKeys[number], string>>;
 
