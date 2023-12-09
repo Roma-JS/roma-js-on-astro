@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.11",
-    "@solid-primitives/media": "^2.0.2",
+    "@solid-primitives/media": "^2.2.5",
     "@tanstack/solid-query": "^4.33.0",
     "date-fns": "^2.30.0",
     "graphql": "^16.8.0",
@@ -51,7 +51,7 @@
     "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.7.10",
+    "solid-js": "^1.8.7",
     "solid-transition-group": "^0.2.3",
     "typescript": "^5.2.2"
   }
