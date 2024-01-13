@@ -5,7 +5,7 @@ import {
   fetchAllPastRomajsEvents,
 } from '@api/meetup/queries.server';
 import { formatVenueMapsHref } from 'utils/venue';
-import { formatDate } from 'utils/i18n';
+import { formatDate } from '@i18n/date-time';
 
 const lng = 'it';
 
