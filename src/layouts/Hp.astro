@@ -82,7 +82,7 @@ changeLanguage(lang);
           sections.map((section) => (
             <section class="arrow-box hp-section">
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
-              <p class="h-2 h-dynamic">{section.body}</p>
+              {section.body.map(body => <p class="h-2 h-dynamic">{body}</p>)}
               <div class="hp-section-links">
                 {!!section.cta && (
                 <a

@@ -5,6 +5,7 @@ import {
   fetchUpcomingRomajsEvents,
 } from '@api/meetup/queries.server';
 import { formatVenueMapsHref } from 'utils/venue';
+import { formatDate } from 'utils/i18n';
 
 const lng = 'en';
 
@@ -21,7 +22,9 @@ export async function getEnHpContent(): Promise<Readonly<HpContent>> {
   if (nextEvent) {
     sections.push({
       heading: l10n('nextTalkTitle', { lng }),
-      body: nextEvent.title || '',
+      body: [nextEvent.title || '', formatDate(lng, nextEvent.dateTime)].filter(
+        Boolean
+      ),
       cta: {
         href: nextEvent.eventUrl,
         text: l10n('ctaRegister', { lng }),
@@ -38,7 +41,7 @@ export async function getEnHpContent(): Promise<Readonly<HpContent>> {
   if (latestPastEvent) {
     sections.push({
       heading: l10n('latestTalkTitle', { lng }),
-      body: latestPastEvent.title || '',
+      body: [latestPastEvent.title || ''].filter(Boolean),
       cta: {
         href: import.meta.env.PUBLIC_YOUTUBE_PAGE_HREF,
         text: l10n('ctaVOD', { lng }),

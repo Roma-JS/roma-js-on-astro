@@ -6,7 +6,7 @@ export interface Link {
 
 export interface HpSection {
   heading: string;
-  body: string;
+  body: string[];
   cta?: Link;
   venue?: Link;
 }
