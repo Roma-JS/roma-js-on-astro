@@ -10,8 +10,8 @@
   min-height: 44px;
   border-radius: 5px;
   text-transform: uppercase;
-  background: var(--bg-primary);
-  color: var(--text-primary, #121212);
+  background: var(--cta-bg, var(--bg-primary));
+  color: var(--cta-text, var(--text-primary, #121212));
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -28,5 +28,16 @@
     background-position: center;
     position: relative;
     bottom: -4px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--cta-bg, var(--bg-primary));
+      background-color: var(--cta-text, var(--text-primary, #121212));
+
+      &::after {
+        filter: invert(100%);
+      }
+    }
   }
 }
