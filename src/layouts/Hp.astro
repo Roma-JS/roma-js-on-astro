@@ -12,6 +12,7 @@ import type { Lang } from '@i18n/types';
 import { getCanonicalURL, socialLinks } from 'utils/routing';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import { CFPCta } from '@components/CFPCta/CFPCta'
 import { l10n } from '@i18n/config';
 import type { HpContent } from '../@types/hp';
 import { ViewTransitions } from 'astro:transitions';
@@ -82,7 +83,7 @@ changeLanguage(lang);
           sections.map((section) => (
             <section class="arrow-box hp-section">
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
-              <p class="h-2 h-dynamic">{section.body}</p>
+              {section.body.map(body => <p class="h-2 h-dynamic">{body}</p>)}
               <div class="hp-section-links">
                 {!!section.cta && (
                 <a
@@ -108,8 +109,11 @@ changeLanguage(lang);
         }
       </div>
       <slot />
+      <div class="cfp-wrapper">
+        <p class="h-2"><CFPCta style={{ '--cta-bg': 'var(--text-secondary)', '--cta-text': 'var(--text-primary)' }}>{l10n('ctaRequestTalk')}</CFPCta></p>
+      </div>
       <section class="contacts-cta">
-        <p class="h-2">{l10n('ctaRequestTalk')}</p>
+        <p class="h-2">{l10n('ctaDiscussWebDev')}</p>
         <p class="h-2">{l10n('ctaSeePreviousTalks')}</p>
         <h2 class="h-1">{l10n('ctaContacts')}</h2>
       </section>
