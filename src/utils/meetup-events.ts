@@ -15,12 +15,12 @@ export interface MeetupEventsApiResponse {
   >[];
 }
 
-type ScheduledEvent = {
+export type ScheduledEvent = {
   type: 'scheduled';
   data: MeetupEventType;
   epochTimeMs: number;
 };
-type PlaceholderEvent = {
+export type PlaceholderEvent = {
   type: 'placeholder';
   date: Date;
   epochTimeMs: number;
@@ -64,6 +64,20 @@ export function computeThirdWednesdayOfMonth(date: Date | number): Date {
   return nextWednesday(nextWednesday(nextWednesday(firstDayOfNextMonth)));
 }
 
+export function computeScheduledEvents(
+  scheduledUpcomingEvents: MeetupEventType[] | undefined | null
+): ScheduledEvent[] {
+  return (
+    scheduledUpcomingEvents?.map(
+      (data): ScheduledEvent => ({
+        type: 'scheduled',
+        data,
+        epochTimeMs: new Date(data.dateTime).getTime(),
+      })
+    ) || []
+  );
+}
+
 /**
  * Given a list of scheduled events, returns a list of scheduled and placeholder
  * events sorted by date in ascending order.
@@ -75,14 +89,7 @@ export function computeUpcomingEvents(
   scheduledUpcomingEvents: MeetupEventType[] | undefined | null,
   curentEpochTimeMs: number
 ): UpcomingEvent[] {
-  const scheduledEvents =
-    scheduledUpcomingEvents?.map(
-      (data): ScheduledEvent => ({
-        type: 'scheduled',
-        data,
-        epochTimeMs: new Date(data.dateTime).getTime(),
-      })
-    ) || [];
+  const scheduledEvents = computeScheduledEvents(scheduledUpcomingEvents);
 
   const meetupOfThisMonth = computeThirdWednesdayOfMonth(curentEpochTimeMs);
   const isNowBeforeMeetup =
