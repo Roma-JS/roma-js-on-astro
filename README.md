@@ -108,6 +108,8 @@ periodically triggers the deployment.
 - `pnpm run create-post` prompts to generate new posts
 - `pnpm run preview` starts a server that serves the content of `dist/`
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
+- `pnpm run test` runs tests
+- `pnpm run test:watch` runs tests in watch mode
 
 ## Designs
 

@@ -30,5 +30,7 @@ jobs:
         run: pnpm run lint:ts
       - name: lint - astro
         run: pnpm run lint:astro
+      - name: tests
+        run: pnpm run test
       - name: Build
         run: pnpm run build

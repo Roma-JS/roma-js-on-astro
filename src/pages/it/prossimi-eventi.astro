@@ -9,7 +9,7 @@ const lang: Lang = 'it';
 const description = 'Tutti i prossimi eventi in programma del RomaJS';
 
 const scheduledEvents = await fetchUpcomingRomajsEvents()
-
+console.log(JSON.stringify(scheduledEvents));
 const upcomingEvents = computeUpcomingEvents(scheduledEvents, Date.now());
 ---
 

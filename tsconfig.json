@@ -23,7 +23,8 @@
       "@media/*": ["./media/*"],
       "@types/*": ["./@types/*"],
       "@api/*": ["./api/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]

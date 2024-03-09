@@ -26,7 +26,7 @@ export type MeetupGroupType = {
 export type MeetupImageType = {
   id: string;
   baseUrl: string;
-  preview: string;
+  preview: string | null;
 };
 export type MeetupUserType = {
   id: string;
