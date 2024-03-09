@@ -2,48 +2,35 @@ import type { JSX } from 'solid-js/jsx-runtime';
 import styles from './styles.module.scss';
 import { For, Show } from 'solid-js';
 import type { Lang } from '@i18n/types';
-import { CFPCta } from '@components/CFPCta/CFPCta';
-import { formatDate } from '@i18n/date-time';
 import type { UpcomingEvent } from 'utils/meetup-events';
+import { PlaceholderEvent } from './components/PlaceholderEvent';
+import { ScheduledEvent } from './components/ScheduledEvent';
 
 export interface EventsListProps {
   events?: UpcomingEvent[];
   lang: Lang;
 }
 
-export function EventsList({ events, lang }: EventsListProps): JSX.Element {
+export function EventsList(props: EventsListProps): JSX.Element {
   return (
     <ul class={styles.eventsList}>
-      <For each={events}>
+      <For each={props.events}>
         {(event) => (
           <>
             <Show when={event.type === 'placeholder' && event.date}>
               {(placeholderDate) => (
                 <li>
-                  <section class={styles.event}>
-                    <time datetime={placeholderDate().toISOString()}>
-                      {formatDate(lang, placeholderDate())}
-                    </time>
-                    <h3 class={styles.eventHeading}>
-                      TBD <CFPCta />
-                    </h3>
-                  </section>
+                  <PlaceholderEvent
+                    lang={props.lang}
+                    date={placeholderDate()}
+                  />
                 </li>
               )}
             </Show>
             <Show when={event.type === 'scheduled' && event.data}>
               {(scheduled) => (
                 <li>
-                  <section class={styles.event}>
-                    <time
-                      datetime={new Date(scheduled().dateTime).toISOString()}
-                    >
-                      {formatDate(lang, new Date(scheduled().dateTime))}
-                    </time>
-                    <h3 class={styles.eventHeading}>
-                      <a href={scheduled().eventUrl}>{scheduled().title}</a>
-                    </h3>
-                  </section>
+                  <ScheduledEvent lang={props.lang} event={scheduled()} />
                 </li>
               )}
             </Show>
