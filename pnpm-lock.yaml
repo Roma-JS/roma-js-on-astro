@@ -39,8 +39,8 @@ dependencies:
     specifier: ^0.2.3
     version: 0.2.3(solid-js@1.8.7)
   typescript:
-    specifier: ^5.2.2
-    version: 5.2.2
+    specifier: ^5.4.3
+    version: 5.4.3
 
 devDependencies:
   '@astrojs/rss':
@@ -69,7 +69,7 @@ devDependencies:
     version: 21.0.0
   astro:
     specifier: 4.0.3
-    version: 4.0.3(sass@1.65.1)(typescript@5.2.2)
+    version: 4.0.3(sass@1.65.1)(typescript@5.4.3)
   astro-i18next:
     specifier: 1.0.0-beta.21
     version: 1.0.0-beta.21(astro@4.0.3)
@@ -128,7 +128,7 @@ packages:
       astro: ^4.0.0-beta.0
     dependencies:
       '@astrojs/prism': 3.0.0
-      astro: 4.0.3(sass@1.65.1)(typescript@5.2.2)
+      astro: 4.0.3(sass@1.65.1)(typescript@5.4.3)
       github-slugger: 2.0.0
       import-meta-resolve: 4.0.0
       mdast-util-definitions: 6.0.0
@@ -1616,7 +1616,7 @@ packages:
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
-      astro: 4.0.3(sass@1.65.1)(typescript@5.2.2)
+      astro: 4.0.3(sass@1.65.1)(typescript@5.4.3)
       i18next: 22.4.10
       i18next-browser-languagedetector: 7.1.0
       i18next-fs-backend: 2.1.5
@@ -1628,7 +1628,7 @@ packages:
       - encoding
     dev: true
 
-  /astro@4.0.3(sass@1.65.1)(typescript@5.2.2):
+  /astro@4.0.3(sass@1.65.1)(typescript@5.4.3):
     resolution: {integrity: sha512-hrwe7CIVhSKW8/iibDs1hpqzZAtvx6Qu8TFFxjaGbooEWF720M9L+ZZtyTgrcy6K/ZHJ0xwFvZV3/X2Vvbf/LQ==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
@@ -1686,7 +1686,7 @@ packages:
       shikiji: 0.6.13
       string-width: 7.0.0
       strip-ansi: 7.1.0
-      tsconfck: 3.0.0(typescript@5.2.2)
+      tsconfck: 3.0.0(typescript@5.4.3)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
       vite: 5.0.7(sass@1.65.1)
@@ -4924,7 +4924,7 @@ packages:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: true
 
-  /tsconfck@3.0.0(typescript@5.2.2):
+  /tsconfck@3.0.0(typescript@5.4.3):
     resolution: {integrity: sha512-w3wnsIrJNi7avf4Zb0VjOoodoO0woEqGgZGQm+LHH9przdUI+XDKsWAXwxHA1DaRTjeuZNcregSzr7RaA8zG9A==}
     engines: {node: ^18 || >=20}
     hasBin: true
@@ -4934,7 +4934,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      typescript: 5.2.2
+      typescript: 5.4.3
     dev: true
 
   /tslib@2.4.0:
@@ -4972,8 +4972,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /typescript@5.2.2:
-    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
+  /typescript@5.4.3:
+    resolution: {integrity: sha512-KrPd3PKaCLr78MalgiwJnA25Nm8HAmdwN3mYUYZgG/wizIo9EainNVQI9/yDavtVFRN2h3k8uf3GLHuhDMgEHg==}
     engines: {node: '>=14.17'}
     hasBin: true
 
