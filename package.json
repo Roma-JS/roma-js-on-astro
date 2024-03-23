@@ -14,7 +14,7 @@
     "create-post": "node scripts/create-post.mjs",
     "preview": "astro preview",
     "fmt": "prettier . --write",
-    "test": "vitest --run",
+    "test": "vitest --run -c vitest.config.mts",
     "test:watch": "vitest --watch",
     "prepare": "husky install; pnpm run astro:sync",
     "pre-commit": "lint-staged"
@@ -43,7 +43,7 @@
     "prompts": "^2.4.2",
     "sass": "^1.65.1",
     "tiny-invariant": "^1.2.0",
-    "vitest": "^1.3.1"
+    "vitest": "^1.4.0"
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.11",
