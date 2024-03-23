@@ -14,15 +14,14 @@ import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
-import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
+import type { UpcomingEvent } from 'utils/meetup-events';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
-  upcomingEvents: MeetupEventType[] | null;
-  nextEvents: Date[];
+  upcomingEvents: UpcomingEvent[];
 }
 
-const { title, description, lang, upcomingEvents, nextEvents } = Astro.props;
+const { title, description, lang, upcomingEvents } = Astro.props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -57,7 +56,7 @@ changeLanguage(lang);
         <BrandLogo class='logo-small' />
       </SlantedHeader>
       <div class="main-content">
-        <EventsList data={upcomingEvents} upcoming={nextEvents} lang={lang} />
+        <EventsList events={upcomingEvents} lang={lang} />
         <slot />
       </div>
       <footer><SocialLinksList /></footer>

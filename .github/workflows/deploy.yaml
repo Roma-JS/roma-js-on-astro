@@ -13,16 +13,17 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       HUSKY: '0'
+      TZ: 'Europe/Rome'
       PUBLIC_SITE_URL: "https://romajs.org"
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: 'actions/checkout@v4'
         with:
           fetch-depth: 0
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 'v18.17.0'
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
