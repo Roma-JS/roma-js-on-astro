@@ -50,7 +50,7 @@
     "@solid-primitives/media": "^2.2.5",
     "@tanstack/solid-query": "^4.33.0",
     "date-fns": "^3.6.0",
-    "graphql": "^16.8.0",
+    "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
