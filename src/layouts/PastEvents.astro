@@ -17,6 +17,7 @@ import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 import type { Page } from 'astro';
+import { computeScheduledEvents } from 'utils/meetup-events';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -31,6 +32,8 @@ const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
+
+const scheduledEvents = computeScheduledEvents(page.data);
 
 changeLanguage(lang);
 ---
@@ -58,7 +61,7 @@ changeLanguage(lang);
         <BrandLogo class='logo-small' />
       </SlantedHeader>
       <div class="main-content">
-        <EventsList data={page.data}  lang={lang} />
+        <EventsList events={scheduledEvents}  lang={lang} />
         <slot />
         <Pagination url={page.url} lang={lang} />
       </div>

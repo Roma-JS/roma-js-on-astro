@@ -12,6 +12,7 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 - Blog section.
 - Blog category pages.
 - Upcoming events page.
+- Previous events page.
 - [feed rss](https://rss.com/blog/how-do-rss-feeds-work/) available at `<SITE>/blog/rss.xml`.
 - opengraph and twitter social cards.
 - headless blog posts available at `/api/blog/post.json`.
@@ -26,7 +27,6 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 - [x] github action pipeline that deploys to github pages
 - [x] blog post categories pages
 - [x] categories index page
-- [ ] blog post authors pages
 - [x] blog post comments powered by [giscus](https://giscus.app/)
 - [x] copy facebook posts 2022, 2020, 2019
 - [x] generate blog homepage
@@ -51,7 +51,7 @@ nvm use
 
 #### pnpm & corepack
 
-You do not need to install [`pnpm`](https://pnpm.io), you just need have [`node 18`](https://nodejs.org/en/) installed and then enable [`corepack`](https://nodejs.org/api/corepack.html):
+You do not need to install [`pnpm`](https://pnpm.io), you just need have [`node 20`](https://nodejs.org/en/) installed and then enable [`corepack`](https://nodejs.org/api/corepack.html):
 
 ```bash
 corepack enable
@@ -108,6 +108,8 @@ periodically triggers the deployment.
 - `pnpm run create-post` prompts to generate new posts
 - `pnpm run preview` starts a server that serves the content of `dist/`
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
+- `pnpm run test` runs tests
+- `pnpm run test:watch` runs tests in watch mode
 
 ## Designs
 

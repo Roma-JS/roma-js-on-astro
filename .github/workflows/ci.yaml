@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       HUSKY: '0'
+      TZ: 'Europe/Rome'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -18,7 +19,7 @@ jobs:
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 'v18.17.0'
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
       - name: log info
         run: >
@@ -29,5 +30,7 @@ jobs:
         run: pnpm run lint:ts
       - name: lint - astro
         run: pnpm run lint:astro
+      - name: tests
+        run: pnpm run test
       - name: Build
         run: pnpm run build

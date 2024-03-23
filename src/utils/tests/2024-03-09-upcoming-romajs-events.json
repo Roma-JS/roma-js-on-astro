@@ -1,0 +1,26 @@
+[
+  {
+    "id": "299628360",
+    "title": "Inventiamo un nuovo linguaggio in JS ed usiamolo con Monaco editor @ Sourcesense",
+    "eventUrl": "https://www.meetup.com/romajs/events/299628360",
+    "imageUrl": "https://secure-content.meetupstatic.com/images/classic-events/519572361/676x380.webp",
+    "description": "Come di consueto il terzo mercoledì del mese è targato RomaJS e dalle 19:00 ci confrontiamo con tutta la community su tematiche di sviluppo, paradigmi, librerie e framework basati su JavaScript & dintorni.\n\n**Inventiamo un nuovo linguaggio in JS ed usiamolo con Monaco editor**\n\nAvete mai pensato di inventare un nuovo linguaggio per permettere ai vostri utenti di compiere azioni invece di aggiungere nuovi bottoni? Quali vantaggi può comportare? Ma soprattutto, da dove si inizia? In questo talk vedremo come definire un linguaggio in JS e come usarlo per analizzare dei dati in modo semplice ed intuitivo con Monaco Editor\n\nSpeaker: Marco Liberati\n\\-\\-\\-\\-\\-\\-\\-\\-\\-\\-\n\n**Questo evento sarà ospitato negli uffici di Sourcesense, in Via del Poggio Laurentino, 9.**\n\nLa prima parte dell'evento sarà ripresa in diretta sui nostri social:\n\n* Youtube: TBD\n* Linkedin: TBD\n\nRimarremo in ascolto di tutti i commenti sulle due piattaforme, e sul canale #general del nostro server Discord (trovate il link di invito su [https://romajs.org/](https://romajs.org/)) dove poter interagire ulteriormente con tutti gli altri.",
+    "dateTime": "2024-03-20T19:00+01:00",
+    "duration": "PT1H30M",
+    "host": { "id": "214984963", "name": "Guido D'Orsi" },
+    "images": [
+      {
+        "id": "519572361",
+        "baseUrl": "https://secure-content.meetupstatic.com/images/classic-events/",
+        "preview": null
+      }
+    ],
+    "group": { "id": "19086109", "name": "RomaJS", "urlname": "RomaJS" },
+    "venue": {
+      "id": "27538066",
+      "name": "Via del Poggio Laurentino, 9",
+      "lat": 41.828175,
+      "lng": 12.474467
+    }
+  }
+]
