@@ -1,4 +1,3 @@
-import spawn from '@expo/spawn-async';
 import prompts from 'prompts';
 import paths from './utils/paths.cjs';
 import path from 'path';
