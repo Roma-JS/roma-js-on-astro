@@ -25,6 +25,10 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      - name: Enable corepack
+        run: 'corepack enable'
+      - name: log node & package manager
+      - run: 'printf "node -> %s\n pnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 

@@ -22,7 +22,7 @@
   "engines": {
     "node": "^20.10.0"
   },
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@9.0.6",
   "devDependencies": {
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.1",
