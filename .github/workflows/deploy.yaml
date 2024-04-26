@@ -28,7 +28,7 @@ jobs:
       - name: Enable corepack
         run: 'corepack enable'
       - name: log node & package manager
-        run: 'printf "node -> %s\n pnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
+        run: 'printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
