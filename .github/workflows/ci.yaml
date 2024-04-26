@@ -26,8 +26,8 @@ jobs:
           printf 'commit -> %s\nbranch -> %s\n' "$(git rev-parse --short HEAD)" "$(git branch --show-current)"
       - name: Enable corepack
         run: 'corepack enable'
-      - name: log node & package manager
-      - run: 'printf "node -> %s\n pnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
+      - name: log node and package manager
+        run: 'printf "node -> %s\n pnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: lint - typescript
