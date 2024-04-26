@@ -1,4 +1,3 @@
-import type { Lang } from '@i18n/types';
 import slugify from 'slugify';
 import type { CollectionEntry } from 'astro:content';
 

@@ -5,10 +5,10 @@ import { defineCollection, z } from 'astro:content';
 const blogPosts = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string().nonempty(),
-    createdAt: z.string().nonempty(),
+    title: z.string().min(1),
+    createdAt: z.string().min(1),
     categories: z.array(z.string()),
-    author: z.string().nonempty(),
+    author: z.string().min(1),
     lang: z.union([z.literal('it'), z.literal('en')]),
   }),
 });

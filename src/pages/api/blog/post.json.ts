@@ -1,4 +1,4 @@
-import { sortPosts, getBlogPostLink } from 'utils/blog';
+import { getBlogPostLink } from 'utils/blog';
 import { getCollection } from 'astro:content';
 
 export interface PostInfoDto {
