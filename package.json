@@ -26,7 +26,7 @@
   "devDependencies": {
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.1",
-    "@astrojs/solid-js": "^4.0.1",
+    "@astrojs/solid-js": "^4.1.0",
     "@expo/spawn-async": "^1.6.0",
     "@types/babel__core": "^7.1.19",
     "@types/html-escaper": "^3.0.0",
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@fontsource/open-sans": "^4.5.11",
-    "@solid-primitives/media": "^2.2.5",
+    "@solid-primitives/media": "^2.2.9",
     "@tanstack/solid-query": "^4.33.0",
     "date-fns": "^3.6.0",
     "graphql": "^16.8.1",
@@ -55,7 +55,7 @@
     "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.5",
-    "solid-js": "^1.8.7",
+    "solid-js": "^1.8.17",
     "solid-transition-group": "^0.2.3"
   }
 }
