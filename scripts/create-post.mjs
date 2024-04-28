@@ -1,13 +1,12 @@
-import spawn from '@expo/spawn-async';
 import prompts from 'prompts';
 import paths from './utils/paths.cjs';
-import path from 'path';
 import Mustache from 'mustache';
-import fs from 'fs/promises';
 import chalk from 'chalk';
 import slugify from 'slugify';
-import process from 'process';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs/promises';
+import process from 'node:process';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 /**
  * @type {(createdAt: string, title: string) => string}

@@ -1,7 +1,6 @@
 import { type JSX, Show, type JSXElement } from 'solid-js';
 import { splitProps } from 'solid-js';
 import styles from './styles.module.scss';
-import logoSvg from 'media/brand-logo/primary.svg';
 
 export type SlantedHeaderProps = JSX.IntrinsicElements['header'] & {
   title: string;
