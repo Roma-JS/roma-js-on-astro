@@ -51,7 +51,7 @@
     "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.6",
-    "solid-js": "^1.8.17",
+    "solid-js": "^1.8.18",
     "solid-transition-group": "^0.2.3",
     "typescript": "^5.5.3"
   }
