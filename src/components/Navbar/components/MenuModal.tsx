@@ -7,7 +7,7 @@ import {
 } from '@components/LangSelector/LangSelector';
 import { BrandMenuArea } from './BrandMenuArea';
 import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
-import type { NavbarMessages } from '../helpers';
+import { closeMenuBtnId, openMenuBtnId, type NavbarMessages } from '../helpers';
 
 export interface MenuModalProps extends LangSelectorProps {
   class?: string;
@@ -20,8 +20,11 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
   createEffect(() => {
     document.body.style.setProperty('overflow', 'hidden');
 
+    document.getElementById(closeMenuBtnId)?.focus();
+
     onCleanup(() => {
       document.body.style.removeProperty('overflow');
+      document.getElementById(openMenuBtnId)?.focus();
     });
   });
 
@@ -35,9 +38,15 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
     >
       <div class={styles.menuTopNav}>
         <div class={styles.leftSide}>
-          <LangSelector activeLang={props.activeLang} urlMap={props.urlMap} />
+          <LangSelector
+            messages={props.messages}
+            activeLang={props.activeLang}
+            urlMap={props.urlMap}
+          />
         </div>
         <button
+          id={closeMenuBtnId}
+          aria-label={props.messages.closeMenu}
           classList={{
             [styles.rightSide]: true,
             [styles.hamburgerMenuBtn]: true,
@@ -46,10 +55,9 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
           onClick={props.onCloseButtonClick}
         >
           <img src={hamburgerMenuOpenImg.src} alt="close" aria-hidden="true" />
-          <span class="visually-hidden">Close menu</span>
         </button>
       </div>
-      <nav class="d-contents">
+      <nav class="d-contents" aria-label={props.messages.mainSiteNav}>
         <ul class={styles.menuLinks}>
           <For each={navLinksEntries()}>
             {([label, href]) => (
@@ -107,7 +115,7 @@ export function MenuModal(props: MenuModalProps): JSX.Element {
           </a>
         </li>
       </ul>
-      <BrandMenuArea />
+      <BrandMenuArea aria-hidden="true" />
     </div>
   );
 }
