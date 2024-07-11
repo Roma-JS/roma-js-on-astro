@@ -110,6 +110,7 @@ periodically triggers the deployment.
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
 - `pnpm run test` runs tests
 - `pnpm run test:watch` runs tests in watch mode
+- `pnpm run astro:upgrade` upgrade astro deps to latest
 
 ## Designs
 
