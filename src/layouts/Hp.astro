@@ -16,6 +16,8 @@ import { CFPCta } from '@components/CFPCta/CFPCta'
 import { l10n } from '@i18n/config';
 import type { HpContent } from '../@types/hp';
 import { ViewTransitions } from 'astro:transitions';
+import { h1HeadingDomId } from 'utils/a11y';
+import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -50,6 +52,7 @@ changeLanguage(lang);
 
   <body class={styles.wallpaper}>
     <main class="main">
+      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
       <Navbar
         client:load
         lang={lang}
@@ -61,7 +64,7 @@ changeLanguage(lang);
         <section class="hp-section logo-hero">
           <BrandLogo class='logo'/>
           <div class="logo-hero__text hero">
-            <h1 class="h-1">{title}</h1><span class="h-1">{description}</span>
+            <h1 id={h1HeadingDomId} tabindex="-1" class="h-1">{title}</h1><span class="h-1">{description}</span>
           </div>
           <a
             class="btn btn-secondary slack-link h-1"

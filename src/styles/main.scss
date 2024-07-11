@@ -38,6 +38,10 @@ body {
   @include a11y.visually-hidden();
 }
 
+.visually-hidden-focusable {
+  @include a11y.visually-hidden-focusable();
+}
+
 @mixin heading-1 {
   @include text.font-family();
   font-style: normal;
