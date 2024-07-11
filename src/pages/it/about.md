@@ -26,7 +26,7 @@ Potete avere un assaggio dei nostri incontri sul nostro [canale](https://www.you
 
 Per qualsiasi altra informazione potete contattarci usando uno dei nostri profili social.
 
-### About this website
+## About this website
 
 [romajs.org](https://romajs.org/) è stato progettato e sviluppato da [Fabrizio Vitale](https://github.com/FaberVitale) e [Guido D'Orsi](https://github.com/gdorsi) ed il sorgente è su https://github.com/Roma-JS/roma-js-on-astro.
 

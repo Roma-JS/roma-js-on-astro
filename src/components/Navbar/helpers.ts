@@ -1,6 +1,14 @@
 import { l10n } from '@i18n/config';
 
-const l10nKeys = ['ctaWatchOurVideos', 'ctaJoinDiscordCta'] as const;
+const l10nKeys = [
+  'ctaWatchOurVideos',
+  'ctaJoinDiscordCta',
+  'openMenu',
+  'closeMenu',
+  'mainSiteNav',
+  'itWebsite',
+  'enWebsite',
+] as const;
 
 export type NavbarMessages = Readonly<Record<typeof l10nKeys[number], string>>;
 
@@ -16,3 +24,6 @@ export function getNavbarMessages(): NavbarMessages {
     l10nKeys.map((key) => [key, l10n(key)])
   ) as NavbarMessages;
 }
+
+export const closeMenuBtnId = 'rmjs-close-menu-btn';
+export const openMenuBtnId = 'rmjs-open-menu-btn';

@@ -20,6 +20,8 @@ import {
 import { l10n } from '@i18n/config';
 import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
+import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 
 const { content } = Astro.props;
 
@@ -48,6 +50,7 @@ const breadcrumMessages = Object.fromEntries(
 
   <body class={styles.wallpaper}>
     <article class="main">
+      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
       <Navbar
         client:load
         lang={lang}
@@ -56,6 +59,7 @@ const breadcrumMessages = Object.fromEntries(
         messages={getNavbarMessages()}
       />
       <SlantedHeader
+        {...slantedHeaderH1Config}
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}

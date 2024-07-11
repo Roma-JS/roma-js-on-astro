@@ -1,0 +1,6 @@
+.root {
+  position: fixed;
+  top: 4px;
+  left: 4px;
+  z-index: calc(var(--navbar-menu-fullscreen-index, 2) + 2);
+}

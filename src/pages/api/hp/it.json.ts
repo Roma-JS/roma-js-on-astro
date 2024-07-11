@@ -22,9 +22,11 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
   if (nextEvent) {
     sections.push({
       heading: l10n('nextTalkTitle', { lng }),
-      body: [nextEvent.title || '', formatDate(lng, nextEvent.dateTime)].filter(
-        Boolean
-      ),
+      body: [nextEvent.title ?? ''].filter(Boolean),
+      startDate: {
+        dateTime: nextEvent.dateTime,
+        label: formatDate(lng, nextEvent.dateTime),
+      },
       cta: {
         href: nextEvent.eventUrl,
         text: l10n('ctaRegister', { lng }),
