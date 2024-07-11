@@ -1,10 +1,17 @@
 import type { Lang } from '@i18n/types';
 import { For, type JSX, splitProps } from 'solid-js';
 import styles from './langSelector.module.scss';
+import type { NavbarMessages } from '@components/Navbar/helpers';
 
 export type LangSelectorProps = JSX.IntrinsicElements['nav'] & {
   activeLang: Lang;
   urlMap?: Partial<Record<Lang, string>> | null | undefined;
+  messages: NavbarMessages;
+};
+
+const langToLabelMap: Readonly<Record<string, keyof NavbarMessages>> = {
+  it: 'itWebsite',
+  en: 'enWebsite',
 };
 
 export function LangSelector(props: LangSelectorProps) {
@@ -39,6 +46,7 @@ export function LangSelector(props: LangSelectorProps) {
                 href={altUrl}
                 hreflang={lang}
                 lang={lang}
+                aria-label={props.messages[langToLabelMap[lang]]}
               >
                 {lang}
               </a>

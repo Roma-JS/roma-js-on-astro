@@ -10,7 +10,7 @@ import styles from './navbar.module.scss';
 import { createAppBreakpoints } from 'utils/media-queries';
 import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
 import type { Lang } from '@i18n/types';
-import type { NavbarMessages } from './helpers';
+import { openMenuBtnId, type NavbarMessages } from './helpers';
 
 export interface NavbarProps {
   lang: Lang;
@@ -40,7 +40,11 @@ export function Navbar(props: NavbarProps): JSX.Element {
         <div class={styles.leftSide}>
           <Show when={props.urlMap} keyed>
             {(urlMap) => (
-              <LangSelector activeLang={props.lang} urlMap={urlMap} />
+              <LangSelector
+                messages={props.messages}
+                activeLang={props.lang}
+                urlMap={urlMap}
+              />
             )}
           </Show>
         </div>
@@ -50,7 +54,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
             [styles.rightSide]: true,
           }}
         >
-          <nav class={styles.navbarNav}>
+          <nav class={styles.navbarNav} aria-label={props.messages.mainSiteNav}>
             <ul>
               <li>
                 <a
@@ -83,7 +87,11 @@ export function Navbar(props: NavbarProps): JSX.Element {
           </nav>
         </div>
         <button
+          id={openMenuBtnId}
+          aria-label={props.messages.openMenu}
           type="button"
+          aria-haspopup="true"
+          aria-expanded={isMenuVisible()}
           classList={{
             [styles.hamburgerMenuBtn]: true,
             [styles.rightSide]: true,
@@ -93,7 +101,6 @@ export function Navbar(props: NavbarProps): JSX.Element {
           }}
         >
           <img aria-hidden="true" alt="menu" src={hamburgerMenuImg.src} />
-          <span class="visually-hidden">Open menu</span>
         </button>
       </div>
       <Transition name="fade" appear>

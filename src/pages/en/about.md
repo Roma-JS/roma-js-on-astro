@@ -26,7 +26,7 @@ You can have some taste of our meeting on our official youtube [channel](https:/
 
 For further questions you can contact us using one of our social network profiles.
 
-### About this website
+## About this website
 
 [romajs.org](https://romajs.org/) has been developed and designed by [Fabrizio Vitale](https://github.com/FaberVitale) and [Guido D'Orsi](https://github.com/gdorsi) and its source code is available at https://github.com/Roma-JS/roma-js-on-astro.
 

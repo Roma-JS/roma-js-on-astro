@@ -15,6 +15,9 @@ import { getNavbarMessages } from '@components/Navbar/helpers';
 import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import type { UpcomingEvent } from 'utils/meetup-events';
+import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
+import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
+import { l10n } from '@i18n/config';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -41,6 +44,7 @@ changeLanguage(lang);
   </head>
   <body class={styles.wallpaper}>
     <article class="main">
+      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
       <Navbar
         client:load
         lang={lang}
@@ -49,6 +53,7 @@ changeLanguage(lang);
         messages={getNavbarMessages()}
       />
       <SlantedHeader
+        {...slantedHeaderH1Config}
         title={title}
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}

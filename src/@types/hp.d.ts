@@ -9,6 +9,7 @@ export interface HpSection {
   body: string[];
   cta?: Link;
   venue?: Link;
+  startDate?: { dateTime: string; label: string };
 }
 
 export interface HpContent {

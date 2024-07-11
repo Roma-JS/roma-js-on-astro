@@ -175,6 +175,12 @@
   }
 }
 
+.hamburgerMenuBtn:focus-visible {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-offset: 2px;
+}
+
 .ctaLinks {
   composes: list-style-none m-0 from global;
   display: flex;

@@ -20,5 +20,11 @@
   "ctaVenue": "Scopri la location",
   "prevPage": "Pagina precedente",
   "nextPage": "Prossima pagina",
-  "venue": "Location"
+  "venue": "Location",
+  "openMenu": "Apri il menu",
+  "closeMenu": "Chiudi il menu",
+  "mainSiteNav": "Links del sito",
+  "itWebsite": "Sito in Italiano",
+  "enWebsite": "Sito in Inglese",
+  "skipToMainContent": "Vai al contenuto principale"
 }

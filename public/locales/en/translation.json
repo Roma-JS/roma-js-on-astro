@@ -20,5 +20,11 @@
   "ctaVenue": "Venue",
   "prevPage": "Previous page",
   "nextPage": "Next page",
-  "venue": "Venue"
+  "venue": "Venue",
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+  "mainSiteNav": "Main site navigation",
+  "itWebsite": "Italian website",
+  "enWebsite": "English website",
+  "skipToMainContent": "Skip to main content"
 }
