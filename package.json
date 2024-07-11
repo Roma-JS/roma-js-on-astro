@@ -9,6 +9,7 @@
     "clear": "rm -rf .astro dist",
     "build": "npm run lint:ts && astro build",
     "astro:sync": "astro sync",
+    "astro:upgrade": "pnpm dlx @astrojs/upgrade",
     "lint:ts": "tsc --noEmit",
     "lint:astro": "astro check",
     "create-post": "node scripts/create-post.mjs",
@@ -27,7 +28,7 @@
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/solid-js": "^4.4.0",
-    "astro": "4.11.3",
+    "astro": "4.11.5",
     "astro-i18next": "1.0.0-beta.21",
     "chalk": "^5.0.1",
     "husky": "^8.0.0",
@@ -41,7 +42,7 @@
     "vitest": "^2.0.2"
   },
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
+    "@astrojs/check": "^0.8.1",
     "@fontsource/open-sans": "^4.5.11",
     "@solid-primitives/media": "^2.2.9",
     "@tanstack/solid-query": "^4.33.0",
