@@ -1,13 +1,13 @@
 @use '@fontsource/open-sans/scss/mixins' as OpenSans;
 
-@include OpenSans.fontFace(
-  $weight: 400,
+/* docs: https://fontsource.org/docs/getting-started/faces-mixin */
+@include OpenSans.faces(
+  $subsets: latin,
+  $weights: (
+    400,
+    700,
+  ),
   $display: fallback,
-  $fontDir: '@fontsource/open-sans/files'
-);
-
-@include OpenSans.fontFace(
-  $weight: 700,
-  $display: fallback,
-  $fontDir: '@fontsource/open-sans/files'
+  $styles: all,
+  $directory: '@fontsource/open-sans/files'
 );
