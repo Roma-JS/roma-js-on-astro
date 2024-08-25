@@ -8,7 +8,7 @@ describe('time', () => {
     });
 
     it.each([undefined, null, '', ' ', '\n'])(
-      'returns empty output when there input is %j',
+      'returns empty output (0 months & 0 errors) when input=%j',
       (input) => {
         expect(parseMonthsList(input)).toEqual(createEmpyOutput());
       }
@@ -56,7 +56,7 @@ describe('time', () => {
         },
       },
     ])(
-      'parse input=$input correctly when there is invalid input',
+      'parses input=$input correctly when there is invalid input',
       ({ input, expected }) => {
         const output = parseMonthsList(input);
         expect(output.parsedMonths).toEqual(expected.parsedMonths);
