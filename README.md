@@ -80,6 +80,19 @@ HomePage content is defined in:
 
 Edit `enHpContent` to modify the english homepage and `itHpContent` to change the italian one.
 
+#### Upcoming events
+
+The upcoming events page is populated using the meetup api (`env.MEETUP_GRAPHQL_ENDPOINT`).
+
+##### Placeholders
+
+The [page generation logic](src/utils/meetup-events.ts) automatically adds placeholders after the current month.
+You can use the env var `PUBLIC_MONTHS_WITHOUT_GENERATED_UPCOMING_EVENTS` to filter out placeholder months.
+
+```bash
+PUBLIC_MONTHS_WITHOUT_GENERATED_UPCOMING_EVENTS="08,10" # Hide August and October placeholders.
+```
+
 #### Deployment
 
 ##### Manual deploys
