@@ -26,7 +26,7 @@ export const parseMonthsList = (
       ?.trim()
       .split(/\s*,\s*/)
       .filter(Boolean) ?? [];
-  const referenceDate = new Date(new Date().getFullYear(), 0, 4);
+  const referenceDate = new Date(new Date().getFullYear(), 0, 4); // A reference date with timezone-safe date of month.
 
   const output: ParseMonthsListOutput = {
     parsedMonths: new Set<number>(),
@@ -41,7 +41,7 @@ export const parseMonthsList = (
         output.parsedMonths.add(parsedDate.getMonth());
       } else {
         throw new Error(
-          `cannot parse date using format=${monthFormat}, input=${formattedMonth}`
+          `parseMonthsList: cannot parse date using format=${monthFormat}, input=${formattedMonth}`
         );
       }
     } catch (err) {
