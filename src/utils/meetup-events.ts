@@ -7,6 +7,7 @@ import {
   isBefore,
   addMonths,
 } from 'date-fns';
+import { parseMonthsList } from './time';
 
 export interface MeetupEventsApiResponse {
   events: Pick<
@@ -78,19 +79,19 @@ export function computeScheduledEvents(
   );
 }
 
-/**
- * Given a list of scheduled events, returns a list of scheduled and placeholder
- * events sorted by date in ascending order.
- * @param scheduledUpcomingEvents Scheduled events
- * @param curentEpochTimeMs built time epoch time i.e. Date.now().
- * @see {@link UpcomingEvent}
- */
-export function computeUpcomingEvents(
-  scheduledUpcomingEvents: MeetupEventType[] | undefined | null,
-  curentEpochTimeMs: number
-): UpcomingEvent[] {
-  const scheduledEvents = computeScheduledEvents(scheduledUpcomingEvents);
+export interface ComputeUpcomingEventsOptions {
+  monthsWithoutGeneratedUpcomingEvents?: string | undefined | null;
+}
 
+export function createPlaceholderEvents({
+  scheduledEvents,
+  curentEpochTimeMs,
+  monthsWithoutGeneratedUpcomingEvents,
+}: {
+  scheduledEvents: ScheduledEvent[];
+  curentEpochTimeMs: number;
+  monthsWithoutGeneratedUpcomingEvents: ComputeUpcomingEventsOptions['monthsWithoutGeneratedUpcomingEvents'];
+}) {
   const meetupOfThisMonth = computeThirdWednesdayOfMonth(curentEpochTimeMs);
   const isNowBeforeMeetup =
     !isSameDay(curentEpochTimeMs, meetupOfThisMonth) &&
@@ -98,7 +99,11 @@ export function computeUpcomingEvents(
 
   const placeholderMonths = isNowBeforeMeetup ? [0, 1, 2, 3] : [1, 2, 3];
 
-  const placeholderEvents = placeholderMonths
+  const { parsedMonths: monthsWithoutGeneratedEventsSet } = parseMonthsList(
+    monthsWithoutGeneratedUpcomingEvents
+  );
+
+  return placeholderMonths
     .map((month): PlaceholderEvent => {
       const date = computeThirdWednesdayOfMonth(
         addMonths(new Date(curentEpochTimeMs), month)
@@ -112,11 +117,35 @@ export function computeUpcomingEvents(
     })
     .filter(
       (placeholder) =>
+        !monthsWithoutGeneratedEventsSet.has(placeholder.date.getMonth()) &&
         !scheduledEvents.some(
           (scheduled) =>
             isSameDay(scheduled.epochTimeMs, placeholder.epochTimeMs) // filter out placeholder if overlaps with a scheduled event
         )
     );
+}
+
+/**
+ * Given a list of scheduled events, returns a list of scheduled and placeholder
+ * events sorted by date in ascending order.
+ * @param scheduledUpcomingEvents Scheduled events
+ * @param curentEpochTimeMs built time epoch time i.e. Date.now().
+ * @param {ComputeUpcomingEventsOptions} options Additional options.
+ * @see {@link UpcomingEvent}
+ * @see {@link ComputeUpcomingEventsOptions}
+ */
+export function computeUpcomingEvents(
+  scheduledUpcomingEvents: MeetupEventType[] | undefined | null,
+  curentEpochTimeMs: number,
+  options?: ComputeUpcomingEventsOptions
+): UpcomingEvent[] {
+  const scheduledEvents = computeScheduledEvents(scheduledUpcomingEvents);
+  const placeholderEvents = createPlaceholderEvents({
+    scheduledEvents,
+    curentEpochTimeMs,
+    monthsWithoutGeneratedUpcomingEvents:
+      options?.monthsWithoutGeneratedUpcomingEvents,
+  });
 
   return (scheduledEvents as UpcomingEvent[])
     .concat(placeholderEvents)
