@@ -42,12 +42,12 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3(solid-js@1.8.21)
       typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
+        specifier: ^5.5.4
+        version: 5.5.4
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.3
-        version: 0.9.3(prettier@2.7.1)(typescript@5.5.3)
+        version: 0.9.3(prettier@2.7.1)(typescript@5.5.4)
       '@astrojs/rss':
         specifier: ^4.0.7
         version: 4.0.7
@@ -59,10 +59,10 @@ importers:
         version: 4.4.1(solid-js@1.8.21)(vite@5.4.2(sass@1.77.7))
       astro:
         specifier: 4.14.5
-        version: 4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.3)
+        version: 4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.4)
       astro-i18next:
         specifier: 1.0.0-beta.21
-        version: 1.0.0-beta.21(astro@4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.3))
+        version: 1.0.0-beta.21(astro@4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.4))
       chalk:
         specifier: ^5.0.1
         version: 5.3.0
@@ -2576,8 +2576,8 @@ packages:
   typescript-auto-import-cache@0.3.3:
     resolution: {integrity: sha512-ojEC7+Ci1ij9eE6hp8Jl9VUNnsEKzztktP5gtYNRMrTmfXVwA1PITYYAkpxCvvupdSYa/Re51B6KMcv1CTZEUA==}
 
-  typescript@5.5.3:
-    resolution: {integrity: sha512-/hreyEujaB0w76zKo6717l3L0o/qEUtRgdvUBvlkhoWeOVMjMuHNHk0BRBzikzuGDqNmPQbg5ifMEqsHLiIUcQ==}
+  typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -3004,13 +3004,13 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@astrojs/check@0.9.3(prettier@2.7.1)(typescript@5.5.3)':
+  '@astrojs/check@0.9.3(prettier@2.7.1)(typescript@5.5.4)':
     dependencies:
-      '@astrojs/language-server': 2.14.1(prettier@2.7.1)(typescript@5.5.3)
+      '@astrojs/language-server': 2.14.1(prettier@2.7.1)(typescript@5.5.4)
       chokidar: 3.6.0
       fast-glob: 3.3.2
       kleur: 4.1.5
-      typescript: 5.5.3
+      typescript: 5.5.4
       yargs: 17.7.2
     transitivePeerDependencies:
       - prettier
@@ -3020,12 +3020,12 @@ snapshots:
 
   '@astrojs/internal-helpers@0.4.1': {}
 
-  '@astrojs/language-server@2.14.1(prettier@2.7.1)(typescript@5.5.3)':
+  '@astrojs/language-server@2.14.1(prettier@2.7.1)(typescript@5.5.4)':
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/yaml2ts': 0.2.1
       '@jridgewell/sourcemap-codec': 1.4.15
-      '@volar/kit': 2.4.0(typescript@5.5.3)
+      '@volar/kit': 2.4.0(typescript@5.5.4)
       '@volar/language-core': 2.4.0
       '@volar/language-server': 2.4.0
       '@volar/language-service': 2.4.0
@@ -3827,12 +3827,12 @@ snapshots:
       loupe: 3.1.1
       tinyrainbow: 1.2.0
 
-  '@volar/kit@2.4.0(typescript@5.5.3)':
+  '@volar/kit@2.4.0(typescript@5.5.4)':
     dependencies:
       '@volar/language-service': 2.4.0
       '@volar/typescript': 2.4.0
       typesafe-path: 0.2.2
-      typescript: 5.5.3
+      typescript: 5.5.4
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
 
@@ -3938,11 +3938,11 @@ snapshots:
 
   assertion-error@2.0.1: {}
 
-  astro-i18next@1.0.0-beta.21(astro@4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.3)):
+  astro-i18next@1.0.0-beta.21(astro@4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.4)):
     dependencies:
       '@proload/core': 0.3.3
       '@proload/plugin-tsm': 0.2.1(@proload/core@0.3.3)
-      astro: 4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.3)
+      astro: 4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.4)
       i18next: 22.4.10
       i18next-browser-languagedetector: 7.1.0
       i18next-fs-backend: 2.1.5
@@ -3953,7 +3953,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  astro@4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.3):
+  astro@4.14.5(rollup@4.21.0)(sass@1.77.7)(typescript@5.5.4):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.1
@@ -4011,7 +4011,7 @@ snapshots:
       shiki: 1.14.1
       string-width: 7.2.0
       strip-ansi: 7.1.0
-      tsconfck: 3.1.1(typescript@5.5.3)
+      tsconfck: 3.1.1(typescript@5.5.4)
       unist-util-visit: 5.0.0
       vfile: 6.0.2
       vite: 5.4.2(sass@1.77.7)
@@ -4021,7 +4021,7 @@ snapshots:
       yargs-parser: 21.1.1
       zod: 3.23.8
       zod-to-json-schema: 3.23.2(zod@3.23.8)
-      zod-to-ts: 1.2.0(typescript@5.5.3)(zod@3.23.8)
+      zod-to-ts: 1.2.0(typescript@5.5.4)(zod@3.23.8)
     optionalDependencies:
       sharp: 0.33.3
     transitivePeerDependencies:
@@ -5747,9 +5747,9 @@ snapshots:
 
   trough@2.2.0: {}
 
-  tsconfck@3.1.1(typescript@5.5.3):
+  tsconfck@3.1.1(typescript@5.5.4):
     optionalDependencies:
-      typescript: 5.5.3
+      typescript: 5.5.4
 
   tslib@2.6.2:
     optional: true
@@ -5766,7 +5766,7 @@ snapshots:
     dependencies:
       semver: 7.6.2
 
-  typescript@5.5.3: {}
+  typescript@5.5.4: {}
 
   unified@11.0.5:
     dependencies:
@@ -6167,9 +6167,9 @@ snapshots:
     dependencies:
       zod: 3.23.8
 
-  zod-to-ts@1.2.0(typescript@5.5.3)(zod@3.23.8):
+  zod-to-ts@1.2.0(typescript@5.5.4)(zod@3.23.8):
     dependencies:
-      typescript: 5.5.3
+      typescript: 5.5.4
       zod: 3.23.8
 
   zod@3.23.8: {}

@@ -54,6 +54,6 @@
     "slugify": "^1.6.6",
     "solid-js": "^1.8.21",
     "solid-transition-group": "^0.2.3",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }
