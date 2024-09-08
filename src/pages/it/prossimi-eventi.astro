@@ -10,7 +10,9 @@ const description = 'Tutti i prossimi eventi in programma del RomaJS';
 
 const scheduledEvents = await fetchUpcomingRomajsEvents()
 
-const upcomingEvents = computeUpcomingEvents(scheduledEvents, Date.now());
+const upcomingEvents = computeUpcomingEvents(scheduledEvents, Date.now(), {
+  monthsWithoutGeneratedUpcomingEvents: import.meta.env.PUBLIC_MONTHS_WITHOUT_GENERATED_UPCOMING_EVENTS
+});
 ---
 
 <UpcomingEventsLayout

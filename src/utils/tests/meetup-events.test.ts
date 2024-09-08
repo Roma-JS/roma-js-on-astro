@@ -122,5 +122,36 @@ describe('meetup-events', () => {
         ]
       `);
     });
+
+    it('filters out the generated placeholders when monthsWithoutGeneratedUpcomingEvents is provided', () => {
+      const currentEpochTime = new Date('2024-03-09').getTime();
+      const [_, ...placeholders] = computeUpcomingEvents(
+        singleUpcomingEventList,
+        currentEpochTime,
+        {
+          monthsWithoutGeneratedUpcomingEvents: '04,6',
+        }
+      );
+
+      expect(placeholders).toHaveLength(1);
+      expect(new Date(placeholders[0].epochTimeMs).getMonth()).toBe(4);
+    });
+
+    it('does not filter out the scheduled events', () => {
+      const currentEpochTime = new Date('2024-03-09').getTime();
+      const events = computeUpcomingEvents(
+        singleUpcomingEventList,
+        currentEpochTime,
+        {
+          monthsWithoutGeneratedUpcomingEvents: '1,2,3,4,5,6,7,8,9,10,11,12',
+        }
+      );
+
+      expect(events).toHaveLength(1);
+      expect(events[0]).toHaveProperty('type', 'scheduled');
+      expect(new Date(events[0].epochTimeMs).getMonth()).toBe(
+        2 /* 0-based index */
+      );
+    });
   });
 });
