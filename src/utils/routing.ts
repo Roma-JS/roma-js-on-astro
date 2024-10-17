@@ -46,6 +46,16 @@ export const hpUrlMap: Readonly<Record<Lang, string>> = {
   en: routes.en.home,
 };
 
+export const upcomingEventsUrlMap: Readonly<Record<Lang, string>> = {
+  it: routes.it['prossimi eventi'],
+  en: routes.en['upcoming events'],
+};
+
+export const pastEventsUrlMap: Readonly<Record<Lang, string>> = {
+  it: routes.it['eventi passati'],
+  en: routes.en['past events'],
+};
+
 export const aboutUrlMap: Readonly<Record<Lang, string>> = {
   it: routes.it.about,
   en: routes.en.about,
