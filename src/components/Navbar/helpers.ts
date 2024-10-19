@@ -10,7 +10,9 @@ const l10nKeys = [
   'enWebsite',
 ] as const;
 
-export type NavbarMessages = Readonly<Record<typeof l10nKeys[number], string>>;
+export type NavbarMessages = Readonly<
+  Record<(typeof l10nKeys)[number], string>
+>;
 
 /**
  * Do not use this function inside a component,

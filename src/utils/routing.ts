@@ -108,5 +108,5 @@ export const socialLinks = {
   linkedin: {
     href: import.meta.env.PUBLIC_LINKEDIN_PROFILE_HREF,
     iconHref: linkedinIcon,
-  }
+  },
 } as const;
