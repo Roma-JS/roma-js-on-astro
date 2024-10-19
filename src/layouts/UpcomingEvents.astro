@@ -8,7 +8,11 @@ import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { changeLanguage } from 'i18next';
-import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
+import {
+  getCanonicalURL,
+  navbarLinks,
+  upcomingEventsUrlMap,
+} from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
@@ -48,7 +52,7 @@ changeLanguage(lang);
       <Navbar
         client:load
         lang={lang}
-        urlMap={aboutUrlMap}
+        urlMap={upcomingEventsUrlMap}
         relativePageUrl={relativePageUrl}
         messages={getNavbarMessages()}
       />

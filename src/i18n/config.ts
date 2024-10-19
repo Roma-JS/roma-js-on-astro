@@ -1,4 +1,4 @@
-import type { I18nRouteParams } from './types';
+import type { I18nRouteParams, Lang } from './types';
 import { t as i18nextTranslate } from 'i18next';
 import type { TOptions } from 'i18next';
 import type L10nMessages from '../../public/locales/it/translation.json';
@@ -10,7 +10,16 @@ export const i18nLang = Object.freeze({
   en: {
     locale: 'en-US',
   },
-} as const);
+} as const satisfies Readonly<Record<Lang, { locale: string }>>);
+
+export function assertValidLang(value: unknown): asserts value is Lang {
+  const validLangs = getI18nRouteParams().map(({ lang }) => lang);
+  if (!validLangs.some((lang) => lang === value)) {
+    throw new TypeError(
+      `assertion failed, expected valid lang (it, en), got ${value}`
+    );
+  }
+}
 
 export function getI18nRouteParams(): I18nRouteParams[] {
   return Object.entries(i18nLang).map(([lang]) => ({

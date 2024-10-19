@@ -5,6 +5,7 @@ import youtubeIcon from 'media/social/youtube.svg';
 import twitterIcon from 'media/social/twitter-square.svg';
 import rssIcon from 'media/social/rss.svg';
 import discordIcon from 'media/social/discord.svg';
+import linkedinIcon from 'media/social/linkedin.svg';
 import type { AstroGlobal } from 'astro';
 
 export const routes = {
@@ -44,6 +45,16 @@ export const categoryPageUrl = navbarLinks.it.blog + '/category';
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
   it: routes.it.home,
   en: routes.en.home,
+};
+
+export const upcomingEventsUrlMap: Readonly<Record<Lang, string>> = {
+  it: routes.it['prossimi eventi'],
+  en: routes.en['upcoming events'],
+};
+
+export const pastEventsUrlMap: Readonly<Record<Lang, string>> = {
+  it: routes.it['eventi passati'],
+  en: routes.en['past events'],
 };
 
 export const aboutUrlMap: Readonly<Record<Lang, string>> = {
@@ -93,5 +104,9 @@ export const socialLinks = {
   github: {
     href: import.meta.env.PUBLIC_GITHUB_PROFILE_HREF,
     iconHref: githubIcon,
+  },
+  linkedin: {
+    href: import.meta.env.PUBLIC_LINKEDIN_PROFILE_HREF,
+    iconHref: linkedinIcon,
   },
 } as const;
