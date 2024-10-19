@@ -5,6 +5,7 @@ import youtubeIcon from 'media/social/youtube.svg';
 import twitterIcon from 'media/social/twitter-square.svg';
 import rssIcon from 'media/social/rss.svg';
 import discordIcon from 'media/social/discord.svg';
+import linkedinIcon from 'media/social/linkedin.svg';
 import type { AstroGlobal } from 'astro';
 
 export const routes = {
@@ -104,4 +105,8 @@ export const socialLinks = {
     href: import.meta.env.PUBLIC_GITHUB_PROFILE_HREF,
     iconHref: githubIcon,
   },
+  linkedin: {
+    href: import.meta.env.PUBLIC_LINKEDIN_PROFILE_HREF,
+    iconHref: linkedinIcon,
+  }
 } as const;
