@@ -4,6 +4,7 @@ import { getHpItContent } from './api/hp/it.json';
 import { hpUrlMap } from 'utils/routing';
 import type { Lang } from '@i18n/types';
 import { changeLanguage } from 'i18next';
+import SiteNameStructuredData from '@components/SiteNameStructuredData.astro';
 
 const lang: Lang = 'it';
 changeLanguage(lang);
@@ -18,4 +19,8 @@ const permalink = Astro.props.permalink;
   urlMap={hpUrlMap}
   sections={sections}
   permalink={permalink}
-/>
+>
+  <Fragment slot="head">
+    <SiteNameStructuredData />
+  </Fragment>
+</HpLayout>
