@@ -1,6 +1,6 @@
 ---
 import HpLayout from '@layouts/Hp.astro';
-import { getI18nRouteParams } from '@i18n/config';
+import { assertValidLang, getI18nRouteParams } from '@i18n/config';
 import { getEnHpContent } from '../api/hp/en.json';
 import { getHpItContent } from '../api/hp/it.json';
 import { hpUrlMap } from 'utils/routing';
@@ -16,7 +16,10 @@ export async function getStaticPaths() {
 }
 
 function getProp<Key extends keyof Props>(key: Key): Props[Key] {
-  return Astro.props[key] ?? (Astro.params[key as keyof typeof Astro.params] as Props[Key]);
+  return (
+    Astro.props[key] ??
+    (Astro.params[key as keyof typeof Astro.params] as Props[Key])
+  );
 }
 
 function getContentByLang(lang: Lang) {
@@ -34,6 +37,7 @@ function getContentByLang(lang: Lang) {
 }
 
 const lang = getProp('lang');
+assertValidLang(lang);
 const { title, description, sections } = await getContentByLang(lang);
 const permalink = Astro.props.permalink;
 ---
@@ -45,4 +49,12 @@ const permalink = Astro.props.permalink;
   urlMap={hpUrlMap}
   sections={sections}
   permalink={permalink}
-/>
+>
+  <Fragment slot="head">
+    {
+      lang === 'it' && (
+        <link rel="canonical" href={process.env.PUBLIC_SITE_URL} />
+      )
+    }
+  </Fragment>
+</HpLayout>
