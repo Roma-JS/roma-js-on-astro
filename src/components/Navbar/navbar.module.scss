@@ -1,5 +1,17 @@
 @use '../../styles/mixins/breakpoints' as br;
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @keyframes dash {
   0% {
     stroke-dashoffset: 1000;
@@ -10,209 +22,236 @@
   }
 }
 
+:root {
+  --navbar--height--mobile: 60px;
+  --navbar--height--desktop: 50px;
+
+  --navbar--padding--mobile: 0 14px;
+  --navbar--padding--desktop: 0 16px;
+
+  --navbar--gap: 15px;
+}
+
+menu {
+  padding: 0;
+}
+
 .navbar {
-  composes: d-grid from global;
+  --navbar--height: var(--navbar--height--mobile);
+  --navbar--padding: var(--navbar--padding--mobile);
+
+  composes: d-flex from global;
+
+  place-content: space-between;
+  place-items: center;
+
   width: 100%;
-  overflow: hidden;
-  height: 60px;
-  align-items: center;
+  height: var(--navbar--height);
+  padding: var(--navbar--padding);
   background-color: var(--bg-primary);
-  grid-template-columns: auto 1fr auto;
-  padding: 0 14px;
+  overflow: hidden;
 
   @include br.media-breakpoint-up(lg) {
-    height: 50px;
-    padding: 0 16px;
+    --navbar--height: var(--navbar--height--desktop);
+    --navbar--padding: var(--navbar--padding--desktop);
+  }
+}
+
+.navbarNavWrapper {
+  position: fixed;
+  inset: var(--navbar--height) 0 0;
+
+  display: flex;
+  place-content: start;
+  place-items: center;
+  flex-flow: column-reverse nowrap;
+
+  background-color: var(--bg-primary);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s ease-in-out;
+
+  @include br.media-breakpoint-up(lg) {
+    position: static;
+    inset: auto;
+
+    display: inline-flex;
+    flex-flow: row nowrap;
+
+    opacity: 1;
+    visibility: visible;
+  }
+
+  :global(.btn.btn-small) {
+    min-width: 68px;
+    padding: 0 4px;
+
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0;
+    white-space: nowrap;
+    text-transform: capitalize;
+  }
+
+  [aria-expanded='true'] ~ & {
+    flex-flow: column nowrap;
+
+    opacity: 1;
+    visibility: visible;
+    z-index: 3;
+
+    :global(.btn.btn-small) {
+      // MDN DOCS: duration | easing-function | delay | iteration-count | direction | fill-mode | play-state | name
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/animation#syntax
+      animation: 300ms ease-in-out calc(150ms + 75ms * var(--index, 0)) both
+        fadeInUp;
+
+      @include br.media-breakpoint-up(lg) {
+        animation: none;
+      }
+    }
+
+    .brandArea {
+      display: block;
+
+      .animatedBrandMenuGroup path {
+        stroke-dasharray: 1000;
+
+        // MDN DOCS: duration | easing-function | delay | iteration-count | direction | fill-mode | play-state | name
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/animation#syntax
+        animation: 5s ease-in-out both dash;
+      }
+    }
+  }
+}
+
+.navbarDivider {
+  @include br.media-breakpoint-up(lg) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+
+    padding-left: var(--navbar--gap);
+    border-left: 2px solid var(--text-primary);
+    margin-left: var(--navbar--gap);
   }
 }
 
 .navbarNav {
-  composes: d-contents from global;
+  display: flex;
+  flex-flow: column nowrap;
+  place-content: start;
+  place-items: center;
+  gap: var(--navbar--gap);
 
-  .divider {
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    &::after {
-      content: '';
-      width: 2px;
-      height: 28px;
-      background: var(--text-primary);
-    }
-  }
+  padding-top: 58px;
 
-  ul,
-  li {
-    display: flex;
+  @include br.media-breakpoint-up(lg) {
+    --navbar--gap: 5px;
     flex-flow: row nowrap;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
 
-  ul {
-    gap: 5px;
-    justify-content: flex-end;
-  }
-
-  li {
-    justify-content: center;
+    padding-top: 0;
   }
 
   :global(.btn.btn-small) {
-    font-size: 18px;
-    text-transform: capitalize;
-    font-weight: 700;
-    white-space: nowrap;
-    letter-spacing: 0;
-    padding: 0 4px;
-    min-width: 68px;
-  }
-}
+    img {
+      filter: invert(1);
+    }
 
-.leftSide {
-  grid-column: 1 / span 1;
-}
-
-.rightSide {
-  grid-column: span 1 / -1;
-}
-
-.rightSideDesktop {
-  display: none;
-  @include br.media-breakpoint-up(lg) {
-    display: block;
-  }
-}
-
-.fullscreenMenu {
-  composes: d-flex from global;
-  position: fixed;
-  z-index: var(--navbar-menu-fullscreen-index);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  display: none;
-  flex-flow: column nowrap;
-  background: var(--bg-primary);
-
-  .brandArea {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 54vw;
-    width: min(54vw, 360px);
-  }
-
-  .menuLinks {
-    list-style: none;
-    padding: 58px 0 0;
-    margin: 0;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    gap: 17px;
-  }
-
-  .menuItem {
-    display: inline-flex;
-    list-style: none;
-    text-transform: capitalize;
-    margin: 0;
-    padding: 5px 4px;
-    border-bottom: 2px solid var(--bg-secondary);
-    &:focus-within {
-      padding: 5px 10px;
+    &:hover {
+      img {
+        filter: invert(0);
+      }
     }
   }
-
-  .menuItem:nth-child(2) {
-    animation-delay: 340ms;
-  }
-
-  .menuItem:nth-child(3) {
-    animation-delay: 380ms;
-  }
-
-  a:global(.btn.btn-small) {
-    font-size: 16px;
-  }
 }
 
-.animatedBrandMenuGroup path {
-  animation-fill-mode: both;
-  stroke-dasharray: 1000;
-  animation-delay: 1.5s;
-  animation-iteration-count: 1;
-  animation: dash 5s ease-in-out;
-}
-
-.menuTopNav {
-  composes: d-grid from global;
-  height: 60px;
-  width: 100%;
-  padding: 0 14px;
-  align-items: center;
-  grid-template-columns: auto 1fr auto;
-}
-
-.hamburgerMenuBtn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
-  background: transparent;
+.navbarNavDiscordLink {
+  display: inline-flex;
 
   @include br.media-breakpoint-up(lg) {
     display: none;
   }
 }
 
-.hamburgerMenuBtn:focus-visible {
-  outline-width: 2px;
-  outline-style: solid;
-  outline-offset: 2px;
+.rightSide {
+  composes: d-inline-flex from global;
+  position: relative;
 }
 
-.ctaLinks {
-  composes: list-style-none m-0 from global;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  padding: 3rem 0 0;
-  gap: 1.5rem;
-  font-weight: 700;
+.brandArea {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 
-  a img {
-    filter: invert(1);
-    margin-left: 0.2rem;
+  display: none;
+
+  width: 54vw;
+  width: min(54vw, 360px);
+}
+
+.hamburgerMenuBtn {
+  position: relative;
+
+  background: transparent;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  margin: 0;
+  box-shadow: none;
+
+  outline: none;
+
+  @include br.media-breakpoint-up(lg) {
+    display: none;
   }
 
-  @media (hover: hover) {
-    a:hover img {
-      filter: invert(0);
+  &:focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+
+    opacity: 1;
+
+    transition: opacity 0.3s linear;
+    will-change: opacity;
+  }
+
+  &::before {
+    background-image: var(--hamburger-menu-open);
+  }
+
+  &::after {
+    background-image: var(--hamburger-menu-close);
+    opacity: 0;
+  }
+
+  &[aria-expanded='true'] {
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
     }
   }
-
-  li:nth-child(1) {
-    animation-delay: 400ms;
-  }
-
-  li:nth-child(2) {
-    animation-delay: 440ms;
-  }
-}
-
-.animatedlistItem {
-  animation-delay: 300ms;
-  animation-duration: 300ms;
-  animation-fill-mode: both;
-  animation-timing-function: ease-in-out;
 }

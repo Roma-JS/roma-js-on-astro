@@ -3,14 +3,14 @@ import {
   LangSelector,
   type LangSelectorProps,
 } from 'components/LangSelector/LangSelector';
-import hamburgerMenuImg from 'media/hamburger-menu-closed.svg';
-import { MenuModal } from './components/MenuModal';
-import { Transition } from 'solid-transition-group';
+import hamburgerMenuOpenImg from 'media/hamburger-menu-open.svg';
+import hamburgerMenuCloseImg from 'media/hamburger-menu-closed.svg';
 import styles from './navbar.module.scss';
 import { createAppBreakpoints } from 'utils/media-queries';
 import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
 import type { Lang } from '@i18n/types';
 import { openMenuBtnId, type NavbarMessages } from './helpers';
+import { BrandMenuArea } from './components/BrandMenuArea';
 
 export interface NavbarProps {
   lang: Lang;
@@ -29,7 +29,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
 
   return (
     <>
-      <div
+      <header
         id="rmjs-navbar"
         class={styles.navbar}
         classList={{
@@ -37,7 +37,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
           [props.class as string]: !!props.class,
         }}
       >
-        <div class={styles.leftSide}>
+        <menu class={styles.leftSide}>
           <Show when={props.urlMap} keyed>
             {(urlMap) => (
               <LangSelector
@@ -47,73 +47,87 @@ export function Navbar(props: NavbarProps): JSX.Element {
               />
             )}
           </Show>
-        </div>
-        <div
-          classList={{
-            [styles.rightSideDesktop]: true,
-            [styles.rightSide]: true,
-          }}
-        >
-          <nav class={styles.navbarNav} aria-label={props.messages.mainSiteNav}>
-            <ul>
-              <li>
-                <a
-                  class="btn btn-small btn-primary"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  href={socialLinks.youtube.href}
-                >
-                  {props.messages.ctaWatchOurVideos}
-                </a>
-              </li>
-              <li class={styles.divider} />
+        </menu>
+        <menu class={styles.rightSide}>
+          <button
+            id={openMenuBtnId}
+            aria-label={props.messages.openMenu}
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={isMenuVisible()}
+            class={styles.hamburgerMenuBtn}
+            style={{
+              '--hamburger-menu-close': `url("${hamburgerMenuOpenImg.src}")`,
+              '--hamburger-menu-open': `url("${hamburgerMenuCloseImg.src}")`,
+            }}
+            onClick={() => {
+              setIsMenuOpen((prev) => !prev);
+
+              isMenuVisible()
+                ? document.body.style.setProperty('overflow', 'hidden')
+                : document.body.style.removeProperty('overflow');
+            }}
+          ></button>
+          <div class={styles.navbarNavWrapper}>
+            <nav
+              class={styles.navbarNav}
+              aria-label={props.messages.mainSiteNav}
+            >
               <For each={navLinksEntries()}>
-                {([label, href]) => (
-                  <li>
-                    <a
-                      aria-current={
-                        props.relativePageUrl === href ? 'page' : undefined
-                      }
-                      onClick={preventSelfNavigation}
-                      class="btn btn-small btn-primary"
-                      href={href}
-                    >
-                      {label}
-                    </a>
-                  </li>
+                {([label, href], index) => (
+                  <a
+                    aria-current={
+                      props.relativePageUrl === href ? 'page' : undefined
+                    }
+                    onClick={preventSelfNavigation}
+                    class="btn btn-small btn-primary"
+                    style={`--index: ${index()}`}
+                    href={href}
+                  >
+                    {label}
+                  </a>
                 )}
               </For>
-            </ul>
-          </nav>
-        </div>
-        <button
-          id={openMenuBtnId}
-          aria-label={props.messages.openMenu}
-          type="button"
-          aria-haspopup="true"
-          aria-expanded={isMenuVisible()}
-          classList={{
-            [styles.hamburgerMenuBtn]: true,
-            [styles.rightSide]: true,
-          }}
-          onClick={() => {
-            setIsMenuOpen(true);
-          }}
-        >
-          <img aria-hidden="true" alt="menu" src={hamburgerMenuImg.src} />
-        </button>
-      </div>
-      <Transition name="fade" appear>
-        <Show when={isMenuVisible()}>
-          <MenuModal
-            relativePageUrl={props.relativePageUrl}
-            activeLang={props.lang}
-            urlMap={props.urlMap}
-            onCloseButtonClick={() => setIsMenuOpen(false)}
-            messages={props.messages}
-          />
-        </Show>
-      </Transition>
+            </nav>
+            <span class={styles.navbarDivider} />
+            <nav class={styles.navbarNav}>
+              <a
+                class="btn btn-small btn-secondary"
+                classList={{
+                  [styles.navbarNavDiscordLink]: true,
+                }}
+                style={`--index: ${navLinksEntries().length}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                href={socialLinks.discord.href}
+              >
+                {props.messages.ctaJoinDiscordCta}{' '}
+                <img
+                  width="24"
+                  height="24"
+                  src={socialLinks.discord.iconHref.src}
+                  alt={'discord'}
+                  aria-hidden="true"
+                />
+              </a>
+              <a
+                class="btn btn-small"
+                classList={{
+                  'btn-primary': !isMenuVisible(),
+                  'btn-secondary': isMenuVisible(),
+                }}
+                style={`--index: ${navLinksEntries().length + 1}`}
+                rel="noopener noreferrer"
+                target="_blank"
+                href={socialLinks.youtube.href}
+              >
+                {props.messages.ctaWatchOurVideos}
+              </a>
+            </nav>
+            <BrandMenuArea aria-hidden="true" />
+          </div>
+        </menu>
+      </header>
     </>
   );
 }
