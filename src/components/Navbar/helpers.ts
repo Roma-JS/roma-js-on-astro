@@ -10,9 +10,7 @@ const l10nKeys = [
   'enWebsite',
 ] as const;
 
-export type NavbarMessages = Readonly<
-  Record<(typeof l10nKeys)[number], string>
->;
+export type NavbarMessages = Readonly<Record<typeof l10nKeys[number], string>>;
 
 /**
  * Do not use this function inside a component,
@@ -27,5 +25,4 @@ export function getNavbarMessages(): NavbarMessages {
   ) as NavbarMessages;
 }
 
-export const closeMenuBtnId = 'rmjs-close-menu-btn';
-export const openMenuBtnId = 'rmjs-open-menu-btn';
+export const menuBtnId = 'rmjs-menu-btn';

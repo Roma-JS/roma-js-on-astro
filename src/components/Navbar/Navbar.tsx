@@ -1,4 +1,11 @@
-import { createSignal, For, type JSX, Show } from 'solid-js';
+import {
+  createEffect,
+  createSignal,
+  For,
+  onCleanup,
+  Show,
+  type JSX,
+} from 'solid-js';
 import {
   LangSelector,
   type LangSelectorProps,
@@ -9,7 +16,7 @@ import styles from './navbar.module.scss';
 import { createAppBreakpoints } from 'utils/media-queries';
 import { navbarLinks, preventSelfNavigation, socialLinks } from 'utils/routing';
 import type { Lang } from '@i18n/types';
-import { openMenuBtnId, type NavbarMessages } from './helpers';
+import { menuBtnId, type NavbarMessages } from './helpers';
 import { BrandMenuArea } from './components/BrandMenuArea';
 
 export interface NavbarProps {
@@ -27,13 +34,25 @@ export function Navbar(props: NavbarProps): JSX.Element {
   const isMenuVisible = () => !matches.lg && isMenuOpen();
   const navLinksEntries = () => Object.entries(navbarLinks[props.lang] ?? {});
 
-  const handleHamburgerMenuKeydown = (e: KeyboardEvent) => {
-    if (isMenuVisible() && e.key === 'Tab' && !e.shiftKey) {
-      const hamburgerMenuBtn: HTMLElement = document.querySelector(
-        '[class*=hamburgerMenuBtn]'
-      )!;
+  createEffect(() => {
+    if (!isMenuVisible()) {
+      return;
+    }
 
-      hamburgerMenuBtn.focus();
+    document.body.style.setProperty('overflow', 'hidden');
+    document.getElementById(menuBtnId)?.focus();
+
+    onCleanup(() => {
+      document.body.style.removeProperty('overflow');
+      document.getElementById(menuBtnId)?.focus();
+    });
+  });
+
+  const handleMenuKeydown = (e: KeyboardEvent) => {
+    if (isMenuVisible() && e.key === 'Tab' && !e.shiftKey) {
+      const hamburgerMenuBtn = document.getElementById(menuBtnId);
+
+      hamburgerMenuBtn?.focus();
 
       e.preventDefault();
       e.stopPropagation();
@@ -66,7 +85,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
         </menu>
         <menu class={styles.rightSide}>
           <button
-            id={openMenuBtnId}
+            id={menuBtnId}
             aria-label={props.messages.openMenu}
             type="button"
             aria-haspopup="true"
@@ -136,7 +155,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
                 rel="noopener noreferrer"
                 target="_blank"
                 href={socialLinks.youtube.href}
-                onKeyDown={handleHamburgerMenuKeydown}
+                onKeyDown={handleMenuKeydown}
               >
                 {props.messages.ctaWatchOurVideos}
               </a>
