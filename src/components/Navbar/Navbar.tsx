@@ -27,6 +27,22 @@ export function Navbar(props: NavbarProps): JSX.Element {
   const isMenuVisible = () => !matches.lg && isMenuOpen();
   const navLinksEntries = () => Object.entries(navbarLinks[props.lang] ?? {});
 
+  const handleHamburgerMenuKeydown = (e: KeyboardEvent) => {
+    if (isMenuVisible() && e.key === 'Tab' && !e.shiftKey) {
+      const hamburgerMenuBtn: HTMLElement = document.querySelector(
+        '[class*=hamburgerMenuBtn]'
+      )!;
+
+      hamburgerMenuBtn.focus();
+
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      return false;
+    }
+  };
+
   return (
     <>
       <header
@@ -120,6 +136,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
                 rel="noopener noreferrer"
                 target="_blank"
                 href={socialLinks.youtube.href}
+                onKeyDown={handleHamburgerMenuKeydown}
               >
                 {props.messages.ctaWatchOurVideos}
               </a>
