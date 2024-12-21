@@ -41,12 +41,16 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: 'android(Pixel 7)',
-      use: { ...devices['Pixel 7'] },
+      name: 'Mobile Chrome (android)',
+      use: { ...devices['Pixel 7'], isMobile: true },
     },
     {
       name: 'Mobile Safari(iPhone)',
-      use: { ...devices['iPhone 15 Pro'] },
+      use: { ...devices['iPhone 15 Pro'], isMobile: true },
+    },
+    {
+      name: 'Firefox desktop',
+      use: { ...devices['Desktop Firefox'] },
     },
 
     /* Test against branded browsers. */

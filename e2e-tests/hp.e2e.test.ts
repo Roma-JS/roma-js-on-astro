@@ -1,30 +1,38 @@
 import { test, expect } from '@playwright/test';
+import {
+  expectH1,
+  expectHtmlLang,
+  expectValidCountrySelector,
+  expectValidFooter,
+} from './shared-e2e-tests';
+
+const urlMap = {
+  it: '/',
+  en: '/en',
+};
 
 test('italian HP is well formed', async ({ page }) => {
   await page.goto('./');
+  const lang = 'it';
+  await expectHtmlLang(page, lang);
+  await expectValidFooter(page);
+  await expectValidCountrySelector(page, lang, urlMap);
 
-  const html = page.locator('html');
-  const lang = await html.getAttribute('lang');
-
-  expect(lang).toBe('it');
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/La tech community di Javascript su Roma/);
 
-  const h1 = page.locator('h1');
-  await h1.isVisible();
-  await expect(h1).toHaveText(/La tech community di Javascript su Roma/);
+  await expectH1(page, /La tech community di Javascript su Roma/);
 });
 
 test('english HP is well formed', async ({ page }) => {
   await page.goto('./en');
+  const lang = 'en';
 
-  const html = page.locator('html');
-  const lang = await html.getAttribute('lang');
+  await expectHtmlLang(page, lang);
+  await expectValidFooter(page);
+  await expectValidCountrySelector(page, lang, urlMap);
 
-  expect(lang).toBe('en');
   await expect(page).toHaveTitle(/The Javascript community in Rome/);
 
-  const h1 = page.locator('h1');
-  await h1.isVisible();
-  await expect(h1).toHaveText(/The Javascript community in Rome/);
+  await expectH1(page, /The Javascript community in Rome/);
 });
