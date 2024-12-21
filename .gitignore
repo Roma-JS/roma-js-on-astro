@@ -35,3 +35,7 @@ package-lock.json
 *.idea
 
 .astro
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
