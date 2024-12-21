@@ -14,7 +14,7 @@ import { Navbar } from '@components/Navbar/Navbar';
 import BaseHead from '@components/BaseHead.astro';
 import { CategoriesList as CategoriesListComponent } from '@components/CategoriesList/CategoriesList';
 import { getNavbarMessages } from '@components/Navbar/helpers';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
@@ -41,12 +41,16 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body class={styles.wallpaper}>
     <article class="main">
-      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
+      <SkipToMainContent
+        client:load
+        targetId={h1HeadingDomId}
+        label={l10n('skipToMainContent')}
+      />
       <Navbar
         client:load
         lang={lang}

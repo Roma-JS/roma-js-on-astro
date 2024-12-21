@@ -19,7 +19,7 @@ import {
   type BreadcrumbsProps,
 } from '@components/Breadcrumbs/Breadcrumbs';
 import { l10n } from '@i18n/config';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
@@ -56,7 +56,7 @@ const breadcrumMessages = Object.fromEntries(
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body class={styles.wallpaper}>
