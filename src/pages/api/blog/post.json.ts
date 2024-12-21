@@ -1,4 +1,8 @@
-import { getBlogPostLink } from 'utils/blog';
+import {
+  ascendingCreatedAtComparator,
+  getBlogPostLink,
+  sortPosts,
+} from 'utils/blog';
 import { getCollection } from 'astro:content';
 
 export interface PostInfoDto {
@@ -10,11 +14,14 @@ export interface PostInfoDto {
     author: string;
   };
   url: string;
-  markdown: string;
+  markdown: string | null;
 }
 
 export async function GET() {
-  const posts = await getCollection('blog-posts');
+  const posts = sortPosts(
+    await getCollection('blog-posts'),
+    ascendingCreatedAtComparator
+  );
 
   return new Response(
     JSON.stringify(
@@ -28,7 +35,7 @@ export async function GET() {
             author: post.data.author,
           },
           url: getBlogPostLink(post),
-          markdown: post.body,
+          markdown: post.body ?? null,
         })
       )
     )

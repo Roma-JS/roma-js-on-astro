@@ -3,6 +3,7 @@ import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
 import '../styles/layouts/blogPost.scss';
 import BaseHead from '@components/BaseHead.astro';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { changeLanguage } from 'i18next';
@@ -22,17 +23,27 @@ import { ViewTransitions } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
+import type { CollectionEntry } from 'astro:content';
 
-const { content } = Astro.props;
+type CollectionData = CollectionEntry<'blog-posts'>['data'];
+export interface Props extends BaseHeadProps, CollectionData {
+  lang: Lang;
+}
 
-const { title, description, createdAt = '', categories = [] } = content;
+const {
+  title,
+  description,
+  createdAt = '',
+  categories = [],
+  lang = 'en',
+} = Astro.props;
+
 const canonicalURL = getCanonicalURL(Astro);
 
 const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
-const lang: Lang = content.lang || 'en';
 
 changeLanguage(lang);
 
@@ -50,7 +61,11 @@ const breadcrumMessages = Object.fromEntries(
 
   <body class={styles.wallpaper}>
     <article class="main">
-      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
+      <SkipToMainContent
+        client:load
+        targetId={h1HeadingDomId}
+        label={l10n('skipToMainContent')}
+      />
       <Navbar
         client:load
         lang={lang}

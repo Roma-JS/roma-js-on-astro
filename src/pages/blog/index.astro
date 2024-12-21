@@ -1,16 +1,16 @@
 ---
 import BlogPostListLayout from '@layouts/BlogPostList.astro';
 import { computeAllCategories, sortPosts } from '../../utils/blog';
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 
 // Component Script:
 // You can write any JavaScript/TypeScript that you'd like here.
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
 const title: string = 'RomaJS Blog';
-let description = 'The perfect starter for your perfect blog.';
+let description = 'A collection of blog posts curated by the RomaJS team';
 const lang = 'it';
-const posts = sortPosts(await getCollection('blog-posts'))
+const posts = sortPosts(await getCollection('blog-posts'));
 
 const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
 
