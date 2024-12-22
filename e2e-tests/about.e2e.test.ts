@@ -1,11 +1,5 @@
 import { test } from '@playwright/test';
-import {
-  expectH1,
-  expectHtmlLang,
-  expectValidCountrySelector,
-  expectValidFooter,
-  expectValidMeta,
-} from './shared-e2e-tests';
+import { expectH1, expectWellFormedPage } from './shared-e2e-tests';
 
 const urlMap = {
   it: '/it/about',
@@ -15,21 +9,19 @@ const urlMap = {
 test('italian about page is well formed', async ({ page }) => {
   await page.goto('./it/about');
   const lang = 'it';
-  await expectHtmlLang(page, lang);
-  await expectValidFooter(page);
-  await expectValidCountrySelector(page, lang, urlMap);
-  await expectValidMeta(page, lang);
 
-  await expectH1(page, /About RomaJS/);
+  await Promise.all([
+    expectWellFormedPage(page, lang, urlMap),
+    expectH1(page, /About RomaJS/i),
+  ]);
 });
 
 test('english about page is well formed', async ({ page }) => {
   await page.goto('./en/about');
   const lang = 'en';
-  await expectHtmlLang(page, lang);
-  await expectValidFooter(page);
-  await expectValidCountrySelector(page, lang, urlMap);
-  await expectValidMeta(page, lang);
 
-  await expectH1(page, /About RomaJS/);
+  await Promise.all([
+    expectWellFormedPage(page, lang, urlMap),
+    expectH1(page, /About RomaJS/i),
+  ]);
 });

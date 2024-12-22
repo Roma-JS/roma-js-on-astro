@@ -17,6 +17,38 @@ export async function expectHtmlLang(page: Page, expectedLang: ExpectedLang) {
 }
 
 /**
+ * Asserts that page contains valid `link[rel="alternate"]`
+ * @param page
+ * @param expectedLang
+ * @param urlMap
+ */
+export async function expectValidLinkRelAlternate(
+  page: Page,
+  expectedLang: ExpectedLang,
+  urlMap: Record<ExpectedLang, string>
+) {
+  const alternateLinksByLang = Object.fromEntries(
+    (
+      await Promise.all(
+        (
+          await page.locator('head > link[rel="alternate"]').all()
+        ).map((loc) =>
+          Promise.all([loc.getAttribute('hreflang'), loc.getAttribute('href')])
+        )
+      )
+    ).filter((entry): entry is [string, string] => !!entry[0] && !!entry[1])
+  );
+
+  for (const [lang, url] of Object.entries(urlMap)) {
+    if (lang === expectedLang) {
+      continue;
+    }
+
+    expect(alternateLinksByLang[lang]).toContain(url);
+  }
+}
+
+/**
  * Asserts that page has valid footer
  * @param page
  */
@@ -146,6 +178,17 @@ export async function expectValidMeta(page: Page, lang: ExpectedLang) {
   expect(
     await page.locator('head > link[rel="icon"]').getAttribute('href')
   ).toBe('/favicon.ico');
+  expect(
+    await page.locator('head > meta[name="viewport"]').getAttribute('content')
+  ).toBeTruthy();
+  expect(
+    await page.locator('head > meta[name="title"]').getAttribute('content')
+  ).toBeTruthy();
+  expect(
+    await page
+      .locator('head > meta[name="description"]')
+      .getAttribute('content')
+  ).toBeTruthy();
 
   const ogMetaAttributesFound = Object.fromEntries(
     (
@@ -167,4 +210,18 @@ export async function expectValidMeta(page: Page, lang: ExpectedLang) {
   for (const [property, content] of Object.entries(ogAttr)) {
     expect(ogMetaAttributesFound[property]).toContain(content);
   }
+}
+
+export async function expectWellFormedPage(
+  page: Page,
+  expectedLang: ExpectedLang,
+  urlMap: Record<ExpectedLang, string> | null
+) {
+  return Promise.all([
+    expectHtmlLang(page, expectedLang),
+    expectValidFooter(page),
+    urlMap && expectValidCountrySelector(page, expectedLang, urlMap),
+    urlMap && expectValidLinkRelAlternate(page, expectedLang, urlMap),
+    expectValidMeta(page, expectedLang),
+  ]);
 }
