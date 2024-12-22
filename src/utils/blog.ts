@@ -27,7 +27,7 @@ export function descendingCreatedAtComparator(
 }
 
 export function getBlogPostLink(blogPost: CollectionEntry<'blog-posts'>) {
-  return `/blog/post/${blogPost.slug}`;
+  return `/blog/post/${blogPost.id}`;
 }
 
 export function createSlug(content: string): string {
