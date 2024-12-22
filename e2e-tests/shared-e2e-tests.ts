@@ -177,7 +177,7 @@ export async function expectValidMeta(page: Page, lang: ExpectedLang) {
   ).toBe('utf-8');
   expect(
     await page.locator('head > link[rel="icon"]').getAttribute('href')
-  ).toBe('/favicon.ico');
+  ).toBe('/assets/favicon.ico');
   expect(
     await page.locator('head > meta[name="viewport"]').getAttribute('content')
   ).toBeTruthy();
