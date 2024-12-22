@@ -45,10 +45,10 @@ const linkRelAlternateProps = generateLinkRelAlternateProps(canonicalURL);
   property="twitter:image:alt"
   content="RomaJS, il meetup javascript di Roma"
 />
-<>
+<Fragment>
   {
     linkRelAlternateProps.map(({ hreflang, href }) => (
       <link rel="alternate" href={href} hreflang={hreflang} />
     ))
   }
-</>
+</Fragment>
