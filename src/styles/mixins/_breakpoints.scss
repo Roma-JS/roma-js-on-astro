@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 // Partially lifted from https://github.com/twbs/bootstrap/blob/8de048833049f8b6af2c07df2d44d98c1ee095db/scss/mixins/_breakpoints.scss
 
 $xs: 0;
@@ -18,14 +20,14 @@ $breakpoints: (
 );
 
 @mixin assert-valid-breakpoint($name) {
-  @if map-get($breakpoints, $name) == null {
+  @if map.get($breakpoints, $name) == null {
     @error "#{$name} is not a valid breakpoint. Expected one of #{map-keys($breakpoints)}";
   }
 }
 
 // Minimum breakpoint width. Null for the smallest (first) breakpoint.
 @function breakpoint-min($name) {
-  $min: map-get($breakpoints, $name);
+  $min: map.get($breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
@@ -36,7 +38,7 @@ $breakpoints: (
 // Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
 // See https://bugs.webkit.org/show_bug.cgi?id=178261
 @function breakpoint-max($name) {
-  $max: map-get($breakpoints, $name);
+  $max: map.get($breakpoints, $name);
   @return if($max and $max > 0, $max - 0.02, null);
 }
 
@@ -96,6 +98,6 @@ $breakpoints: (
 
 @mixin breakpoints-as-css-properties {
   @each $name, $value in $breakpoints {
-    --breakpoint-#{$name}: #{map-get($breakpoints, $name)};
+    --breakpoint-#{$name}: #{map.get($breakpoints, $name)};
   }
 }

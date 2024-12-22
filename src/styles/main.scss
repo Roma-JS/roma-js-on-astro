@@ -2,11 +2,11 @@
 @use './mixins/text';
 @use './mixins//breakpoints' as br;
 
-@import 'normalize.css/normalize.css';
-@import './utilities/layout';
-@import './utilities/open-sans';
-@import './utilities/btn';
-@import './utilities/animations';
+@use 'normalize.css/normalize.css';
+@use './utilities/layout';
+@use './utilities/open-sans';
+@use './utilities/btn';
+@use './utilities/animations';
 
 [hidden] {
   display: none !important;
