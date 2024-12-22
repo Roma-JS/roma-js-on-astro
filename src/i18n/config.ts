@@ -2,6 +2,7 @@ import type { I18nRouteParams, Lang } from './types';
 import { t as i18nextTranslate } from 'i18next';
 import type { TOptions } from 'i18next';
 import type L10nMessages from '../../public/locales/it/translation.json';
+import { hpUrlMap } from 'utils/routing';
 
 export const i18nLang = Object.freeze({
   it: {
@@ -47,6 +48,16 @@ export interface RelAlternateProps {
  */
 export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {
   const output: RelAlternateProps[] = [];
+
+  if (/^\/?$/.test(url.pathname)) {
+    // is index page ?
+    return [
+      {
+        href: hpUrlMap.en,
+        hreflang: 'en',
+      },
+    ];
+  }
 
   const result = routeParamsRegex.exec(url.pathname);
 
