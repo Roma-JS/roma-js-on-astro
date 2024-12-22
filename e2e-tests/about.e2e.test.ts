@@ -4,6 +4,7 @@ import {
   expectHtmlLang,
   expectValidCountrySelector,
   expectValidFooter,
+  expectValidMeta,
 } from './shared-e2e-tests';
 
 const urlMap = {
@@ -17,6 +18,7 @@ test('italian about page is well formed', async ({ page }) => {
   await expectHtmlLang(page, lang);
   await expectValidFooter(page);
   await expectValidCountrySelector(page, lang, urlMap);
+  await expectValidMeta(page, lang);
 
   await expectH1(page, /About RomaJS/);
 });
@@ -27,6 +29,7 @@ test('english about page is well formed', async ({ page }) => {
   await expectHtmlLang(page, lang);
   await expectValidFooter(page);
   await expectValidCountrySelector(page, lang, urlMap);
+  await expectValidMeta(page, lang);
 
   await expectH1(page, /About RomaJS/);
 });

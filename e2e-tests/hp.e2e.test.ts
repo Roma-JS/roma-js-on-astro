@@ -4,6 +4,7 @@ import {
   expectHtmlLang,
   expectValidCountrySelector,
   expectValidFooter,
+  expectValidMeta,
 } from './shared-e2e-tests';
 
 const urlMap = {
@@ -17,6 +18,7 @@ test('italian HP is well formed', async ({ page }) => {
   await expectHtmlLang(page, lang);
   await expectValidFooter(page);
   await expectValidCountrySelector(page, lang, urlMap);
+  await expectValidMeta(page, lang);
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/La tech community di Javascript su Roma/);
@@ -31,6 +33,7 @@ test('english HP is well formed', async ({ page }) => {
   await expectHtmlLang(page, lang);
   await expectValidFooter(page);
   await expectValidCountrySelector(page, lang, urlMap);
+  await expectValidMeta(page, lang);
 
   await expect(page).toHaveTitle(/The Javascript community in Rome/);
 
