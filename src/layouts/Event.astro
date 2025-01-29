@@ -1,0 +1,88 @@
+---
+import '../styles/main.scss';
+import '../styles/layouts/events.scss';
+import styles from '../styles/wallpaper.module.scss';
+import BaseHead from '@components/BaseHead.astro';
+import { BuildInfo } from '@components/BuildInfo/BuildInfo';
+import { Navbar } from '@components/Navbar/Navbar';
+import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
+import { changeLanguage } from 'i18next';
+import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
+import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import type { Lang } from '@i18n/types';
+import { getNavbarMessages } from '@components/Navbar/helpers';
+import { ClientRouter } from 'astro:transitions';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
+import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
+import { l10n } from '@i18n/config';
+import type { CollectionEntry } from 'astro:content';
+import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+
+type CollectionData = CollectionEntry<'events'>['data'];
+export interface Props extends BaseHeadProps, CollectionData {
+  lang: Lang;
+}
+
+const { title, description, lang = 'en', heroImg } = Astro.props;
+
+const canonicalURL = getCanonicalURL(Astro);
+
+const relativePageUrl =
+  canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
+  canonicalURL.search +
+  canonicalURL.hash;
+
+changeLanguage(lang);
+---
+
+<html lang={lang} class="rmjs-yellow-black-theme">
+  <head>
+    <BaseHead title={title} description={description} />
+    <slot name="head" />
+    <ClientRouter />
+  </head>
+  <body class={styles.wallpaper}>
+    <article class="main">
+      <SkipToMainContent
+        client:load
+        targetId={h1HeadingDomId}
+        label={l10n('skipToMainContent')}
+      />
+      <Navbar
+        client:load
+        lang={lang}
+        urlMap={aboutUrlMap}
+        relativePageUrl={relativePageUrl}
+        messages={getNavbarMessages()}
+      />
+      <SlantedHeader
+        {...slantedHeaderH1Config}
+        title={title}
+        logoHref={navbarLinks[lang]?.home}
+        logoLabel={'homepage'}
+      >
+        <BrandLogo class="logo-small" />
+      </SlantedHeader>
+      <div class="main-content center">
+        {
+          heroImg && (
+            <div class="hero-img-wrapper">
+              <img
+                loading="lazy"
+                src={heroImg.src}
+                width={heroImg.width}
+                height={heroImg.height}
+                alt={heroImg.alt}
+              />
+            </div>
+          )
+        }
+        <slot />
+      </div>
+      <footer><SocialLinksList /></footer>
+    </article>
+    <slot name="after" />
+    <BuildInfo />
+  </body>
+</html>
