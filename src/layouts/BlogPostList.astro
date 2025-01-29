@@ -11,7 +11,7 @@ import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { CategoriesList } from '@components/CategoriesList/CategoriesList';
-import type { CollectionEntry } from 'astro:content'
+import type { CollectionEntry } from 'astro:content';
 import type { Category } from 'utils/blog';
 import { BlogPostCard } from '@components/BlogPostCard/BlogPostCard';
 import { l10n } from '@i18n/config';
@@ -20,7 +20,7 @@ import {
   Breadcrumbs,
   type BreadcrumbsProps,
 } from '@components/Breadcrumbs/Breadcrumbs';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
@@ -59,12 +59,16 @@ const breadcrumMessages = Object.fromEntries(
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body class={styles.wallpaper}>
     <article class="main">
-      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
+      <SkipToMainContent
+        client:load
+        targetId={h1HeadingDomId}
+        label={l10n('skipToMainContent')}
+      />
       <Navbar
         client:load
         lang={lang}

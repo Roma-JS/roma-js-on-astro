@@ -124,6 +124,8 @@ periodically triggers the deployment.
 - `pnpm run test` runs tests
 - `pnpm run test:watch` runs tests in watch mode
 - `pnpm run astro:upgrade` upgrade astro deps to latest
+- `pnpm run test:e2e` run e2e tests
+- `pnpm run test:e2e:ui` run e2e2 tests in UI mode
 
 ## Designs
 

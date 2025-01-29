@@ -1,0 +1,14 @@
+.hero-img-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 1.5rem;
+
+  & img {
+    border-radius: 8px;
+    object-fit: contain;
+    max-width: 100%;
+    height: 100%;
+    width: min(100%, var(--hero-img-max-width, 720px));
+  }
+}

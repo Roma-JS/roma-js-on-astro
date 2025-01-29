@@ -3,7 +3,7 @@ import '../styles/main.scss';
 import styles from '../styles/wallpaper.module.scss';
 import '../styles/layouts/hp.scss';
 import BaseHead from '@components/BaseHead.astro';
-import BrandLogo  from '@components/BrandLogo/BrandLogo.astro';
+import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -12,12 +12,14 @@ import type { Lang } from '@i18n/types';
 import { getCanonicalURL, socialLinks } from 'utils/routing';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
-import { CFPCta } from '@components/CFPCta/CFPCta'
+import { CFPCta } from '@components/CFPCta/CFPCta';
 import { l10n } from '@i18n/config';
 import type { HpContent } from '../@types/hp';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import { h1HeadingDomId } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
+import eventsMetadata from '../data/events/events-metadata.json';
+import { createSlug } from 'utils/blog';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -34,7 +36,8 @@ const {
 } = Astro.props as Props;
 
 const canonicalURL = getCanonicalURL(Astro);
-
+const hrefByEventSlug: Record<string, string | undefined> =
+  eventsMetadata.hrefByEventSlug;
 const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
@@ -47,12 +50,16 @@ changeLanguage(lang);
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body class={styles.wallpaper}>
     <main class="main">
-      <SkipToMainContent client:load targetId={h1HeadingDomId} label={l10n('skipToMainContent')} />
+      <SkipToMainContent
+        client:load
+        targetId={h1HeadingDomId}
+        label={l10n('skipToMainContent')}
+      />
       <Navbar
         client:load
         lang={lang}
@@ -62,9 +69,11 @@ changeLanguage(lang);
       />
       <div class="hp-wrapper">
         <section class="hp-section logo-hero">
-          <BrandLogo class='logo'/>
+          <BrandLogo class="logo" />
           <div class="logo-hero__text hero">
-            <h1 id={h1HeadingDomId} tabindex="-1" class="h-1">{title}</h1><span class="h-1">{description}</span>
+            <h1 id={h1HeadingDomId} tabindex="-1" class="h-1">{title}</h1><span
+              class="h-1">{description}</span
+            >
           </div>
           <a
             class="btn btn-secondary slack-link h-1"
@@ -86,27 +95,49 @@ changeLanguage(lang);
           sections.map((section) => (
             <section class="arrow-box hp-section">
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
-              {section.body.map(body => <p class="h-2 h-dynamic">{body}</p>)}
-              {section.startDate && <time class="h-2 h-dynamic" datetime={section.startDate.dateTime}>{section.startDate.label}</time>}
+              {section.body.map((body) => {
+                const slug = createSlug(body);
+                const href: string | undefined = hrefByEventSlug[slug];
+
+                return (
+                  <p class="h-2 h-dynamic">
+                    {href ? (
+                      <a class="hp-link" href={href}>
+                        {body}
+                      </a>
+                    ) : (
+                      body
+                    )}
+                  </p>
+                );
+              })}
+              {section.startDate && (
+                <time
+                  class="h-2 h-dynamic"
+                  datetime={section.startDate.dateTime}
+                >
+                  {section.startDate.label}
+                </time>
+              )}
               <div class="hp-section-links">
                 {!!section.cta && (
-                <a
-                  class="btn btn-outline btn-tertiary"
-                  href={section.cta.href}
-                  hreflang={section.cta.lang || undefined}
-                >
-                  {section.cta.text}
-                </a>
-              )}
+                  <a
+                    class="btn btn-outline btn-tertiary"
+                    href={section.cta.href}
+                    hreflang={section.cta.lang || undefined}
+                  >
+                    {section.cta.text}
+                  </a>
+                )}
                 {!!section.venue && (
-                <a
-                class="btn btn-outline btn-tertiary"
-                  href={section.venue.href}
-                  hreflang={section.venue.lang || undefined}
-                >
-                  {section.venue.text}
-                </a>
-              )}
+                  <a
+                    class="btn btn-outline btn-tertiary"
+                    href={section.venue.href}
+                    hreflang={section.venue.lang || undefined}
+                  >
+                    {section.venue.text}
+                  </a>
+                )}
               </div>
             </section>
           ))
@@ -114,7 +145,14 @@ changeLanguage(lang);
       </div>
       <slot />
       <div class="cfp-wrapper">
-        <p class="h-2"><CFPCta style={{ '--cta-bg': 'var(--text-secondary)', '--cta-text': 'var(--text-primary)' }}>{l10n('ctaRequestTalk')}</CFPCta></p>
+        <p class="h-2">
+          <CFPCta
+            style={{
+              '--cta-bg': 'var(--text-secondary)',
+              '--cta-text': 'var(--text-primary)',
+            }}>{l10n('ctaRequestTalk')}</CFPCta
+          >
+        </p>
       </div>
       <section class="contacts-cta">
         <p class="h-2">{l10n('ctaDiscussWebDev')}</p>
