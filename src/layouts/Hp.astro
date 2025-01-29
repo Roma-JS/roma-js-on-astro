@@ -18,6 +18,8 @@ import type { HpContent } from '../@types/hp';
 import { ClientRouter } from 'astro:transitions';
 import { h1HeadingDomId } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
+import eventsMetadata from '../data/events/events-metadata.json';
+import { createSlug } from 'utils/blog';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -34,7 +36,8 @@ const {
 } = Astro.props as Props;
 
 const canonicalURL = getCanonicalURL(Astro);
-
+const hrefByEventSlug: Record<string, string | undefined> =
+  eventsMetadata.hrefByEventSlug;
 const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
@@ -92,9 +95,22 @@ changeLanguage(lang);
           sections.map((section) => (
             <section class="arrow-box hp-section">
               <h2 class="h-2 h-dynamic">{section.heading}</h2>
-              {section.body.map((body) => (
-                <p class="h-2 h-dynamic">{body}</p>
-              ))}
+              {section.body.map((body) => {
+                const slug = createSlug(body);
+                const href: string | undefined = hrefByEventSlug[slug];
+
+                return (
+                  <p class="h-2 h-dynamic">
+                    {href ? (
+                      <a class="hp-link" href={href}>
+                        {body}
+                      </a>
+                    ) : (
+                      body
+                    )}
+                  </p>
+                );
+              })}
               {section.startDate && (
                 <time
                   class="h-2 h-dynamic"
