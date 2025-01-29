@@ -106,18 +106,14 @@ body {
     width: 100%;
     z-index: var(--footer-z-index);
   }
+
+  a:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 .main-content {
   padding: 24px 20px var(--footer-height);
-
-  a {
-    color: var(--accent-primary);
-
-    &:focus-visible {
-      outline: var(--accent-primary) auto 1px;
-    }
-  }
 
   hr {
     border-color: var(--accent-primary);
@@ -125,6 +121,17 @@ body {
     border-width: 1px;
     border-style: solid;
     height: 0;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  a {
+    font-weight: 500;
+    color: var(--accent-primary);
+
+    &:focus-visible {
+      outline: var(--accent-primary) auto 1px;
+    }
   }
 
   @include br.media-breakpoint-up(lg) {
