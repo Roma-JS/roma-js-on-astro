@@ -1,0 +1,11 @@
+.hero-img-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 1.5rem;
+
+  & img {
+    object-fit: contain;
+    max-width: 100%;
+  }
+}

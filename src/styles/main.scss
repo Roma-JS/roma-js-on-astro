@@ -119,8 +119,21 @@ body {
     }
   }
 
+  hr {
+    border-color: var(--accent-primary);
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    height: 0;
+  }
+
   @include br.media-breakpoint-up(lg) {
     padding: 40px 40px var(--footer-height);
+  }
+
+  &.center {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
