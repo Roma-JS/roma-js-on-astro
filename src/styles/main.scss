@@ -6,6 +6,7 @@
 @import './utilities/layout';
 @import './utilities/open-sans';
 @import './utilities/btn';
+@import './utilities/link';
 @import './utilities/animations';
 
 [hidden] {
@@ -132,6 +133,10 @@ body {
     &:focus-visible {
       outline: var(--accent-primary) auto 1px;
     }
+  }
+
+  li {
+    margin-bottom: 0.5rem;
   }
 
   @include br.media-breakpoint-up(lg) {

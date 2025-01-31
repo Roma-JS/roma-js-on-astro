@@ -3,6 +3,11 @@ title: 'RomaJS Special Edition #NaN'
 description: 'JavaScript, community e networking in un sabato pomeriggio targato RomaJS.'
 createdAt: '2025-01-29T07:10:12.427Z'
 categories: ['RomaJS', 'event']
+abstracts:
+  [
+    'typescript-arriva-in-nodejs-by-marco-ippolito',
+    'nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna',
+  ]
 heroImg:
   {
     src: '/assets/2025-02-15-romajs-special-edition.webp',
@@ -33,8 +38,8 @@ L'agenda è in fase di definizione. Annunceremo nei prossimi giorni gli speaker.
 
 - 14:30 Aperture porte
 - 14:50 Opening
-- 15:00 Talk: **TypeScript arriva in Node.js** - Speaker [Marco Ippolito](https://it.linkedin.com/in/marcoippolito2021)
-- 15:50 Slot intervento
+- 15:00 Talk: <button class="link" type="button" data-modal="typescript-arriva-in-nodejs-by-marco-ippolito">TypeScript arriva in Node.js</button>
+- 15:50 Talk: <button class="link" type="button" data-modal="nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna">Node.js: più thread di quelli che immagini</button>
 - 16:40 Coffe break
 - 17:20 Slot intervento
 - 18:10 Slot intervento

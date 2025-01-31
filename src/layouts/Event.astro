@@ -18,13 +18,21 @@ import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainConte
 import { l10n } from '@i18n/config';
 import type { CollectionEntry } from 'astro:content';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
+import { getEntries, render } from 'astro:content';
+import { AbstractModal } from '@components/AbstractModal/AbstractModal';
 
 type CollectionData = CollectionEntry<'events'>['data'];
 export interface Props extends BaseHeadProps, CollectionData {
   lang: Lang;
 }
 
-const { title, description, lang = 'en', heroImg } = Astro.props;
+const {
+  title,
+  description,
+  lang = 'en',
+  heroImg,
+  abstracts = [],
+} = Astro.props;
 
 const canonicalURL = getCanonicalURL(Astro);
 
@@ -33,6 +41,11 @@ const relativePageUrl =
   canonicalURL.search +
   canonicalURL.hash;
 
+const abstractEntries = await getEntries(abstracts).then((entries) =>
+  Promise.all(
+    entries.map(async (entry) => ({ entry, rendered: await render(entry) }))
+  )
+);
 changeLanguage(lang);
 ---
 
@@ -82,6 +95,19 @@ changeLanguage(lang);
       </div>
       <footer><SocialLinksList /></footer>
     </article>
+    {
+      abstractEntries.map(({ entry, rendered: { Content } }) => {
+        return (
+          <AbstractModal
+            client:idle
+            abstract={entry}
+            messages={{ talkSpeaker: l10n('talkSpeaker') }}
+          >
+            <Content />
+          </AbstractModal>
+        );
+      })
+    }
     <slot name="after" />
     <BuildInfo />
   </body>
