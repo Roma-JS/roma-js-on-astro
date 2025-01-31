@@ -49,8 +49,17 @@
   min-width: 2.5rem;
   line-height: 1;
   padding: 0;
+  background: transparent;
+
+  &:focus-visible {
+    outline: var(--accent-primary) auto 1px;
+    outline-offset: 4px;
+    outline-width: solid;
+  }
 }
 
-.close.btn {
-  background: transparent;
+@media (hover: hover) {
+  .close:hover {
+    background: var(--btn-bg-color);
+  }
 }
