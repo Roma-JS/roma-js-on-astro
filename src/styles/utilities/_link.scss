@@ -1,0 +1,19 @@
+.link {
+  appearance: none;
+  font-weight: 500;
+  color: var(--accent-primary);
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+
+  &:focus-visible {
+    outline: var(--accent-primary) auto 1px;
+  }
+}
+
+.link:disabled {
+  cursor: default;
+}

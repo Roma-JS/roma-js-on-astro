@@ -1,7 +1,7 @@
 $display-values: none, inline, inline-block, block, grid, flex, inline-flex,
   contents;
 $position-values: sticky, static, relative, absolute, fixed;
-$overflow-values: auto, hidden, visible, scroll;
+$overflow-values: auto, hidden, visible, scroll, clip;
 
 @each $value in $overflow-values {
   .overflow-#{$value} {
