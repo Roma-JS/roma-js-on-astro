@@ -27,6 +27,10 @@ export function Modal(props: ModalProps) {
   ]);
   let dialogRef: HTMLDialogElement | undefined;
 
+  function handleModalStateChange(this: HTMLDialogElement) {
+    document.documentElement.classList.toggle('overflow-hidden', this.open);
+  }
+
   const handleWindowClick = ({ target }: MouseEvent) => {
     if (!(target instanceof Element) || !dialogRef) {
       return;
@@ -35,7 +39,8 @@ export function Modal(props: ModalProps) {
       target.getAttribute('data-modal') === local.id &&
       !dialogRef.contains(target)
     ) {
-      dialogRef?.showModal();
+      dialogRef.showModal();
+      handleModalStateChange.call(dialogRef);
     }
   };
 
@@ -51,9 +56,10 @@ export function Modal(props: ModalProps) {
 
   createEffect(() => {
     window.addEventListener('click', handleWindowClick);
-
+    dialogRef?.addEventListener('close', handleModalStateChange);
     onCleanup(() => {
       window.removeEventListener('click', handleWindowClick);
+      dialogRef?.removeEventListener('close', handleModalStateChange);
     });
   });
 

@@ -1,5 +1,6 @@
 .modal::backdrop {
   background: rgb(0, 0, 0, 0.5);
+  touch-action: none; /* prevent scroll on iOS when modal is open */
 }
 
 .modal {
