@@ -12,7 +12,11 @@ export interface AbstractModalProps
 }
 
 export function AbstractModal(props: AbstractModalProps) {
-  const [local, otherProps] = splitProps(props, ['children', 'abstract']);
+  const [local, otherProps] = splitProps(props, [
+    'children',
+    'abstract',
+    'messages',
+  ]);
   return (
     <Modal
       {...otherProps}
@@ -20,7 +24,7 @@ export function AbstractModal(props: AbstractModalProps) {
       heading={local.abstract.data.title}
       preHeading={
         <aside>
-          {props.messages.talkSpeaker}:{' '}
+          {local.messages.talkSpeaker}:{' '}
           <Show
             when={local.abstract.data.website}
             fallback={local.abstract.data.author}

@@ -3,7 +3,6 @@ import {
   splitProps,
   createEffect,
   onCleanup,
-  Show,
   type JSX,
 } from 'solid-js';
 import styles from './modal.module.scss';
