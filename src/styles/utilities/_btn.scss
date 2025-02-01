@@ -48,6 +48,11 @@
   }
 }
 
+a.btn:not(:disabled),
+button.btn:not(:disabled) {
+  cursor: pointer;
+}
+
 .btn[aria-current='page'],
 .btn[aria-current='page']:active {
   color: var(--btn-accent);
