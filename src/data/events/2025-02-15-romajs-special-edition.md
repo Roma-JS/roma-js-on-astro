@@ -29,7 +29,7 @@ Dal 2013 a oggi abbiamo imparato quanto gli eventi sul territorio siano fondamen
 
 Quest'anno abbiamo deciso di fare un passo in avanti e organizzare un incontro pomeridiano in pieno stile RomaJS:
 
-4 ore di talk e networking, all'interno del coworking [Millepiani](http://www.millepiani.eu/), in [Via Nicolo Odero 13](https://maps.app.goo.gl/175r1oifsjwEPjcF8), nel cuore della Garbatella.
+Il 15 Febbraio dalle 14,30 ci ritreveremo per quattro ore di talk e networking, all'interno del coworking [Millepiani](http://www.millepiani.eu/), in [Via Nicolo Odero 13](https://maps.app.goo.gl/175r1oifsjwEPjcF8), nel cuore della Garbatella.
 
 ---
 
