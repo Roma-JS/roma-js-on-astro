@@ -24,8 +24,12 @@ jobs:
       - name: log info
         run: >
           printf 'commit -> %s\nbranch -> %s\n' "$(git rev-parse --short HEAD)" "$(git branch --show-current)"
-      - name: Enable corepack
-        run: 'corepack enable'
+      - name: Setup corepack
+        run: |
+          echo "Before: corepack version => $(corepack --version || echo 'not installed')"
+          npm install -g corepack@latest
+          echo "After : corepack version => $(corepack --version)"
+          corepack enable
       - name: log node and package manager
         run: 'printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
       - name: Install dependencies

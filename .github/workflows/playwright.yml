@@ -13,8 +13,17 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
+    - name: Setup corepack
+      run: |
+        echo "Before: corepack version => $(corepack --version || echo 'not installed')"
+        npm install -g corepack@latest
+        echo "After : corepack version => $(corepack --version)"
+        corepack enable
+        echo "pnpm version $(pnpm --version)"
+    - name: log node & package manager
+      run: 'printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
     - name: Install dependencies
-      run: corepack enable && pnpm install
+      run: pnpm install --frozen-lockfile
     - name: Install Playwright Browsers
       run: pnpm exec playwright install --with-deps
     - name: Run Playwright tests

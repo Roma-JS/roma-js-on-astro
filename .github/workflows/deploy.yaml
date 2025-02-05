@@ -25,8 +25,12 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
-      - name: Enable corepack
-        run: 'corepack enable'
+      - name: Setup corepack
+        run: |
+          echo "Before: corepack version => $(corepack --version || echo 'not installed')"
+          npm install -g corepack@latest
+          echo "After : corepack version => $(corepack --version)"
+          corepack enable
       - name: log node & package manager
         run: 'printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
       - name: Install dependencies
