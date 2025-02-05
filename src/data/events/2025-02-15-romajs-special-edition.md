@@ -7,6 +7,7 @@ abstracts:
   [
     'typescript-arriva-in-nodejs-by-marco-ippolito',
     'nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna',
+    'local-first-sync-is-the-new-way-by-guido-dorsi',
   ]
 heroImg:
   {
@@ -28,7 +29,7 @@ Dal 2013 a oggi abbiamo imparato quanto gli eventi sul territorio siano fondamen
 
 Quest'anno abbiamo deciso di fare un passo in avanti e organizzare un incontro pomeridiano in pieno stile RomaJS:
 
-4 ore di talk e networking, all'interno del coworking [Millepiani](http://www.millepiani.eu/), in [Via Nicolo Odero 13](https://maps.app.goo.gl/175r1oifsjwEPjcF8), nel cuore della Garbatella.
+Il 15 Febbraio dalle 14,30 ci ritreveremo per quattro ore di talk e networking, all'interno del coworking [Millepiani](http://www.millepiani.eu/), in [Via Nicolo Odero 13](https://maps.app.goo.gl/175r1oifsjwEPjcF8), nel cuore della Garbatella.
 
 ---
 
@@ -41,9 +42,12 @@ L'agenda è in fase di definizione. Annunceremo nei prossimi giorni gli speaker.
 - 15:00 Talk: <button class="link" type="button" data-modal="typescript-arriva-in-nodejs-by-marco-ippolito">TypeScript arriva in Node.js</button>
 - 15:50 Talk: <button class="link" type="button" data-modal="nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna">Node.js: più thread di quelli che immagini</button>
 - 16:40 Coffe break
-- 17:20 Slot intervento
-- 18:10 Slot intervento
-- 19:00 Saluti
+- 17:10 Talk <button class="link" type="button" data-modal="local-first-sync-is-the-new-way-by-guido-dorsi">Local-first: sync is the new way!</button>
+- 18:00 Lightning talk ⚡️
+- 18:10 Lightning talk ⚡️
+- 18:20 Lightning talk ⚡️
+- 18:40 Lightning talk ⚡️
+- 18:50 - 19:00 Saluti
 
 ---
 
