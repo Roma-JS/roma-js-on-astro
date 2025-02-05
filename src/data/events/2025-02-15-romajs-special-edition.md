@@ -43,7 +43,10 @@ L'agenda è in fase di definizione. Annunceremo nei prossimi giorni gli speaker.
 - 15:50 Talk: <button class="link" type="button" data-modal="nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna">Node.js: più thread di quelli che immagini</button>
 - 16:40 Coffe break
 - 17:10 Talk <button class="link" type="button" data-modal="local-first-sync-is-the-new-way-by-guido-dorsi">Local-first: sync is the new way!</button>
-- 18:10 Lightning talks ⚡️
+- 18:00 Lightning talk ⚡️
+- 18:10 Lightning talk ⚡️
+- 18:20 Lightning talk ⚡️
+- 18:40 Lightning talk ⚡️
 - 18:50 - 19:00 Saluti
 
 ---
