@@ -43,10 +43,9 @@ L'agenda è in fase di definizione. Annunceremo nei prossimi giorni gli speaker.
 - 15:50 Talk: <button class="link" type="button" data-modal="nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna">Node.js: più thread di quelli che immagini</button>
 - 16:40 Coffe break
 - 17:10 Talk <button class="link" type="button" data-modal="local-first-sync-is-the-new-way-by-guido-dorsi">Local-first: sync is the new way!</button>
-- 18:00 Lightning talk ⚡️
-- 18:10 Lightning talk ⚡️
-- 18:20 Lightning talk ⚡️
-- 18:40 Lightning talk ⚡️
+- 18:10 ⚡️ Talk: **Lean Web: Manifesto per un web sostenibile** | Emiliano Pisu
+- 18:20 ⚡️ Talk: **Think Deferrable** | Giorgio Galassi
+- 18:30 ⚡️ Talk: **Signal in React: si! può!! fare!!!!** | Enrico Giacomazzi
 - 18:50 - 19:00 Saluti
 
 ---
@@ -62,6 +61,16 @@ L'evento è **gratuito**.
 Abbiamo un numero limitato di posti. Nel rispetto di tutti, chiediamo gentilmente di annullare la prenotazione nel caso in cui ci si rende conto di non poter partecipare.
 
 È attiva una waiting list automatica, per cui anche annullarlo il giorno prima può dare la possibilità a qualcun altro di partecipare.
+
+---
+
+## BRING YOUR OWN LANYARD
+
+Il nostro scopo come RomaJS è quello di creare questi momenti di condivisione e renderli sostenibili. Per questo motivo, oltre ad aver stampato i badge su carta ecosostenibile, abbiamo deciso di creare l'iniziativa **BRING YOUR OWN LANYARD**: ogni conferenza ha il suo laccetto, che teniamo gelosamente nel cassetto insieme agli altri 30.
+
+Invece di mettere nel cassetto un altro laccetto, chiediamo ai nostri partecipanti di portare il loro lanyard a cui appendere il badge dell'evento (e se ne avete più di uno da condividere, portateli per chi non li avrà).
+
+Sarà bellissimo vedere 100 laccetti di colore diverso tra tutti i partecipanti 🌈
 
 ---
 

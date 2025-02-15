@@ -25,7 +25,7 @@
   "engines": {
     "node": "^22.0.0"
   },
-  "packageManager": "pnpm@10.2.0",
+  "packageManager": "pnpm@10.4.0",
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/rss": "^4.0.10",
