@@ -64,6 +64,16 @@ Abbiamo un numero limitato di posti. Nel rispetto di tutti, chiediamo gentilment
 
 ---
 
+## BRING YOUR OWN LANYARD
+
+Il nostro scopo come RomaJS è quello di creare questi momenti di condivisione e renderli sostenibili. Per questo motivo, oltre ad aver stampato i badge su carta ecosostenibile, abbiamo deciso di creare l'iniziativa **BRING YOUR OWN LANYARD**: ogni conferenza ha il suo laccetto, che teniamo gelosamente nel cassetto insieme agli altri 30.
+
+Invece di mettere nel cassetto un altro laccetto, chiediamo ai nostri partecipanti di portare il loro lanyard a cui appendere il badge dell'evento (e se ne avete più di uno da condividere, portateli per chi non li avrà).
+
+Sarà bellissimo vedere 100 laccetti di colore diverso tra tutti i partecipanti 🌈
+
+---
+
 ## Community: sociale e circolarità
 
 Il coworking [Millepiani](http://www.millepiani.eu/) è uno spazio offerto dal VIII Municipio di Roma e gestito dall'associazione Millepiani APS, il cui obiettivo è quello di favorire lo sviluppo di una comunità collaborativa ed autogestita, che accoglie ogni giorno nuovi freelancer, imprese, associazioni, startup, sostenendo gratuitamente chi è colpito professionalmente dalla precarietá o dalle emergenze, avvalendosi del supporto dei membri e delle associazioni.
