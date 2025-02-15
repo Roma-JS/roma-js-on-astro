@@ -37,16 +37,16 @@ Il 15 Febbraio dalle 14,30 ci ritreveremo per quattro ore di talk e networking, 
 
 L'agenda è in fase di definizione. Annunceremo nei prossimi giorni gli speaker. Per rimanere aggiornato, segui la nostra pagina [Linkedin](https://www.linkedin.com/company/romajs/).
 
-- 14:30 Aperture porte
-- 14:50 Opening
-- 15:00 Talk: <button class="link" type="button" data-modal="typescript-arriva-in-nodejs-by-marco-ippolito">TypeScript arriva in Node.js</button>
-- 15:50 Talk: <button class="link" type="button" data-modal="nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna">Node.js: più thread di quelli che immagini</button>
-- 16:40 Coffe break
-- 17:10 Talk <button class="link" type="button" data-modal="local-first-sync-is-the-new-way-by-guido-dorsi">Local-first: sync is the new way!</button>
+- 14:50 ☀️ Opening
+- 15:00 🎙️ Talk: <button class="link" type="button" data-modal="typescript-arriva-in-nodejs-by-marco-ippolito">TypeScript arriva in Node.js</button>
+- 15:50 🎙️ Talk: <button class="link" type="button" data-modal="nodejs-piu-thread-di-quelli-che-immagini-by-paolo-insogna">Node.js: più thread di quelli che immagini</button>
+- 16:40 ☕️ Coffe break
+- 17:10 🎙️ Talk: <button class="link" type="button" data-modal="local-first-sync-is-the-new-way-by-guido-dorsi">Local-first: sync is the new way!</button>
+- 18:00 ⚡️ Talk: **Testing JavaScript beyond the basics: Quick wins for better quality** | Ludovico Besana
 - 18:10 ⚡️ Talk: **Lean Web: Manifesto per un web sostenibile** | Emiliano Pisu
 - 18:20 ⚡️ Talk: **Think Deferrable** | Giorgio Galassi
 - 18:30 ⚡️ Talk: **Signal in React: si! può!! fare!!!!** | Enrico Giacomazzi
-- 18:50 - 19:00 Saluti
+- 18:40 👋 Saluti
 
 ---
 
