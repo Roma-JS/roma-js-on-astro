@@ -6,6 +6,7 @@ import {
 } from '@api/meetup/queries.server';
 import { formatVenueMapsHref } from 'utils/venue';
 import { formatDate } from '@i18n/date-time';
+import { computeScheduledEvents } from 'utils/meetup-events';
 
 const lng = 'en';
 
@@ -14,31 +15,33 @@ export async function getEnHpContent(): Promise<Readonly<HpContent>> {
     fetchUpcomingRomajsEvents(),
     fetchAllPastRomajsEvents(),
   ]);
-  const nextEvent = upcomingEvents?.[0] || null;
+  const nextEventsByDate = computeScheduledEvents(upcomingEvents).sort(
+    (a, b) => a.epochTimeMs - b.epochTimeMs
+  );
   const latestPastEvent = previousEvents?.[0];
 
   const sections: HpContent['sections'] = [];
 
-  if (nextEvent) {
-    sections.push({
+  sections.push(
+    ...nextEventsByDate.map(({ data }) => ({
       heading: l10n('nextTalkTitle', { lng }),
-      body: [nextEvent.title ?? ''].filter(Boolean),
+      body: [data.title ?? ''].filter(Boolean),
       startDate: {
-        dateTime: nextEvent.dateTime,
-        label: formatDate(lng, nextEvent.dateTime),
+        dateTime: data.dateTime,
+        label: formatDate(lng, data.dateTime),
       },
       cta: {
-        href: nextEvent.eventUrl,
+        href: data.eventUrl,
         text: l10n('ctaRegister', { lng }),
       },
-      venue: nextEvent.venue
+      venue: data.venue
         ? {
-            href: formatVenueMapsHref(nextEvent.venue),
+            href: formatVenueMapsHref(data.venue),
             text: l10n('ctaVenue', { lng }),
           }
         : undefined,
-    });
-  }
+    }))
+  );
 
   if (latestPastEvent) {
     sections.push({
