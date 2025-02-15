@@ -70,7 +70,7 @@ export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {
   lang = lang.toLowerCase();
 
   for (const hreflang of Object.keys(i18nLang)) {
-    if (hreflang !== lang) {
+    if (hreflang === lang) {
       const altUrl = new URL(url);
 
       altUrl.pathname = `/${hreflang}${altUrl.pathname.slice(
