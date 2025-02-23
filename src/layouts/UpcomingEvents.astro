@@ -7,7 +7,6 @@ import { EventsList } from '@components/EventsList/EventsList';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
-import { changeLanguage } from 'i18next';
 import {
   getCanonicalURL,
   navbarLinks,
@@ -21,7 +20,7 @@ import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import type { UpcomingEvent } from 'utils/meetup-events';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
-import { l10n } from '@i18n/config';
+import { createTranslate } from '@i18n/translate';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -36,8 +35,7 @@ const relativePageUrl =
   canonicalURL.pathname.replace(/([^/]+)\/$/g, '$1') +
   canonicalURL.search +
   canonicalURL.hash;
-
-changeLanguage(lang);
+const l10n = await createTranslate(lang);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -58,7 +56,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={upcomingEventsUrlMap}
         relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages()}
+        messages={getNavbarMessages(l10n)}
       />
       <SlantedHeader
         {...slantedHeaderH1Config}

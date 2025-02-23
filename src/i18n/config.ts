@@ -1,7 +1,4 @@
 import type { I18nRouteParams, Lang } from './types';
-import { t as i18nextTranslate } from 'i18next';
-import type { TOptions } from 'i18next';
-import type L10nMessages from '../../public/locales/it/translation.json';
 import { hpUrlMap } from 'utils/routing';
 
 export const i18nLang = Object.freeze({
@@ -86,15 +83,3 @@ export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {
 
   return output;
 }
-
-export type L10nKey = keyof typeof L10nMessages;
-
-export interface TranslateMessage {
-  (args: L10nKey | L10nKey[]): string;
-  <TInterpolationMap extends Record<string, any>>(
-    args: L10nKey,
-    options: TOptions<TInterpolationMap>
-  ): string;
-}
-
-export const l10n = i18nextTranslate as TranslateMessage;

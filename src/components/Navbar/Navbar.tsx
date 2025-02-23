@@ -5,6 +5,7 @@ import {
   onCleanup,
   Show,
   type JSX,
+  createMemo,
 } from 'solid-js';
 import {
   LangSelector,
@@ -32,7 +33,12 @@ export function Navbar(props: NavbarProps): JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = createSignal(false);
   const matches = createAppBreakpoints();
   const isMenuVisible = () => !matches.lg && isMenuOpen();
-  const navLinksEntries = () => Object.entries(navbarLinks[props.lang] ?? {});
+  const navLinksEntries = createMemo(() =>
+    Object.entries(navbarLinks[props.lang] ?? {}).map(([key, href]) => [
+      props.messages[key as keyof NavbarMessages] ?? key,
+      href,
+    ])
+  );
 
   createEffect(() => {
     if (!isMenuVisible()) {

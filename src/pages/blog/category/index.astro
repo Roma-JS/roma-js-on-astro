@@ -1,18 +1,17 @@
 ---
-import { l10n } from '@i18n/config';
+import { createTranslate } from '@i18n/translate';
+import type { Lang } from '@i18n/types';
 import CategoriesListLayout from '@layouts/CategoriesList.astro';
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 import { computeAllCategories } from 'utils/blog';
-import { changeLanguage } from 'i18next';
 
-const post = await getCollection('blog-posts')
+const post = await getCollection('blog-posts');
 const allCategories = Array.from(
   computeAllCategories(post, import.meta.env.BASE_URL).values()
 );
 
-const lang = 'it';
-
-changeLanguage(lang);
+const lang: Lang = 'it';
+const l10n = await createTranslate(lang);
 ---
 
 <CategoriesListLayout
