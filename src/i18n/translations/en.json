@@ -27,5 +27,10 @@
   "itWebsite": "Italian website",
   "enWebsite": "English website",
   "skipToMainContent": "Skip to main content",
-  "talkSpeaker": "Speaker"
+  "talkSpeaker": "Speaker",
+  "upcomingEvents": "Upcoming events",
+  "pastEvents": "Previous events",
+  "homepage": "home",
+  "aboutPage": "about",
+  "blog": "blog"
 }

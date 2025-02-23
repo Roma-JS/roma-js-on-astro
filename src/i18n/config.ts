@@ -1,5 +1,5 @@
 import type { I18nRouteParams, Lang } from './types';
-import { hpUrlMap } from 'utils/routing';
+import { routes, type RouteKey } from 'utils/routing';
 
 export const i18nLang = Object.freeze({
   it: {
@@ -25,17 +25,12 @@ export function getI18nRouteParams(): I18nRouteParams[] {
   }));
 }
 
-const routeParamsRegex = new RegExp(
-  `^(?<leadingSlash>\/?)(?<lang>${Object.keys(i18nLang).join(
-    '|'
-  )})(?<rest>.*)$`,
-  'i'
-);
-
 export interface RelAlternateProps {
   href: string;
   hreflang: string;
 }
+
+const trimTrailingSlash = (path: string) => path.replace(/\/+$/g, '');
 
 /**
  * Generates a list `link[rel="alternate"]` attributes given input url.
@@ -43,41 +38,32 @@ export interface RelAlternateProps {
  * @returns
  * @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
  */
-export function generateLinkRelAlternateProps(url: URL): RelAlternateProps[] {
+export function generateLinkRelAlternateProps(
+  pageLang: Lang,
+  url: URL
+): RelAlternateProps[] {
   const output: RelAlternateProps[] = [];
+  const pathnameToSearch = trimTrailingSlash(url.pathname);
 
-  if (/^\/?$/.test(url.pathname)) {
-    // is index page ?
-    return [
-      {
-        href: hpUrlMap.en,
-        hreflang: 'en',
-      },
-    ];
-  }
+  const routeKey = Object.entries(routes[pageLang]).find(
+    ([, pathname]) => pathnameToSearch === trimTrailingSlash(pathname)
+  )?.[0] as RouteKey;
 
-  const result = routeParamsRegex.exec(url.pathname);
+  if (routeKey) {
+    for (const [lang, langRoutes] of Object.entries(routes)) {
+      if (lang === pageLang) {
+        continue;
+      }
 
-  if (!result || !result.groups) {
-    return output;
-  }
+      const relativeUrl: string | undefined =
+        langRoutes[routeKey as keyof typeof langRoutes];
 
-  let { leadingSlash, lang } = result.groups;
-
-  lang = lang.toLowerCase();
-
-  for (const hreflang of Object.keys(i18nLang)) {
-    if (hreflang !== lang) {
-      const altUrl = new URL(url);
-
-      altUrl.pathname = `/${hreflang}${altUrl.pathname.slice(
-        leadingSlash.length + lang.length
-      )}`;
-
-      output.push({
-        hreflang,
-        href: altUrl.href,
-      });
+      if (typeof relativeUrl === 'string') {
+        output.push({
+          hreflang: lang,
+          href: new URL(relativeUrl, import.meta.env.PUBLIC_SITE_URL).href,
+        });
+      }
     }
   }
 

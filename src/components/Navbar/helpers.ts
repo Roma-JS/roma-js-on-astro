@@ -8,6 +8,11 @@ const l10nKeys = [
   'mainSiteNav',
   'itWebsite',
   'enWebsite',
+  'upcomingEvents',
+  'pastEvents',
+  'homepage',
+  'aboutPage',
+  'blog',
 ] as const;
 
 export type NavbarMessages = Readonly<
