@@ -3,11 +3,9 @@ import HpLayout from '@layouts/Hp.astro';
 import { getHpItContent } from './api/hp/it.json';
 import { hpUrlMap } from 'utils/routing';
 import type { Lang } from '@i18n/types';
-import { changeLanguage } from 'i18next';
 import SiteNameStructuredData from '@components/SiteNameStructuredData.astro';
 
 const lang: Lang = 'it';
-changeLanguage(lang);
 const { title, description, sections } = await getHpItContent();
 const permalink = Astro.props.permalink;
 ---

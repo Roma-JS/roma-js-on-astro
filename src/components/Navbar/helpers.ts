@@ -1,4 +1,4 @@
-import { l10n } from '@i18n/config';
+import type { Translate } from '@i18n/translate';
 
 const l10nKeys = [
   'ctaWatchOurVideos',
@@ -10,7 +10,9 @@ const l10nKeys = [
   'enWebsite',
 ] as const;
 
-export type NavbarMessages = Readonly<Record<typeof l10nKeys[number], string>>;
+export type NavbarMessages = Readonly<
+  Record<(typeof l10nKeys)[number], string>
+>;
 
 /**
  * Do not use this function inside a component,
@@ -19,7 +21,7 @@ export type NavbarMessages = Readonly<Record<typeof l10nKeys[number], string>>;
  * @see https://github.com/yassinedoghri/astro-i18next/issues/46
  * @returns
  */
-export function getNavbarMessages(): NavbarMessages {
+export function getNavbarMessages(l10n: Translate): NavbarMessages {
   return Object.fromEntries(
     l10nKeys.map((key) => [key, l10n(key)])
   ) as NavbarMessages;

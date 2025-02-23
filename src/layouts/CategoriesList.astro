@@ -6,7 +6,6 @@ import '../styles/layouts/categoriesList.scss';
 import type { Category } from 'utils/blog';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { getCanonicalURL, navbarLinks } from 'utils/routing';
-import { changeLanguage } from 'i18next';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
@@ -18,7 +17,7 @@ import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
-import { l10n } from '@i18n/config';
+import { createTranslate } from '@i18n/translate';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -34,7 +33,7 @@ const relativePageUrl =
   canonicalURL.search +
   canonicalURL.hash;
 
-changeLanguage(lang);
+const l10n = await createTranslate(lang);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
@@ -56,7 +55,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={null}
         relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages()}
+        messages={getNavbarMessages(l10n)}
       />
       <SlantedHeader
         {...slantedHeaderH1Config}

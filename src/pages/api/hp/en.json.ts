@@ -1,4 +1,3 @@
-import { l10n } from '@i18n/config';
 import type { HpContent } from '../../../@types/hp';
 import {
   fetchAllPastRomajsEvents,
@@ -7,13 +6,16 @@ import {
 import { formatVenueMapsHref } from 'utils/venue';
 import { formatDate } from '@i18n/date-time';
 import { computeScheduledEvents } from 'utils/meetup-events';
+import { createTranslate } from '@i18n/translate';
+import type { Lang } from '@i18n/types';
 
-const lng = 'en';
+const lng: Lang = 'en';
 
 export async function getEnHpContent(): Promise<Readonly<HpContent>> {
-  const [upcomingEvents, previousEvents] = await Promise.all([
+  const [upcomingEvents, previousEvents, l10n] = await Promise.all([
     fetchUpcomingRomajsEvents(),
     fetchAllPastRomajsEvents(),
+    createTranslate(lng),
   ]);
   const nextEventsByDate = computeScheduledEvents(upcomingEvents).sort(
     (a, b) => a.epochTimeMs - b.epochTimeMs
