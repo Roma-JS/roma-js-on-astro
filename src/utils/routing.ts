@@ -6,6 +6,8 @@ import twitterIcon from 'media/social/twitter-square.svg';
 import rssIcon from 'media/social/rss.svg';
 import discordIcon from 'media/social/discord.svg';
 import linkedinIcon from 'media/social/linkedin.svg';
+import meetupIcon from 'media/social/meetup.svg';
+
 import type { AstroGlobal } from 'astro';
 
 export const routes = {
@@ -108,5 +110,9 @@ export const socialLinks = {
   linkedin: {
     href: import.meta.env.PUBLIC_LINKEDIN_PROFILE_HREF,
     iconHref: linkedinIcon,
+  },
+  meetup: {
+    href: import.meta.env.PUBLIC_MEEETUP_PROFILE_HREF,
+    iconHref: meetupIcon,
   },
 } as const;
