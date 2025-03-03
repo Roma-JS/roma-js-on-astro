@@ -1,7 +1,9 @@
 ---
 import { generateLinkRelAlternateProps } from '@i18n/config';
+import type { Lang } from '@i18n/types';
 import { getCanonicalURL } from 'utils/routing';
 export interface Props {
+  lang: Lang;
   title: string;
   description: string;
   permalink?: string;
@@ -9,13 +11,18 @@ export interface Props {
 
 const canonicalURL = getCanonicalURL(Astro);
 
-const { title, description, permalink = canonicalURL } = Astro.props as Props;
+const {
+  title,
+  description,
+  permalink = canonicalURL,
+  lang,
+} = Astro.props as Props;
 
 const ogImage = new URL(canonicalURL.origin);
 ogImage.pathname = '/assets/og-img.png';
 
 // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
-const linkRelAlternateProps = generateLinkRelAlternateProps(canonicalURL);
+const linkRelAlternateProps = generateLinkRelAlternateProps(lang, canonicalURL);
 ---
 
 <meta charset="utf-8" />
