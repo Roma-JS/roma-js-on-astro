@@ -1,12 +1,13 @@
 ---
 import BlogPostListLayout from '@layouts/BlogPostList.astro';
-import { l10n } from '../../../i18n/config';
 import {
   computeAllCategories,
   type Category,
   descendingCreatedAtComparator,
 } from 'utils/blog';
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
+import type { Lang } from '@i18n/types';
+import { createTranslate } from '@i18n/translate';
 
 export interface Props {
   category: Category;
@@ -14,7 +15,7 @@ export interface Props {
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog-posts')
+  const posts = await getCollection('blog-posts');
   const allCategories = computeAllCategories(posts, import.meta.env.BASE_URL);
 
   const allCategoriesList = Array.from(allCategories.values());
@@ -39,8 +40,9 @@ const {
   categories,
 } = Astro.props;
 const description = `Category: ${categoryName}`;
-const lang = 'it';
+const lang: Lang = 'it';
 const sortedPostsByDate = posts.slice().sort(descendingCreatedAtComparator);
+const l10n = await createTranslate(lang);
 ---
 
 <BlogPostListLayout

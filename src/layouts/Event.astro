@@ -6,7 +6,6 @@ import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
-import { changeLanguage } from 'i18next';
 import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import type { Lang } from '@i18n/types';
@@ -15,11 +14,11 @@ import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
-import { l10n } from '@i18n/config';
 import type { CollectionEntry } from 'astro:content';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { getEntries, render } from 'astro:content';
 import { AbstractModal } from '@components/AbstractModal/AbstractModal';
+import { createTranslate } from '@i18n/translate';
 
 type CollectionData = CollectionEntry<'events'>['data'];
 export interface Props extends BaseHeadProps, CollectionData {
@@ -46,12 +45,13 @@ const abstractEntries = await getEntries(abstracts).then((entries) =>
     entries.map(async (entry) => ({ entry, rendered: await render(entry) }))
   )
 );
-changeLanguage(lang);
+
+const l10n = await createTranslate(lang);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead lang={lang} title={title} description={description} />
     <slot name="head" />
     <ClientRouter />
   </head>
@@ -67,7 +67,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={aboutUrlMap}
         relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages()}
+        messages={getNavbarMessages(l10n)}
       />
       <SlantedHeader
         {...slantedHeaderH1Config}

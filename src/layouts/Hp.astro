@@ -7,19 +7,18 @@ import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
-import { changeLanguage } from 'i18next';
 import type { Lang } from '@i18n/types';
 import { getCanonicalURL, socialLinks } from 'utils/routing';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { CFPCta } from '@components/CFPCta/CFPCta';
-import { l10n } from '@i18n/config';
 import type { HpContent } from '../@types/hp';
 import { ClientRouter } from 'astro:transitions';
 import { h1HeadingDomId } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 import eventsMetadata from '../data/events/events-metadata.json';
 import { createSlug } from 'utils/blog';
+import { createTranslate } from '@i18n/translate';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -43,12 +42,12 @@ const relativePageUrl =
   canonicalURL.search +
   canonicalURL.hash;
 
-changeLanguage(lang);
+const l10n = await createTranslate(lang);
 ---
 
 <html lang={lang} class="rmjs-yellow-black-theme">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead lang={lang} title={title} description={description} />
     <slot name="head" />
     <ClientRouter />
   </head>
@@ -65,7 +64,7 @@ changeLanguage(lang);
         lang={lang}
         urlMap={urlMap}
         relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages()}
+        messages={getNavbarMessages(l10n)}
       />
       <div class="hp-wrapper">
         <section class="hp-section logo-hero">

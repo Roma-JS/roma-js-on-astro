@@ -6,7 +6,6 @@ import BaseHead from '@components/BaseHead.astro';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
-import { changeLanguage } from 'i18next';
 import { getCanonicalURL, navbarLinks } from 'utils/routing';
 import { BlogPostInfo } from '@components/BlogPostInfo/BlogPostInfo';
 import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
@@ -18,12 +17,12 @@ import {
   Breadcrumbs,
   type BreadcrumbsProps,
 } from '@components/Breadcrumbs/Breadcrumbs';
-import { l10n } from '@i18n/config';
 import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 import type { CollectionEntry } from 'astro:content';
+import { createTranslate } from '@i18n/translate';
 
 type CollectionData = CollectionEntry<'blog-posts'>['data'];
 export interface Props extends BaseHeadProps, CollectionData {
@@ -45,7 +44,7 @@ const relativePageUrl =
   canonicalURL.search +
   canonicalURL.hash;
 
-changeLanguage(lang);
+const l10n = await createTranslate(lang);
 
 const breadcrumMessages = Object.fromEntries(
   (['breadcrumbs', 'scrollToTop'] as const).map((key) => [key, l10n(key)])
@@ -54,7 +53,7 @@ const breadcrumMessages = Object.fromEntries(
 
 <html lang={lang} class="rmjs-yellow-black-theme">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead lang={lang} title={title} description={description} />
     <slot name="head" />
     <ClientRouter />
   </head>
@@ -71,7 +70,7 @@ const breadcrumMessages = Object.fromEntries(
         lang={lang}
         urlMap={null}
         relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages()}
+        messages={getNavbarMessages(l10n)}
       />
       <SlantedHeader
         {...slantedHeaderH1Config}

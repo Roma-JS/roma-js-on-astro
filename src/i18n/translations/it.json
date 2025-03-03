@@ -1,6 +1,6 @@
 {
   "ctaWatchOurVideos": "Rivedi i precedenti talks",
-  "ctaJoinDiscordCta": "Unisciti a noi su Discord",  
+  "ctaJoinDiscordCta": "Unisciti a noi su Discord",
   "ctaReserveMeetupPartecipation": "Registrati!",
   "categoryTitle": "Tag: {{categoryTitle}}",
   "categoriesTitle": "Tags",
@@ -27,5 +27,10 @@
   "itWebsite": "Sito in Italiano",
   "enWebsite": "Sito in Inglese",
   "skipToMainContent": "Vai al contenuto principale",
-  "talkSpeaker": "Speaker"
+  "talkSpeaker": "Speaker",
+  "upcomingEvents": "Prossimi eventi",
+  "pastEvents": "Eventi passati",
+  "homepage": "home",
+  "aboutPage": "about",
+  "blog": "blog"
 }

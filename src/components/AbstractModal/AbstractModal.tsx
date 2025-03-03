@@ -1,7 +1,7 @@
 import { Show, splitProps, type ComponentProps } from 'solid-js';
 import { Modal } from '../Modal/Modal';
 import type { CollectionEntry } from 'astro:content';
-import type { L10nKey } from '@i18n/config';
+import type { L10nKey } from '@i18n/translate';
 
 type Messages<T extends L10nKey> = Partial<Record<T, string>>;
 

@@ -6,32 +6,48 @@ import twitterIcon from 'media/social/twitter-square.svg';
 import rssIcon from 'media/social/rss.svg';
 import discordIcon from 'media/social/discord.svg';
 import linkedinIcon from 'media/social/linkedin.svg';
+import meetupIcon from 'media/social/meetup.svg';
+
 import type { AstroGlobal } from 'astro';
 
+const createPageRoute = (relativeUrl: string) =>
+  new URL(relativeUrl, import.meta.env.PUBLIC_SITE_URL).pathname;
+
+export type RouteKey =
+  | 'homepage'
+  | 'upcomingEvents'
+  | 'pastEvents'
+  | 'blog'
+  | 'aboutPage';
+
+const itRoutes = {
+  homepage: createPageRoute('/'),
+  upcomingEvents: createPageRoute('/it/prossimi-eventi'),
+  pastEvents: createPageRoute('/it/eventi-passati/1'),
+  blog: createPageRoute('/blog'),
+  aboutPage: createPageRoute('/it/about'),
+} as const satisfies Partial<Record<RouteKey, string>>;
+
+const enRoutes = {
+  homepage: createPageRoute('/en'),
+  upcomingEvents: createPageRoute('/en/upcoming-events'),
+  pastEvents: createPageRoute('/en/past-events/1'),
+  aboutPage: createPageRoute('/en/about'),
+} as const satisfies Partial<Record<RouteKey, string>>;
+
 export const routes = {
-  it: {
-    home: import.meta.env.PUBLIC_URL_BASE + '/',
-    'prossimi eventi': import.meta.env.PUBLIC_URL_BASE + '/it/prossimi-eventi',
-    'eventi passati': import.meta.env.PUBLIC_URL_BASE + '/it/eventi-passati/1',
-    blog: import.meta.env.PUBLIC_URL_BASE + '/blog',
-    about: import.meta.env.PUBLIC_URL_BASE + '/it/about',
-  },
-  en: {
-    home: import.meta.env.PUBLIC_URL_BASE + '/en',
-    'upcoming events': import.meta.env.PUBLIC_URL_BASE + '/en/upcoming-events',
-    'past events': import.meta.env.PUBLIC_URL_BASE + '/en/past-events/1',
-    about: import.meta.env.PUBLIC_URL_BASE + '/en/about',
-  },
-} as const;
+  it: itRoutes,
+  en: enRoutes,
+} as const satisfies Record<Lang, Partial<Record<RouteKey, string>>>;
 
 export const breadcrumbLinks = {
   it: {
-    home: routes.it.home,
+    home: routes.it.homepage,
     blog: routes.it.blog,
   },
   en: {
-    home: routes.en.home,
-    about: routes.en.about,
+    home: routes.en.homepage,
+    about: routes.en.aboutPage,
   },
 };
 
@@ -43,23 +59,23 @@ export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
 export const categoryPageUrl = navbarLinks.it.blog + '/category';
 
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
-  it: routes.it.home,
-  en: routes.en.home,
+  it: routes.it.homepage,
+  en: routes.en.homepage,
 };
 
 export const upcomingEventsUrlMap: Readonly<Record<Lang, string>> = {
-  it: routes.it['prossimi eventi'],
-  en: routes.en['upcoming events'],
+  it: routes.it.upcomingEvents,
+  en: routes.en.upcomingEvents,
 };
 
 export const pastEventsUrlMap: Readonly<Record<Lang, string>> = {
-  it: routes.it['eventi passati'],
-  en: routes.en['past events'],
+  it: routes.it.pastEvents,
+  en: routes.en.pastEvents,
 };
 
 export const aboutUrlMap: Readonly<Record<Lang, string>> = {
-  it: routes.it.about,
-  en: routes.en.about,
+  it: routes.it.aboutPage,
+  en: routes.en.aboutPage,
 };
 
 export function preventSelfNavigation(
@@ -108,5 +124,9 @@ export const socialLinks = {
   linkedin: {
     href: import.meta.env.PUBLIC_LINKEDIN_PROFILE_HREF,
     iconHref: linkedinIcon,
+  },
+  meetup: {
+    href: import.meta.env.PUBLIC_MEEETUP_PROFILE_HREF,
+    iconHref: meetupIcon,
   },
 } as const;

@@ -25,7 +25,7 @@
   "engines": {
     "node": "^22.0.0"
   },
-  "packageManager": "pnpm@10.4.0",
+  "packageManager": "pnpm@10.4.1",
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/rss": "^4.0.10",
@@ -33,7 +33,6 @@
     "@astrojs/solid-js": "^5.0.1",
     "@playwright/test": "^1.49.1",
     "astro": "5.1.1",
-    "astro-i18next": "1.0.0-beta.21",
     "chalk": "^5.0.1",
     "husky": "^8.0.0",
     "jsdom": "^24.1.0",
@@ -52,7 +51,6 @@
     "date-fns": "^3.6.0",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
-    "i18next": "22.4.10",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.6",
     "solid-js": "^1.8.21",
