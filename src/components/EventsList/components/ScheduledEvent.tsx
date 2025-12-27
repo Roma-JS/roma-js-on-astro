@@ -2,11 +2,11 @@ import type { Lang } from '@i18n/types';
 import type { JSX } from 'solid-js/jsx-runtime';
 import styles from '../styles.module.scss';
 import { formatDate } from '@i18n/date-time';
-import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
+import type { MeetupArticleFragment } from '@api/meetup/events.graphql.generated';
 import { Dynamic } from 'solid-js/web';
 
 export interface ScheduleEventProps {
-  event: MeetupEventType;
+  event: MeetupArticleFragment;
   lang: Lang;
   heading?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }

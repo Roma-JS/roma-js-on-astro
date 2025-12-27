@@ -1,8 +1,8 @@
 import prompts from 'prompts';
 import paths from './utils/paths.cjs';
 import Mustache from 'mustache';
-import chalk from 'chalk';
 import slugify from 'slugify';
+import { styleText } from 'node:util';
 import fs from 'node:fs/promises';
 import process from 'node:process';
 import path from 'node:path';
@@ -115,7 +115,7 @@ async function createPostPrompts() {
 }
 
 async function cli() {
-  console.log(chalk.cyan('create-post\n'));
+  console.log(styleText('cyan', 'create-post\n'));
   const templateFilePath = path.resolve(
     paths.templatesDir,
     'blog-post-simple.hbs'
@@ -147,7 +147,8 @@ async function cli() {
   });
 
   console.log(
-    chalk.green(
+    styleText(
+      'green',
       `[create-post] A new post has been created at ${newPostFilePath}`
     )
   );
@@ -155,7 +156,7 @@ async function cli() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   cli().catch((...args) => {
-    console.error(chalk.red('[create-post][error]\n\n'), ...args);
+    console.error(styleText('red', '[create-post][error]\n\n'), ...args);
 
     if (!process.exitCode) {
       process.exitCode = 1;

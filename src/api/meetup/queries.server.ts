@@ -1,13 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
-import {
-  EVENT_BY_EVENTID,
-  MEETUP_EVENTS_COUNT,
-  LAST_UPCOMING_EVENT_QUERY,
-  PAST_EVENT_QUERY,
-} from './event.graphql';
-import type { MeetupEventType } from './event.graqhql.types';
 import { queryCacheClient } from '../query-client';
 import type { FetchQueryOptions } from '@tanstack/solid-query';
+import { getSdk, type MeetupArticleFragment } from './events.graphql.generated';
 
 /**
  * A simple graqhql client not backed by a cache.
@@ -16,8 +10,8 @@ import type { FetchQueryOptions } from '@tanstack/solid-query';
  *
  * @see {@link https://www.npmjs.com/package/graphql-request}
  */
-const meetupGraqhqlClient = new GraphQLClient(
-  import.meta.env.MEETUP_GRAPHQL_ENDPOINT || ''
+const meetupApiClient = getSdk(
+  new GraphQLClient(import.meta.env.MEETUP_GRAPHQL_ENDPOINT || '')
 );
 
 // Additional `cache.fetchQuery` parameters that can be added to customize the cache behavior
@@ -36,18 +30,17 @@ export type MeetupQueryConfig<Data> = Omit<
  *
  * @see {@link MeetupQueryConfig}
  */
-export async function fetchMeetupEventById(eventId: string) {
+export async function fetchMeetupEventById(
+  eventId: string
+): Promise<MeetupArticleFragment | undefined> {
   return queryCacheClient.fetchQuery({
     queryKey: ['fetchMeetupEventById', eventId],
     async queryFn({ queryKey }) {
-      const data = await meetupGraqhqlClient.request<{
-        event: MeetupEventType | null;
-      }>({
-        document: EVENT_BY_EVENTID,
-        variables: { eventId: queryKey[1] },
+      const data = await meetupApiClient.eventsByEventId({
+        eventId: queryKey[1],
       });
 
-      return data.event;
+      return data.event ?? undefined;
     },
   });
 }
@@ -63,25 +56,14 @@ export async function fetchMeetupEventById(eventId: string) {
  *
  * @see {@link MeetupQueryConfig}
  */
-export async function fetchRomajsMeetupsCount(): Promise<number> {
+export async function fetchRomajsMeetupsCount(): Promise<number | undefined> {
   return queryCacheClient.fetchQuery({
     queryKey: ['fetchRomajsMeetupsCount'],
     async queryFn() {
-      const data = await meetupGraqhqlClient.request<{
-        groupByUrlname: { pastEvents: { count: number } };
-      }>({
-        document: MEETUP_EVENTS_COUNT,
-        variables: {
-          urlname: import.meta.env.MEETUP_GROUP_ID,
-        },
+      const data = await meetupApiClient.allEventsCount({
+        urlname: import.meta.env.MEETUP_GROUP_ID,
       });
-
-      const {
-        groupByUrlname: {
-          pastEvents: { count },
-        },
-      } = data;
-      return count;
+      return data.groupByUrlname?.events.totalCount ?? undefined;
     },
   });
 }
@@ -96,31 +78,16 @@ export async function fetchRomajsMeetupsCount(): Promise<number> {
  * ```
  */
 export async function fetchUpcomingRomajsEvents(): Promise<
-  MeetupEventType[] | null
+  MeetupArticleFragment[] | undefined
 > {
   return queryCacheClient.fetchQuery({
     queryKey: ['fetchUpcomingRomajsEvents'],
     async queryFn() {
-      const data = await meetupGraqhqlClient.request<{
-        groupByUrlname: {
-          upcomingEvents: { edges: { node: MeetupEventType }[] };
-        };
-      }>({
-        document: LAST_UPCOMING_EVENT_QUERY,
-        variables: {
-          urlname: import.meta.env.MEETUP_GROUP_ID,
-        },
+      const data = await meetupApiClient.latestUpcomingEvents({
+        urlname: import.meta.env.MEETUP_GROUP_ID,
       });
 
-      const {
-        groupByUrlname: {
-          upcomingEvents: { edges },
-        },
-      } = data;
-
-      return edges.map((eventElement) => ({
-        ...eventElement.node,
-      }));
+      return data.groupByUrlname?.events.edges.map((edge) => edge.node);
     },
   });
 }
@@ -134,29 +101,18 @@ export async function fetchUpcomingRomajsEvents(): Promise<
  * const allPastEvents = await fetchAllPastRomajsEvents();
  * ```
  */
-export async function fetchAllPastRomajsEvents(): Promise<MeetupEventType[]> {
+export async function fetchAllPastRomajsEvents(): Promise<
+  MeetupArticleFragment[] | undefined
+> {
   return queryCacheClient.fetchQuery({
     queryKey: ['fetchAllPastRomajsEvents'],
     async queryFn() {
-      const itemsNum = await fetchRomajsMeetupsCount();
-
-      const data = await meetupGraqhqlClient.request<{
-        groupByUrlname: { pastEvents: { edges: { node: MeetupEventType }[] } };
-      }>({
-        document: PAST_EVENT_QUERY,
-        variables: {
-          urlname: import.meta.env.MEETUP_GROUP_ID,
-          itemsNum,
-        },
+      const data = await meetupApiClient.pastEvents({
+        urlname: import.meta.env.MEETUP_GROUP_ID,
+        itemsNum: 999_999,
       });
 
-      const {
-        groupByUrlname: {
-          pastEvents: { edges },
-        },
-      } = data;
-
-      return edges.map((eventElement) => eventElement.node);
+      return data.groupByUrlname?.events.edges.map((edge) => edge.node);
     },
   });
 }

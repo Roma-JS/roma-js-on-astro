@@ -1,4 +1,3 @@
-import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 import {
   startOfMonth,
   nextWednesday,
@@ -8,17 +7,18 @@ import {
   addMonths,
 } from 'date-fns';
 import { parseMonthsList } from './time';
+import type { MeetupArticleFragment } from '@api/meetup/events.graphql.generated';
 
 export interface MeetupEventsApiResponse {
   events: Pick<
-    MeetupEventType,
-    'id' | 'title' | 'dateTime' | 'eventUrl' | 'group' | 'duration' | 'venue'
+    MeetupArticleFragment,
+    'id' | 'title' | 'dateTime' | 'eventUrl' | 'group' | 'duration' | 'venues'
   >[];
 }
 
 export type ScheduledEvent = {
   type: 'scheduled';
-  data: MeetupEventType;
+  data: MeetupArticleFragment;
   epochTimeMs: number;
 };
 export type PlaceholderEvent = {
@@ -30,18 +30,18 @@ export type PlaceholderEvent = {
 export type UpcomingEvent = ScheduledEvent | PlaceholderEvent;
 
 export function computeMeetupEventsApiResponse(
-  meetupEvents: MeetupEventType[] | null | undefined
+  meetupEvents: MeetupArticleFragment[] | null | undefined
 ): MeetupEventsApiResponse {
   return {
     events: (meetupEvents || [])?.map(
-      ({ id, eventUrl, title, dateTime, group, duration, venue }) => ({
+      ({ id, eventUrl, title, dateTime, group, duration, venues }) => ({
         id,
         title,
         dateTime,
         eventUrl,
         group,
         duration,
-        venue,
+        venues,
       })
     ),
   };
@@ -66,7 +66,7 @@ export function computeThirdWednesdayOfMonth(date: Date | number): Date {
 }
 
 export function computeScheduledEvents(
-  scheduledUpcomingEvents: MeetupEventType[] | undefined | null
+  scheduledUpcomingEvents: MeetupArticleFragment[] | undefined | null
 ): ScheduledEvent[] {
   return (
     scheduledUpcomingEvents?.map(
@@ -135,7 +135,7 @@ export function createPlaceholderEvents({
  * @see {@link ComputeUpcomingEventsOptions}
  */
 export function computeUpcomingEvents(
-  scheduledUpcomingEvents: MeetupEventType[] | undefined | null,
+  scheduledUpcomingEvents: MeetupArticleFragment[] | undefined | null,
   curentEpochTimeMs: number,
   options?: ComputeUpcomingEventsOptions
 ): UpcomingEvent[] {

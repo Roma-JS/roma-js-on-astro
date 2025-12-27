@@ -1,12 +1,13 @@
+import type { MeetupArticleFragment } from '@api/meetup/events.graphql.generated';
 import {
   computeUpcomingEvents,
   computeScheduledEvents,
   computeThirdWednesdayOfMonth,
 } from '../meetup-events';
 import upcomingEventsMarch2024 from './2024-03-09-upcoming-romajs-events.json';
-import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 
-const singleUpcomingEventList = upcomingEventsMarch2024 as MeetupEventType[];
+const singleUpcomingEventList =
+  upcomingEventsMarch2024 as MeetupArticleFragment[];
 
 describe('meetup-events', () => {
   describe('computeScheduledEvents', () => {
