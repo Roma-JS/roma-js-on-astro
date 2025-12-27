@@ -24,9 +24,9 @@
     "pre-commit": "lint-staged"
   },
   "engines": {
-    "node": "^22.0.0"
+    "node": "^24.0.0"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.26.2",
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/rss": "^4.0.14",
