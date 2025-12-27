@@ -3,6 +3,11 @@ on:
   push:
     branches:
       - release
+  workflow_call:
+    secrets:
+      DEPLOY_TOKEN:
+        description: 'PAT scoped to roma-js repositories'
+        required: true
 permissions: 
   contents: write
 jobs:
@@ -20,6 +25,8 @@ jobs:
         uses: 'actions/checkout@v5'
         with:
           fetch-depth: 0
+          ref: 'release'
+          token: ${{ secrets.DEPLOY_TOKEN }}
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v6
         with:
