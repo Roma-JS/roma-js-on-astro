@@ -1,7 +1,7 @@
 import slugify from 'slugify';
 import process from 'node:process';
 import assert from 'node:assert/strict';
-import { parseArgs } from 'node:util';
+import { parseArgs, styleText } from 'node:util';
 import { fileURLToPath } from 'node:url';
 
 export function getAbstractSlug(params) {
@@ -31,7 +31,7 @@ async function main() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   main().catch((...args) => {
-    console.error(chalk.red('[create-post][error]\n\n'), ...args);
+    console.error(styleText('red', '[create-post][error]\n\n'), ...args);
 
     if (!process.exitCode) {
       process.exitCode = 1;

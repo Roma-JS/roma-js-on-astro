@@ -7,10 +7,10 @@ jobs:
   trigger-deploy:
     # prevents this action from running on forks
     if: github.repository == 'Roma-JS/roma-js-on-astro'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout 🛎️
-        uses: 'actions/checkout@v4'
+        uses: 'actions/checkout@v5'
         with:
           ref: 'release'
           token: ${{ secrets.DEPLOY_TOKEN }} # see https://github.com/Roma-JS/roma-js-on-astro/issues/12
