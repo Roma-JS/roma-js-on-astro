@@ -3,6 +3,7 @@ name: Trigger Site Rebuild on a CRON Schedule
 on:
   schedule: 
     - cron: '1 */12 * * *' # "At minute 1 past every 12th hour." (see https://crontab.guru)
+  workflow_dispatch: # test cronjob
 jobs:
   trigger-deploy:
     # prevents this action from running on forks
@@ -14,18 +15,7 @@ jobs:
         with:
           ref: 'release'
           token: ${{ secrets.DEPLOY_TOKEN }} # see https://github.com/Roma-JS/roma-js-on-astro/issues/12
-      - name: Setup environment
-        # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
-        run: |
-          git config user.name 'cronjob-deploy'
-          git config user.email 'noreply@romajs.org'
-          echo "GIT_DEPLOY_DATE=$(date)" >> $GITHUB_ENV  
-          echo "GIT_DEPLOY_CID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV  
-      - name: Update site-deploy.yml
-        run: |
-          printf 'date: %s\ncid: %s\n' "${{ env.GIT_DEPLOY_DATE }}" "${{ env.GIT_DEPLOY_CID }}" > site-deploy.yml
-      - name: Commit and push changes
-        run: |
-          git add site-deploy.yml
-          git commit -m "cronjob deploy 🚀 of ${{ env.GIT_DEPLOY_CID }} at ${{ env.GIT_DEPLOY_DATE }}"
-          git push origin release
+      - name: Trigger deploy
+        uses: './.github/workflows/deploy.yaml'
+        with:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
