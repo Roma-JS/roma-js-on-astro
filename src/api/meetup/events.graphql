@@ -1,0 +1,93 @@
+# See https://www.meetup.com/graphql/playground/#graphQl-playground
+
+fragment MeetupArticleLead on Event {
+  id
+  title
+  dateTime
+  description
+  eventUrl
+}
+
+fragment MeetupArticle on Event {
+  id
+  title
+  eventUrl
+  description
+  dateTime
+  duration
+  eventHosts {
+    name
+  }
+  featuredEventPhoto {
+    id
+    baseUrl
+    standardUrl
+    thumbUrl
+  }
+  group {
+    id
+    name
+    urlname
+  }
+  venues {
+    id
+    name
+    lat
+    lon
+  }
+}
+
+query allPosts($urlname: String!) {
+  allEvents: groupByUrlname(urlname: $urlname) {
+    events(first: 55, sort: DESC, filter: { status: [PAST, ACTIVE] }) {
+      totalCount
+      pageInfo {
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          ...MeetupArticleLead
+        }
+      }
+    }
+  }
+}
+
+query pastEvents($urlname: String!, $itemsNum: Int!) {
+  groupByUrlname(urlname: $urlname) {
+    events(first: $itemsNum, sort: DESC, filter: { status: [PAST] }) {
+      edges {
+        node {
+          ...MeetupArticle
+        }
+      }
+    }
+  }
+}
+
+query latestUpcomingEvents($urlname: String!) {
+  groupByUrlname(urlname: $urlname) {
+    events(first: 10, sort: DESC, filter: { status: [ACTIVE] }) {
+      edges {
+        node {
+          ...MeetupArticle
+        }
+      }
+    }
+  }
+}
+
+query eventsByEventId($eventId: ID!) {
+  event(id: $eventId) {
+    ...MeetupArticle
+  }
+}
+
+query allEventsCount($urlname: String!) {
+  groupByUrlname(urlname: $urlname) {
+    events(sort: DESC, filter: { status: [ACTIVE, PAST] }) {
+      totalCount
+    }
+  }
+}

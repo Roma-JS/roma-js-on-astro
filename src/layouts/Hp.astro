@@ -128,13 +128,13 @@ const l10n = await createTranslate(lang);
                     {section.cta.text}
                   </a>
                 )}
-                {!!section.venue && (
+                {!!section.venues?.length && (
                   <a
                     class="btn btn-outline btn-tertiary"
-                    href={section.venue.href}
-                    hreflang={section.venue.lang || undefined}
+                    href={section.venues[0].href}
+                    hreflang={section.venues[0].lang || undefined}
                   >
-                    {section.venue.text}
+                    {section.venues[0].text}
                   </a>
                 )}
               </div>

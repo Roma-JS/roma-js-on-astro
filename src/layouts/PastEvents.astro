@@ -14,16 +14,16 @@ import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { ClientRouter } from 'astro:transitions';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
-import type { MeetupEventType } from '@api/meetup/event.graqhql.types';
 import type { Page } from 'astro';
 import { computeScheduledEvents } from 'utils/meetup-events';
 import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 import { createTranslate } from '@i18n/translate';
+import type { MeetupArticleFragment } from '@api/meetup/events.graphql.generated';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
-  page: Page<MeetupEventType>;
+  page: Page<MeetupArticleFragment>;
 }
 
 const { title, description, lang, page } = Astro.props;
