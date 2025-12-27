@@ -37,12 +37,10 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
         href: data.eventUrl,
         text: l10n('ctaRegister', { lng }),
       },
-      venue: data.venue
-        ? {
-            href: formatVenueMapsHref(data.venue),
-            text: l10n('ctaVenue', { lng }),
-          }
-        : undefined,
+      venues: data.venues?.map((venue) => ({
+        href: formatVenueMapsHref(venue),
+        text: l10n('ctaVenue', { lng }),
+      })),
     }))
   );
 

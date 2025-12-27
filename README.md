@@ -126,6 +126,16 @@ periodically triggers the deployment.
 - `pnpm run astro:upgrade` upgrade astro deps to latest
 - `pnpm run test:e2e` run e2e tests
 - `pnpm run test:e2e:ui` run e2e2 tests in UI mode
+- `pnpm run graphql:codegen` regenerates graphql types
+
+## Data sources
+
+### Meetup.com
+
+The website relies on the data provided by [meetup.com graphql api](https://www.meetup.com/graphql/guide/).
+Types are generated automatically using `pnpm run graphql:codegen`.
+
+Queries can be tested using the [online graphql playground](https://www.meetup.com/graphql/playground/#graphQl-playground).
 
 ## Designs
 

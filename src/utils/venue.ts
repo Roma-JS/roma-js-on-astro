@@ -1,5 +1,8 @@
-import type { MeetupVenueType } from '@api/meetup/event.graqhql.types';
+export type VenueGeoCoordInfo = {
+  lat?: number | undefined | null;
+  lon?: number | undefined | null;
+};
 
-export function formatVenueMapsHref(venue: MeetupVenueType): string {
-  return `http://www.google.com/maps/place/${venue.lat},${venue.lng}`;
+export function formatVenueMapsHref(venue: VenueGeoCoordInfo): string {
+  return `http://www.google.com/maps/place/${venue.lat},${venue.lon}`;
 }
