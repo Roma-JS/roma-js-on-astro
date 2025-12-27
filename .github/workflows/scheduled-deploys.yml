@@ -8,6 +8,6 @@ jobs:
   trigger-deploy:
     # prevents this action from running on forks
     if: github.repository == 'Roma-JS/roma-js-on-astro'
-    uses: './.github/workflows/deploy.yaml@main'
+    uses: './.github/workflows/deploy.yaml'
     secrets:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
