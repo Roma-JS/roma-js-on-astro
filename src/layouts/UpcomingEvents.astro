@@ -1,6 +1,5 @@
 ---
-import '../styles/main.scss';
-import styles from '../styles/wallpaper.module.scss';
+import '../styles/global.css';
 import BaseHead from '@components/BaseHead.astro';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { EventsList } from '@components/EventsList/EventsList';
@@ -44,8 +43,8 @@ const l10n = await createTranslate(lang);
     <slot name="head" />
     <ClientRouter />
   </head>
-  <body class={styles.wallpaper}>
-    <article class="main">
+  <body class="bg-paper text-ink">
+    <article class="flex min-h-screen flex-col">
       <SkipToMainContent
         client:load
         targetId={h1HeadingDomId}
@@ -64,13 +63,15 @@ const l10n = await createTranslate(lang);
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="logo-small" />
+        <BrandLogo class="h-16 w-16 lg:h-20 lg:w-20" />
       </SlantedHeader>
-      <div class="main-content">
+      <div class="mx-auto w-full max-w-5xl flex-1 px-6 py-10 lg:px-10">
         <EventsList events={upcomingEvents} lang={lang} />
         <slot />
       </div>
-      <footer><SocialLinksList /></footer>
+      <footer class="flex items-center justify-center border-t-3 border-ink bg-ink p-6">
+        <SocialLinksList />
+      </footer>
     </article>
     <slot name="after" />
     <BuildInfo />

@@ -5,8 +5,10 @@ import type { L10nKey } from '@i18n/translate';
 
 type Messages<T extends L10nKey> = Partial<Record<T, string>>;
 
-export interface AbstractModalProps
-  extends Omit<ComponentProps<'dialog'>, 'id'> {
+export interface AbstractModalProps extends Omit<
+  ComponentProps<'dialog'>,
+  'id'
+> {
   abstract: CollectionEntry<'abstracts'>;
   messages: Messages<'talkSpeaker'>;
 }
@@ -30,7 +32,7 @@ export function AbstractModal(props: AbstractModalProps) {
             fallback={local.abstract.data.author}
           >
             <a
-              class="link"
+              class="underline decoration-2 underline-offset-4 hover:bg-brand-yellow"
               target="_blank"
               rel="noopener noreferrer"
               href={local.abstract.data.website}

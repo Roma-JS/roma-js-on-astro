@@ -1,8 +1,6 @@
 ---
-import '../styles/main.scss';
+import '../styles/global.css';
 import type { Lang } from '@i18n/types';
-import styles from '../styles/wallpaper.module.scss';
-import '../styles/layouts/categoriesList.scss';
 import type { Category } from 'utils/blog';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { getCanonicalURL, navbarLinks } from 'utils/routing';
@@ -43,8 +41,8 @@ const l10n = await createTranslate(lang);
     <ClientRouter />
   </head>
 
-  <body class={styles.wallpaper}>
-    <article class="main">
+  <body class="bg-paper text-ink">
+    <article class="flex min-h-screen flex-col">
       <SkipToMainContent
         client:load
         targetId={h1HeadingDomId}
@@ -63,17 +61,18 @@ const l10n = await createTranslate(lang);
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="logo-small" />
+        <BrandLogo class="h-16 w-16 lg:h-20 lg:w-20" />
       </SlantedHeader>
-      <div class="main-content categories-list-layout">
+      <div class="mx-auto w-full max-w-5xl flex-1 px-6 py-10 lg:px-10">
         <CategoriesListComponent
-          class="categories-list"
           categories={categories.map((r) => r.name)}
           baseUrl={import.meta.env.BASE_URL}
         />
         <slot />
       </div>
-      <footer><SocialLinksList /></footer>
+      <footer class="flex items-center justify-center border-t-3 border-ink bg-ink p-6">
+        <SocialLinksList />
+      </footer>
     </article>
     <slot name="after" />
     <BuildInfo />

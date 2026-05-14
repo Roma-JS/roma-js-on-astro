@@ -1,0 +1,350 @@
+@import 'tailwindcss';
+
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/700.css';
+
+/* Brutalist design tokens */
+@theme {
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --font-sans: var(--font-mono);
+  --default-font-family: var(--font-mono);
+
+  --color-ink: #121212;
+  --color-ink-soft: #303030;
+  --color-paper: #ffffff;
+  --color-paper-soft: #f3f6f9;
+  --color-brand-red: #8f001c;
+  --color-brand-yellow: #ffb200;
+
+  /* Match the project's historical breakpoints (lg = 1024, xl = 1200, 2xl = 1400) */
+  --breakpoint-sm: 36rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 75rem;
+  --breakpoint-2xl: 87.5rem;
+
+  --radius-*: initial;
+  --shadow-brutal: 4px 4px 0 0 var(--color-ink);
+  --shadow-brutal-sm: 2px 2px 0 0 var(--color-ink);
+  --shadow-brutal-lg: 8px 8px 0 0 var(--color-ink);
+  --shadow-brutal-red: 4px 4px 0 0 var(--color-brand-red);
+  --shadow-brutal-yellow: 4px 4px 0 0 var(--color-brand-yellow);
+}
+
+/* Base reset + brutal defaults */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-mono);
+    touch-action: manipulation;
+    word-break: break-word;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid var(--color-brand-red);
+    outline-offset: 2px;
+  }
+
+  hr {
+    border: 0;
+    border-top: 3px solid var(--color-ink);
+    margin: 2rem 0;
+  }
+
+  ::selection {
+    background: var(--color-brand-yellow);
+    color: var(--color-ink);
+  }
+}
+
+/* Theme classes — kept name-compatible with the previous codebase */
+.rmjs-yellow-black-theme {
+  color-scheme: light;
+  background-color: var(--color-brand-yellow);
+  color: var(--color-ink);
+}
+
+.rmjs-yellow-white-theme {
+  color-scheme: light;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Reusable brutal building blocks */
+@utility brutal-border {
+  border: 3px solid var(--color-ink);
+}
+
+@utility brutal-border-thin {
+  border: 2px solid var(--color-ink);
+}
+
+@utility brutal-card {
+  border: 3px solid var(--color-ink);
+  background-color: var(--color-paper);
+  box-shadow: var(--shadow-brutal);
+}
+
+@utility brutal-press {
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out;
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--color-ink);
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--color-ink);
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border: 3px solid var(--color-ink);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-brutal);
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out,
+    background-color 80ms ease-out;
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 0 var(--color-ink);
+}
+
+.btn--primary {
+  background-color: var(--color-brand-yellow);
+}
+
+.btn--danger {
+  background-color: var(--color-brand-red);
+  color: var(--color-paper);
+}
+
+.btn--ink {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-brutal);
+}
+
+/* Brutalist heading classes — kept for compatibility with .h-1 / .h-2 / .p-1 usage */
+.h-1 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.h-2 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.h-2.h-dynamic {
+  @media (min-width: 64rem) {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+.p-1 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Accessibility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Transition classes used by solid-transition-group */
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 200ms ease-in;
+}
+.fade-enter,
+.fade-exit-to {
+  opacity: 0;
+}
+
+/* ─── Raw brutalism: terminal aesthetic ──────────────────────────────── */
+@utility raw-grid-bg {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-paper) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-paper) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 24px 24px;
+}
+
+@utility raw-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    color-mix(in srgb, var(--color-paper) 4%, transparent) 3px,
+    color-mix(in srgb, var(--color-paper) 4%, transparent) 4px
+  );
+}
+
+.raw-rule {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: currentColor;
+  letter-spacing: 0;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.raw-rule::before {
+  content: '═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════';
+}
+
+.raw-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: var(--color-brand-yellow);
+}
+
+.raw-kv {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  text-align: left;
+}
+
+.raw-kv dt {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  color: var(--color-brand-yellow);
+}
+
+.raw-kv dt::after {
+  content: ' ▸';
+  opacity: 0.5;
+}
+
+.raw-kv dd {
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+/* Blinking caret */
+@keyframes raw-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.raw-caret::after {
+  content: '▮';
+  display: inline-block;
+  margin-left: 0.25em;
+  animation: raw-blink 1s steps(1) infinite;
+}

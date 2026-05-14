@@ -1,6 +1,5 @@
 import { type JSX, Show, type JSXElement } from 'solid-js';
 import { splitProps } from 'solid-js';
-import styles from './styles.module.scss';
 import { Dynamic } from 'solid-js/web';
 
 export type SlantedHeaderProps = JSX.IntrinsicElements['header'] & {
@@ -37,10 +36,14 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
   };
 
   return (
-    <header class={styles.header} classList={classList()} {...otherProps}>
+    <header
+      class="flex items-center gap-5 border-b-3 border-ink bg-brand-yellow px-5 py-8 lg:gap-8 lg:px-16 lg:py-12"
+      classList={classList()}
+      {...otherProps}
+    >
       <Show when={local.logoHref} fallback={props.children}>
         <a
-          class={styles.logoLink}
+          class="brutal-press inline-block no-underline outline-none focus-visible:outline-3 focus-visible:outline-brand-red"
           href={local.logoHref}
           aria-label={props.logoLabel}
         >
@@ -50,10 +53,9 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
 
       <Dynamic
         component={local.heading}
-        class="h-1"
+        class="m-0 line-clamp-3 overflow-hidden text-xl font-bold uppercase leading-tight tracking-tight text-ink sm:line-clamp-2 sm:text-2xl lg:text-4xl"
         tabIndex={local.headingTabIndex}
         id={local.headingId}
-        classList={{ [styles.heading]: true }}
       >
         {local.title}
       </Dynamic>

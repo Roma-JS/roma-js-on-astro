@@ -1,8 +1,6 @@
 ---
 import type { Page } from 'astro';
 import type { Lang } from '@i18n/types';
-
-import styles from './styles.module.scss';
 import { createTranslate } from '@i18n/translate';
 
 export interface Props {
@@ -14,19 +12,10 @@ const { url, lang: lng } = Astro.props;
 const l10n = await createTranslate(lng);
 ---
 
-<nav role="navigation" class={styles.container}>
-  {
-    url.prev ? (
-      <a class={styles.pageLink} href={url.prev}>
-        {l10n('prevPage', { lng })}
-      </a>
-    ) : null
-  }
-  {
-    url.next ? (
-      <a class={styles.pageLink} href={url.next}>
-        {l10n('nextPage', { lng })}
-      </a>
-    ) : null
-  }
+<nav
+  role="navigation"
+  class="mt-12 flex w-full justify-between gap-4 border-t-3 border-ink pt-6"
+>
+  {url.prev ? <a class="btn" href={url.prev}>← {l10n('prevPage', { lng })}</a> : <span />}
+  {url.next ? <a class="btn" href={url.next}>{l10n('nextPage', { lng })} →</a> : <span />}
 </nav>

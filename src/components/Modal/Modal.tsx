@@ -5,7 +5,6 @@ import {
   onCleanup,
   type JSX,
 } from 'solid-js';
-import styles from './modal.module.scss';
 import { Dynamic } from 'solid-js/web';
 import { isVieportPointInside } from 'utils/dom';
 
@@ -66,24 +65,29 @@ export function Modal(props: ModalProps) {
     <dialog
       {...otherProps}
       onClick={handleDialogClick}
-      classList={{ [styles.modal]: true }}
+      class="brutal-modal h-min w-[min(80vw,720px)] border-3 border-ink bg-paper p-0 text-ink shadow-brutal-lg backdrop:bg-ink/60"
       ref={dialogRef}
       id={local.id}
     >
       <button
         autofocus
         type="button"
-        classList={{ 'btn btn-secondary': true }}
-        class={styles.close}
+        class="absolute right-2 top-2 inline-flex h-10 w-10 items-center justify-center border-3 border-ink bg-paper text-2xl font-bold leading-none text-ink shadow-brutal-sm hover:bg-brand-red hover:text-paper"
+        aria-label="Close"
         onClick={() => {
           dialogRef?.close();
         }}
       >
         &times;
       </button>
-      <article class={styles.article}>
-        <aside class={styles.aside}>{local.preHeading}</aside>
-        <Dynamic component={local.headingElem ?? 'h2'} class={styles.heading}>
+      <article class="grid max-h-[80vh] w-full grid-cols-1 grid-rows-[auto_auto_1fr] overflow-x-hidden overflow-y-auto p-6 lg:p-8">
+        <aside class="m-0 flex max-w-[calc(100%-1.2rem)] min-h-8 items-center overflow-hidden text-sm font-bold uppercase tracking-widest text-ink-soft">
+          {local.preHeading}
+        </aside>
+        <Dynamic
+          component={local.headingElem ?? 'h2'}
+          class="m-0 mb-4 flex max-w-full min-h-10 items-center overflow-hidden text-2xl font-bold uppercase tracking-tight text-ink"
+        >
           {local.heading}
         </Dynamic>
         {local.children}

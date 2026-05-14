@@ -1,6 +1,5 @@
 import type { JSX } from 'solid-js/jsx-runtime';
 import { CategoriesList } from '@components/CategoriesList/CategoriesList';
-import styles from './styles.module.scss';
 
 export interface BlogPostInfoProps {
   createdAt: string;
@@ -10,8 +9,13 @@ export interface BlogPostInfoProps {
 
 export function BlogPostInfo(props: BlogPostInfoProps): JSX.Element {
   return (
-    <aside class={styles.wrapper}>
-      <time dateTime={props.createdAt}>{props.createdAt.split('T')[0]}</time>
+    <aside class="grid max-w-full grid-cols-1 items-start justify-center gap-3 border-b-3 border-ink bg-paper-soft p-5 text-center lg:grid-cols-[120px_1fr] lg:px-10 lg:py-5 lg:text-left">
+      <time
+        dateTime={props.createdAt}
+        class="inline-flex items-center font-bold uppercase tracking-widest"
+      >
+        {props.createdAt.split('T')[0]}
+      </time>
       <CategoriesList categories={props.categories} baseUrl={props.baseUrl} />
     </aside>
   );

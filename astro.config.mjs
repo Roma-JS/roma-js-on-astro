@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import solid from '@astrojs/solid-js';
 import { env } from 'process';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
 function enhanceEnvVariables() {
   if (!env.PUBLIC_BUILD_DATE) {
@@ -70,13 +71,6 @@ export default defineConfig({
   base: base || undefined,
   site,
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          loadPaths: ['node_modules'],
-        },
-      },
-    },
+    plugins: [tailwindcss()],
   },
 });

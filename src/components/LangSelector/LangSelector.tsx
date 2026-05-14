@@ -1,6 +1,5 @@
 import type { Lang } from '@i18n/types';
 import { For, type JSX, splitProps } from 'solid-js';
-import styles from './langSelector.module.scss';
 import type { NavbarMessages } from '@components/Navbar/helpers';
 
 export type LangSelectorProps = JSX.IntrinsicElements['nav'] & {
@@ -21,7 +20,7 @@ export function LangSelector(props: LangSelectorProps) {
     'classList',
   ]);
   const urlMapEntries = () => local.urlMap && Object.entries(local.urlMap);
-  const classList = () => ({ ...local.classList, [styles.nav]: true });
+  const classList = () => ({ ...local.classList, contents: true });
 
   const handleLinkClick: JSX.EventHandlerUnion<
     HTMLAnchorElement,
@@ -35,13 +34,13 @@ export function LangSelector(props: LangSelectorProps) {
 
   return (
     <nav classList={classList()} {...otherProps}>
-      <ul class={styles.list}>
+      <ul class="m-0 flex h-8 list-none border-3 border-ink bg-paper p-0 shadow-brutal-sm">
         <For each={urlMapEntries()}>
           {([lang, altUrl]) => (
-            <li class={styles.listItem}>
+            <li class="m-0 flex list-none items-center justify-center border-r-3 border-ink p-0 last:border-r-0">
               <a
                 onClick={handleLinkClick}
-                class={styles.langBtn}
+                class="flex h-full min-w-9 items-center justify-center bg-transparent px-2 text-sm font-bold uppercase tracking-widest text-ink no-underline aria-[current=page]:bg-ink aria-[current=page]:text-paper"
                 aria-current={local.activeLang === lang ? 'page' : undefined}
                 href={altUrl}
                 hreflang={lang}

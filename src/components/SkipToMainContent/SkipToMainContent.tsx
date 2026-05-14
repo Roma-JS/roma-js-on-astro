@@ -1,5 +1,3 @@
-import styles from './styles.module.scss';
-
 export interface SkipToMainContentProps {
   targetId: string;
   label: string;
@@ -13,10 +11,7 @@ export function SkipToMainContent(props: SkipToMainContentProps) {
   return (
     <button
       type="button"
-      classList={{
-        [styles.root]: true,
-        'btn btn-secondary h-1 visually-hidden-focusable': true,
-      }}
+      class="btn btn--ink visually-hidden-focusable fixed left-1 top-1 z-50"
       onClick={handleClick}
     >
       {props.label}

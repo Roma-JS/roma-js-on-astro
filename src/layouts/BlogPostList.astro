@@ -1,6 +1,5 @@
 ---
-import '../styles/main.scss';
-import styles from '../styles/wallpaper.module.scss';
+import '../styles/global.css';
 import BaseHead from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -61,8 +60,8 @@ const breadcrumMessages = Object.fromEntries(
     <ClientRouter />
   </head>
 
-  <body class={styles.wallpaper}>
-    <article class="main">
+  <body class="bg-paper text-ink">
+    <article class="flex min-h-screen flex-col">
       <SkipToMainContent
         client:load
         targetId={h1HeadingDomId}
@@ -81,39 +80,43 @@ const breadcrumMessages = Object.fromEntries(
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="logo-small" />
+        <BrandLogo class="h-16 w-16 lg:h-20 lg:w-20" />
       </SlantedHeader>
-      <div class="main-content blog-list-layout">
-        <ul class="list-style-none m-0 post-list">
+      <div class="mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 gap-8 px-6 py-10 lg:grid-cols-[1fr_280px] lg:gap-12 lg:px-10">
+        <ul class="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2">
           {
             posts.map((post) => (
-              <li class="list-style-none m-0 p-0 d-contents">
+              <li class="m-0 list-none p-0">
                 <BlogPostCard post={post} />
               </li>
             ))
           }
         </ul>
-        <aside class="aside text-center">
-          <h2 class="h-2 m-0">{l10n('topCategoriesTitle')}</h2>
+        <aside class="flex flex-col gap-5 border-3 border-ink bg-paper-soft p-6 shadow-brutal lg:self-start">
+          <h2 class="m-0 text-lg font-bold uppercase tracking-tight">
+            {l10n('topCategoriesTitle')}
+          </h2>
           <CategoriesList
-            class="categories-list"
             baseUrl={import.meta.env.BASE_URL}
             categories={topCategoriesNames}
           />
-          <a class="btn btn-primary" href={categoryPageUrl}
-            >{l10n('showAllTags')}
-          </a>
+          <a class="btn btn--primary" href={categoryPageUrl}
+            >{l10n('showAllTags')}</a
+          >
         </aside>
-        <Breadcrumbs
-          client:idle
-          currentPathname={canonicalURL.pathname}
-          messages={breadcrumMessages}
-          lang={lang}
-          class="nav-breadcrumbs"
-        />
-        <slot />
+        <div class="lg:col-span-2">
+          <Breadcrumbs
+            client:idle
+            currentPathname={canonicalURL.pathname}
+            messages={breadcrumMessages}
+            lang={lang}
+          />
+          <slot />
+        </div>
       </div>
-      <footer><SocialLinksList /></footer>
+      <footer class="flex items-center justify-center border-t-3 border-ink bg-ink p-6">
+        <SocialLinksList />
+      </footer>
     </article>
     <slot name="after" />
     <BuildInfo />

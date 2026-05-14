@@ -1,7 +1,5 @@
 ---
-import '../styles/main.scss';
-import styles from '../styles/wallpaper.module.scss';
-import '../styles/layouts/blogPost.scss';
+import '../styles/global.css';
 import BaseHead from '@components/BaseHead.astro';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
@@ -58,8 +56,8 @@ const breadcrumMessages = Object.fromEntries(
     <ClientRouter />
   </head>
 
-  <body class={styles.wallpaper}>
-    <article class="main">
+  <body class="bg-paper text-ink">
+    <article class="flex min-h-screen flex-col">
       <SkipToMainContent
         client:load
         targetId={h1HeadingDomId}
@@ -78,24 +76,26 @@ const breadcrumMessages = Object.fromEntries(
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="logo-small" />
+        <BrandLogo class="h-16 w-16 lg:h-20 lg:w-20" />
       </SlantedHeader>
       <BlogPostInfo
         createdAt={createdAt ?? ''}
         categories={categories}
         baseUrl={import.meta.env.BASE_URL}
       />
-      <div class="main-content pt-0">
-        <slot /><BlogPostComments class="comments-box" />
+      <div class="prose-brutal mx-auto w-full max-w-4xl flex-1 px-6 py-10 lg:px-10">
+        <slot />
+        <BlogPostComments class="mt-12 border-t-3 border-ink pt-8" />
         <Breadcrumbs
           client:idle
           currentPathname={canonicalURL.pathname}
           messages={breadcrumMessages}
           lang={lang}
-          class="nav-breadcrumbs"
         />
       </div>
-      <footer><SocialLinksList /></footer>
+      <footer class="flex items-center justify-center border-t-3 border-ink bg-ink p-6">
+        <SocialLinksList />
+      </footer>
     </article>
     <slot name="after" />
     <BuildInfo />

@@ -1,7 +1,5 @@
 ---
-import '../styles/main.scss';
-import styles from '../styles/wallpaper.module.scss';
-import '../styles/layouts/hp.scss';
+import '../styles/global.css';
 import BaseHead from '@components/BaseHead.astro';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
@@ -10,7 +8,6 @@ import { Navbar } from '@components/Navbar/Navbar';
 import type { Lang } from '@i18n/types';
 import { getCanonicalURL, socialLinks } from 'utils/routing';
 import { getNavbarMessages } from '@components/Navbar/helpers';
-import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
 import { CFPCta } from '@components/CFPCta/CFPCta';
 import type { HpContent } from '../@types/hp';
 import { ClientRouter } from 'astro:transitions';
@@ -52,8 +49,8 @@ const l10n = await createTranslate(lang);
     <ClientRouter />
   </head>
 
-  <body class={styles.wallpaper}>
-    <main class="main">
+  <body class="bg-ink text-paper">
+    <main class="flex min-h-screen flex-col">
       <SkipToMainContent
         client:load
         targetId={h1HeadingDomId}
@@ -66,100 +63,188 @@ const l10n = await createTranslate(lang);
         relativePageUrl={relativePageUrl}
         messages={getNavbarMessages(l10n)}
       />
-      <div class="hp-wrapper">
-        <section class="hp-section logo-hero">
-          <BrandLogo class="logo" />
-          <div class="logo-hero__text hero">
-            <h1 id={h1HeadingDomId} tabindex="-1" class="h-1">{title}</h1><span
-              class="h-1">{description}</span
-            >
-          </div>
-          <a
-            class="btn btn-secondary slack-link h-1"
-            rel="noopener noreferrer"
-            target="_blank"
-            href={socialLinks.discord.href}
-          >
-            {l10n('ctaJoinDiscordCta')}{' '}
-            <img
-              width="24"
-              height="24"
-              src={socialLinks.discord.iconHref.src}
-              alt=""
-              aria-hidden="true"
-            />
-          </a>
-        </section>
-        {
-          sections.map((section) => (
-            <section class="arrow-box hp-section">
-              <h2 class="h-2 h-dynamic">{section.heading}</h2>
-              {section.body.map((body) => {
-                const slug = createSlug(body);
-                const href: string | undefined = hrefByEventSlug[slug];
 
-                return (
-                  <p class="h-2 h-dynamic">
-                    {href ? (
-                      <a class="hp-link" href={href}>
-                        {body}
-                      </a>
-                    ) : (
-                      body
-                    )}
-                  </p>
-                );
-              })}
-              {section.startDate && (
-                <time
-                  class="h-2 h-dynamic"
-                  datetime={section.startDate.dateTime}
+      {/* hero */}
+      <section class="raw-scanlines relative overflow-hidden bg-ink px-6 py-12 lg:px-16 lg:py-24">
+        <div class="mr-auto flex max-w-6xl flex-col gap-8">
+          <span class="raw-rule text-paper opacity-30" aria-hidden="true" />
+          <div class="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_auto]">
+            <div class="flex flex-col gap-6">
+              <span class="raw-label">{`// MEETUP_INDEX.HOST = ROMA`}</span>
+              <h1
+                id={h1HeadingDomId}
+                tabindex="-1"
+                class="m-0 text-4xl font-bold uppercase leading-[0.95] tracking-tight text-paper sm:text-6xl lg:text-8xl"
+              >
+                {title}
+              </h1>
+              <p class="m-0 max-w-xl border-l-3 border-brand-yellow pl-4 text-sm font-bold uppercase leading-relaxed tracking-wider text-paper opacity-80 lg:text-base">
+                {description}
+              </p>
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <a
+                  class="btn btn--primary"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href={socialLinks.discord.href}
                 >
-                  {section.startDate.label}
-                </time>
-              )}
-              <div class="hp-section-links">
-                {!!section.cta && (
-                  <a
-                    class="btn btn-outline btn-tertiary"
-                    href={section.cta.href}
-                    hreflang={section.cta.lang || undefined}
-                  >
-                    {section.cta.text}
-                  </a>
-                )}
-                {!!section.venues?.length && (
-                  <a
-                    class="btn btn-outline btn-tertiary"
-                    href={section.venues[0].href}
-                    hreflang={section.venues[0].lang || undefined}
-                  >
-                    {section.venues[0].text}
-                  </a>
-                )}
+                  {`>`} {l10n('ctaJoinDiscordCta')}
+                </a>
+                <span class="font-mono text-xs font-bold uppercase tracking-widest text-paper opacity-50">
+                  {`// PRESS_TO_JOIN`}
+                </span>
               </div>
-            </section>
-          ))
+            </div>
+            <div class="flex flex-col items-start gap-3 self-start">
+              <BrandLogo class="h-40 w-40 lg:h-64 lg:w-64" />
+              <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-brand-yellow">
+                LOGO.SVG / 224×224
+              </span>
+            </div>
+          </div>
+          <span class="raw-rule text-paper opacity-30" aria-hidden="true" />
+        </div>
+      </section>
+
+      {/* content sections — raw terminal cards on black */}
+      <div class="flex flex-1 flex-col bg-ink">
+        {
+          sections.map((section, idx) => {
+            const sectionIdx = String(idx + 1).padStart(2, '0');
+            const sectionTag =
+              idx === 0 ? './next_event.sh' : `./event_${sectionIdx}.sh`;
+            return (
+              <section class="bg-ink px-6 py-10 lg:px-16 lg:py-16">
+                <div class="mr-auto flex max-w-6xl flex-col gap-6">
+                  <div class="flex items-baseline gap-3 font-mono text-xs font-bold uppercase tracking-widest text-brand-yellow">
+                    <span aria-hidden="true">{`[${sectionIdx}]`}</span>
+                    <span>{sectionTag}</span>
+                    <span class="ml-auto hidden text-paper opacity-50 sm:inline">
+                      {`STATUS: ${idx === 0 ? 'UPCOMING' : 'CONFIRMED'}`}
+                    </span>
+                  </div>
+                  <h2 class="m-0 text-3xl font-bold uppercase leading-none tracking-tight text-paper sm:text-5xl lg:text-7xl">
+                    {section.heading}
+                  </h2>
+
+                  <dl class="raw-kv text-paper text-sm sm:text-base">
+                    {section.body.map((body, bodyIdx) => {
+                      const slug = createSlug(body);
+                      const href: string | undefined = hrefByEventSlug[slug];
+                      const key = bodyIdx === 0 ? 'TITLE' : `LINE_${bodyIdx}`;
+                      return (
+                        <>
+                          <dt>{key}</dt>
+                          <dd>
+                            {href ? (
+                              <a
+                                class="underline decoration-brand-yellow decoration-2 underline-offset-4 hover:bg-brand-yellow hover:text-ink"
+                                href={href}
+                              >
+                                {body}
+                              </a>
+                            ) : (
+                              body
+                            )}
+                          </dd>
+                        </>
+                      );
+                    })}
+                    {section.startDate && (
+                      <>
+                        <dt>DATE</dt>
+                        <dd>
+                          <time datetime={section.startDate.dateTime}>
+                            {section.startDate.label}
+                          </time>
+                        </dd>
+                      </>
+                    )}
+                  </dl>
+
+                  <div class="flex flex-wrap items-center gap-3 pt-2">
+                    {!!section.cta && (
+                      <a
+                        class="btn btn--primary"
+                        href={section.cta.href}
+                        hreflang={section.cta.lang || undefined}
+                      >
+                        {`>`} {section.cta.text}
+                      </a>
+                    )}
+                    {!!section.venues?.length && (
+                      <a
+                        class="btn"
+                        href={section.venues[0].href}
+                        hreflang={section.venues[0].lang || undefined}
+                      >
+                        @ {section.venues[0].text}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </section>
+            );
+          })
         }
       </div>
+
       <slot />
-      <div class="cfp-wrapper">
-        <p class="h-2">
-          <CFPCta
-            style={{
-              '--cta-bg': 'var(--text-secondary)',
-              '--cta-text': 'var(--text-primary)',
-            }}>{l10n('ctaRequestTalk')}</CFPCta
-          >
-        </p>
-      </div>
-      <section class="contacts-cta">
-        <p class="h-2">{l10n('ctaDiscussWebDev')}</p>
-        <p class="h-2">{l10n('ctaSeePreviousTalks')}</p>
-        <h2 class="h-1">{l10n('ctaContacts')}</h2>
+
+      {/* CFP — yellow accent block */}
+      <section class="bg-brand-yellow px-6 py-12 text-ink lg:px-16 lg:py-20">
+        <div class="mr-auto flex max-w-6xl flex-col gap-6">
+          <span class="raw-label !text-ink">{`// CALL_FOR_PROPOSALS`}</span>
+          <h2 class="m-0 text-4xl font-bold uppercase leading-none tracking-tight sm:text-6xl lg:text-7xl">
+            {l10n('ctaRequestTalk')}<span class="raw-caret" aria-hidden="true" />
+          </h2>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <CFPCta class="btn--ink">SUBMIT</CFPCta>
+            <span class="font-mono text-xs font-bold uppercase tracking-widest opacity-70">
+              {`// AWAITING SPEAKER_INPUT`}
+            </span>
+          </div>
+        </div>
       </section>
-      <footer>
-        <SocialLinksList />
+
+      {/* Contacts block */}
+      <section class="bg-ink px-6 py-12 text-paper lg:px-16 lg:py-20">
+        <div class="mr-auto flex max-w-6xl flex-col gap-6">
+          <span class="raw-rule text-brand-yellow opacity-60" aria-hidden="true" />
+          <span class="raw-label">{`> ./contacts.sh`}</span>
+          <h2 class="m-0 text-3xl font-bold uppercase leading-none tracking-tight text-brand-yellow sm:text-5xl lg:text-6xl">
+            {l10n('ctaContacts')}
+          </h2>
+          <p class="m-0 max-w-xl font-mono text-sm font-bold uppercase leading-relaxed tracking-wider opacity-80 lg:text-base">
+            <span class="text-brand-yellow">{`>`}</span> {l10n('ctaDiscussWebDev')}
+            <br />
+            <span class="text-brand-yellow">{`>`}</span> {l10n('ctaSeePreviousTalks')}
+          </p>
+          <span class="raw-rule text-brand-yellow opacity-60" aria-hidden="true" />
+        </div>
+      </section>
+
+      <footer class="flex items-center bg-ink px-6 py-8 lg:px-16">
+        <ul class="m-0 flex list-none flex-wrap items-center gap-3 p-0">
+          {Object.entries(socialLinks).map(([name, link]) => (
+            <li class="m-0 list-none p-0">
+              <a
+                href={link.href}
+                rel="noopener noreferrer"
+                target="_blank"
+                class="inline-flex h-10 w-10 items-center justify-center border-3 border-paper bg-ink text-paper hover:bg-brand-yellow hover:text-ink focus-visible:outline-3 focus-visible:outline-brand-yellow"
+              >
+                <span class="visually-hidden">{name}</span>
+                <img
+                  src={link.iconHref.src}
+                  alt={name}
+                  aria-hidden="true"
+                  class="h-5 w-5 invert group-hover:invert-0"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
       </footer>
     </main>
     <slot name="after" />

@@ -35,6 +35,7 @@
     "@graphql-codegen/cli": "^7.0.0",
     "@graphql-codegen/typescript-graphql-request": "^7.0.1",
     "@playwright/test": "^1.60.0",
+    "@tailwindcss/vite": "^4.3.0",
     "astro": "6.3.2",
     "dotenv": "^17.4.2",
     "husky": "^9.1.7",
@@ -43,12 +44,12 @@
     "mustache": "^4.2.0",
     "prettier": "3.8.3",
     "prompts": "^2.4.2",
-    "sass": "^1.99.0",
+    "tailwindcss": "^4.3.0",
     "tiny-invariant": "^1.3.3",
     "vitest": "^4.1.6"
   },
   "dependencies": {
-    "@fontsource/open-sans": "^5.2.7",
+    "@fontsource/jetbrains-mono": "^5.2.8",
     "@solid-primitives/media": "^2.3.5",
     "@tanstack/solid-query": "^5.100.10",
     "date-fns": "^4.1.0",
