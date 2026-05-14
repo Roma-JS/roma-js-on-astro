@@ -4,6 +4,7 @@ import { Dynamic } from 'solid-js/web';
 
 export type SlantedHeaderProps = JSX.IntrinsicElements['header'] & {
   title: string;
+  eyebrow?: string;
   logoHref?: string;
   logoLabel?: string;
   children: JSXElement;
@@ -15,6 +16,7 @@ export type SlantedHeaderProps = JSX.IntrinsicElements['header'] & {
 export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
   const [local, otherProps] = splitProps(props, [
     'title',
+    'eyebrow',
     'children',
     'class',
     'classList',
@@ -27,38 +29,42 @@ export function SlantedHeader(props: SlantedHeaderProps): JSX.Element {
 
   const classList = () => {
     const output = { ...local.classList };
-
     if (local.class) {
       output[local.class] = true;
     }
-
     return output;
   };
 
   return (
     <header
-      class="flex items-center gap-5 border-b-3 border-ink bg-brand-yellow px-5 py-8 lg:gap-8 lg:px-16 lg:py-12"
+      class="border-b border-ink bg-brand-yellow text-black"
       classList={classList()}
       {...otherProps}
     >
-      <Show when={local.logoHref} fallback={props.children}>
-        <a
-          class="brutal-press inline-block no-underline outline-none focus-visible:outline-3 focus-visible:outline-brand-red"
-          href={local.logoHref}
-          aria-label={props.logoLabel}
+      <div class="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 pt-16 pb-12 lg:px-8 lg:pt-24 lg:pb-16">
+        <div class="flex items-center gap-4">
+          <Show when={local.logoHref}>
+            <a
+              class="inline-flex shrink-0 text-black no-underline hover:bg-transparent hover:text-black"
+              href={local.logoHref}
+              aria-label={props.logoLabel}
+            >
+              {props.children}
+            </a>
+          </Show>
+          <p class="m-0 font-mono text-xs uppercase tracking-widest text-black/60">
+            {local.eyebrow ?? '// page'}
+          </p>
+        </div>
+        <Dynamic
+          component={local.heading}
+          class="m-0 max-w-4xl font-mono text-3xl font-bold leading-[1.1] tracking-tight text-black sm:text-4xl lg:text-5xl"
+          tabIndex={local.headingTabIndex}
+          id={local.headingId}
         >
-          {props.children}
-        </a>
-      </Show>
-
-      <Dynamic
-        component={local.heading}
-        class="m-0 line-clamp-3 overflow-hidden text-xl font-bold uppercase leading-tight tracking-tight text-ink sm:line-clamp-2 sm:text-2xl lg:text-4xl"
-        tabIndex={local.headingTabIndex}
-        id={local.headingId}
-      >
-        {local.title}
-      </Dynamic>
+          {local.title}
+        </Dynamic>
+      </div>
     </header>
   );
 }

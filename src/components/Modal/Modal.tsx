@@ -65,32 +65,38 @@ export function Modal(props: ModalProps) {
     <dialog
       {...otherProps}
       onClick={handleDialogClick}
-      class="brutal-modal h-min w-[min(80vw,720px)] border-3 border-ink bg-paper p-0 text-ink shadow-brutal-lg backdrop:bg-ink/60"
+      class="h-min w-[min(80vw,720px)] border border-ink bg-paper p-0 text-ink backdrop:bg-ink/60"
       ref={dialogRef}
       id={local.id}
     >
-      <button
-        autofocus
-        type="button"
-        class="absolute right-2 top-2 inline-flex h-10 w-10 items-center justify-center border-3 border-ink bg-paper text-2xl font-bold leading-none text-ink shadow-brutal-sm hover:bg-brand-red hover:text-paper"
-        aria-label="Close"
-        onClick={() => {
-          dialogRef?.close();
-        }}
-      >
-        &times;
-      </button>
-      <article class="grid max-h-[80vh] w-full grid-cols-1 grid-rows-[auto_auto_1fr] overflow-x-hidden overflow-y-auto p-6 lg:p-8">
-        <aside class="m-0 flex max-w-[calc(100%-1.2rem)] min-h-8 items-center overflow-hidden text-sm font-bold uppercase tracking-widest text-ink-soft">
-          {local.preHeading}
-        </aside>
-        <Dynamic
-          component={local.headingElem ?? 'h2'}
-          class="m-0 mb-4 flex max-w-full min-h-10 items-center overflow-hidden text-2xl font-bold uppercase tracking-tight text-ink"
-        >
-          {local.heading}
-        </Dynamic>
-        {local.children}
+      <article class="grid max-h-[80vh] w-full grid-cols-1 grid-rows-[auto_auto_1fr] gap-3 overflow-x-hidden overflow-y-auto p-5 font-mono lg:p-6">
+        <header class="flex items-start justify-between gap-3 border-b border-ink pb-3">
+          <div class="flex flex-col gap-1">
+            <p class="m-0 font-mono text-xs uppercase tracking-widest text-ink-soft">
+              {local.preHeading}
+            </p>
+            <Dynamic
+              component={local.headingElem ?? 'h2'}
+              class="m-0 max-w-full font-mono text-xl font-bold leading-tight tracking-tight lg:text-2xl"
+            >
+              {local.heading}
+            </Dynamic>
+          </div>
+          <button
+            autofocus
+            type="button"
+            class="btn"
+            aria-label="Close"
+            onClick={() => {
+              dialogRef?.close();
+            }}
+          >
+            close
+          </button>
+        </header>
+        <div class="prose-mono pt-2 font-mono text-sm leading-relaxed lg:text-[15px]">
+          {local.children}
+        </div>
       </article>
     </dialog>
   );

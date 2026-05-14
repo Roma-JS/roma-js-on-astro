@@ -7,8 +7,13 @@ import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
-import { getCanonicalURL, navbarLinks, pastEventsUrlMap } from 'utils/routing';
-import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import {
+  getCanonicalURL,
+  getEventUrl,
+  navbarLinks,
+  pastEventsUrlMap,
+} from 'utils/routing';
+import SiteFooter from '@components/SiteFooter/SiteFooter.astro';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { ClientRouter } from 'astro:transitions';
@@ -19,6 +24,8 @@ import { h1HeadingDomId, slantedHeaderH1Config } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 import { createTranslate } from '@i18n/translate';
 import type { MeetupArticleFragment } from '@api/meetup/events.graphql.generated';
+import { getCollection } from 'astro:content';
+import { formatDate } from '@i18n/date-time';
 
 export interface Props extends BaseHeadProps {
   lang: Lang;
@@ -35,46 +42,114 @@ const relativePageUrl =
   canonicalURL.hash;
 
 const scheduledEvents = computeScheduledEvents(page.data);
-const l10n = await createTranslate(lang);
+const eventDateRe = /^(\d{4}-\d{2}-\d{2})-/;
+
+const [l10n, conferenceEntries] = await Promise.all([
+  createTranslate(lang),
+  page.currentPage === 1
+    ? getCollection('events', (entry) => entry.data.lang === lang)
+    : Promise.resolve([]),
+]);
+
+const conferences = conferenceEntries
+  .map((entry) => {
+    const match = entry.id.match(eventDateRe);
+    const eventDate = match ? new Date(match[1]) : null;
+    return { entry, eventDate };
+  })
+  .sort((a, b) => {
+    const aTime = a.eventDate?.getTime() ?? 0;
+    const bTime = b.eventDate?.getTime() ?? 0;
+    return bTime - aTime;
+  });
 ---
 
-<html lang={lang} class="rmjs-yellow-black-theme">
+<html lang={lang}>
   <head>
     <BaseHead lang={lang} title={title} description={description} />
     <slot name="head" />
     <ClientRouter />
   </head>
   <body class="bg-paper text-ink">
-    <article class="flex min-h-screen flex-col">
-      <SkipToMainContent
-        client:load
-        targetId={h1HeadingDomId}
-        label={l10n('skipToMainContent')}
-      />
-      <Navbar
-        client:load
-        lang={lang}
-        urlMap={pastEventsUrlMap}
-        relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages(l10n)}
-      />
+    <SkipToMainContent
+      client:load
+      targetId={h1HeadingDomId}
+      label={l10n('skipToMainContent')}
+    />
+    <Navbar
+      client:load
+      lang={lang}
+      urlMap={pastEventsUrlMap}
+      relativePageUrl={relativePageUrl}
+      messages={getNavbarMessages(l10n)}
+    />
+    <article>
       <SlantedHeader
         {...slantedHeaderH1Config}
         title={title}
+        eyebrow="// past events"
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="h-16 w-16 lg:h-20 lg:w-20" />
+        <BrandLogo class="h-10 w-10" />
       </SlantedHeader>
-      <div class="mx-auto w-full max-w-5xl flex-1 px-6 py-10 lg:px-10">
-        <EventsList events={scheduledEvents} lang={lang} />
+      <div class="mx-auto w-full max-w-6xl px-4 py-12 lg:px-8 lg:py-16">
+        {
+          conferences.length > 0 && (
+            <section class="mb-16 lg:mb-20">
+              <header class="mb-6 flex flex-col items-start gap-1">
+                <p class="m-0 font-mono text-xs uppercase tracking-widest text-ink-soft">
+                  // conferences
+                </p>
+                <h2 class="m-0 font-mono text-2xl font-bold tracking-tight lg:text-3xl">
+                  {l10n('conferencesTitle')}
+                </h2>
+              </header>
+              <ul class="m-0 grid list-none gap-x-6 gap-y-10 p-0 sm:grid-cols-2">
+                {conferences.map(({ entry, eventDate }) => (
+                  <li class="m-0 list-none p-0">
+                    <a
+                      href={getEventUrl(entry.id)}
+                      class="block text-ink no-underline hover:text-ink"
+                    >
+                      <article class="ascii-box flex h-full flex-col gap-4 transition-colors hover:bg-paper-soft">
+                        <span class="ascii-box__title">CONF</span>
+                        {eventDate && (
+                          <span class="ascii-box__meta">
+                            <time datetime={eventDate.toISOString()}>
+                              {formatDate(lang, eventDate)}
+                            </time>
+                          </span>
+                        )}
+                        <h3 class="m-0 font-mono text-lg font-bold leading-tight tracking-tight lg:text-xl">
+                          {entry.data.title}
+                        </h3>
+                        {entry.data.description && (
+                          <p class="m-0 text-sm text-ink-soft">
+                            {entry.data.description}
+                          </p>
+                        )}
+                      </article>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+        <EventsList
+          events={scheduledEvents}
+          lang={lang}
+          placeholderMessages={{
+            topicTbd: l10n('topicTbd'),
+            submitTalk: l10n('ctaSubmitTalk'),
+          }}
+        />
         <slot />
         <Pagination url={page.url} lang={lang} />
       </div>
-      <footer class="flex items-center justify-center border-t-3 border-ink bg-ink p-6">
-        <SocialLinksList />
-      </footer>
     </article>
+    <SiteFooter tagline={l10n('footerTagline')} />
     <slot name="after" />
     <BuildInfo />
   </body>

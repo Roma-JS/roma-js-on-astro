@@ -2,11 +2,6 @@
   "ctaWatchOurVideos": "Watch our videos",
   "ctaJoinDiscordCta": "Join us on Discord",
   "ctaReserveMeetupPartecipation": "Reserve",
-  "categoryTitle": "Tag: {{categoryTitle}}",
-  "categoriesTitle": "Tags",
-  "topCategoriesTitle": "Top tags",
-  "categoriesDescription": "All the tags of the RomaJS blog",
-  "showAllTags": "See all tags",
   "ctaRequestTalk": "Request a talk - CFP",
   "ctaDiscussWebDev": "Do you want to chat about web development?",
   "ctaSeePreviousTalks": "Do want to watch the previous talks?",
@@ -21,6 +16,10 @@
   "prevPage": "Previous page",
   "nextPage": "Next page",
   "venue": "Venue",
+  "topicTbd": "Topic to be announced",
+  "conferencesTitle": "Conferences",
+  "footerTagline": "The JavaScript meetup of Rome",
+  "ctaSubmitTalk": "submit a talk",
   "openMenu": "Open menu",
   "closeMenu": "Close menu",
   "mainSiteNav": "Main site navigation",
@@ -31,6 +30,5 @@
   "upcomingEvents": "Upcoming events",
   "pastEvents": "Previous events",
   "homepage": "home",
-  "aboutPage": "about",
-  "blog": "blog"
+  "aboutPage": "about"
 }

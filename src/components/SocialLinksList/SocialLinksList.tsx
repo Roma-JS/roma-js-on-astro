@@ -3,7 +3,7 @@ import { socialLinks } from 'utils/routing';
 
 export function SocialLinksList(): JSX.Element {
   return (
-    <ul class="m-0 flex list-none items-center gap-5 p-0">
+    <ul class="m-0 flex list-none flex-wrap items-center gap-x-3 gap-y-2 p-0 font-mono text-sm">
       <For each={Object.entries(socialLinks)}>
         {([name, link]) => (
           <li class="m-0 list-none p-0">
@@ -11,15 +11,10 @@ export function SocialLinksList(): JSX.Element {
               href={link.href}
               rel="noopener noreferrer"
               target="_blank"
-              class="brutal-press inline-flex h-10 w-10 items-center justify-center border-3 border-ink bg-paper text-ink shadow-brutal-sm focus-visible:outline-3 focus-visible:outline-brand-red"
+              class="inline-flex items-center gap-1.5 no-underline before:content-['['] hover:bg-ink hover:text-paper after:content-[']']"
             >
               <span class="visually-hidden">{name}</span>
-              <img
-                src={link.iconHref.src}
-                alt={name}
-                aria-hidden="true"
-                class="h-5 w-5"
-              />
+              <span aria-hidden="true">{name}</span>
             </a>
           </li>
         )}

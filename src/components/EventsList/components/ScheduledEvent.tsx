@@ -14,23 +14,18 @@ const defaultHeading: NonNullable<ScheduleEventProps['heading']> = 'h2';
 
 export function ScheduledEvent(props: ScheduleEventProps): JSX.Element {
   return (
-    <section class="grid grid-cols-1 items-center gap-4 border-3 border-ink bg-paper p-5 shadow-brutal hover:bg-brand-yellow md:grid-cols-[200px_1fr] md:p-6">
-      <time
-        datetime={new Date(props.event.dateTime).toISOString()}
-        class="font-bold uppercase tracking-widest text-ink-soft"
-      >
-        {formatDate(props.lang, new Date(props.event.dateTime))}
-      </time>
+    <section class="ascii-box flex flex-col gap-4 transition-colors hover:bg-paper-soft">
+      <span class="ascii-box__title">EVENT</span>
+      <span class="ascii-box__meta">
+        <time datetime={new Date(props.event.dateTime).toISOString()}>
+          {formatDate(props.lang, new Date(props.event.dateTime))}
+        </time>
+      </span>
       <Dynamic
         component={props.heading ?? defaultHeading}
-        class="m-0 text-xl font-bold uppercase leading-tight text-ink"
+        class="m-0 font-mono text-lg font-bold leading-tight tracking-tight lg:text-xl"
       >
-        <a
-          class="underline decoration-2 underline-offset-4"
-          href={props.event.eventUrl}
-        >
-          {props.event.title}
-        </a>
+        <a href={props.event.eventUrl}>{props.event.title}</a>
       </Dynamic>
     </section>
   );

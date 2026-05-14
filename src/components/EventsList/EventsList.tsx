@@ -2,17 +2,21 @@ import type { JSX } from 'solid-js/jsx-runtime';
 import { For, Show } from 'solid-js';
 import type { Lang } from '@i18n/types';
 import type { UpcomingEvent } from 'utils/meetup-events';
-import { PlaceholderEvent } from './components/PlaceholderEvent';
+import {
+  PlaceholderEvent,
+  type PlaceholderEventMessages,
+} from './components/PlaceholderEvent';
 import { ScheduledEvent } from './components/ScheduledEvent';
 
 export interface EventsListProps {
   events?: UpcomingEvent[];
   lang: Lang;
+  placeholderMessages: PlaceholderEventMessages;
 }
 
 export function EventsList(props: EventsListProps): JSX.Element {
   return (
-    <ul class="m-0 grid list-none gap-6 p-0">
+    <ul class="m-0 grid list-none gap-x-6 gap-y-10 p-0 sm:grid-cols-2">
       <For each={props.events}>
         {(event) => (
           <>
@@ -22,6 +26,7 @@ export function EventsList(props: EventsListProps): JSX.Element {
                   <PlaceholderEvent
                     lang={props.lang}
                     date={placeholderDate()}
+                    messages={props.placeholderMessages}
                   />
                 </li>
               )}

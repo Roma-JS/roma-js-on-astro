@@ -9,27 +9,16 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 - Seo Support | automatic sitemap generation, robots.txt, `link[rel="alternate"]` etc...
 - Localized routes `/it/**` italian and `/en/**` english.
 - Homepage.
-- Blog section.
-- Blog category pages.
 - Upcoming events page.
 - Previous events page.
-- [feed rss](https://rss.com/blog/how-do-rss-feeds-work/) available at `<SITE>/blog/rss.xml`.
 - opengraph and twitter social cards.
-- headless blog posts available at `/api/blog/post.json`.
-- headless blog posts categories available at `/api/blog/category.json`.
 - headless homepage content available at `/api/hp/it.json` & `/api/hp/en.json`
 - About page
 
 ## Todo
 
 - [x] homepage
-- [x] script that generates blog post files from a template
 - [x] github action pipeline that deploys to github pages
-- [x] blog post categories pages
-- [x] categories index page
-- [x] blog post comments powered by [giscus](https://giscus.app/)
-- [x] copy facebook posts 2022, 2020, 2019
-- [x] generate blog homepage
 - [x] build about page
 - [x] setup PR pipeline
 - [x] setup deploy to GH pages pipeline
@@ -66,10 +55,6 @@ pnpm run fmt
 ---
 
 ### How To
-
-#### Create a new post
-
-Run `pnpm run create-post` and follow the instructions.
 
 #### Change Homepage content
 
@@ -118,7 +103,6 @@ periodically triggers the deployment.
 - `pnpm run dev` starts dev server at `127.0.0.1:3000`.
 - `pnpm run build` builds project and emits site at `dist/` folder.
 - `pnpm run fmt` format code using prettier
-- `pnpm run create-post` prompts to generate new posts
 - `pnpm run preview` starts a server that serves the content of `dist/`
 - `pnpm run pre-commit` runs automatically on pre-commit; there's no need to call it directly
 - `pnpm run test` runs tests

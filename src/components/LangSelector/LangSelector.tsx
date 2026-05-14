@@ -40,7 +40,7 @@ export function LangSelector(props: LangSelectorProps) {
             <li class="m-0 flex list-none items-center justify-center border-r-3 border-ink p-0 last:border-r-0">
               <a
                 onClick={handleLinkClick}
-                class="flex h-full min-w-9 items-center justify-center bg-transparent px-2 text-sm font-bold uppercase tracking-widest text-ink no-underline aria-[current=page]:bg-ink aria-[current=page]:text-paper"
+                class="flex h-full min-w-9 items-center justify-center bg-transparent px-2 text-sm font-bold uppercase tracking-widest text-ink no-underline hover:no-underline aria-[current=page]:bg-ink aria-[current=page]:text-paper"
                 aria-current={local.activeLang === lang ? 'page' : undefined}
                 href={altUrl}
                 hreflang={lang}

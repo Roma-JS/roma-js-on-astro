@@ -5,7 +5,7 @@ import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import { Navbar } from '@components/Navbar/Navbar';
 import { SlantedHeader } from '@components/SlantedHeader/SlantedHeader';
 import { getCanonicalURL, aboutUrlMap, navbarLinks } from 'utils/routing';
-import { SocialLinksList } from '@components/SocialLinksList/SocialLinksList';
+import SiteFooter from '@components/SiteFooter/SiteFooter.astro';
 import type { Lang } from '@i18n/types';
 import { getNavbarMessages } from '@components/Navbar/helpers';
 import { ClientRouter } from 'astro:transitions';
@@ -28,41 +28,42 @@ const lang: Lang = content.lang || 'en';
 const l10n = await createTranslate(lang);
 ---
 
-<html lang={lang} class="rmjs-yellow-black-theme">
+<html lang={lang}>
   <head>
     <BaseHead lang={lang} title={title} description={description} />
     <slot name="head" />
     <ClientRouter />
   </head>
   <body class="bg-paper text-ink">
-    <article class="flex min-h-screen flex-col">
-      <SkipToMainContent
-        client:load
-        targetId={h1HeadingDomId}
-        label={l10n('skipToMainContent')}
-      />
-      <Navbar
-        client:load
-        lang={lang}
-        urlMap={aboutUrlMap}
-        relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages(l10n)}
-      />
+    <SkipToMainContent
+      client:load
+      targetId={h1HeadingDomId}
+      label={l10n('skipToMainContent')}
+    />
+    <Navbar
+      client:load
+      lang={lang}
+      urlMap={aboutUrlMap}
+      relativePageUrl={relativePageUrl}
+      messages={getNavbarMessages(l10n)}
+    />
+    <article>
       <SlantedHeader
         {...slantedHeaderH1Config}
         title={title}
+        eyebrow="// about"
         logoHref={navbarLinks[lang]?.home}
         logoLabel={'homepage'}
       >
-        <BrandLogo class="h-16 w-16 lg:h-20 lg:w-20" />
+        <BrandLogo class="h-10 w-10" />
       </SlantedHeader>
-      <div class="prose-brutal mx-auto w-full max-w-4xl flex-1 px-6 py-10 lg:px-10">
+      <div
+        class="prose-mono mx-auto w-full max-w-3xl px-4 py-16 font-mono text-sm leading-relaxed lg:px-8 lg:py-20 lg:text-[15px]"
+      >
         <slot />
       </div>
-      <footer class="flex items-center justify-center border-t-3 border-ink bg-ink p-6">
-        <SocialLinksList />
-      </footer>
     </article>
+    <SiteFooter tagline={l10n('footerTagline')} />
     <slot name="after" />
     <BuildInfo />
   </body>

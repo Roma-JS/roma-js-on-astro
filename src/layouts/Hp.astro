@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import BaseHead from '@components/BaseHead.astro';
 import BrandLogo from '@components/BrandLogo/BrandLogo.astro';
+import SiteFooter from '@components/SiteFooter/SiteFooter.astro';
 import { BuildInfo } from '@components/BuildInfo/BuildInfo';
 import type { Props as BaseHeadProps } from '@components/BaseHead.astro';
 import { Navbar } from '@components/Navbar/Navbar';
@@ -14,7 +15,7 @@ import { ClientRouter } from 'astro:transitions';
 import { h1HeadingDomId } from 'utils/a11y';
 import { SkipToMainContent } from '@components/SkipToMainContent/SkipToMainContent';
 import eventsMetadata from '../data/events/events-metadata.json';
-import { createSlug } from 'utils/blog';
+import { createSlug } from 'utils/slug';
 import { createTranslate } from '@i18n/translate';
 
 export interface Props extends BaseHeadProps {
@@ -42,211 +43,182 @@ const relativePageUrl =
 const l10n = await createTranslate(lang);
 ---
 
-<html lang={lang} class="rmjs-yellow-black-theme">
+<html lang={lang}>
   <head>
     <BaseHead lang={lang} title={title} description={description} />
     <slot name="head" />
     <ClientRouter />
   </head>
 
-  <body class="bg-ink text-paper">
-    <main class="flex min-h-screen flex-col">
-      <SkipToMainContent
-        client:load
-        targetId={h1HeadingDomId}
-        label={l10n('skipToMainContent')}
-      />
-      <Navbar
-        client:load
-        lang={lang}
-        urlMap={urlMap}
-        relativePageUrl={relativePageUrl}
-        messages={getNavbarMessages(l10n)}
-      />
+  <body class="bg-paper text-ink">
+    <SkipToMainContent
+      client:load
+      targetId={h1HeadingDomId}
+      label={l10n('skipToMainContent')}
+    />
+    <Navbar
+      client:load
+      lang={lang}
+      urlMap={urlMap}
+      relativePageUrl={relativePageUrl}
+      messages={getNavbarMessages(l10n)}
+    />
 
-      {/* hero */}
-      <section class="raw-scanlines relative overflow-hidden bg-ink px-6 py-12 lg:px-16 lg:py-24">
-        <div class="mr-auto flex max-w-6xl flex-col gap-8">
-          <span class="raw-rule text-paper opacity-30" aria-hidden="true" />
-          <div class="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1fr_auto]">
-            <div class="flex flex-col gap-6">
-              <span class="raw-label">{`// MEETUP_INDEX.HOST = ROMA`}</span>
-              <h1
-                id={h1HeadingDomId}
-                tabindex="-1"
-                class="m-0 text-4xl font-bold uppercase leading-[0.95] tracking-tight text-paper sm:text-6xl lg:text-8xl"
-              >
-                {title}
-              </h1>
-              <p class="m-0 max-w-xl border-l-3 border-brand-yellow pl-4 text-sm font-bold uppercase leading-relaxed tracking-wider text-paper opacity-80 lg:text-base">
-                {description}
-              </p>
-              <div class="flex flex-wrap items-center gap-3 pt-2">
-                <a
-                  class="btn btn--primary"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  href={socialLinks.discord.href}
-                >
-                  {`>`} {l10n('ctaJoinDiscordCta')}
-                </a>
-                <span class="font-mono text-xs font-bold uppercase tracking-widest text-paper opacity-50">
-                  {`// PRESS_TO_JOIN`}
-                </span>
-              </div>
-            </div>
-            <div class="flex flex-col items-start gap-3 self-start">
-              <BrandLogo class="h-40 w-40 lg:h-64 lg:w-64" />
-              <span class="font-mono text-[10px] font-bold uppercase tracking-widest text-brand-yellow">
-                LOGO.SVG / 224×224
-              </span>
-            </div>
+    <main class="mx-auto w-full max-w-6xl">
+      {/* HERO */}
+      <section class="border-b border-ink px-4 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
+        <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <BrandLogo class="mb-6 h-20 w-20 lg:h-24 lg:w-24" />
+          <p class="m-0 mb-6 font-mono text-xs uppercase tracking-widest text-ink-soft">
+            <span aria-hidden="true">/*</span>&nbsp; ROMA · JS · MEETUP · EST. 2014 &nbsp;<span aria-hidden="true">*/</span>
+          </p>
+          <h1
+            id={h1HeadingDomId}
+            tabindex="-1"
+            class="m-0 max-w-3xl font-mono text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+          >
+            {title}<span class="blink ml-1 text-ink-soft" aria-hidden="true">_</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-sm text-ink-soft lg:text-base">
+            {description}
+          </p>
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+            <a
+              class="btn btn--primary"
+              rel="noopener noreferrer"
+              target="_blank"
+              href={socialLinks.discord.href}
+            >
+              {l10n('ctaJoinDiscordCta')}
+            </a>
           </div>
-          <span class="raw-rule text-paper opacity-30" aria-hidden="true" />
         </div>
       </section>
 
-      {/* content sections — raw terminal cards on black */}
-      <div class="flex flex-1 flex-col bg-ink">
-        {
-          sections.map((section, idx) => {
-            const sectionIdx = String(idx + 1).padStart(2, '0');
-            const sectionTag =
-              idx === 0 ? './next_event.sh' : `./event_${sectionIdx}.sh`;
-            return (
-              <section class="bg-ink px-6 py-10 lg:px-16 lg:py-16">
-                <div class="mr-auto flex max-w-6xl flex-col gap-6">
-                  <div class="flex items-baseline gap-3 font-mono text-xs font-bold uppercase tracking-widest text-brand-yellow">
-                    <span aria-hidden="true">{`[${sectionIdx}]`}</span>
-                    <span>{sectionTag}</span>
-                    <span class="ml-auto hidden text-paper opacity-50 sm:inline">
-                      {`STATUS: ${idx === 0 ? 'UPCOMING' : 'CONFIRMED'}`}
+      {/* EVENTS GRID */}
+      <section class="border-b border-ink px-4 py-16 lg:px-8 lg:py-24">
+        <header class="mb-8 flex flex-col items-start gap-1 lg:mb-10">
+          <p class="m-0 font-mono text-xs uppercase tracking-widest text-ink-soft">
+            // schedule
+          </p>
+          <h2 class="m-0 font-mono text-2xl font-bold tracking-tight lg:text-3xl">
+            Upcoming &amp; latest
+          </h2>
+        </header>
+        <div class="grid gap-x-6 gap-y-10 sm:grid-cols-2">
+          {
+            sections.map((section, idx) => {
+              const label = idx === 0 ? 'NEXT' : 'PREV';
+              return (
+                <article class="ascii-box flex flex-col gap-4">
+                  <span class="ascii-box__title">{label}</span>
+                  {section.startDate && (
+                    <span class="ascii-box__meta">
+                      <time datetime={section.startDate.dateTime}>
+                        {section.startDate.label}
+                      </time>
                     </span>
-                  </div>
-                  <h2 class="m-0 text-3xl font-bold uppercase leading-none tracking-tight text-paper sm:text-5xl lg:text-7xl">
+                  )}
+                  <h3 class="m-0 mt-1 font-mono text-xl font-bold leading-tight tracking-tight lg:text-2xl">
                     {section.heading}
-                  </h2>
-
-                  <dl class="raw-kv text-paper text-sm sm:text-base">
-                    {section.body.map((body, bodyIdx) => {
+                  </h3>
+                  <dl class="ascii-dl text-sm lg:text-[15px]">
+                    {section.body.map((body, i) => {
                       const slug = createSlug(body);
                       const href: string | undefined = hrefByEventSlug[slug];
-                      const key = bodyIdx === 0 ? 'TITLE' : `LINE_${bodyIdx}`;
+                      const key =
+                        i === 0 ? 'subject' : `note.${String(i).padStart(2, '0')}`;
                       return (
                         <>
                           <dt>{key}</dt>
-                          <dd>
-                            {href ? (
-                              <a
-                                class="underline decoration-brand-yellow decoration-2 underline-offset-4 hover:bg-brand-yellow hover:text-ink"
-                                href={href}
-                              >
-                                {body}
-                              </a>
-                            ) : (
-                              body
-                            )}
-                          </dd>
+                          <dd>{href ? <a href={href}>{body}</a> : body}</dd>
                         </>
                       );
                     })}
-                    {section.startDate && (
+                    {section.venues?.length ? (
                       <>
-                        <dt>DATE</dt>
+                        <dt>venue</dt>
                         <dd>
-                          <time datetime={section.startDate.dateTime}>
-                            {section.startDate.label}
-                          </time>
+                          <a
+                            href={section.venues[0].href}
+                            hreflang={section.venues[0].lang || undefined}
+                          >
+                            {section.venues[0].text}
+                          </a>
                         </dd>
                       </>
-                    )}
+                    ) : null}
                   </dl>
-
-                  <div class="flex flex-wrap items-center gap-3 pt-2">
+                  <div class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
                     {!!section.cta && (
                       <a
                         class="btn btn--primary"
                         href={section.cta.href}
                         hreflang={section.cta.lang || undefined}
                       >
-                        {`>`} {section.cta.text}
-                      </a>
-                    )}
-                    {!!section.venues?.length && (
-                      <a
-                        class="btn"
-                        href={section.venues[0].href}
-                        hreflang={section.venues[0].lang || undefined}
-                      >
-                        @ {section.venues[0].text}
+                        {section.cta.text}
                       </a>
                     )}
                   </div>
-                </div>
-              </section>
-            );
-          })
-        }
-      </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </section>
 
       <slot />
 
-      {/* CFP — yellow accent block */}
-      <section class="bg-brand-yellow px-6 py-12 text-ink lg:px-16 lg:py-20">
-        <div class="mr-auto flex max-w-6xl flex-col gap-6">
-          <span class="raw-label !text-ink">{`// CALL_FOR_PROPOSALS`}</span>
-          <h2 class="m-0 text-4xl font-bold uppercase leading-none tracking-tight sm:text-6xl lg:text-7xl">
-            {l10n('ctaRequestTalk')}<span class="raw-caret" aria-hidden="true" />
-          </h2>
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <CFPCta class="btn--ink">SUBMIT</CFPCta>
-            <span class="font-mono text-xs font-bold uppercase tracking-widest opacity-70">
-              {`// AWAITING SPEAKER_INPUT`}
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Contacts block */}
-      <section class="bg-ink px-6 py-12 text-paper lg:px-16 lg:py-20">
-        <div class="mr-auto flex max-w-6xl flex-col gap-6">
-          <span class="raw-rule text-brand-yellow opacity-60" aria-hidden="true" />
-          <span class="raw-label">{`> ./contacts.sh`}</span>
-          <h2 class="m-0 text-3xl font-bold uppercase leading-none tracking-tight text-brand-yellow sm:text-5xl lg:text-6xl">
-            {l10n('ctaContacts')}
-          </h2>
-          <p class="m-0 max-w-xl font-mono text-sm font-bold uppercase leading-relaxed tracking-wider opacity-80 lg:text-base">
-            <span class="text-brand-yellow">{`>`}</span> {l10n('ctaDiscussWebDev')}
-            <br />
-            <span class="text-brand-yellow">{`>`}</span> {l10n('ctaSeePreviousTalks')}
+      {/* CFP */}
+      <section class="border-b border-ink px-4 py-16 lg:px-8 lg:py-24">
+        <div class="ascii-box mx-auto flex max-w-3xl flex-col items-center gap-5 bg-paper-soft px-6 py-12 text-center lg:px-10 lg:py-16">
+          <span class="ascii-box__title">CFP</span>
+          <p class="m-0 font-mono text-xs uppercase tracking-widest text-ink-soft">
+            // call for proposals
           </p>
-          <span class="raw-rule text-brand-yellow opacity-60" aria-hidden="true" />
+          <h2 class="m-0 max-w-xl font-mono text-2xl font-bold leading-tight tracking-tight lg:text-4xl">
+            {l10n('ctaRequestTalk')}
+          </h2>
+          <p class="m-0 max-w-md text-sm text-ink-soft">
+            We curate talks every month. If you have a story to tell, the stage is yours.
+          </p>
+          <CFPCta class="btn--primary">{l10n('ctaSubmitTalk')}</CFPCta>
         </div>
       </section>
 
-      <footer class="flex items-center bg-ink px-6 py-8 lg:px-16">
-        <ul class="m-0 flex list-none flex-wrap items-center gap-3 p-0">
-          {Object.entries(socialLinks).map(([name, link]) => (
-            <li class="m-0 list-none p-0">
-              <a
-                href={link.href}
-                rel="noopener noreferrer"
-                target="_blank"
-                class="inline-flex h-10 w-10 items-center justify-center border-3 border-paper bg-ink text-paper hover:bg-brand-yellow hover:text-ink focus-visible:outline-3 focus-visible:outline-brand-yellow"
-              >
-                <span class="visually-hidden">{name}</span>
-                <img
-                  src={link.iconHref.src}
-                  alt={name}
-                  aria-hidden="true"
-                  class="h-5 w-5 invert group-hover:invert-0"
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </footer>
+      {/* CONTACTS */}
+      <section class="px-4 py-16 lg:px-8 lg:py-24">
+        <div class="grid items-start gap-10 lg:grid-cols-[1fr_auto]">
+          <div class="flex flex-col items-start gap-2">
+            <p class="m-0 font-mono text-xs uppercase tracking-widest text-ink-soft">
+              // contacts
+            </p>
+            <h2 class="m-0 font-mono text-2xl font-bold tracking-tight lg:text-3xl">
+              {l10n('ctaContacts')}
+            </h2>
+            <p class="m-0 max-w-prose text-sm text-ink-soft lg:text-base">
+              {l10n('ctaDiscussWebDev')} · {l10n('ctaSeePreviousTalks')}
+            </p>
+          </div>
+          <dl class="ascii-dl text-sm lg:text-[15px]">
+            {
+              Object.entries(socialLinks).map(([name, link]) => (
+                <>
+                  <dt>{name}</dt>
+                  <dd>
+                    <a href={link.href} rel="noopener noreferrer" target="_blank">
+                      {link.href.replace(/^https?:\/\//, '')}
+                    </a>
+                  </dd>
+                </>
+              ))
+            }
+          </dl>
+        </div>
+      </section>
     </main>
+
+    <SiteFooter tagline={l10n('footerTagline')} />
     <slot name="after" />
     <BuildInfo />
   </body>

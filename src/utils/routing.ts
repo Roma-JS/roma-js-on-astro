@@ -3,7 +3,6 @@ import facebookIcon from 'media/social/facebook.svg';
 import githubIcon from 'media/social/github.svg';
 import youtubeIcon from 'media/social/youtube.svg';
 import twitterIcon from 'media/social/twitter-square.svg';
-import rssIcon from 'media/social/rss.svg';
 import discordIcon from 'media/social/discord.svg';
 import linkedinIcon from 'media/social/linkedin.svg';
 import meetupIcon from 'media/social/meetup.svg';
@@ -17,14 +16,12 @@ export type RouteKey =
   | 'homepage'
   | 'upcomingEvents'
   | 'pastEvents'
-  | 'blog'
   | 'aboutPage';
 
 const itRoutes = {
   homepage: createPageRoute('/'),
   upcomingEvents: createPageRoute('/it/prossimi-eventi'),
   pastEvents: createPageRoute('/it/eventi-passati/1'),
-  blog: createPageRoute('/blog'),
   aboutPage: createPageRoute('/it/about'),
 } as const satisfies Partial<Record<RouteKey, string>>;
 
@@ -40,23 +37,10 @@ export const routes = {
   en: enRoutes,
 } as const satisfies Record<Lang, Partial<Record<RouteKey, string>>>;
 
-export const breadcrumbLinks = {
-  it: {
-    home: routes.it.homepage,
-    blog: routes.it.blog,
-  },
-  en: {
-    home: routes.en.homepage,
-    about: routes.en.aboutPage,
-  },
-};
-
 export const navbarLinks: Readonly<Record<Lang, Record<string, string>>> = {
   it: routes.it,
   en: routes.en,
 };
-
-export const categoryPageUrl = navbarLinks.it.blog + '/category';
 
 export const hpUrlMap: Readonly<Record<Lang, string>> = {
   it: routes.it.homepage,
@@ -78,8 +62,12 @@ export const aboutUrlMap: Readonly<Record<Lang, string>> = {
   en: routes.en.aboutPage,
 };
 
+export function getEventUrl(entryId: string): string {
+  return createPageRoute(`/it/eventi/${entryId}`);
+}
+
 export function preventSelfNavigation(
-  evt: MouseEvent & { currentTarget: HTMLAnchorElement }
+  evt: MouseEvent & { currentTarget: HTMLAnchorElement },
 ): void {
   if (evt.currentTarget.getAttribute('aria-current') === 'page') {
     evt.stopPropagation();
@@ -112,10 +100,6 @@ export const socialLinks = {
   youtube: {
     href: import.meta.env.PUBLIC_YOUTUBE_PAGE_HREF,
     iconHref: youtubeIcon,
-  },
-  rss: {
-    href: import.meta.env.PUBLIC_URL_BASE + `/blog/rss.xml`,
-    iconHref: rssIcon,
   },
   github: {
     href: import.meta.env.PUBLIC_GITHUB_PROFILE_HREF,

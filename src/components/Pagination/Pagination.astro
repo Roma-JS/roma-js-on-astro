@@ -14,8 +14,28 @@ const l10n = await createTranslate(lng);
 
 <nav
   role="navigation"
-  class="mt-12 flex w-full justify-between gap-4 border-t-3 border-ink pt-6"
+  class="mt-12 flex w-full items-center justify-between gap-4 border-t border-ink pt-6 font-mono text-sm"
 >
-  {url.prev ? <a class="btn" href={url.prev}>← {l10n('prevPage', { lng })}</a> : <span />}
-  {url.next ? <a class="btn" href={url.next}>{l10n('nextPage', { lng })} →</a> : <span />}
+  {
+    url.prev ? (
+      <a class="btn" href={url.prev}>
+        ← {l10n('prevPage', { lng })}
+      </a>
+    ) : (
+      <span class="text-ink-soft" aria-hidden="true">
+        [ — ]
+      </span>
+    )
+  }
+  {
+    url.next ? (
+      <a class="btn" href={url.next}>
+        {l10n('nextPage', { lng })} →
+      </a>
+    ) : (
+      <span class="text-ink-soft" aria-hidden="true">
+        [ — ]
+      </span>
+    )
+  }
 </nav>

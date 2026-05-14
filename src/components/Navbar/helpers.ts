@@ -12,7 +12,6 @@ const l10nKeys = [
   'pastEvents',
   'homepage',
   'aboutPage',
-  'blog',
 ] as const;
 
 export type NavbarMessages = Readonly<
@@ -28,7 +27,7 @@ export type NavbarMessages = Readonly<
  */
 export function getNavbarMessages(l10n: Translate): NavbarMessages {
   return Object.fromEntries(
-    l10nKeys.map((key) => [key, l10n(key)])
+    l10nKeys.map((key) => [key, l10n(key)]),
   ) as NavbarMessages;
 }
 

@@ -1,39 +1,42 @@
 @import 'tailwindcss';
 
-@import '@fontsource/jetbrains-mono/400.css';
-@import '@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/700.css';
 
-/* Brutalist design tokens */
+/* ASCII / manpage tokens */
 @theme {
   --font-mono:
-    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
   --font-sans: var(--font-mono);
   --default-font-family: var(--font-mono);
 
-  --color-ink: #121212;
-  --color-ink-soft: #303030;
-  --color-paper: #ffffff;
-  --color-paper-soft: #f3f6f9;
+  --color-ink: #000000;
+  --color-ink-soft: #555555;
+  --color-muted: #888888;
+  --color-paper: #f5f1e8;
+  --color-paper-soft: #efe8d8;
+  --color-paper-elevated: #ffffff;
+  --color-border: #000000;
+  --color-border-strong: #000000;
+
   --color-brand-red: #8f001c;
   --color-brand-yellow: #ffb200;
 
-  /* Match the project's historical breakpoints (lg = 1024, xl = 1200, 2xl = 1400) */
   --breakpoint-sm: 36rem;
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 75rem;
   --breakpoint-2xl: 87.5rem;
 
-  --radius-*: initial;
-  --shadow-brutal: 4px 4px 0 0 var(--color-ink);
-  --shadow-brutal-sm: 2px 2px 0 0 var(--color-ink);
-  --shadow-brutal-lg: 8px 8px 0 0 var(--color-ink);
-  --shadow-brutal-red: 4px 4px 0 0 var(--color-brand-red);
-  --shadow-brutal-yellow: 4px 4px 0 0 var(--color-brand-yellow);
+  /* Flat — no real shadows in ASCII */
+  --shadow-brutal: 0 0 0 0 transparent;
+  --shadow-brutal-sm: 0 0 0 0 transparent;
+  --shadow-brutal-lg: 0 0 0 0 transparent;
+  --shadow-brutal-red: 0 0 0 1px var(--color-brand-red);
+  --shadow-brutal-yellow: 0 0 0 1px var(--color-brand-yellow);
 }
 
-/* Base reset + brutal defaults */
 @layer base {
   *,
   *::before,
@@ -51,8 +54,17 @@
 
   body {
     font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     touch-action: manipulation;
-    word-break: break-word;
+  }
+
+  @media (min-width: 64rem) {
+    body {
+      font-size: 15px;
+    }
   }
 
   [hidden] {
@@ -62,112 +74,154 @@
   a {
     color: inherit;
     text-decoration: underline;
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
+  }
+
+  a:hover {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    text-decoration: none;
   }
 
   a:focus-visible,
   button:focus-visible,
   [tabindex]:focus-visible {
-    outline: 3px solid var(--color-brand-red);
+    outline: 1px dashed var(--color-ink);
     outline-offset: 2px;
   }
 
   hr {
     border: 0;
-    border-top: 3px solid var(--color-ink);
-    margin: 2rem 0;
+    height: 0;
+    overflow: visible;
+    text-align: left;
+    color: var(--color-ink);
+    margin: 1.25rem 0;
+  }
+
+  hr::before {
+    content: '────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────';
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    line-height: 1;
   }
 
   ::selection {
-    background: var(--color-brand-yellow);
-    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* Neutralize legacy heavy borders — ASCII uses character glyphs, not CSS rules */
+  .border-3 {
+    border-width: 1px;
   }
 }
 
-/* Theme classes — kept name-compatible with the previous codebase */
-.rmjs-yellow-black-theme {
-  color-scheme: light;
-  background-color: var(--color-brand-yellow);
-  color: var(--color-ink);
-}
-
+/* Theme classes — kept name-compatible */
+.rmjs-yellow-black-theme,
 .rmjs-yellow-white-theme {
   color-scheme: light;
-  background-color: var(--color-paper);
-  color: var(--color-ink);
 }
 
-/* Reusable brutal building blocks */
+/* Dark mode follows the OS preference, no toggle */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --color-ink: #ede4cf;
+    --color-ink-soft: #a89f88;
+    --color-muted: #87806b;
+    --color-paper: #15140f;
+    --color-paper-soft: #1f1d17;
+    --color-paper-elevated: #2a2722;
+    --color-border: #ede4cf;
+    --color-border-strong: #ede4cf;
+  }
+}
+
+/* ── Bordered building blocks ────────────────────────────────────────── */
 @utility brutal-border {
-  border: 3px solid var(--color-ink);
+  border: 1px solid var(--color-ink);
 }
 
 @utility brutal-border-thin {
-  border: 2px solid var(--color-ink);
+  border: 1px dashed var(--color-ink);
 }
 
 @utility brutal-card {
-  border: 3px solid var(--color-ink);
   background-color: var(--color-paper);
-  box-shadow: var(--shadow-brutal);
+  border: 1px solid var(--color-ink);
 }
 
 @utility brutal-press {
-  transition:
-    transform 80ms ease-out,
-    box-shadow 80ms ease-out;
+  transition: background-color 80ms linear;
   &:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 0 var(--color-ink);
-  }
-  &:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0 0 0 0 var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
   }
 }
 
-/* Buttons */
+/* ── Buttons — bracketed text ────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.125rem;
+  gap: 0.4em;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: var(--color-ink);
+  border: none;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
   text-decoration: none;
-  border: 3px solid var(--color-ink);
-  background-color: var(--color-paper);
-  color: var(--color-ink);
   cursor: pointer;
-  box-shadow: var(--shadow-brutal);
-  transition:
-    transform 80ms ease-out,
-    box-shadow 80ms ease-out,
-    background-color 80ms ease-out;
+  user-select: none;
+  line-height: 1.55;
+}
+
+.btn::before {
+  content: '[';
+  display: inline-block;
+}
+
+.btn::after {
+  content: ']';
+  display: inline-block;
 }
 
 .btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 0 var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-paper);
 }
 
 .btn:active {
-  transform: translate(2px, 2px);
-  box-shadow: 0 0 0 0 var(--color-ink);
+  opacity: 0.7;
+}
+
+.btn[aria-current='page']::before {
+  content: '[*';
 }
 
 .btn--primary {
-  background-color: var(--color-brand-yellow);
+  font-weight: 700;
 }
 
-.btn--danger {
-  background-color: var(--color-brand-red);
-  color: var(--color-paper);
+.btn--primary::before {
+  content: '[+';
+}
+
+.btn--primary:hover {
+  background-color: var(--color-brand-yellow);
+  color: #000;
+}
+
+.btn--ink::before {
+  content: '[>';
 }
 
 .btn--ink {
@@ -175,37 +229,53 @@
   color: var(--color-paper);
 }
 
-.btn:disabled,
-.btn[aria-disabled='true'] {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: var(--shadow-brutal);
+.btn--ink:hover {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  outline: 1px solid var(--color-ink);
+  outline-offset: -1px;
 }
 
-/* Brutalist heading classes — kept for compatibility with .h-1 / .h-2 / .p-1 usage */
+.btn--danger::before {
+  content: '[!';
+}
+
+.btn--danger {
+  color: var(--color-brand-red);
+}
+
+.btn--danger:hover {
+  background-color: var(--color-brand-red);
+  color: var(--color-paper);
+}
+
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Typography helpers ──────────────────────────────────────────────── */
 .h-1 {
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 1.75rem;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-size: 1.5rem;
+  line-height: 1.25;
   text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .h-2 {
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 1.125rem;
-  line-height: 1.3;
+  font-size: 1rem;
+  line-height: 1.4;
   text-transform: uppercase;
 }
 
 .h-2.h-dynamic {
   @media (min-width: 64rem) {
-    font-size: 1.75rem;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: 1.5rem;
   }
 }
 
@@ -213,10 +283,241 @@
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* Accessibility */
+/* ── ASCII boxes — title overlaps the top border ─────────────────────── */
+.ascii-box {
+  position: relative;
+  border: 1px solid var(--color-ink);
+  background-color: var(--color-paper);
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+}
+
+.ascii-box__title {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  transform: translateY(-50%);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.ascii-box__title::before {
+  content: '[ ';
+}
+
+.ascii-box__title::after {
+  content: ' ]';
+}
+
+/* Right-side meta inline on the box */
+.ascii-box__meta {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  transform: translateY(-50%);
+  background-color: var(--color-paper);
+  color: var(--color-ink-soft);
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── ASCII rule that scales with viewport ───────────────────────────── */
+.ascii-rule {
+  display: block;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  color: currentColor;
+}
+
+.ascii-rule::before {
+  content: '═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════';
+}
+
+.ascii-rule--thin::before {
+  content: '────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────';
+}
+
+.ascii-rule--dashed::before {
+  content: '────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────';
+  letter-spacing: 2px;
+}
+
+/* ── Definition list (manpage style) ─────────────────────────────────── */
+.ascii-dl {
+  display: grid;
+  grid-template-columns: minmax(6rem, max-content) 1fr;
+  gap: 0.25rem 1.5rem;
+  font-family: var(--font-mono);
+  margin: 0;
+}
+
+.ascii-dl dt {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.ascii-dl dd {
+  margin: 0;
+  color: var(--color-ink);
+}
+
+/* Manpage-style page header */
+.manpage-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-ink);
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.manpage-header > * {
+  white-space: nowrap;
+}
+
+/* ── Prose (markdown content rendered through layouts) ───────────────── */
+.prose-mono {
+  font-family: var(--font-mono);
+}
+
+.prose-mono > * + * {
+  margin-top: 1em;
+}
+
+.prose-mono h1,
+.prose-mono h2,
+.prose-mono h3,
+.prose-mono h4 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.prose-mono h1 {
+  font-size: 1.75rem;
+}
+
+.prose-mono h2 {
+  font-size: 1.375rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.prose-mono h3 {
+  font-size: 1.125rem;
+}
+
+.prose-mono p {
+  margin: 0;
+}
+
+.prose-mono ul,
+.prose-mono ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.prose-mono ul li::marker {
+  content: '* ';
+  font-weight: 700;
+}
+
+.prose-mono li + li {
+  margin-top: 0.25em;
+}
+
+.prose-mono blockquote {
+  margin: 0;
+  padding: 0.25em 1em;
+  border-left: 2px solid var(--color-ink);
+  color: var(--color-ink-soft);
+  font-style: normal;
+}
+
+.prose-mono code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-paper-soft);
+  border: 1px solid var(--color-border);
+  padding: 0.1em 0.3em;
+}
+
+.prose-mono pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  background-color: var(--color-paper-soft);
+  border: 1px solid var(--color-ink);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.prose-mono pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.prose-mono img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--color-ink);
+}
+
+.prose-mono hr {
+  margin: 2.5em 0;
+}
+
+.prose-mono a {
+  text-decoration: underline;
+}
+
+/* Blinking caret */
+@keyframes ascii-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: ascii-blink 1s steps(1) infinite;
+}
+
+/* ── Accessibility ───────────────────────────────────────────────────── */
 .visually-hidden {
   position: absolute !important;
   width: 1px !important;
@@ -241,7 +542,6 @@
   border: 0 !important;
 }
 
-/* Transition classes used by solid-transition-group */
 .fade-enter-active,
 .fade-exit-active {
   transition: opacity 200ms ease-in;
@@ -249,102 +549,4 @@
 .fade-enter,
 .fade-exit-to {
   opacity: 0;
-}
-
-/* ─── Raw brutalism: terminal aesthetic ──────────────────────────────── */
-@utility raw-grid-bg {
-  background-image:
-    linear-gradient(
-      to right,
-      color-mix(in srgb, var(--color-paper) 8%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--color-paper) 8%, transparent) 1px,
-      transparent 1px
-    );
-  background-size: 24px 24px;
-}
-
-@utility raw-scanlines {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 3px,
-    color-mix(in srgb, var(--color-paper) 4%, transparent) 3px,
-    color-mix(in srgb, var(--color-paper) 4%, transparent) 4px
-  );
-}
-
-.raw-rule {
-  display: block;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: currentColor;
-  letter-spacing: 0;
-  user-select: none;
-  white-space: nowrap;
-  overflow: hidden;
-  line-height: 1;
-}
-
-.raw-rule::before {
-  content: '═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════';
-}
-
-.raw-label {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.75rem;
-  color: var(--color-brand-yellow);
-}
-
-.raw-kv {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 0.5rem 1rem;
-  font-family: var(--font-mono);
-  text-align: left;
-}
-
-.raw-kv dt {
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-  color: var(--color-brand-yellow);
-}
-
-.raw-kv dt::after {
-  content: ' ▸';
-  opacity: 0.5;
-}
-
-.raw-kv dd {
-  margin: 0;
-  font-weight: 700;
-  text-transform: uppercase;
-  word-break: break-word;
-}
-
-/* Blinking caret */
-@keyframes raw-blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-
-.raw-caret::after {
-  content: '▮';
-  display: inline-block;
-  margin-left: 0.25em;
-  animation: raw-blink 1s steps(1) infinite;
 }

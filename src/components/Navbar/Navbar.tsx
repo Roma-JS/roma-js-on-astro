@@ -67,7 +67,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
   return (
     <header
       id="rmjs-navbar"
-      class="sticky top-0 z-40 flex h-14 w-full items-center justify-between gap-4 border-b-3 border-ink bg-brand-yellow px-4 lg:h-14 lg:px-6"
+      class="sticky top-0 z-40 flex h-12 w-full items-center justify-between gap-4 border-b border-ink bg-brand-red px-4 font-mono text-sm text-white lg:h-12 lg:px-6"
       classList={{
         ...props.classList,
         [props.class as string]: !!props.class,
@@ -103,7 +103,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
           <span aria-hidden="true">{isMenuVisible() ? '×' : '≡'}</span>
         </button>
         <div
-          class="fixed inset-x-0 top-14 bottom-0 invisible flex flex-col-reverse items-center justify-start gap-4 overflow-y-auto bg-brand-yellow opacity-0 transition-opacity duration-200 lg:static lg:visible lg:inset-auto lg:ml-4 lg:flex-row lg:gap-3 lg:overflow-visible lg:opacity-100"
+          class="fixed inset-x-0 top-14 bottom-0 invisible flex flex-col-reverse items-center justify-start gap-4 overflow-y-auto bg-brand-red text-white opacity-0 transition-opacity duration-200 lg:static lg:visible lg:inset-auto lg:ml-4 lg:flex-row lg:gap-3 lg:overflow-visible lg:opacity-100"
           classList={{
             '!visible !opacity-100 !flex-col z-30': isMenuVisible(),
           }}
@@ -119,7 +119,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
                     props.relativePageUrl === href ? 'page' : undefined
                   }
                   onClick={preventSelfNavigation}
-                  class="px-2 py-1 text-sm font-bold uppercase tracking-widest text-ink no-underline hover:underline hover:decoration-2 hover:underline-offset-4 aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-4"
+                  class="px-2 py-1 text-sm font-bold uppercase tracking-widest no-underline hover:no-underline aria-[current=page]:bg-ink aria-[current=page]:text-paper"
                   href={href}
                 >
                   {label}
@@ -130,7 +130,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
           <span class="hidden h-4 w-px self-center bg-ink/40 lg:block" />
           <nav class="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center lg:gap-4">
             <a
-              class="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold uppercase tracking-widest text-ink no-underline hover:underline hover:decoration-2 hover:underline-offset-4 lg:hidden"
+              class="inline-flex items-center gap-2 px-2 py-1 text-sm font-bold uppercase tracking-widest no-underline hover:no-underline lg:hidden"
               rel="noopener noreferrer"
               target="_blank"
               href={socialLinks.discord.href}
@@ -145,7 +145,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
               />
             </a>
             <a
-              class="px-2 py-1 text-sm font-bold uppercase tracking-widest text-ink no-underline hover:underline hover:decoration-2 hover:underline-offset-4"
+              class="px-2 py-1 text-sm font-bold uppercase tracking-widest no-underline hover:no-underline"
               rel="noopener noreferrer"
               target="_blank"
               href={socialLinks.youtube.href}
