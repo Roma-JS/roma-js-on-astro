@@ -15,7 +15,7 @@ function enhanceEnvVariables() {
       ['rev-parse', '--short', 'HEAD'],
       {
         encoding: 'utf8',
-      }
+      },
     ).trim();
   }
 
@@ -69,4 +69,14 @@ export default defineConfig({
   ],
   base: base || undefined,
   site,
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          loadPaths: ['node_modules'],
+        },
+      },
+    },
+  },
 });
