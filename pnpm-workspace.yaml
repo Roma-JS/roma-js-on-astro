@@ -1,0 +1,10 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true
+minimumReleaseAge: 1440 # in minutes
+minimumReleaseAgeExclude:
+  - '@tanstack/query-core@5.100.13'
+  - '@tanstack/solid-query@5.100.13'
+  - date-fns@4.3.0
+shamefullyHoist: true
