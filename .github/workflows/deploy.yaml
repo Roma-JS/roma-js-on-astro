@@ -1,8 +1,6 @@
 name: Deploy
 on:
-  push:
-    branches:
-      - release
+  workflow_dispatch:
   workflow_call:
     secrets:
       DEPLOY_TOKEN:
@@ -12,9 +10,11 @@ permissions:
   contents: write
 jobs:
   build-and-deploy:
-    # prevents this action from running on forks
-    if: github.repository == 'Roma-JS/roma-js-on-astro'
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    # prevents this action from running on forks or branches that are not main
+    if: ${{ github.repository == 'Roma-JS/roma-js-on-astro' && github.ref == 'refs/heads/main' }}
+    concurrency:
+      group: website-deploy-lock
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     env:
       HUSKY: '0'
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
-          ref: 'release'
+          ref: 'main'
           token: ${{ secrets.DEPLOY_TOKEN }}
       - uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
@@ -39,6 +39,14 @@ jobs:
           corepack enable
       - name: log node & package manager
         run: 'printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
+      - name: Log Execution Details to Summary
+        run: |
+          echo "### 🚀 Deployment Triggered" >> $GITHUB_STEP_SUMMARY
+          echo "* **Triggered By:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "* **Trigger Branch/Ref:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "* **Trigger Event:** \`${{ github.event_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "* **Timestamp:** $(date -u -d "${{ github.event.repository.updated_at }}" '+%Y-%m-%d %H:%M:%S UTC' 2>/dev/null || date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)" >> $GITHUB_STEP_SUMMARY
       - name: Get pnpm store directory
         id: pnpm-store
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
