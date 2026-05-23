@@ -39,6 +39,14 @@ jobs:
           corepack enable
       - name: log node & package manager
         run: 'printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)"'
+      - name: Log Execution Details to Summary
+        run: |
+          echo "### 🚀 Deployment Triggered" >> $GITHUB_STEP_SUMMARY
+          echo "* **Triggered By:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "* **Trigger Branch/Ref:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "* **Trigger Event:** \`${{ github.event_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "* **Timestamp:** $(date -u -d "${{ github.event.repository.updated_at }}" '+%Y-%m-%d %H:%M:%S UTC' 2>/dev/null || date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          printf "node -> %s\npnpm -> %s"  "$(node -v)" "$(pnpm -v)" >> $GITHUB_STEP_SUMMARY
       - name: Get pnpm store directory
         id: pnpm-store
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
