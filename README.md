@@ -57,10 +57,10 @@ nvm use
 
 #### pnpm & corepack
 
-You do not need to install [`pnpm`](https://pnpm.io), you just need have [`node 20`](https://nodejs.org/en/) installed and then enable [`corepack`](https://nodejs.org/api/corepack.html):
+You do not need to install [`pnpm`](https://pnpm.io), you just need have [`node`](https://nodejs.org/en/) installed and then install (if needed) and then enable [`corepack`](https://nodejs.org/api/corepack.html):
 
 ```bash
-corepack enable
+which corepack > /dev/null && echo "corepack already installed at $(which corepack)" || npm install -g corepack@latest
 ```
 
 You should then be able to run pnpm normally in this project, e.g.
