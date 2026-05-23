@@ -97,21 +97,12 @@ PUBLIC_MONTHS_WITHOUT_GENERATED_UPCOMING_EVENTS="08,10" # Hide August and Octobe
 
 ##### Manual deploys
 
-To deploy push the content of `main` to `release`:
-
-```bash
-git fetch --all
-git switch main
-git pull origin main
-git diff --quiet && git diff --cached --quiet && git push origin main:release # --force push if necessary
-```
-
-See [deploy.yaml](.github/workflows/deploy.yaml) for more details.
+Trigger a deploy using a [worflow_dispatch](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#workflow_dispatch) of [deploy.yaml](.github/workflows/deploy.yaml).
 
 ##### Scheduled deploys
 
 There's a cronjob defined in [scheduled-deploys.yml](.github/workflows/scheduled-deploys.yml) that
-periodically triggers the deployment.
+periodically triggers the [website's deploy](.github/workflows/deploy.yaml).
 
 ### Common scripts
 

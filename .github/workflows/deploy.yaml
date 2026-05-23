@@ -1,8 +1,6 @@
 name: Deploy
 on:
-  push:
-    branches:
-      - release
+  workflow_dispatch:
   workflow_call:
     secrets:
       DEPLOY_TOKEN:
@@ -12,8 +10,8 @@ permissions:
   contents: write
 jobs:
   build-and-deploy:
-    # prevents this action from running on forks
-    if: github.repository == 'Roma-JS/roma-js-on-astro'
+    # prevents this action from running on forks and branches that are not main
+    if: ${{ github.repository == 'Roma-JS/roma-js-on-astro' && github.ref == 'refs/heads/main' }}
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-24.04
     env:
