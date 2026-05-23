@@ -41,9 +41,15 @@ The new RomaJS website built with [astro](https://astro.build/) and [SolidJS](ht
 
 ### Requirements
 
-This project requires [node 18](https://nodejs.org/en/) and uses [`pnpm`](https://pnpm.io/) as package manager.
+This project requires a specific [node](https://nodejs.org/en) version (see [.nvmrc file](./.nvmrc)) and uses [`pnpm`](https://pnpm.io/) as package manager.
 
-If you have [`nvm`](https://github.com/nvm-sh/nvm) installed run
+If you have [`fnm`](https://github.com/Schniz/fnm) installed run:
+
+```bash
+fnm use
+```
+
+Ff you have [`nvm`](https://github.com/nvm-sh/nvm) installed run:
 
 ```bash
 nvm use
