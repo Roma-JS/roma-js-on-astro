@@ -10,7 +10,7 @@ export interface Category {
 
 export function ascendingCreatedAtComparator(
   a: CollectionEntry<'blog-posts'>,
-  b: CollectionEntry<'blog-posts'>
+  b: CollectionEntry<'blog-posts'>,
 ): number {
   if (b.data.createdAt === a.data.createdAt) {
     return 0;
@@ -21,7 +21,7 @@ export function ascendingCreatedAtComparator(
 
 export function descendingCreatedAtComparator(
   a: CollectionEntry<'blog-posts'>,
-  b: CollectionEntry<'blog-posts'>
+  b: CollectionEntry<'blog-posts'>,
 ): number {
   return ascendingCreatedAtComparator(b, a);
 }
@@ -40,7 +40,7 @@ export function createSlug(content: string): string {
 
 export function createCategoryUrl(basename: string, category: string) {
   return `${basename.replace(/\/+$/, '')}/blog/category/${createSlug(
-    category
+    category,
   )}`;
 }
 
@@ -51,14 +51,14 @@ export function createCategoryUrl(basename: string, category: string) {
  */
 export function sortPosts(
   posts: CollectionEntry<'blog-posts'>[],
-  comparator = descendingCreatedAtComparator
+  comparator = descendingCreatedAtComparator,
 ): CollectionEntry<'blog-posts'>[] {
   return posts.slice().sort(comparator);
 }
 
 export function computeAllCategories(
   posts: CollectionEntry<'blog-posts'>[],
-  basename: string
+  basename: string,
 ): Map<string, Category> {
   const output: Map<string, Category> = new Map();
 

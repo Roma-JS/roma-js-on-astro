@@ -19,7 +19,7 @@ export type ParseMonthsListOutput = {
  * @returns {ParseMonthsListOutput} an output object
  */
 export const parseMonthsList = (
-  months: string | undefined | null
+  months: string | undefined | null,
 ): ParseMonthsListOutput => {
   const formattedMonths =
     months
@@ -41,7 +41,7 @@ export const parseMonthsList = (
         output.parsedMonths.add(parsedDate.getMonth());
       } else {
         throw new Error(
-          `parseMonthsList: cannot parse date using format=${monthFormat}, input=${formattedMonth}`
+          `parseMonthsList: cannot parse date using format=${monthFormat}, input=${formattedMonth}`,
         );
       }
     } catch (err) {

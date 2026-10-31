@@ -37,7 +37,7 @@ export function Navbar(props: NavbarProps): JSX.Element {
     Object.entries(navbarLinks[props.lang] ?? {}).map(([key, href]) => [
       props.messages[key as keyof NavbarMessages] ?? key,
       href,
-    ])
+    ]),
   );
 
   createEffect(() => {

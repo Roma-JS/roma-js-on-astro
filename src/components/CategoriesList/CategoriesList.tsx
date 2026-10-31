@@ -3,8 +3,10 @@ import type { JSX } from 'solid-js/jsx-runtime';
 import { createSlug, createCategoryUrl } from 'utils/blog';
 import styles from './styles.module.scss';
 
-export interface CategoriesListProps
-  extends Omit<ComponentProps<'ul'>, 'children'> {
+export interface CategoriesListProps extends Omit<
+  ComponentProps<'ul'>,
+  'children'
+> {
   categories: string[];
   baseUrl: string;
   activeCategory?: string;

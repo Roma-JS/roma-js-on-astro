@@ -10,7 +10,7 @@ export interface Translate {
 }
 
 export async function getTranslations(
-  lang: Lang
+  lang: Lang,
 ): Promise<typeof L10nMessages> {
   switch (lang) {
     case 'it': {
@@ -27,7 +27,7 @@ export async function getTranslations(
 export function computeTranslation(
   key: string,
   dictionary: Record<string, string>,
-  replace?: ReplaceConfig | undefined
+  replace?: ReplaceConfig | undefined,
 ): string {
   let dictionaryValue: string | undefined = dictionary[key];
 
@@ -39,7 +39,7 @@ export function computeTranslation(
     for (const replaceKey in replace) {
       dictionaryValue = dictionaryValue.replaceAll(
         `{{${replaceKey}}}`,
-        String(replace[replaceKey])
+        String(replace[replaceKey]),
       );
     }
   }

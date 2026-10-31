@@ -5,6 +5,6 @@ export async function GET() {
   const pastEvents = await fetchAllPastRomajsEvents();
 
   return new Response(
-    JSON.stringify(computeMeetupEventsApiResponse(pastEvents))
+    JSON.stringify(computeMeetupEventsApiResponse(pastEvents)),
   );
 }

@@ -5,6 +5,6 @@ export async function GET() {
   const upcomingEvents = await fetchUpcomingRomajsEvents();
 
   return new Response(
-    JSON.stringify(computeMeetupEventsApiResponse(upcomingEvents))
+    JSON.stringify(computeMeetupEventsApiResponse(upcomingEvents)),
   );
 }

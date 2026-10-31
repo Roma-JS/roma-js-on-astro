@@ -11,7 +11,7 @@ describe('time', () => {
       'returns empty output (0 months & 0 errors) when input=%j',
       (input) => {
         expect(parseMonthsList(input)).toEqual(createEmpyOutput());
-      }
+      },
     );
 
     it.each([
@@ -37,7 +37,7 @@ describe('time', () => {
         const output = parseMonthsList(input);
         expect(output.parsedMonths).toEqual(parsedMonths);
         expect(output.errors).toHaveLength(0);
-      }
+      },
     );
 
     it.each([
@@ -61,9 +61,9 @@ describe('time', () => {
         const output = parseMonthsList(input);
         expect(output.parsedMonths).toEqual(expected.parsedMonths);
         expect(output.errors.map((r) => r.input).sort()).toEqual(
-          expected.invalidMonths.slice().sort()
+          expected.invalidMonths.slice().sort(),
         );
-      }
+      },
     );
   });
 });

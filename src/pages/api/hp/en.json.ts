@@ -18,7 +18,7 @@ export async function getEnHpContent(): Promise<Readonly<HpContent>> {
     createTranslate(lng),
   ]);
   const nextEventsByDate = computeScheduledEvents(upcomingEvents).sort(
-    (a, b) => a.epochTimeMs - b.epochTimeMs
+    (a, b) => a.epochTimeMs - b.epochTimeMs,
   );
   const latestPastEvent = previousEvents?.[0];
 
@@ -40,7 +40,7 @@ export async function getEnHpContent(): Promise<Readonly<HpContent>> {
         href: formatVenueMapsHref(venue),
         text: l10n('ctaVenue', { lng }),
       })),
-    }))
+    })),
   );
 
   if (latestPastEvent) {

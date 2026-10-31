@@ -14,7 +14,7 @@ export function assertValidLang(value: unknown): asserts value is Lang {
   const validLangs = getI18nRouteParams().map(({ lang }) => lang);
   if (!validLangs.some((lang) => lang === value)) {
     throw new TypeError(
-      `assertion failed, expected valid lang (it, en), got ${value}`
+      `assertion failed, expected valid lang (it, en), got ${value}`,
     );
   }
 }
@@ -40,13 +40,13 @@ const trimTrailingSlash = (path: string) => path.replace(/\/+$/g, '');
  */
 export function generateLinkRelAlternateProps(
   pageLang: Lang,
-  url: URL
+  url: URL,
 ): RelAlternateProps[] {
   const output: RelAlternateProps[] = [];
   const pathnameToSearch = trimTrailingSlash(url.pathname);
 
   const routeKey = Object.entries(routes[pageLang]).find(
-    ([, pathname]) => pathnameToSearch === trimTrailingSlash(pathname)
+    ([, pathname]) => pathnameToSearch === trimTrailingSlash(pathname),
   )?.[0] as RouteKey;
 
   if (routeKey) {

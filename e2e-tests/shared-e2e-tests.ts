@@ -25,18 +25,16 @@ export async function expectHtmlLang(page: Page, expectedLang: ExpectedLang) {
 export async function expectValidLinkRelAlternate(
   page: Page,
   expectedLang: ExpectedLang,
-  urlMap: Record<ExpectedLang, string>
+  urlMap: Record<ExpectedLang, string>,
 ) {
   const alternateLinksByLang = Object.fromEntries(
     (
       await Promise.all(
-        (
-          await page.locator('head > link[rel="alternate"]').all()
-        ).map((loc) =>
-          Promise.all([loc.getAttribute('hreflang'), loc.getAttribute('href')])
-        )
+        (await page.locator('head > link[rel="alternate"]').all()).map((loc) =>
+          Promise.all([loc.getAttribute('hreflang'), loc.getAttribute('href')]),
+        ),
       )
-    ).filter((entry): entry is [string, string] => !!entry[0] && !!entry[1])
+    ).filter((entry): entry is [string, string] => !!entry[0] && !!entry[1]),
   );
 
   for (const [lang, url] of Object.entries(urlMap)) {
@@ -79,10 +77,10 @@ export async function expectValidFooter(page: Page) {
 export async function expectValidCountrySelector(
   page: Page,
   expectedLang: ExpectedLang,
-  urlMap: Record<ExpectedLang, string>
+  urlMap: Record<ExpectedLang, string>,
 ) {
   const currentPageLink = page.locator(
-    `nav a[aria-current="page"][hreflang="${expectedLang}"]`
+    `nav a[aria-current="page"][hreflang="${expectedLang}"]`,
   );
   const currentPagehref = await currentPageLink.getAttribute('href');
 
@@ -173,36 +171,35 @@ async function getOgAttributesByLang(page: Page, lang: ExpectedLang) {
  */
 export async function expectValidMeta(page: Page, lang: ExpectedLang) {
   expect(
-    await page.locator('head > meta[charset]').getAttribute('charset')
+    await page.locator('head > meta[charset]').getAttribute('charset'),
   ).toBe('utf-8');
   expect(
-    await page.locator('head > link[rel="icon"]').getAttribute('href')
+    await page.locator('head > link[rel="icon"]').getAttribute('href'),
   ).toBe('/assets/favicon.ico');
   expect(
-    await page.locator('head > meta[name="viewport"]').getAttribute('content')
+    await page.locator('head > meta[name="viewport"]').getAttribute('content'),
   ).toBeTruthy();
   expect(
-    await page.locator('head > meta[name="title"]').getAttribute('content')
+    await page.locator('head > meta[name="title"]').getAttribute('content'),
   ).toBeTruthy();
   expect(
     await page
       .locator('head > meta[name="description"]')
-      .getAttribute('content')
+      .getAttribute('content'),
   ).toBeTruthy();
 
   const ogMetaAttributesFound = Object.fromEntries(
     (
       await Promise.all(
-        (
-          await page.locator(`head > meta[property][content]`).all()
-        ).map((locator) =>
-          Promise.all([
-            locator.getAttribute('property'),
-            locator.getAttribute('content'),
-          ])
-        )
+        (await page.locator(`head > meta[property][content]`).all()).map(
+          (locator) =>
+            Promise.all([
+              locator.getAttribute('property'),
+              locator.getAttribute('content'),
+            ]),
+        ),
       )
-    ).filter((entry): entry is [string, string] => !!entry[0] && !!entry[1])
+    ).filter((entry): entry is [string, string] => !!entry[0] && !!entry[1]),
   );
 
   const ogAttr = await getOgAttributesByLang(page, lang);
@@ -215,7 +212,7 @@ export async function expectValidMeta(page: Page, lang: ExpectedLang) {
 export async function expectWellFormedPage(
   page: Page,
   expectedLang: ExpectedLang,
-  urlMap: Record<ExpectedLang, string> | null
+  urlMap: Record<ExpectedLang, string> | null,
 ) {
   return Promise.all([
     expectHtmlLang(page, expectedLang),

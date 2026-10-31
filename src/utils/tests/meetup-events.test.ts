@@ -25,7 +25,7 @@ describe('meetup-events', () => {
       expect(output[0]).toHaveProperty('data', singleUpcomingEventList[0]);
       expect(output[0]).toHaveProperty(
         'epochTimeMs',
-        new Date(singleUpcomingEventList[0].dateTime).getTime()
+        new Date(singleUpcomingEventList[0].dateTime).getTime(),
       );
     });
   });
@@ -43,7 +43,7 @@ describe('meetup-events', () => {
 
         expect(output.getDay()).toBe(3); // Always Wednesday
         expect(output.getDate()).toBe(expectedDayOfMonth);
-      }
+      },
     );
   });
 
@@ -55,8 +55,8 @@ describe('meetup-events', () => {
       expect(placeholders).toHaveLength(3);
       expect(
         placeholders.every(
-          (r) => r.type === 'placeholder' && r.date.getDay() === 3
-        )
+          (r) => r.type === 'placeholder' && r.date.getDay() === 3,
+        ),
       ).toBe(true);
     });
 
@@ -96,11 +96,11 @@ describe('meetup-events', () => {
       const currentEpochTime = new Date('2024-03-09').getTime();
       const [first, ...other] = computeUpcomingEvents(
         singleUpcomingEventList,
-        currentEpochTime
+        currentEpochTime,
       );
 
       expect(first.type === 'scheduled' && first.data).toBe(
-        singleUpcomingEventList[0]
+        singleUpcomingEventList[0],
       );
       expect(other).toHaveLength(3);
       expect(other).toMatchInlineSnapshot(`
@@ -131,7 +131,7 @@ describe('meetup-events', () => {
         currentEpochTime,
         {
           monthsWithoutGeneratedUpcomingEvents: '04,6',
-        }
+        },
       );
 
       expect(placeholders).toHaveLength(1);
@@ -145,13 +145,13 @@ describe('meetup-events', () => {
         currentEpochTime,
         {
           monthsWithoutGeneratedUpcomingEvents: '1,2,3,4,5,6,7,8,9,10,11,12',
-        }
+        },
       );
 
       expect(events).toHaveLength(1);
       expect(events[0]).toHaveProperty('type', 'scheduled');
       expect(new Date(events[0].epochTimeMs).getMonth()).toBe(
-        2 /* 0-based index */
+        2 /* 0-based index */,
       );
     });
   });
