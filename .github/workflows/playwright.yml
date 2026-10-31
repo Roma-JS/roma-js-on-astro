@@ -1,4 +1,5 @@
 name: Playwright Tests
+run-name: "Playwright Tests [${{ github.head_ref }} -> ${{ github.base_ref }}]"
 on:
   push:
     branches: [ main ]
