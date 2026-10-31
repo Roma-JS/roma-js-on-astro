@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [],
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: 'happy-dom',
     setupFiles: [],
     include: ['src/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
   },
