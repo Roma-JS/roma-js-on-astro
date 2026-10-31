@@ -1,16 +1,16 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
-const invariant = require('tiny-invariant');
+const assert = require('node:assert/strict');
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
 const rootDir = fs.realpathSync(path.resolve(__dirname, '../../'));
 
 const resolvePath = (relativePath) => {
-  invariant(
+  assert.ok(
     typeof relativePath === 'string',
-    'Relative path has to be a string'
+    'Relative path has to be a string',
   );
 
   return path.resolve(rootDir, relativePath);
