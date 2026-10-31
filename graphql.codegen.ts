@@ -1,13 +1,15 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 import assert from 'node:assert/strict';
-import 'dotenv/config';
+import { loadEnvFile } from 'node:process';
+
+loadEnvFile();
 
 const getEnvOrThrow = (envKey: string): string => {
   const value = process.env[envKey];
 
   assert.ok(
     value,
-    `process.env["${envKey}"] is not provided or empty, got: ${value}`
+    `process.env["${envKey}"] is not provided or empty, got: ${value}`,
   );
   return value;
 };

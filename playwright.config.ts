@@ -51,10 +51,6 @@ export default defineConfig({
       name: 'Mobile Safari(iPhone)',
       use: { ...devices['iPhone 15 Pro'], isMobile: true },
     },
-    {
-      name: 'Firefox desktop',
-      use: { ...devices['Desktop Firefox'] },
-    },
 
     /* Test against branded browsers. */
     // {
