@@ -56,7 +56,7 @@
     "graphql-request": "^7.4.0",
     "normalize.css": "^8.0.1",
     "slugify": "^1.6.9",
-    "solid-js": "^1.9.14",
+    "solid-js": "^1.9.18",
     "solid-transition-group": "^0.3.0",
     "typescript": "^6.0.3"
   }
