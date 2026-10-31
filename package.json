@@ -36,7 +36,6 @@
     "@graphql-codegen/typescript-graphql-request": "^7.0.1",
     "@playwright/test": "^1.61.1",
     "astro": "7.4.4",
-    "dotenv": "^17.4.2",
     "happy-dom": "^21.0.4",
     "husky": "^9.1.7",
     "lint-staged": "^17.1.0",
