@@ -32,7 +32,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/solid-js": "^7.1.2",
-    "@graphql-codegen/cli": "^7.0.0",
+    "@graphql-codegen/cli": "^7.4.6",
     "@graphql-codegen/typescript-graphql-request": "^7.0.1",
     "@playwright/test": "^1.61.1",
     "astro": "7.4.4",
