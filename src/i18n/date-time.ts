@@ -4,7 +4,7 @@ let dateFormatterMap: Map<string, Intl.DateTimeFormat> = new Map();
 
 export function formatDate(
   lang: 'it' | 'en',
-  date: string | null | number | Date | undefined | null
+  date: string | null | number | Date | undefined | null,
 ): string {
   const locale = i18nLang[lang].locale;
   let formatter = dateFormatterMap.get(locale);

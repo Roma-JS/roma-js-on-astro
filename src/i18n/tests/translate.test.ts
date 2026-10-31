@@ -48,7 +48,7 @@ describe('i18n/translate', () => {
       'key=$key, dict=$dict, replace=$replace => $expected',
       ({ key, dict, replace, expected }) => {
         expect(computeTranslation(key, dict, replace)).toBe(expected);
-      }
+      },
     );
   });
 
@@ -64,9 +64,9 @@ describe('i18n/translate', () => {
         expect(typeof l10n).toBe('function');
         expect(l10n(key)).toBe(expected);
         expect(l10n('key-not-found-in-the-dictionary-do-not-add' as any)).toBe(
-          'key-not-found-in-the-dictionary-do-not-add'
+          'key-not-found-in-the-dictionary-do-not-add',
         );
-      }
+      },
     );
   });
 });

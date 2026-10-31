@@ -30,7 +30,7 @@ export type PlaceholderEvent = {
 export type UpcomingEvent = ScheduledEvent | PlaceholderEvent;
 
 export function computeMeetupEventsApiResponse(
-  meetupEvents: MeetupArticleFragment[] | null | undefined
+  meetupEvents: MeetupArticleFragment[] | null | undefined,
 ): MeetupEventsApiResponse {
   return {
     events: (meetupEvents || [])?.map(
@@ -42,7 +42,7 @@ export function computeMeetupEventsApiResponse(
         group,
         duration,
         venues,
-      })
+      }),
     ),
   };
 }
@@ -66,16 +66,14 @@ export function computeThirdWednesdayOfMonth(date: Date | number): Date {
 }
 
 export function computeScheduledEvents(
-  scheduledUpcomingEvents: MeetupArticleFragment[] | undefined | null
+  scheduledUpcomingEvents: MeetupArticleFragment[] | undefined | null,
 ): ScheduledEvent[] {
   return (
-    scheduledUpcomingEvents?.map(
-      (data): ScheduledEvent => ({
-        type: 'scheduled',
-        data,
-        epochTimeMs: new Date(data.dateTime).getTime(),
-      })
-    ) || []
+    scheduledUpcomingEvents?.map((data): ScheduledEvent => ({
+      type: 'scheduled',
+      data,
+      epochTimeMs: new Date(data.dateTime).getTime(),
+    })) || []
   );
 }
 
@@ -100,13 +98,13 @@ export function createPlaceholderEvents({
   const placeholderMonths = isNowBeforeMeetup ? [0, 1, 2, 3] : [1, 2, 3];
 
   const { parsedMonths: monthsWithoutGeneratedEventsSet } = parseMonthsList(
-    monthsWithoutGeneratedUpcomingEvents
+    monthsWithoutGeneratedUpcomingEvents,
   );
 
   return placeholderMonths
     .map((month): PlaceholderEvent => {
       const date = computeThirdWednesdayOfMonth(
-        addMonths(new Date(curentEpochTimeMs), month)
+        addMonths(new Date(curentEpochTimeMs), month),
       );
 
       return {
@@ -120,8 +118,8 @@ export function createPlaceholderEvents({
         !monthsWithoutGeneratedEventsSet.has(placeholder.date.getMonth()) &&
         !scheduledEvents.some(
           (scheduled) =>
-            isSameDay(scheduled.epochTimeMs, placeholder.epochTimeMs) // filter out placeholder if overlaps with a scheduled event
-        )
+            isSameDay(scheduled.epochTimeMs, placeholder.epochTimeMs), // filter out placeholder if overlaps with a scheduled event
+        ),
     );
 }
 
@@ -137,7 +135,7 @@ export function createPlaceholderEvents({
 export function computeUpcomingEvents(
   scheduledUpcomingEvents: MeetupArticleFragment[] | undefined | null,
   curentEpochTimeMs: number,
-  options?: ComputeUpcomingEventsOptions
+  options?: ComputeUpcomingEventsOptions,
 ): UpcomingEvent[] {
   const scheduledEvents = computeScheduledEvents(scheduledUpcomingEvents);
   const placeholderEvents = createPlaceholderEvents({

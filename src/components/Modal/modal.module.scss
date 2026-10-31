@@ -5,7 +5,8 @@
 
 .modal {
   --modal-animation-duration: 300ms;
-  transition: display var(--modal-animation-duration) allow-discrete,
+  transition:
+    display var(--modal-animation-duration) allow-discrete,
     overlay var(--modal-animation-duration) allow-discrete;
   animation: modalOut var(--modal-animation-duration) ease-in forwards;
 

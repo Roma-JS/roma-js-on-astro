@@ -21,7 +21,7 @@ export function createBlogPostSlug(createdAt, title) {
 
 async function createPostPrompts() {
   const { allowedCategories } = JSON.parse(
-    await fs.readFile(paths.postCategories, { encoding: 'utf-8' })
+    await fs.readFile(paths.postCategories, { encoding: 'utf-8' }),
   );
 
   const enableTerminalCursor = () => {
@@ -110,7 +110,7 @@ async function createPostPrompts() {
           return true;
         },
       },
-    ].map((prompt) => ({ ...prompt, onState }))
+    ].map((prompt) => ({ ...prompt, onState })),
   );
 }
 
@@ -118,7 +118,7 @@ async function cli() {
   console.log(styleText('cyan', 'create-post\n'));
   const templateFilePath = path.resolve(
     paths.templatesDir,
-    'blog-post-simple.hbs'
+    'blog-post-simple.hbs',
   );
   const template = await fs.readFile(templateFilePath, { encoding: 'utf-8' });
 
@@ -136,7 +136,7 @@ async function cli() {
 
   const newPostFilePath = path.resolve(
     paths.blogPostsDir,
-    `${createBlogPostSlug(createdAt, responses.title)}.md`
+    `${createBlogPostSlug(createdAt, responses.title)}.md`,
   );
 
   await fs.writeFile(newPostFilePath, blogPostRendered, {
@@ -149,8 +149,8 @@ async function cli() {
   console.log(
     styleText(
       'green',
-      `[create-post] A new post has been created at ${newPostFilePath}`
-    )
+      `[create-post] A new post has been created at ${newPostFilePath}`,
+    ),
   );
 }
 

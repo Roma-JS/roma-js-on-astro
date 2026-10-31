@@ -1,7 +1,7 @@
 export function isVieportPointInside<T extends Element>(
   element: T,
   viewportX: number,
-  viewportY: number
+  viewportY: number,
 ) {
   const domRect = element.getBoundingClientRect();
 

@@ -5,8 +5,10 @@ import type { L10nKey } from '@i18n/translate';
 
 type Messages<T extends L10nKey> = Partial<Record<T, string>>;
 
-export interface AbstractModalProps
-  extends Omit<ComponentProps<'dialog'>, 'id'> {
+export interface AbstractModalProps extends Omit<
+  ComponentProps<'dialog'>,
+  'id'
+> {
   abstract: CollectionEntry<'abstracts'>;
   messages: Messages<'talkSpeaker'>;
 }

@@ -13,7 +13,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
 };
 export type MakeEmpty<
   T extends { [key: string]: unknown },
-  K extends keyof T
+  K extends keyof T,
 > = { [_ in K]?: never };
 export type Incremental<T> =
   | T
@@ -3751,25 +3751,25 @@ export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
   operationName: string,
   operationType?: string,
-  variables?: any
+  variables?: any,
 ) => Promise<T>;
 
 const defaultWrapper: SdkFunctionWrapper = (
   action,
   _operationName,
   _operationType,
-  _variables
+  _variables,
 ) => action();
 
 export function getSdk(
   client: GraphQLClient,
-  withWrapper: SdkFunctionWrapper = defaultWrapper
+  withWrapper: SdkFunctionWrapper = defaultWrapper,
 ) {
   return {
     allPosts(
       variables: AllPostsQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
-      signal?: RequestInit['signal']
+      signal?: RequestInit['signal'],
     ): Promise<AllPostsQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -3781,13 +3781,13 @@ export function getSdk(
           }),
         'allPosts',
         'query',
-        variables
+        variables,
       );
     },
     pastEvents(
       variables: PastEventsQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
-      signal?: RequestInit['signal']
+      signal?: RequestInit['signal'],
     ): Promise<PastEventsQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -3799,13 +3799,13 @@ export function getSdk(
           }),
         'pastEvents',
         'query',
-        variables
+        variables,
       );
     },
     latestUpcomingEvents(
       variables: LatestUpcomingEventsQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
-      signal?: RequestInit['signal']
+      signal?: RequestInit['signal'],
     ): Promise<LatestUpcomingEventsQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -3817,13 +3817,13 @@ export function getSdk(
           }),
         'latestUpcomingEvents',
         'query',
-        variables
+        variables,
       );
     },
     eventsByEventId(
       variables: EventsByEventIdQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
-      signal?: RequestInit['signal']
+      signal?: RequestInit['signal'],
     ): Promise<EventsByEventIdQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -3835,13 +3835,13 @@ export function getSdk(
           }),
         'eventsByEventId',
         'query',
-        variables
+        variables,
       );
     },
     allEventsCount(
       variables: AllEventsCountQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
-      signal?: RequestInit['signal']
+      signal?: RequestInit['signal'],
     ): Promise<AllEventsCountQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
@@ -3853,7 +3853,7 @@ export function getSdk(
           }),
         'allEventsCount',
         'query',
-        variables
+        variables,
       );
     },
   };

@@ -28,7 +28,7 @@ export type NavbarMessages = Readonly<
  */
 export function getNavbarMessages(l10n: Translate): NavbarMessages {
   return Object.fromEntries(
-    l10nKeys.map((key) => [key, l10n(key)])
+    l10nKeys.map((key) => [key, l10n(key)]),
   ) as NavbarMessages;
 }
 

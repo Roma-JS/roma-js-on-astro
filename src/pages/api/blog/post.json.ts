@@ -20,24 +20,22 @@ export interface PostInfoDto {
 export async function GET() {
   const posts = sortPosts(
     await getCollection('blog-posts'),
-    ascendingCreatedAtComparator
+    ascendingCreatedAtComparator,
   );
 
   return new Response(
     JSON.stringify(
-      posts.map(
-        (post): PostInfoDto => ({
-          frontmatter: {
-            title: post.data.title,
-            categories: post.data.categories,
-            lang: post.data.lang,
-            createdAt: post.data.createdAt,
-            author: post.data.author,
-          },
-          url: getBlogPostLink(post),
-          markdown: post.body ?? null,
-        })
-      )
-    )
+      posts.map((post): PostInfoDto => ({
+        frontmatter: {
+          title: post.data.title,
+          categories: post.data.categories,
+          lang: post.data.lang,
+          createdAt: post.data.createdAt,
+          author: post.data.author,
+        },
+        url: getBlogPostLink(post),
+        markdown: post.body ?? null,
+      })),
+    ),
   );
 }

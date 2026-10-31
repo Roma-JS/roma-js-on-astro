@@ -11,7 +11,7 @@ import { getSdk, type MeetupArticleFragment } from './events.graphql.generated';
  * @see {@link https://www.npmjs.com/package/graphql-request}
  */
 const meetupApiClient = getSdk(
-  new GraphQLClient(import.meta.env.MEETUP_GRAPHQL_ENDPOINT || '')
+  new GraphQLClient(import.meta.env.MEETUP_GRAPHQL_ENDPOINT || ''),
 );
 
 // Additional `cache.fetchQuery` parameters that can be added to customize the cache behavior
@@ -31,7 +31,7 @@ export type MeetupQueryConfig<Data> = Omit<
  * @see {@link MeetupQueryConfig}
  */
 export async function fetchMeetupEventById(
-  eventId: string
+  eventId: string,
 ): Promise<MeetupArticleFragment | undefined> {
   return queryCacheClient.fetchQuery({
     queryKey: ['fetchMeetupEventById', eventId],

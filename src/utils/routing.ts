@@ -14,11 +14,7 @@ const createPageRoute = (relativeUrl: string) =>
   new URL(relativeUrl, import.meta.env.PUBLIC_SITE_URL).pathname;
 
 export type RouteKey =
-  | 'homepage'
-  | 'upcomingEvents'
-  | 'pastEvents'
-  | 'blog'
-  | 'aboutPage';
+  'homepage' | 'upcomingEvents' | 'pastEvents' | 'blog' | 'aboutPage';
 
 const itRoutes = {
   homepage: createPageRoute('/'),
@@ -79,7 +75,7 @@ export const aboutUrlMap: Readonly<Record<Lang, string>> = {
 };
 
 export function preventSelfNavigation(
-  evt: MouseEvent & { currentTarget: HTMLAnchorElement }
+  evt: MouseEvent & { currentTarget: HTMLAnchorElement },
 ): void {
   if (evt.currentTarget.getAttribute('aria-current') === 'page') {
     evt.stopPropagation();

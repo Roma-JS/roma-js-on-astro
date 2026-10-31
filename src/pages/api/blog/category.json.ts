@@ -16,18 +16,16 @@ export async function GET() {
 
   return new Response(
     JSON.stringify(
-      allCategoriesList.map(
-        (category): CategoryInfoDto => ({
-          name: category.name,
-          slug: category.slug,
-          url: category.url,
-          posts: category.posts.map((post) => ({
-            url: getBlogPostLink(post),
-            title: post.data.title,
-            author: post.data.author,
-          })),
-        })
-      )
-    )
+      allCategoriesList.map((category): CategoryInfoDto => ({
+        name: category.name,
+        slug: category.slug,
+        url: category.url,
+        posts: category.posts.map((post) => ({
+          url: getBlogPostLink(post),
+          title: post.data.title,
+          author: post.data.author,
+        })),
+      })),
+    ),
   );
 }

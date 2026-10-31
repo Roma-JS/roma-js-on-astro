@@ -19,7 +19,7 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
   ]);
 
   const nextEventsByDate = computeScheduledEvents(upcomingEvents).sort(
-    (a, b) => a.epochTimeMs - b.epochTimeMs
+    (a, b) => a.epochTimeMs - b.epochTimeMs,
   );
   const latestPastEvent = previousEvents?.[0];
 
@@ -41,7 +41,7 @@ export async function getHpItContent(): Promise<Readonly<HpContent>> {
         href: formatVenueMapsHref(venue),
         text: l10n('ctaVenue', { lng }),
       })),
-    }))
+    })),
   );
 
   if (latestPastEvent) {
